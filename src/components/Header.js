@@ -20,8 +20,8 @@ function Header() {
           <img src={logo} className="App-logo" alt="logo"/>
           <h1 className="App-tittle">E-Shop</h1>
           <input className="header-search"></input>
-          <h3 className='right-pane'>Deals</h3>
-          <h3 className='right-pane'>Account</h3>
+          <h3>Deals</h3>
+          <h3>Account</h3>
           <img src='https://api.iconify.design/emojione/shopping-cart.svg' className="cart-logo" alt="cart"/>
         </div>
       </div>

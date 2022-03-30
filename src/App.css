@@ -1,10 +1,10 @@
 /* global rules */
 * {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Poppins", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   scroll-behavior: smooth;
   color: black;
 }
@@ -26,6 +26,7 @@ P {
   font-family: "Poppins";
   font-size: 1rem;
 }
+
 h1 {
   font-size: 3.5rem;
   font-weight: 900;
@@ -40,97 +41,9 @@ h3 {
   font-size: 2rem;
   font-weight: 700;
 }
+
 h4 {
   font-size: 1.5rem;
   font-weight: 600;
 }
-
-/* header */
-.App-header {
-  height: 17.5vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-  background: #073c81;
-  color: wheat;
-}
-
-/* top pane */
-.top-pane {
-  width: 100vw;
-  background: #073881;
-  display: flex;
-  justify-content: center;
-}
-.top-pane_info {
-  width: min(85vw, 1200px);
-  height: 2.5vh;
-  display: flex;
-  gap: 1em;
-  padding: 0.5em;
-  background: #073881;
-}
-.top-pane_info p{
-  color: whitesmoke;
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
-/* bottom pane */
-.bottom-pane *{
-  color: whitesmoke;
-}
-.bottom-pane {
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-}
-.bottom-pane_info {
-  width: min(85vw, 1200px);
-  height: 10vh;
-  background: #073c81;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1em;
-}
-.App-logo {
-  width: 60px;
-}
-.cart-logo {
-  width: 60px;
-  cursor: pointer;
-}
-.App-tittle {
-  color: whitesmoke;
-  cursor: pointer;
-  white-space: nowrap;
-}
-.header-search {
-  width: min(50vw, 600px);
-  height: 5vh;
-  text-indent: 1em;
-  border-radius: 20px;
-  color: black;
-}
-.right-pane {
-  cursor: pointer;
-}
-
-/* navbar */
-.navbar {
-  height: 5vh;
-  display: flex;
-  gap: 1em;
-  justify-content: center;
-  align-items: center;
-  background: whitesmoke;
-  box-shadow: 1px 0px 10px 0px;
-}
-.navbar-item {
-  font-size: 1.2rem;
-  font-weight: 400;
-  cursor: pointer;
-}
+/*# sourceMappingURL=App.css.map */

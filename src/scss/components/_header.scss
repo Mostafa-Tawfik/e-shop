@@ -1,0 +1,123 @@
+/* header */
+.App-header {
+  height: 17.5vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  background: $clr-main;
+  color: $clr-light;
+  /* top pane */
+  .top-pane {
+    width: 100vw;
+    background: $clr-sec;
+    display: flex;
+    justify-content: center;
+    .top-pane_info {
+      width: min(85vw, 1200px);
+      height: 2.5vh;
+      display: flex;
+      gap: 1em;
+      padding: 0.5em;
+      background: $clr-sec;
+      p{
+        color: $clr-light;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+    }
+  }
+  /* bottom pane */
+  .bottom-pane {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    * {
+      color: $clr-light;
+    }
+    .bottom-pane_info {
+      width: min(85vw, 1200px);
+      height: 10vh;
+      background: $clr-main;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1em;
+      .App-logo {
+        width: 60px;
+      }
+      .cart-logo {
+        width: 60px;
+        cursor: pointer;
+      }
+      .header-search {
+        width: min(50vw, 600px);
+        height: 5vh;
+        text-indent: 1em;
+        border-radius: 20px;
+        color: black;
+      }
+      h1, h3 {
+        cursor: pointer;
+        white-space: nowrap;
+      }
+    }
+  }
+  
+  /* navbar */
+  .navbar {
+    height: 5vh;
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+    background: whitesmoke;
+    box-shadow: 1px 0px 10px 0px;
+    .navbar-item {
+      font-weight: 400;
+      cursor: pointer;
+    }
+  }
+
+}
+
+@media (max-width: 440px) {
+  .App-header {
+    height: 15vh;
+    .top-pane {
+      display: none;
+    }
+    .bottom-pane {
+      .bottom-pane_info{
+        height: 15vh;
+        flex-direction: column;
+        .App-logo {
+          position: absolute;
+          width: 35px;
+          left: 20px;
+          top: 20px;
+        }
+        .cart-logo {
+          position: absolute;
+          right: 20px;
+          width: 35px;
+          top: 20px;
+        }
+        .header-search {
+          width: min(70vw, 600px);
+          height: 5vh;
+          text-indent: 1em;
+          border-radius: 10px;
+          color: black;
+        }
+      }
+    }
+    h3 {
+      display: none;
+    }
+    .navbar {
+      display: none;
+    }
+  }
+}
