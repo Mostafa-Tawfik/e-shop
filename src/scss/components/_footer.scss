@@ -1,0 +1,42 @@
+// footer
+.App-footer {
+  height: min(17.6vh);
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: $clr-main;
+  * {
+    color: $clr-light;
+  }
+  .footer-top-pane {
+    width: 100vw;
+    background: $clr-sec;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .footer-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .footer-main-section{
+      width: min(30vw, 400px);
+      padding: 1em;
+      p {
+        cursor: pointer;
+      }
+    }
+    .App-logo-footer {
+      width: 50px;
+    }
+  }
+  .footer-bottom-pane {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $clr-dark;
+    padding: 1em;
+  }
+}
