@@ -43,7 +43,7 @@ function Footer() {
       </div>
 
       <div className='footer-bottom-pane'>
-        <p>© 2022 Carrefour. All rights reserved.</p>
+        <p>© 2022 E-Shop. All rights reserved.</p>
       </div>
     </div>
   )
