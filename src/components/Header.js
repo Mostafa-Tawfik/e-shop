@@ -17,9 +17,15 @@ function Header() {
 
       <div className='bottom-pane'>
         <div className='bottom-pane_info'>
-          <img src={logo} className="App-logo" alt="logo"/>
-          <h1 className="App-tittle">E-Shop</h1>
-          <input className="header-search"></input>
+
+          <div className="App-title">
+            <img src={logo} className="App-logo" alt="logo"/>
+            <h1>E-Shop</h1>
+          </div>
+
+          <input className="header-search"
+            placeholder='Search Products'
+          ></input>
           <h3>Deals</h3>
           <h3>Account</h3>
           <img src='https://api.iconify.design/emojione/shopping-cart.svg' className="cart-logo" alt="cart"/>
@@ -27,9 +33,9 @@ function Header() {
       </div>
 
       <div className="navbar">
-        {navItems.map(i => {
+        {navItems.map((i,index) => {
           return (
-            <h4 className="navbar-item">{i}</h4>
+            <h4 key={index} className="navbar-item">{i}</h4>
           )
         })}
       </div>

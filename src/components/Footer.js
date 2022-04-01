@@ -27,13 +27,13 @@ function Footer() {
       <div>
         <div className='footer-main'>
           <img src={logo} className="App-logo-footer" alt="logo"/>
-          {footer.map(s => {
+          {footer.map((s, index) => {
             return (
-              <div className='footer-main-section'>
+              <div key={index} className='footer-main-section'>
                 <h4>{s.title}</h4>
-                {s.sections.map(s => {
+                {s.sections.map((s, index) => {
                   return (
-                    <p>{s}</p>
+                    <p key={index}>{s}</p>
                   )
                 })}
               </div>
