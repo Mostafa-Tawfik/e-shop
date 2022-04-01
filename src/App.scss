@@ -2,13 +2,19 @@
 @import './scss/layout/_global-rules';
 
 // import colors
-@import './scss/colors/colors';
+@import './scss/layout/colors';
+
+// import mixins
+@import './scss/layout/mixins';
 
 // import headrer
 @import './scss/components/header';
 
-// import main
-@import './scss/components/main';
+// import home page
+@import './scss/pages/home';
+
+// import cart page
+@import './scss/pages/cart';
 
 // import categories
 @import './scss/components/categories';

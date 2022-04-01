@@ -1,8 +1,8 @@
 import React from 'react'
-import Categories from './Categories'
+import Categories from '../components/Categories'
 
 
-function Main() {
+function Home() {
   return (
     <div>
       <img src='../images/Free-Advertising-Ideas.jpg' alt='ad' className='ad-image'></img>
@@ -13,4 +13,4 @@ function Main() {
   )
 }
 
-export default Main
+export default Home

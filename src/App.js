@@ -1,7 +1,9 @@
 import './App.scss';
+import {Routes, Route, useLocation} from 'react-router-dom'
 import Footer from './components/Footer';
 import Header from './components/Header';
-import Main from './components/Main';
+import Home from './pages/Home';
+import Cart from './pages/Cart';
 
 function App() {
   return (
@@ -11,8 +13,12 @@ function App() {
       </header>
 
       <main className="App-main">
-        <Main />
+      <Routes>
+          <Route path='/' element={<Home />}/>
+          <Route path='/cart' element={<Cart />}/>
+      </Routes>
       </main>
+
 
       <footer className="App-footer">
         <Footer />
