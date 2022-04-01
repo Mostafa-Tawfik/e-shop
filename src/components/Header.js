@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from '../logo.svg';
+import { Link } from 'react-router-dom'
 
 function Header() {
 
@@ -18,17 +19,24 @@ function Header() {
       <div className='bottom-pane'>
         <div className='bottom-pane_info'>
 
-          <div className="App-title">
-            <img src={logo} className="App-logo" alt="logo"/>
-            <h1>E-Shop</h1>
-          </div>
+          <Link to={'/'}>
+            <div className="App-title">
+              <img src={logo} className="App-logo" alt="logo"/>
+              <h1>E-Shop</h1>
+            </div>
+          </Link>
 
           <input className="header-search"
             placeholder='Search Products'
           ></input>
           <h3>Deals</h3>
           <h3>Account</h3>
-          <img src='https://api.iconify.design/emojione/shopping-cart.svg' className="cart-logo" alt="cart"/>
+
+          <Link to={'/cart'}>
+            <img src='https://api.iconify.design/emojione/shopping-cart.svg' className="cart-logo" alt="cart"/>
+          </Link>
+
+          
         </div>
       </div>
 

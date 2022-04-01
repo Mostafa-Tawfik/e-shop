@@ -1,0 +1,16 @@
+// 
+.cart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: min(60vh);
+  width: min(85vw, 1200px);
+  img {
+    width: min(15vw, 300px);
+  }
+  .home-btn {
+    @include slideSolidBtn;
+    margin-top: 1em;
+  }
+}
