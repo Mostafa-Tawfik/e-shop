@@ -47,8 +47,6 @@
           font-weight: 400;
           font-size: 1.2rem;
         }
-        .product-price{
-        }
         .product-price-com {
           display: flex;
           gap: 0.5em;
@@ -68,7 +66,7 @@
         border-color: transparent;
         cursor: pointer;
         img {
-          width: 3vw;
+          width: min(3vw, 40px);
         }
       }
     }

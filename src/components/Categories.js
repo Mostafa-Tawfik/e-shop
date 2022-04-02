@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react'
 import AppData from '../AppData'
 
-function Categories() {
-  
+function Categories(props) {
+  console.log(props)
   return (
     <div className='cat-holder'>
       {AppData.categories.map(d => {
@@ -18,7 +18,7 @@ function Categories() {
                       <h5>{i.discount}</h5>
                     </div>
 
-                    <img src={i.image} alt='product'  className='product-img'></img>
+                    <img src={i.image} alt='product' className='product-img'></img>
 
                     <div className='product-info'>
                       <h4 className='product-title'>{i.title}</h4>
@@ -32,8 +32,8 @@ function Categories() {
                       <h5 className='product-price'>{i.price}</h5>}
                     </div>
                     
-
-                    <button>
+                    {/* onclick add to cart */}
+                    <button onClick={()=> props.addToCart(i)}>
                       <img src='https://api.iconify.design/bi/cart-plus-fill.svg?color=%23073c81' alt='add-to-cart'></img>
                     </button>
                   </div>
