@@ -10,7 +10,18 @@ function App() {
 
   const [cart, setCart] = React.useState('')
 
-  // console.log(cart)
+  React.useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('cart'));
+    if (items) {
+      setCart(items);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
+
+  console.log(cart)
 
   function addToCart(items) {
     setCart([...cart, items])
