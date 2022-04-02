@@ -2,7 +2,10 @@ import React, { Fragment } from 'react'
 import AppData from '../AppData'
 
 function Categories(props) {
-  console.log(props)
+
+  const [added, setAdded] = React.useState('')
+  // console.log(added)
+
   return (
     <div className='cat-holder'>
       {AppData.categories.map(d => {
@@ -13,9 +16,9 @@ function Categories(props) {
             <div className='product-holder'>
             {d.items.map(i => {
               return (
-                  <div key={i.id}  className='product-card'>
+                  <div key={i.id} className='product-card'>
                     <div className='discount'>
-                      <h5>{i.discount}</h5>
+                      {i.discount && <h5>{i.discount}% OFF</h5>}
                     </div>
 
                     <img src={i.image} alt='product' className='product-img'></img>
@@ -25,16 +28,19 @@ function Categories(props) {
 
                       {i.discountprice ? 
                       <div className='product-price-com'>
-                        <h5 className='product-newprice'>{i.discountprice}</h5>
-                        <h5 className='product-oldprice'>{i.price}</h5>
+                        <h5 className='product-newprice'>${i.discountprice}</h5>
+                        <h5 className='product-oldprice'>${i.price}</h5>
                       </div>
                        : 
-                      <h5 className='product-price'>{i.price}</h5>}
+                      <h5 className='product-price'>${i.price}</h5>}
                     </div>
                     
                     {/* onclick add to cart */}
-                    <button onClick={()=> props.addToCart(i)}>
-                      <img src='https://api.iconify.design/bi/cart-plus-fill.svg?color=%23073c81' alt='add-to-cart'></img>
+                    <button onClick={()=> {
+                      props.addToCart(i)
+                      setAdded([...added, i.id])
+                    }}>
+                      <img src={`https://api.iconify.design/bi/${added.includes(i.id) ? 'cart-check-fill.svg?color=green':'cart-plus-fill.svg?color=%23073c81$'}`} alt='add-to-cart'></img>
                     </button>
                   </div>
               )

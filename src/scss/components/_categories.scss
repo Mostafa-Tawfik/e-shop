@@ -7,6 +7,8 @@
   }
   .product-holder {
     display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 2em 0;
     .product-card {
       width: min(20vw, 300px);

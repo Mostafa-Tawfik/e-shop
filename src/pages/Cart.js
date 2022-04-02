@@ -2,36 +2,46 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function Cart(props) {
-  console.log(props.cart)
+  console.log(props)
 
-  const Discount = props.cart.item && props.cart.item.discountprice ? props.cart.item.price.match(/[0-9]+/g) - props.cart.item.discountprice.match(/[0-9]+/g) : ''
+  const subtotalBeforeDiscount = props.cart ? props.cart.map(i => i.price).reduce((x, y) => x + y) : ''
 
-  const Subtotal = props.cart.item && props.cart.item.price.match(/[0-9]+/g)*1
+  const Discount = props.cart ? props.cart.map(i => (i.price * i.discount/100)).reduce((x, y) => x + y) : ''
+
+  // const Discount = props.cart && props.cart.discountprice ? props.cart.price * (props.cart.discount/100) : ''
+
+  const Subtotal = subtotalBeforeDiscount - Discount
 
   let Shipping = 20
 
   const Total = Subtotal + Shipping
-
+  
   return (
     <div className='cart'>
 
       {props.cart ? 
       
-      // if the cart is filled
-      <div className='cart-filled'>
-
-        <div className='cart-filled-items'>
-          <img src={props.cart.item.image} alt='product'></img>
-          <div className='cart-filled-items-info'>
-            <h3>{props.cart.item.title}</h3>
-            <p>Delivery by </p>
-
-            {/* if there is a discount show it, if not show normal price */}
-            {props.cart.item.discountprice ?
-             <p>{props.cart.item.discountprice}</p> :
-             <p>{props.cart.item.price}</p> }
-
-          </div>
+      <div className='cart-holder'>
+        <div className='cart-filled'>
+          {props.cart.map(c => {
+            return (
+              
+              // if the cart is filled
+              <div key={c.id} className='cart-filled-items'>
+                <img src={c.image} alt='product'></img>
+                <div className='cart-filled-items-info'>
+                  <h3>{c.title}</h3>
+                  <p>Delivery by </p>
+  
+                  {/* if there is a discount show it, if not show normal price */}
+                  {c.discountprice ?
+                  <p>${c.discountprice}</p> :
+                  <p>${c.price}</p> }
+  
+                </div>
+              </div>
+            )
+          })}
         </div>
 
         <div className='cart-filled-summary'>
@@ -40,7 +50,7 @@ function Cart(props) {
 
           <div className='calc'>
             <p>Subtotal before discount</p>
-            <p>{props.cart.item.price}</p>
+            <p>{subtotalBeforeDiscount}</p>
           </div>
           <div className='calc'>
             <p>Discount</p>
@@ -69,6 +79,7 @@ function Cart(props) {
             <button className='checkout-btn'>Checkout</button>
           </Link>
         </div>
+
       </div>
 
       :

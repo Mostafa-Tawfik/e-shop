@@ -2,9 +2,11 @@ import React from 'react'
 import logo from '../logo.svg';
 import { Link } from 'react-router-dom'
 
-function Header() {
+function Header(props) {
 
   const navItems = ['Smartphones', 'Tablets', 'Wearables', 'Electronics', 'Appliances']
+
+  // console.log(props.cart)
 
   return (
     <div>
@@ -33,7 +35,10 @@ function Header() {
           <h3>Account</h3>
 
           <Link to={'/cart'}>
-            <img src='https://api.iconify.design/emojione/shopping-cart.svg' className="cart-logo" alt="cart"/>
+            <div className='header-cart'>
+              <img src='https://api.iconify.design/emojione/shopping-cart.svg' className="cart-logo" alt="cart"/>
+              <div className='cart-counter'>{props.cart.length}</div>
+            </div>
           </Link>
 
           

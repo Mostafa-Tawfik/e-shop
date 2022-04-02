@@ -1,6 +1,6 @@
 import './App.scss';
 import React from 'react'
-import {Routes, Route, useLocation} from 'react-router-dom'
+import {Routes, Route} from 'react-router-dom'
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Home from './pages/Home';
@@ -10,21 +10,16 @@ function App() {
 
   const [cart, setCart] = React.useState('')
 
-  console.log(cart)
+  // console.log(cart)
 
-  function addToCart(item) {
-    setCart(prev => {
-      return {
-        ...prev,
-        item
-      }
-    })
+  function addToCart(items) {
+    setCart([...cart, items])
   }
   
   return (
     <div className="App">
       <header className="App-header">
-        <Header />
+        <Header  cart={cart}/>
       </header>
 
       <main className="App-main">
