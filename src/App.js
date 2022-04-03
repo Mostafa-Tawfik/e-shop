@@ -9,6 +9,7 @@ import Cart from './pages/Cart';
 function App() {
 
   const [cart, setCart] = React.useState('')
+  console.log(cart)
 
   React.useEffect(() => {
     const items = JSON.parse(localStorage.getItem('cart'));
@@ -21,10 +22,16 @@ function App() {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  console.log(cart)
 
   function addToCart(items) {
     setCart([...cart, items])
+  }
+
+  function removeFromCart(id) {
+    setCart([...cart.filter(item => item.id !== id)])
+    if(cart.length === 1) {
+      setCart([])
+    }
   }
   
   return (
@@ -36,7 +43,7 @@ function App() {
       <main className="App-main">
       <Routes>
           <Route path='/' element={<Home addToCart={addToCart}/>}/>
-          <Route path='/cart' element={<Cart cart={cart}/>}/>
+          <Route path='/cart' element={<Cart cart={cart} removeFromCart={removeFromCart}/>}/>
       </Routes>
       </main>
 
