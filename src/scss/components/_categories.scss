@@ -10,6 +10,7 @@
     justify-content: center;
     align-items: center;
     margin: 2em 0;
+    flex-wrap: wrap;
     .product-card {
       width: min(20vw, 300px);
       height: min(40vh, 600px);
@@ -48,6 +49,11 @@
           font-family: $rf;
           font-weight: 400;
           font-size: 1.2rem;
+        }
+        .product-category{
+          color: gray;
+          font-size: 0.7rem;
+          margin-top: -2px;
         }
         .product-price-com {
           display: flex;
@@ -99,11 +105,19 @@
       .product-card {
         width: min(40vw, 300px);
         height: min(30vh, 600px);
+        .discount {
+          top: 5px;
+        }
         .product-img {
           width: min(30vw, 200px);
           height: min(15vh, 300px);
           object-fit: cover;
           cursor: pointer;
+        }
+        button {
+          img {
+            width: 25px;
+          }
         }
       }
     }
