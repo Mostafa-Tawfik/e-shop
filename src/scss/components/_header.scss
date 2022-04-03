@@ -124,12 +124,22 @@
     .bottom-pane_info{
       height: 15vh;
       flex-direction: column;
+      .header-cart{
+        position: absolute;
+        top: 0;
+        right: 0;
         .cart-logo {
           position: absolute;
           right: 25px;
           width: 30px;
           top: 25px;
         }
+        .cart-counter{
+          width: 10px;
+          height: 10px;
+          padding: 0.5em;
+        }
+      }
         .header-search {
           width: min(85vw, 600px);
           height: 5vh;

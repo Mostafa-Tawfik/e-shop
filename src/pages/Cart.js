@@ -4,11 +4,9 @@ import { Link } from 'react-router-dom'
 function Cart(props) {
   console.log(props)
 
-  const subtotalBeforeDiscount = props.cart ? props.cart.map(i => i.price).reduce((x, y) => x + y) : ''
+  const subtotalBeforeDiscount = props.cart.length > 0 ? props.cart.map(i => i.price).reduce((x, y) => x + y) : ''
 
-  const Discount = props.cart ? props.cart.map(i => (i.price * i.discount/100)).reduce((x, y) => x + y) : ''
-
-  // const Discount = props.cart && props.cart.discountprice ? props.cart.price * (props.cart.discount/100) : ''
+  const Discount = props.cart.length > 0 ? props.cart.map(i => (i.price * i.discount/100)).reduce((x, y) => x + y) : ''
 
   const Subtotal = subtotalBeforeDiscount - Discount
 
@@ -19,7 +17,7 @@ function Cart(props) {
   return (
     <div className='cart'>
 
-      {props.cart ? 
+      {props.cart.length > 0 ? 
       
       <div className='cart-holder'>
         <div className='cart-filled'>
@@ -39,6 +37,10 @@ function Cart(props) {
                   <p>${c.price}</p> }
   
                 </div>
+
+                <button onClick={()=> props.removeFromCart(c.id)}>
+                  <img className='cart-delete' src='https://api.iconify.design/fluent/delete-16-filled.svg?color=%23fc2e20' alt='delete item'></img>
+                </button>
               </div>
             )
           })}
@@ -98,7 +100,6 @@ function Cart(props) {
       </div>
       
       }
-
 
     </div>
   )
