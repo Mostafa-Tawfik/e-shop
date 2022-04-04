@@ -86,5 +86,18 @@ export default {
         },
       ],
     },
+  ],
+
+  users:[
+    {
+      userName: "user1",
+      email:'test1@gmail.com',
+      password: "pass1"
+    },
+    {
+      userName: "user2",
+      email:'test2@gmail.com',
+      password: "pass2"
+    }
   ]
 }
