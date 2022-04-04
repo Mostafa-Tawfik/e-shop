@@ -38,6 +38,7 @@ function Categories(props) {
             
             {/* onclick add to cart */}
             <button onClick={()=> {
+              props.cart.length > 0 &&
               props.cart.map(c => c.id).includes(i.id) ?
               alert("Product already in your cart") :
               props.addToCart(i)
