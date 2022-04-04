@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link ,Navigate } from 'react-router-dom'
-import { Redirect } from 'react-router'
+
 import AppData from'../AppData'
 
 
@@ -18,9 +18,8 @@ export default function Login() {
     const [errorMessages, setErrorMessages] = React.useState({});
  
  
-    // it can be used later after submitting the form
+    // it is used to redirect to home page
     const [isSubmitted, setIsSubmitted] = React.useState(false);
-
     // used for storing user input
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -30,13 +29,13 @@ export default function Login() {
  
       // prevent default form submit
       event.preventDefault();
-      event.
+    
       // check if user is already registered
       console.log(userList)
       //const user = userList.find(user => user.email === email);
       // Find user login info in the defined userList
-      const userData = userList.find((user) => user.username === email);
-
+      const userData = userList.find((user) => user.email === email);
+      console.log("userData",email)
       // Compare user info
       if (userData) {
         if (userData.password !== password) {
@@ -63,40 +62,46 @@ export default function Login() {
         <div className="error">{errorMessages.message}</div>
     );
     // Generate JSX code for login form
+    const loginForm = (
+
+      <div className='login'>
+      <div className="text-center m-5-auto">
+          <h2 >Log In</h2>
+          <form action="/" onSubmit={handleSubmit}>
+              <p>
+                  <label>Email address</label><br/>
+                  <input type="email" name="email_address" placeholder={'Enter your Email'} 
+                  required   autoFocus
+                  onChange={(e) => setEmail(e.target.value)}
+                  />
+                  {renderErrorMessage("uname")}
+              </p>
+              <p>
+                  <label>Password</label>
+                  <Link to="/forget-password"><label className="right-label "
+                  style={{color: "#007bff"}}>Forget password?</label></Link>
+                  <br/>
+                  <input type="password" name="password"   placeholder={'Enter your Password'} 
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                  />
+                  {renderErrorMessage("pass")}
+              </p>
+              <p>
+              <button id="sub_btn" type="submit" >Login</button>
+          </p>
+      </form>
+      <footer>
+          <p>First time? <Link to="/register" style={{color: "#007bff"}}>Create an account</Link>.</p>
+          <p ><Link to="/" style={{color: "#007bff"}}>Back to Homepage</Link>.</p>
+      </footer>
+  
+      </div>
+  </div>
+    )
     return (
-        <div className='login'>
-            <div className="text-center m-5-auto">
-                <h2 >Log In</h2>
-                <form action="/" onSubmit={handleSubmit}>
-                    <p>
-                        <label>Email address</label><br/>
-                        <input type="text" name="email_address" placeholder={'Enter your Email'} 
-                        required   autoFocus
-                        onChange={(e) => setEmail(e.target.value)}
-                        />
-                        {renderErrorMessage("uname")}
-                    </p>
-                    <p>
-                        <label>Password</label>
-                        <Link to="/forget-password"><label className="right-label "
-                        style={{color: "#007bff"}}>Forget password?</label></Link>
-                        <br/>
-                        <input type="password" name="password"   placeholder={'Enter your Password'} 
-                        required
-                        onChange={(e) => setPassword(e.target.value)}
-                        />
-                        {renderErrorMessage("pass")}
-                    </p>
-                    <p>
-                    <button id="sub_btn" type="submit" >Login</button>
-                </p>
-            </form>
-            <footer>
-                <p>First time? <Link to="/register" style={{color: "#007bff"}}>Create an account</Link>.</p>
-                <p ><Link to="/" style={{color: "#007bff"}}>Back to Homepage</Link>.</p>
-            </footer>
-        
-            </div>
-        </div>
+      <div>
+      {isSubmitted ? <Navigate to={'/'} /> : loginForm}
+      </div>
     )
 }
