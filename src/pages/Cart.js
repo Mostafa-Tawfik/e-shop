@@ -26,9 +26,16 @@ function Cart(props) {
               
               // if the cart is filled
               <div key={c.id} className='cart-filled-items'>
-                <img src={c.image} alt='product'></img>
+
+                <Link to={`/product/${c.id}`}>
+                  <img src={c.image} alt='product'></img>
+                </Link>
+
                 <div className='cart-filled-items-info'>
-                  <h3>{c.title}</h3>
+
+                  <Link to={`/product/${c.id}`}>
+                    <h3>{c.title}</h3>
+                  </Link>
                   <p>Delivery by </p>
   
                   {/* if there is a discount show it, if not show normal price */}

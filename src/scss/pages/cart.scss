@@ -47,6 +47,15 @@
     }
     .cart-filled-summary {
       width: min(40vw, 600px);
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+      gap: 0.25em;
+      input {
+        text-indent: 0.5em;
+        width: min(30vw, 300px);
+      }
       .calc {
         width: min(30vw, 300px);
         display: flex;
@@ -116,11 +125,13 @@
       }
       .cart-filled-summary {
         width: min(85vw, 600px);
-        display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: left;
         gap: 0.25em;
+        input {
+          text-indent: 0.5em;
+          width: min(85vw, 600px);
+        }
         .calc {
           width: min(85vw, 600px);
           display: flex;
