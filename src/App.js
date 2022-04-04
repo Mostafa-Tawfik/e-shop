@@ -43,9 +43,9 @@ function App() {
 
       <main className="App-main">
       <Routes>
-          <Route path='/' element={<Home addToCart={addToCart}/>}/>
+          <Route path='/' element={<Home addToCart={addToCart} cart={cart}/>}/>
           <Route path='/cart' element={<Cart cart={cart} removeFromCart={removeFromCart}/>}/>
-          <Route path='/product/:id' element={<Product addToCart={addToCart}/>}/>
+          <Route path='/product/:id' element={<Product cart={cart} addToCart={addToCart}/>}/>
       </Routes>
       </main>
 

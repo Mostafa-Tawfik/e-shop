@@ -7,8 +7,8 @@ function Home(props) {
     <div>
       <img src='../images/Free-Advertising-Ideas.jpg' alt='ad' className='ad-image'></img>
 
-      <Categories addToCart={props.addToCart} filter='Top Deals'/>
-      <Categories addToCart={props.addToCart} filter='Recommended for you'/>
+      <Categories {...props} filter='Top Deals'/>
+      <Categories {...props} filter='Recommended for you'/>
       
     </div>
   )
