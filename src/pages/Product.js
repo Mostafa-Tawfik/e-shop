@@ -13,8 +13,6 @@ function Product(props) {
     setProduct(AppData.Products.filter(i=>i.id === params.id*1))
   },[params.id])
 
-  const [added, setAdded] = React.useState('')
-
   return (
     <div className='product'>
       <div className='product-holder'>
@@ -34,10 +32,12 @@ function Product(props) {
 
           {/* onclick add to cart */}
           <button onClick={()=> {
+            // check if the item is already in the cart
+              props.cart.map(c => c.id).includes(product[0].id) ?
+              alert("Product already in your cart") :
               props.addToCart(product[0])
-              setAdded([...added, product[0].id])
             }}>
-              <img src={`https://api.iconify.design/bi/${added.includes(product[0].id) ? 'cart-check-fill.svg?color=green':'cart-plus-fill.svg?color=%23073c81'}`} alt='add-to-cart'></img>
+              <img src={`https://api.iconify.design/bi/${props.cart && props.cart.map(c => c.id).includes(product[0].id) ? 'cart-check-fill.svg?color=green':'cart-plus-fill.svg?color=%23073c81'}`} alt='add-to-cart'></img>
             </button>
 
           {product[0].discount && <h2 className='product-discount'>{product[0].discount}%</h2>}

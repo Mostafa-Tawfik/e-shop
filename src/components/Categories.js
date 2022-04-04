@@ -4,9 +4,6 @@ import { Link } from 'react-router-dom'
 
 function Categories(props) {
 
-  const [added, setAdded] = React.useState('')
-  // console.log(added)
-
   return (
     <div className='cat-holder'>
       <h4>{props.filter}</h4>
@@ -41,10 +38,11 @@ function Categories(props) {
             
             {/* onclick add to cart */}
             <button onClick={()=> {
+              props.cart.map(c => c.id).includes(i.id) ?
+              alert("Product already in your cart") :
               props.addToCart(i)
-              setAdded([...added, i.id])
             }}>
-              <img src={`https://api.iconify.design/bi/${added.includes(i.id) ? 'cart-check-fill.svg?color=green':'cart-plus-fill.svg?color=%23073c81'}`} alt='add-to-cart'></img>
+              <img src={`https://api.iconify.design/bi/${props.cart && props.cart.map(c => c.id).includes(i.id) ? 'cart-check-fill.svg?color=green':'cart-plus-fill.svg?color=%23073c81'}`} alt='add-to-cart'></img>
             </button>
           </div>
         )
