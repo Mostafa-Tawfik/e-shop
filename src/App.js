@@ -5,13 +5,15 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import Product from './pages/Product';
 
 function App() {
 
   const [cart, setCart] = React.useState('')
   console.log(cart)
-
+  
   React.useEffect(() => {
     const items = JSON.parse(localStorage.getItem('cart'));
     if (items) {
@@ -45,6 +47,8 @@ function App() {
       <Routes>
           <Route path='/' element={<Home addToCart={addToCart} cart={cart}/>}/>
           <Route path='/cart' element={<Cart cart={cart} removeFromCart={removeFromCart}/>}/>
+          <Route path='/login' element={<Login />}/>
+          <Route path='/register' element={<Register />}/>
           <Route path='/product/:id' element={<Product cart={cart} addToCart={addToCart}/>}/>
       </Routes>
       </main>

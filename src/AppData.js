@@ -107,4 +107,17 @@ export default {
       description: 'From classic chronographs to the newest smartwatches, we’ve got the watch styles you love. The best part is that our wide selection of timepieces comes in enough styles, colors and designs to keep your style fresh and fun for years to come. Whether you’re looking for an everyday watch, something for a special occasion or a gift for loved ones, you’ll find it here. We’ve got leather strap watches, stainless steel, mesh and silicone for whatever material suits you best. Part effortless cool, part extreme functionality—our Machine watch is the ultimate masculine essential With a rugged design, oversized case and aeronautical-inspired gauges, this industrial style is right on time Make a statement with this dramatic timepiece.',
     },
   ],
+  
+  users:[
+    {
+      userName: "user1",
+      email:'test1@gmail.com',
+      password: "pass1"
+    },
+    {
+      userName: "user2",
+      email:'test2@gmail.com',
+      password: "pass2"
+    }
+  ]
 }
