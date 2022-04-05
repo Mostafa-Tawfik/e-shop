@@ -36,7 +36,7 @@ function Header(props) {
 
           <Link to={'/cart'}>
             <div className='header-cart'>
-              <img src='https://api.iconify.design/emojione/shopping-cart.svg' className="cart-logo" alt="cart"/>
+              <img src='https://api.iconify.design/clarity/shopping-cart-solid-badged.svg?color=whitesmoke' className="cart-logo" alt="cart"/>
               <div className='cart-counter'>{props.cart.length}</div>
             </div>
           </Link>
