@@ -7,6 +7,8 @@ import Home from './pages/Home';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Product from './pages/Product';
+
 function App() {
 
   const [cart, setCart] = React.useState('')
@@ -43,10 +45,11 @@ function App() {
 
       <main className="App-main">
       <Routes>
-          <Route path='/' element={<Home addToCart={addToCart}/>}/>
+          <Route path='/' element={<Home addToCart={addToCart} cart={cart}/>}/>
           <Route path='/cart' element={<Cart cart={cart} removeFromCart={removeFromCart}/>}/>
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>
+          <Route path='/product/:id' element={<Product cart={cart} addToCart={addToCart}/>}/>
       </Routes>
       </main>
 
