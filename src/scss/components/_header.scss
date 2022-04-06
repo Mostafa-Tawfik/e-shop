@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  background: $clr-main;
+  background: $grd-main;
   color: $clr-light;
   /* top pane */
   .top-pane {
@@ -47,31 +47,38 @@
     .bottom-pane_info {
       width: min(85vw, 1200px);
       height: 10vh;
-      background: $clr-main;
+      // background: linear-gradient(220.55deg, #3793FF 0%, #0017E4 100%);
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 1em;
       .header-cart {
         position: relative;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        border-radius: 10px;
         .cart-logo {
-          width: 60px;
+          width: 50px;
           cursor: pointer;
         }
         .cart-counter {
           position: absolute;
-          top: 13px;
-          right: 20px;
+          top: -7px;
+          right: -6px;
           display: flex;
           background-color: $clr-light;
-          color: $clr-high;
-          width: 20px;
-          height: 20px;
+          width: 5px;
+          height: 5px;
           text-align: center;
           align-items: center;
           justify-content: center;
-          padding: 0.8em;
+          padding: 0.7em;
           border-radius: 10px;
+          color: $clr-high;
+          font-weight: 500;
         }
       }
       .header-search {
@@ -80,6 +87,40 @@
         text-indent: 1em;
         border-radius: 20px;
         color: black;
+      }
+      .header-account-holder {
+        position: relative;
+        .header-account {
+          display: flex;
+          gap: 0.25em;
+          img {
+            width: 35px;
+            cursor: pointer;
+          }
+        }
+        .header-account-li {
+          position: absolute;
+          left: 20%;
+          background: $clr-light;
+          width: max-content;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: left;
+          gap: 1em;
+          padding: 1em;
+          border-radius: 10px;
+          button {
+            cursor: pointer;
+            background: $grd-main;
+            width: 90px;
+            padding: 0.5em;
+          }
+          h5 {
+            color: $clr-dark;
+            cursor: pointer;
+          }
+        }
       }
       h1, h3 {
         cursor: pointer;
@@ -113,10 +154,7 @@
     }
     .bottom-pane {
       .App-title {
-        width: 100%;
-        justify-content: left;
-        display: flex;
-        gap: 1em;
+        width: min(85vw, 1200px);
         .App-logo {
           width: 35px;
         }
@@ -124,20 +162,19 @@
     .bottom-pane_info{
       height: 15vh;
       flex-direction: column;
+      position: relative;
       .header-cart{
         position: absolute;
-        top: 0;
-        right: 0;
+        top: 20px;
+        right: 10px;
+        width: 35px;
+        height: 35px;
         .cart-logo {
-          position: absolute;
-          right: 25px;
-          width: 30px;
-          top: 25px;
         }
         .cart-counter{
-          width: 10px;
-          height: 10px;
-          padding: 0.5em;
+          width: 3px;
+          height: 3px;
+          font-size: 0.8rem;
         }
       }
         .header-search {
@@ -146,6 +183,20 @@
           text-indent: 1em;
           border-radius: 10px;
           color: black;
+        }
+        .header-account-holder {
+          position: absolute;
+          top: 20px;
+          right: 50px;
+          .header-account {
+            img:nth-child(3) {
+              display: none;
+            }
+          }
+          .header-account-li {
+            position: absolute;
+            left: -45px;
+          }
         }
       }
     }
