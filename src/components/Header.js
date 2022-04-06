@@ -6,6 +6,13 @@ function Header(props) {
 
   const navItems = ['Smartphones', 'Tablets', 'Wearables', 'Electronics', 'Appliances']
 
+  // a state to controll account drop down menu
+  const [accountIsOpen, setAccountIsOpen] = React.useState(false)
+
+  function openAccount() {
+    setAccountIsOpen(prev => !prev)
+  }
+
   // console.log(props.cart)
 
   return (
@@ -32,7 +39,23 @@ function Header(props) {
             placeholder='Search Products'
           ></input>
           <h3>Deals</h3>
-          <h3>Account</h3>
+
+          <div onClick={openAccount} className="header-account-holder">
+            <div className="header-account">
+              <img src='https://api.iconify.design/mdi/account-circle.svg?color=whitesmoke' alt='account'></img>
+              <h3>Account</h3>
+              <img src='https://api.iconify.design/mdi/menu-down.svg?color=whitesmoke' alt='arrow'></img>
+            </div>
+            {accountIsOpen && <div className="header-account-li">
+              <Link to={'/login'}>
+                <button>SIGN IN</button>
+              </Link>
+              <hr></hr>
+              <h5>My Account</h5>
+              <h5>Orders</h5>
+              <h5>Favorite</h5>
+            </div>}
+          </div>
 
           <Link to={'/cart'}>
             <div className='header-cart'>

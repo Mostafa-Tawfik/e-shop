@@ -88,6 +88,40 @@
         border-radius: 20px;
         color: black;
       }
+      .header-account-holder {
+        position: relative;
+        .header-account {
+          display: flex;
+          gap: 0.25em;
+          img {
+            width: 35px;
+            cursor: pointer;
+          }
+        }
+        .header-account-li {
+          position: absolute;
+          left: 20%;
+          background: $clr-light;
+          width: max-content;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: left;
+          gap: 1em;
+          padding: 1em;
+          border-radius: 10px;
+          button {
+            cursor: pointer;
+            background: $grd-main;
+            width: 90px;
+            padding: 0.5em;
+          }
+          h5 {
+            color: $clr-dark;
+            cursor: pointer;
+          }
+        }
+      }
       h1, h3 {
         cursor: pointer;
         white-space: nowrap;
@@ -120,10 +154,7 @@
     }
     .bottom-pane {
       .App-title {
-        width: 100%;
-        justify-content: left;
-        display: flex;
-        gap: 1em;
+        width: min(85vw, 1200px);
         .App-logo {
           width: 35px;
         }
@@ -131,10 +162,11 @@
     .bottom-pane_info{
       height: 15vh;
       flex-direction: column;
+      position: relative;
       .header-cart{
         position: absolute;
         top: 20px;
-        right: 30px;
+        right: 10px;
         width: 35px;
         height: 35px;
         .cart-logo {
@@ -151,6 +183,20 @@
           text-indent: 1em;
           border-radius: 10px;
           color: black;
+        }
+        .header-account-holder {
+          position: absolute;
+          top: 20px;
+          right: 50px;
+          .header-account {
+            img:nth-child(3) {
+              display: none;
+            }
+          }
+          .header-account-li {
+            position: absolute;
+            left: -45px;
+          }
         }
       }
     }
