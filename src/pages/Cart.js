@@ -13,6 +13,14 @@ function Cart(props) {
   let Shipping = 20
 
   const Total = Subtotal + Shipping
+
+  // set delivery dates
+  let date = new Date()
+  date.setDate(date.getDate() + 2);
+  let dayName = date.toLocaleString('en-us', {weekday: 'long'})
+  let day = ("0" + (date.getDate())).slice(-2)
+  let month = ("0" + (date.getMonth() + 1)).slice(-2)
+  let year = date.getFullYear()
   
   return (
     <div className='cart'>
@@ -36,7 +44,12 @@ function Cart(props) {
                   <Link to={`/product/${c.id}`}>
                     <h3>{c.title}</h3>
                   </Link>
-                  <p>Delivery by </p>
+
+                  
+                  <p>Delivery by 
+                    <p className='cart-delivery'>{dayName} {day}/{month}/{year}
+                    </p>
+                  </p>
   
                   {/* if there is a discount show it, if not show normal price */}
                   {c.discountprice ?

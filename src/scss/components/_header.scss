@@ -47,7 +47,6 @@
     .bottom-pane_info {
       width: min(85vw, 1200px);
       height: 10vh;
-      // background: linear-gradient(220.55deg, #3793FF 0%, #0017E4 100%);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -101,7 +100,7 @@
         .header-account-li {
           position: absolute;
           left: 20%;
-          background: $clr-light;
+          background: white;
           width: max-content;
           display: flex;
           flex-direction: column;
@@ -110,6 +109,7 @@
           gap: 1em;
           padding: 1em;
           border-radius: 10px;
+          z-index: 10;
           button {
             cursor: pointer;
             background: $grd-main;
