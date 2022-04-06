@@ -23,11 +23,27 @@ function Product(props) {
           <p>Brand: {product[0].brand}</p>
           <p>Colors: {product[0].colors}</p>
           
+          <div>
+            {product[0].discountprice ? 
+            // if price have a discount
+            <div className='product-price-holder'>
+              <h5 className='product-price'>${product[0].discountprice}</h5>
+              <div className='product-price-savings'>
+                <h5>Save {product[0].discount}%</h5>
+                <p>All prices include VAT.</p>
+              </div>
+            </div> : 
+            // // if price dosen't have a discount
+            <div className='product-price-holder'>
+              <h5 className='product-price'>
+                ${product[0].price}
+              </h5>
+            </div>}
+          </div>
+
           {product[0].description && <p className='product-info-desc'>{product[0].description}</p>}
 
           <hr></hr>
-
-          {product[0].discountprice ? <p>Price: ${product[0].discountprice}</p> : <p>Price: ${product[0].price}</p>}
 
 
           {/* onclick add to cart */}
@@ -38,7 +54,11 @@ function Product(props) {
               alert("Product already in your cart") :
               props.addToCart(product[0])
             }}>
-              <img src={`https://api.iconify.design/bi/${props.cart && props.cart.map(c => c.id).includes(product[0].id) ? 'cart-check-fill.svg?color=green':'cart-plus-fill.svg?color=%23073c81'}`} alt='add-to-cart'></img>
+              {/* if product is on the cart show "added" */}
+              {props.cart && props.cart.map(c => c.id).includes(product[0].id) ? 
+              <p>Added</p> :
+              <p>Add to cart</p>}
+              
             </button>
 
           {product[0].discount && <h2 className='product-discount'>{product[0].discount}%</h2>}
