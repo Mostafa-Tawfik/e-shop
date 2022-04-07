@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import logo from '../logo.svg';
 import { Link } from 'react-router-dom'
 import AppData from '../AppData';
@@ -64,7 +64,10 @@ function Header(props) {
             <div className='header-search-results' style={query === '' ? {padding: '0'} : {padding: '1em'}}>
               {results.map(r => {
                 return (
-                  <div key={r.id}>{r.title}</div>
+                  <div key={r.id}>
+                    <div>{r.title}</div>
+                    <p>{r.category}</p>
+                  </div>
                 )
               })}
             </div>

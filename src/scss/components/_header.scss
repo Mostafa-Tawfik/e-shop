@@ -100,9 +100,22 @@
           justify-content: flex-start;
           background: white;
           padding: 1em;
+          z-index: 10;
           cursor: pointer;
           * {
             color: $clr-dark;
+          }
+          p {
+            color: gray;
+            font-size:x-small;
+          }
+          > div {
+            transition: 0.3s ease;
+            width: 100%;
+            &:hover, &:active {
+              transform: scale(1.005);
+              background: $clr-light;
+            }
           }
         }
       }
