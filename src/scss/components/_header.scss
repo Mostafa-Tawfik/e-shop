@@ -45,6 +45,7 @@
       }
     }
     .bottom-pane_info {
+      position: relative;
       width: min(85vw, 1200px);
       height: 10vh;
       display: flex;
@@ -81,11 +82,42 @@
         }
       }
       .header-search {
-        width: min(50vw, 600px);
-        height: 5vh;
-        text-indent: 1em;
-        border-radius: 20px;
-        color: black;
+        .header-search-bar {
+          width: min(25vw, 500px);
+          height: 5vh;
+          text-indent: 1em;
+          border-radius: 20px;
+          color: black;
+        }
+        .header-search-results {
+          position: absolute;
+          bottom: -10;
+          width: min(25vw, 500px);
+          border-radius: 20px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          background: white;
+          padding: 1em;
+          z-index: 10;
+          cursor: pointer;
+          * {
+            color: $clr-dark;
+          }
+          p {
+            color: gray;
+            font-size:x-small;
+          }
+          > div {
+            transition: 0.3s ease;
+            width: 100%;
+            &:hover, &:active {
+              transform: scale(1.005);
+              background: $clr-light;
+            }
+          }
+        }
       }
       .header-account-holder {
         position: relative;
@@ -178,11 +210,12 @@
         }
       }
         .header-search {
-          width: min(85vw, 600px);
-          height: 5vh;
-          text-indent: 1em;
-          border-radius: 10px;
-          color: black;
+          .header-search-bar {
+            width: min(85vw);
+          }
+          .header-search-results {
+            width: min(85vw);
+          }
         }
         .header-account-holder {
           position: absolute;
