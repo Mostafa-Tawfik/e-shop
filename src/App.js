@@ -12,7 +12,6 @@ import Product from './pages/Product';
 function App() {
 
   const [cart, setCart] = React.useState('')
-  console.log(cart)
   
   React.useEffect(() => {
     const items = JSON.parse(localStorage.getItem('cart'));
@@ -50,6 +49,7 @@ function App() {
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>
           <Route path='/product/:id' element={<Product cart={cart} addToCart={addToCart}/>}/>
+          <Route path='/search/:name' element={<Product cart={cart} addToCart={addToCart}/>}/>
       </Routes>
       </main>
 
