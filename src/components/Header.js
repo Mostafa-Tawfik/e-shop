@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import logo from '../logo.svg';
 import { Link } from 'react-router-dom'
 import AppData from '../AppData';
@@ -61,10 +61,10 @@ function Header(props) {
               onChange={(e) => setQuery(e.target.value)}
             ></input>
 
-            <div className='header-search-results' style={query === '' ? {padding: '0'} : {padding: '1em'}}>
+            <div className='header-search-results' onBlur={()=>setQuery('')} style={query === '' ? {padding: '0'} : {padding: '1em'}}>
               {results.map(r => {
                 return (
-                  <Link to={`/product/${r.id}`} key={r.id}>
+                  <Link to={`/product/${r.id}`} key={r.id} >
                     <div>
                       <div>{r.title}</div>
                       <p>{r.category}</p>
@@ -78,15 +78,15 @@ function Header(props) {
           {/* <h3>Deals</h3> */}
 
           {/* user account */}
-          <div onClick={openAccount} className="header-account-holder">
+          <div onClick={openAccount}className="header-account-holder">
             <div className="header-account">
               <img src='https://api.iconify.design/mdi/account-circle.svg?color=whitesmoke' alt='account'></img>
               <h3>Account</h3>
               <img src='https://api.iconify.design/mdi/menu-down.svg?color=whitesmoke' alt='arrow'></img>
             </div>
-            {accountIsOpen && <div className="header-account-li">
+            {accountIsOpen && <div className="header-account-li" tabIndex='true' onBlur={openAccount}>
               <Link to={'/login'}>
-                <button>SIGN IN</button>
+                <button onBlur={openAccount}>SIGN IN</button>
               </Link>
               <hr></hr>
               <h5>My Account</h5>
