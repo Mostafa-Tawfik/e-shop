@@ -8,6 +8,7 @@ import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Product from './pages/Product';
+import Search from './pages/Search';
 
 function App() {
 
@@ -49,7 +50,7 @@ function App() {
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>
           <Route path='/product/:id' element={<Product cart={cart} addToCart={addToCart}/>}/>
-          <Route path='/search/:name' element={<Product cart={cart} addToCart={addToCart}/>}/>
+          <Route path='/search/:name' element={<Search cart={cart} addToCart={addToCart}/>}/>
       </Routes>
       </main>
 
