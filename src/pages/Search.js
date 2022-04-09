@@ -30,26 +30,14 @@ function Search(props) {
 
             <div className='search-card-info'>
 
-              <div className='search-card-info-left'>
-                <p>{p.category}</p>
-                <Link to={`/product/${p.id}`}>
-                  <h5>{p.title}</h5>
-                </Link>
-              </div>
+              <p>{p.category}</p>
 
-              <div className='search-card-info-right'>
-                <h5 className='search-card-price'>${p.price}</h5>
+              <Link to={`/product/${p.id}`}>
+                <h5>{p.title}</h5>
+              </Link>
 
-                {/* onclick add to cart */}
-                <button onClick={()=> {
-                  props.cart.length > 0 &&
-                  props.cart.map(c => c.id).includes(p.id) ?
-                  alert("Product already in your cart") :
-                  props.addToCart(p)
-                }}>
-                  <img src={`https://api.iconify.design/bi/${props.cart && props.cart.map(c => c.id).includes(p.id) ? 'cart-check-fill.svg?color=green':'cart-plus-fill.svg?color=%23073c81'}`} alt='add-to-cart'></img>
-                </button>
-              </div>
+              <p>${p.price}</p>
+
             </div>
             
           </div>
