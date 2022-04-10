@@ -120,4 +120,16 @@ export default {
       password: "pass2"
     }
   ]
+  ,
+  
+  coupons:[
+    {
+      code: 'save50',
+      save: 50
+    },
+    {
+      code: 'save10',
+      save: 10
+    },
+  ]
 }

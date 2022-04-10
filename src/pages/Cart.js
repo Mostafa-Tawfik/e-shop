@@ -1,18 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import OrderSummary from '../components/OrderSummary';
 
 function Cart(props) {
   // console.log(props)
-
-  const subtotalBeforeDiscount = props.cart.length > 0 ? props.cart.map(i => i.price).reduce((x, y) => x + y) : ''
-
-  const Discount = props.cart.length > 0 ? props.cart.map(i => (i.price * i.discount/100)).reduce((x, y) => x + y) : ''
-
-  const Subtotal = subtotalBeforeDiscount - Discount
-
-  let Shipping = 20
-
-  const Total = Subtotal + Shipping
 
   // set delivery dates
   let date = new Date()
@@ -46,10 +37,10 @@ function Cart(props) {
                   </Link>
 
                   
-                  <p>Delivery by 
+                  <div>Delivery by 
                     <p className='cart-delivery'>{dayName} {day}/{month}/{year}
                     </p>
-                  </p>
+                  </div>
   
                   {/* if there is a discount show it, if not show normal price */}
                   {c.discountprice ?
@@ -66,41 +57,7 @@ function Cart(props) {
           })}
         </div>
 
-        <div className='cart-filled-summary'>
-          <h3>Order Summary</h3>
-          <input placeholder='Coupon Code'></input>
-
-          <div className='calc'>
-            <p>Subtotal before discount</p>
-            <p>{subtotalBeforeDiscount}</p>
-          </div>
-          <div className='calc'>
-            <p>Discount</p>
-            <p className='discount'>-${Discount}</p>
-          </div>
-
-          <hr className='calc'></hr>
-
-          <div className='calc'>
-            <p>Subtotal</p>
-            <p>${Subtotal}</p>
-          </div>
-          <div className='calc'>
-            <p>Shipping</p>
-            <p>${Shipping}</p>
-          </div>
-
-          <hr className='calc'></hr>
-
-          <div className='calc'>
-            <p className='total'>Total</p>
-            <p className='total'>${Total}</p>
-          </div>
-
-          <Link to={'/'}>
-            <button className='checkout-btn'>Checkout</button>
-          </Link>
-        </div>
+        <OrderSummary {...props}/>
 
       </div>
 

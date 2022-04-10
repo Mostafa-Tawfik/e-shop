@@ -54,9 +54,18 @@
       width: min(40vw, 600px);
       display: flex;
       flex-direction: column;
-      justify-content: start;
+      justify-content: center;
       align-items: center;
       gap: 0.25em;
+      // coupon is applied
+      > p {
+        color: green;
+        font-size: smaller;
+      }
+      // order summary
+      h3:nth-child(3) {
+        margin-top: 1em;
+      }
       input {
         padding: 0.5em;
         width: min(30vw, 300px);
