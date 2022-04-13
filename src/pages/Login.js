@@ -4,7 +4,7 @@ import { Link ,Navigate } from 'react-router-dom'
 import AppData from'../AppData'
 
 
-export default function Login() {
+export default function Login(props) {
    
     // User Login info
     const userList =AppData.users  
@@ -45,6 +45,8 @@ export default function Login() {
 
           console.log('Succesffully logged in')
           setIsSubmitted(true);
+          // declare which user has logged in
+          props.userlogged(userList.filter(u => u.id === userData.id))
           return <Navigate to="/home" />
 
         }

@@ -40,14 +40,28 @@ function Header(props) {
           {/* user account */}
           <div onClick={openAccount}className="header-account-holder">
             <div className="header-account">
+
               <img src='https://api.iconify.design/mdi/account-circle.svg?color=whitesmoke' alt='account'></img>
-              <h3>Account</h3>
+
+              <div className='header-account-account'>
+                {/* if signed in show a user welcome */}
+                {props.userLoggedIn && <p>Hi {props.userLoggedIn.userName}!</p>}
+                <h3>Account</h3>
+              </div>
+
               <img src='https://api.iconify.design/mdi/menu-down.svg?color=whitesmoke' alt='arrow'></img>
             </div>
             {accountIsOpen && <div className="header-account-li" tabIndex='true' onBlur={openAccount}>
+
+              {props.userLoggedIn ?
+              // if signed in
+              <button onBlur={openAccount} onClick={props.signOut}>Sign Out</button>
+              :
+              // if signed out
               <Link to={'/login'}>
-                <button onBlur={openAccount}>SIGN IN</button>
+                <button onBlur={openAccount}>Sign In</button>
               </Link>
+              }
               <hr></hr>
               <h5>My Account</h5>
               <h5>Orders</h5>
