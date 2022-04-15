@@ -1,3 +1,5 @@
+// used in Header.js
+
 import React from 'react'
 import { Link } from 'react-router-dom'
 import AppData from '../AppData'
@@ -28,12 +30,12 @@ function SearchBar() {
         onChange={(e) => setQuery(e.target.value)}
       ></input>
 
-      <div className='header-search-results' onBlur={()=>setQuery('')} style={query === '' ? {padding: '0'} : {padding: '1em'}}>
+      <div className='header-search-results' onClick={()=>setQuery('')} style={query === '' ? {padding: '0'} : {padding: '1em'}}>
 
         {/* return maximum 4 results */}
         {results.slice(0,4).map(r => {
           return (
-            <Link to={`/product/${r.id}`} key={r.id} >
+            <Link to={`/product/${r.id}`} key={r.id}>
               <div>
                 <div>{r.title}</div>
                 <p>{r.category}</p>

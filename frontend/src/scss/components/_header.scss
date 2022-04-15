@@ -128,6 +128,16 @@
             width: 35px;
             cursor: pointer;
           }
+          .header-account-account {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            > p {
+              margin-bottom: -12px;
+              white-space: nowrap;
+            }
+          }
         }
         .header-account-li {
           position: absolute;
@@ -215,6 +225,7 @@
           }
           .header-search-results {
             width: min(85vw);
+            transition: 1s;
           }
         }
         .header-account-holder {
@@ -224,6 +235,14 @@
           .header-account {
             img:nth-child(3) {
               display: none;
+            }
+            .header-account-account {
+              position: absolute;
+              top: 85px;
+              right: -30px;
+              p {
+                font-size: smaller;
+              }
             }
           }
           .header-account-li {
