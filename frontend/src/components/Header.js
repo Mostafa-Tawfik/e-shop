@@ -45,7 +45,7 @@ function Header(props) {
 
               <div className='header-account-account'>
                 {/* if signed in show a user welcome */}
-                {props.userLoggedIn && <p>Hi {props.userLoggedIn.userName}!</p>}
+                {props.userLoggedIn && <p>Hi {props.userLoggedIn.name}!</p>}
                 <h3>Account</h3>
               </div>
 

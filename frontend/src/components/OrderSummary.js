@@ -9,14 +9,15 @@ function OrderSummary(props) {
   // a state to hold coupon input
   const [coupon, setCoupon] = React.useState('')
 
+
   // a state to confirm the coupon validation
   const [couponIsvalid, setCouponIsvalid] = React.useState('')
-  console.log(couponIsvalid)
 
   // compare coupon with database
   React.useEffect(()=> {
     setCouponIsvalid(AppData.coupons.filter(c => c.code === coupon).map(c => c.save))
   },[coupon])
+
 
   // Order Summary calc
   const subtotalBeforeDiscount = props.cart.length > 0 ? props.cart.map(i => i.price).reduce((x, y) => x + y) : ''
@@ -30,6 +31,7 @@ function OrderSummary(props) {
   let shipping = 20
 
   const Total = subtotal + shipping
+  
 
   return (
     <div className='cart-filled-summary'>

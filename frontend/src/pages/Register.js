@@ -1,32 +1,44 @@
 import React from "react";
 import { Link ,Navigate} from "react-router-dom";
-import AppData from "../AppData";
+import axios from 'axios'
+
 export default function Register(){
 
-
-      // User Login info
-      const userList =AppData.users 
-
     // used for storing user input
-    const [userName, setUserName] = React.useState("");
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
+    const [newUser, setNewUser] = React.useState({
+        name: '',
+        email: '',
+        password: ''
+    });
+
+    console.log(newUser)
     
 
     // it is used to redirect to Login page
     const [isSubmitted, setIsSubmitted] = React.useState(false);
     
 
-    const handleSubmit = (event) => {
- 
+    const handleSubmit = async (login) => {
+
         // prevent default form submit
-        event.preventDefault();
-        const userData = {userName,email,password}
-        userList.push(userData)
-        console.log("userList",userList)
-        console.log("userData",userData)
-        setIsSubmitted(true);
-      };
+        login.preventDefault();
+
+        await axios.post('api/users/',{
+            name: newUser.name,
+            email: newUser.email,
+            password: newUser.password
+        })
+        .then((res) => {
+            alert('successfully registered')
+            console.log(res.data)
+            setIsSubmitted(true)
+            return <Navigate to="/login"/>
+        },
+        (error) => {
+            console.log(error)
+        }
+        )
+    };
       
 
 
@@ -38,24 +50,47 @@ export default function Register(){
                 <form action="/home" onSubmit={handleSubmit}>
                     <p>
                         <label>Username</label><br/>
-                        <input type="text" name="first_name"
+                        <input 
+                        type="text" 
+                        name="name"
                         required 
                         placeholder={'Enter your username'} 
-                        onChange={(e) => setUserName(e.target.value)}
+                        onChange={(e) => setNewUser(prev => {
+                            return {
+                                ...prev,
+                                name: e.target.value
+                            }
+                        })}
                         autoFocus
                         />
                     </p>
                     <p>
                         <label>Email address</label><br/>
-                        <input type="email" name="email" required 
-                        onChange={(e) => setEmail(e.target.value)}
+                        <input 
+                        type="email" 
+                        name="email" 
+                        required 
+                        onChange={(e) => setNewUser(prev => {
+                            return {
+                                ...prev,
+                                email: e.target.value
+                            }
+                        })}
                         placeholder={'Enter your Email'} 
                         />
                     </p>
                     <p>
                         <label>Password</label><br/>
-                        <input type="password" name="password" required
-                        onChange={(e) => setPassword(e.target.value)}
+                        <input 
+                        type="password" 
+                        name="password" 
+                        required
+                        onChange={(e) => setNewUser(prev => {
+                            return {
+                                ...prev,
+                                password: e.target.value
+                            }
+                        })}
                         placeholder={'Enter your Password'} 
                         />
                         

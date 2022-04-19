@@ -70,7 +70,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Header cart={cart} userLoggedIn={userLoggedIn[0]} signOut={signOut}/>
+        <Header cart={cart} userLoggedIn={userLoggedIn} signOut={signOut}/>
       </header>
 
       <main className="App-main">

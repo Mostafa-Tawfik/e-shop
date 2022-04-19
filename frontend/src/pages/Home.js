@@ -1,5 +1,6 @@
 import React from 'react'
 import Categories from '../components/Categories'
+import HomeSection from '../components/HomeSection'
 
 
 function Home(props) {
@@ -9,6 +10,7 @@ function Home(props) {
 
       <Categories {...props} filter='Top Deals'/>
       <Categories {...props} filter='Recommended for you'/>
+      <HomeSection {...props} filter='Electronics'/>
       
     </div>
   )
