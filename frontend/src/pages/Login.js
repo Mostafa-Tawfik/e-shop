@@ -9,10 +9,12 @@ export default function Login(props) {
  
     // it is used to redirect to home page
     const [isSubmitted, setIsSubmitted] = React.useState(false);
-
+    
     // used for storing user input
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
+    const [loginUser, setLoginUser] = React.useState({
+      email: '',
+      password: ''
+    });
 
 
     const handleSubmit = async (login) => {
@@ -21,8 +23,8 @@ export default function Login(props) {
       login.preventDefault();
 
       await axios.post('api/users/login',{
-        email: email,
-        password: password
+        email: loginUser.email,
+        password: loginUser.password
       })
       .then((res) => {
         
@@ -30,7 +32,7 @@ export default function Login(props) {
         // declare user has logged in
         props.userlogged(res.data)
         setIsSubmitted(true)
-        return <Navigate to="/login"/>
+        return res.data
       },
       (error) => {
         console.log(error)
@@ -38,7 +40,7 @@ export default function Login(props) {
       }
       )
     };
-
+    
     // Generate JSX code for login form
     const loginForm = (
 
@@ -54,7 +56,12 @@ export default function Login(props) {
                 placeholder={'Enter your Email'}
                 required
                 autoFocus
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setLoginUser(prev => {
+                  return {
+                    ...prev,
+                    email: e.target.value
+                  }
+                })}
               />
             </p>
             <p>
@@ -67,7 +74,12 @@ export default function Login(props) {
                 name="password"   
                 placeholder={'Enter your Password'} 
                 required
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setLoginUser(prev => {
+                  return {
+                    ...prev,
+                    password: e.target.value
+                  }
+                })}
               />
             </p>
             <div className="error">{errorMessages}</div>
@@ -85,7 +97,8 @@ export default function Login(props) {
     )
     return (
       <div>
-      {isSubmitted ? <Navigate to={'/'} /> : loginForm}
+      {/* {loginForm} */}
+      {isSubmitted ? props.isAdmin ? <Navigate to={'/dashboard'} /> : <Navigate to={'/'} /> : loginForm}
       </div>
     )
 }
