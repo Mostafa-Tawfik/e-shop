@@ -15,16 +15,17 @@ function Cart(props) {
   
   return (
     <div className='cart'>
-
+      
       {props.cart.length > 0 ? 
       
+      // if the cart is filled
       <div className='cart-holder'>
         <div className='cart-filled'>
           {props.cart.map(c => {
             return (
               
               // if the cart is filled
-              <div key={c.id} className='cart-filled-items'>
+              <div key={c.id || c._id} className='cart-filled-items'>
 
                 <Link to={`/product/${c.id}`}>
                   <img src={c.image} alt='product'></img>
@@ -33,7 +34,7 @@ function Cart(props) {
                 <div className='cart-filled-items-info'>
 
                   <Link to={`/product/${c.id}`}>
-                    <h3>{c.title}</h3>
+                    <h3>{c.title || c.name}</h3>
                   </Link>
 
                   
@@ -52,6 +53,7 @@ function Cart(props) {
                 <button onClick={()=> props.removeFromCart(c.id)}>
                   <img className='cart-delete' src='https://api.iconify.design/fluent/delete-16-filled.svg?color=%23fc2e20' alt='delete item'></img>
                 </button>
+                
               </div>
             )
           })}
