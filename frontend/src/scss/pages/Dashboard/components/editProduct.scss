@@ -1,0 +1,66 @@
+.dash-products-create {
+  > h2 {
+    margin-bottom: 1em;
+    color: $clr-sec;
+  }
+  .dash-products-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    .dash-products-form {
+      padding: 1em;
+      background: white;
+      width: min(70vw, 700px);
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      border-radius: 10px;
+      box-shadow: $boxShadow;
+      > div {
+        width: 100%;
+        > input {
+          width: 100%;
+        }
+        > p {
+          padding: 5px;
+        }
+      }
+    }
+    input {
+      height: 40px;
+      border-radius: 10px;
+      padding-left: 1em;
+      border: $border;
+    }
+    button {
+      @include slideSolidBtn($clr-light);
+      width: 25%;
+      padding: 0.75em;
+      margin: 1em 0;
+      box-shadow: $boxShadow;
+    }
+    .dash-products-form-desc {
+      height: 120px;
+      border-radius: 10px;
+      padding: 1em;
+      width: 100%;
+      border: $border;
+    }
+    .dash-products-form-cat {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1em;
+      > div {
+        width: 50%;
+        > input {
+          width: 100%;
+        }
+        > p {
+          padding: 5px;
+        }
+      }
+    }
+  }
+}
