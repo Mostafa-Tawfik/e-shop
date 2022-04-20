@@ -95,7 +95,9 @@ function DashboardProducts() {
           return (
             <div key={p._id} className='dash-product-card'>
 
-              <img src='https://api.iconify.design/emojione/money-bag.svg' alt='money'></img>
+              {p.image ?
+              <img src={p.image} alt='money'></img> :
+              <img src='https://api.iconify.design/emojione/money-bag.svg' alt='money'></img>}
 
               <div className='dash-product-details'>
                 <h5>{p.name}</h5>

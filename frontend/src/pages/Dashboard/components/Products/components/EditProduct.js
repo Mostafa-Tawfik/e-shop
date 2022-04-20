@@ -1,35 +1,31 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 function EditProduct() {
 
   const params = useParams()
+  const navigate = useNavigate()
 
-  ///-- handle current product --///
-  const [product, setProduct] = React.useState('')
-  console.log(product)
-
+  // pre filled the form with current infos
   React.useEffect(()=> {
     axios.get(`/api/products/${params.id}`)
     .then(res => setUpdateForm(res.data))
   },[params.id])
-  ///-- end --///
 
 
   ///-- handle update form --///
   const [updateForm, setUpdateForm] = useState({
-    name: `${product.name}`,
-    price: `${product.price}`,
-    discount: `${product.discount}`,
-    description: `${product.description}`,
-    image: `${product.image}`,
-    brand: `${product.brand}`,
-    category: `${product.category}`,
-    countInStock: `${product.countInStock}`
+    name: ``,
+    price: ``,
+    discount: ``,
+    description: ``,
+    image: ``,
+    brand: ``,
+    category: ``,
+    countInStock: ``
   })
 
-  console.log(updateForm)
 
   // handle input change
   function handleChange(event) {
@@ -42,12 +38,37 @@ function EditProduct() {
     })
   }
 
+  // handle submit
+  async function handleSubmit(event) {
+    event.preventDefault() 
+
+    await axios({
+      url: `/api/products/${params.id}`,
+      method: 'PUT',
+      headers: {
+         Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+      },
+      data: updateForm
+    })
+    .then((res) => {
+      console.log('Product updated')
+      alert('Product updated')
+      console.log(res.data)
+      navigate('/dashboard/products')
+      return res.data
+    },
+    (error) => {
+      console.log(error)
+    }
+    )
+  }
+
   return (
     <div className='dash-products-create'>
       <h2>Edit Product</h2>
 
       <div className='dash-products-form-container'>
-        <form className='dash-products-form'>
+        <form className='dash-products-form' onSubmit={handleSubmit}>
 
           <div>
             <p>Product title</p>
