@@ -20,7 +20,7 @@ function HomeSection(props) {
         return (
           <div key={i._id} className='product-card'>
             <div className='discount'>
-              {i.discount && <h5>{i.discount}% OFF</h5>}
+              {i.discount && <img src='https://png2.cleanpng.com/sh/d5b9d75cd8a81f00a1af6b3e11d81b73/L0KzQYm3U8I4N6N0fZH0aYP2gLBuTgNidJZ4RdlqcnHqdX76gfxmNZVui9V4dX73g37ojvQuaZ1xhAlqbnPog376iP9xeJpzReVqbHWwg8XwgBtmel46edQEZUXkRom9WcFmPV85UakDM0azR4K8UsIyO2M4UaIANUG1PsH1h5==/kisspng-sales-garage-sale-discounts-and-allowances-shoppin-sale-sticker-5ab9e5a68691e5.4978360715221323905512.png' alt='sale'></img>}
             </div>
 
             <Link to={`/product/${i._id}`}>
