@@ -1,8 +1,6 @@
 import React from 'react'
 
-function Dashboard() {
-
-
+function DashHome() {
   return (
     <div className='dashboard-section'>
       <h2>Dashboard</h2>
@@ -35,4 +33,4 @@ function Dashboard() {
   )
 }
 
-export default Dashboard
+export default DashHome

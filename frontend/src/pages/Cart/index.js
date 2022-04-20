@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import OrderSummary from '../components/OrderSummary';
+import OrderSummary from './components/OrderSummary'
 
 function Cart(props) {
   // console.log(props)

@@ -1,22 +1,23 @@
 import './App.scss';
 import React from 'react'
-import {Routes, Route, Link} from 'react-router-dom'
-import Footer from './components/Footer';
-import Header from './components/Header';
+import {Routes, Route} from 'react-router-dom'
+import Footer from './layout/Footer';
+import Header from './layout/Header';
 import Home from './pages/Home';
-import Cart from './pages/Cart';
+import Cart from './pages/Cart/index';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Product from './pages/Product';
 import Search from './pages/Search';
-import Dashboard from './pages/Dashboard'
-import DashboardProducts from './components/Dashboard-Products'
+import Dashboard from './pages/Dashboard/index'
 
 function App() {
 
+  // cart state
   const [cart, setCart] = React.useState('')
 
-  // setup local storage
+
+  // setup local storage for cart
   React.useEffect(() => {
     const items = JSON.parse(localStorage.getItem('cart'));
     if (items) {
@@ -34,6 +35,7 @@ function App() {
     setCart([...cart, items])
   }
 
+
   // remove from cart function
   function removeFromCart(id) {
     setCart([...cart.filter(item => item.id !== id)])
@@ -41,6 +43,7 @@ function App() {
       setCart([])
     }
   }
+
 
   // a state to control login
   const [userLoggedIn, setUserLoggedIn,] = React.useState('')
@@ -51,9 +54,10 @@ function App() {
     setUserLoggedIn(user)
   }
 
-  // a login function with the logged user id
+  // a logout function
   function signOut() {
     setUserLoggedIn('')
+    localStorage.removeItem(userLoggedIn)
   }
 
   // setup local storage for signed in user
@@ -68,8 +72,7 @@ function App() {
     localStorage.setItem('userLoggedIn', JSON.stringify(userLoggedIn));
   }, [userLoggedIn]);
 
-
-  const app = (
+  const homePage = (
     <div className="App">
       
       <header className="App-header">
@@ -101,43 +104,12 @@ function App() {
     </div>
   )
 
-
-  const adminPanel = ['Dashboard', 'Products', 'Orders']
-
-  const dashboard = (
-    
-    <>
-    <div className='dashboard'>
-
-      <div className='admin-panel'>
-        <h4>Admin Panel</h4>
-        {adminPanel.map((section, index) => {
-        return (
-          <Link to={section !== 'Dashboard' ? `/dashboard/${section.toLowerCase()}` : '/dashboard/'}>
-            <div key={index} className='panel-section'>
-                {section}
-            </div>
-          </Link>
-        )})}
-      </div>
-
-      <div className='sections'>
-        <Routes>
-          <Route path='/dashboard/' element={<Dashboard />}/>
-          <Route path='/dashboard/products' element={<DashboardProducts />}/>
-        </Routes>
-      </div>
-
-      <button onClick={()=>signOut()} className='logout'>Logout</button>
-
-      </div>
-    </>
-  )
-
-  
   return (
     <>
-      {userLoggedIn.isAdmin ? dashboard : app}
+      {userLoggedIn.isAdmin ? 
+      <Dashboard signOut={signOut}/> : 
+      homePage
+      }
     </>
   )
 }
