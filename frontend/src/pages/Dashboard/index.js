@@ -2,6 +2,7 @@ import React from 'react'
 import {Routes, Route, Link} from 'react-router-dom'
 import DashHome from './components/DashHome'
 import DashProducts from './components/Products'
+import CreateProduct from './components/Products/components/CreateProduct'
 
 function Dashboard(props) {
 
@@ -27,6 +28,7 @@ function Dashboard(props) {
         <Routes>
           <Route path='/' element={<DashHome />}/>
           <Route path='/dashboard/products' element={<DashProducts />}/>
+          <Route path='/dashboard/products/create' element={<CreateProduct />}/>
         </Routes>
       </div>
 

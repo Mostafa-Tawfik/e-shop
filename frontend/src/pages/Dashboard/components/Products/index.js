@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import {Link} from 'react-router-dom'
 
 function DashboardProducts() {
 
@@ -29,10 +30,67 @@ function DashboardProducts() {
       }
       })
   }
+
+  //-- create new product --//
+  async function createProduct() {
+
+    await axios({
+      url: '/api/products',
+      method: 'POST',
+      headers: {
+         Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+        }
+    })
+    .then((res) => {
+      console.log('Product created')
+      alert('Product created')
+      console.log(res.data)
+      window.location.reload()
+      return res.data
+    },
+    (error) => {
+      console.log(error)
+    }
+    )
+  }
+  ///-- end --///
+
+
+  //-- create new product --//
+  async function deleteProduct(id) {
+
+    await axios({
+      url: `/api/products/${id}`,
+      method: 'DELETE',
+      headers: {
+         Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+        }
+    })
+    .then((res) => {
+      console.log('Product deleted')
+      alert('Product deleted')
+      console.log(res.data)
+      window.location.reload()
+      return res.data
+    },
+    (error) => {
+      console.log(error)
+    }
+    )
+  }
+  ///-- end --///
   
   return (
     <div className='dash-products-section'>
       <h2>Products</h2>
+
+      {/* <Link to={'/dashboard/products/create'}> */}
+        <button 
+        onClick={()=>createProduct()}
+        className='dash-add-product-btn'>
+          <p>+ Create new product</p>
+        </button>
+      {/* </Link> */}
 
       <div className='dash-cards-container'>
         {products.map(p => {
@@ -62,7 +120,7 @@ function DashboardProducts() {
               <div className='dash-product-actions'>
                 <p>View details</p>
                 <p>Edit info</p>
-                <p>Delete</p>
+                <p onClick={()=>deleteProduct(p._id)}>Delete</p>
               </div>
               }
 

@@ -1,5 +1,5 @@
 import './App.scss';
-import React from 'react'
+import React, { useState } from 'react'
 import {Routes, Route} from 'react-router-dom'
 import Footer from './layout/Footer';
 import Header from './layout/Header';
@@ -13,9 +13,8 @@ import Dashboard from './pages/Dashboard/index'
 
 function App() {
 
-  // cart state
+  ///-- handle cart --///
   const [cart, setCart] = React.useState('')
-
 
   // setup local storage for cart
   React.useEffect(() => {
@@ -43,15 +42,16 @@ function App() {
       setCart([])
     }
   }
+  ///--- end ---///
 
 
-  // a state to control login
+  ///-- handle user login details --///
   const [userLoggedIn, setUserLoggedIn,] = React.useState('')
-  console.log(userLoggedIn)
 
   // a login function with the logged user id
   function userlogged(user) {
     setUserLoggedIn(user)
+    setjwt(user.token)
   }
 
   // a logout function
@@ -71,6 +71,25 @@ function App() {
   React.useEffect(() => {
     localStorage.setItem('userLoggedIn', JSON.stringify(userLoggedIn));
   }, [userLoggedIn]);
+  ///--- end ---///
+
+
+  ///-- handle user token --///
+  const [jwt, setjwt] = useState('')
+
+  // store token in localStorage
+  React.useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('jwt'));
+    if (user) {
+      setjwt(user);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    localStorage.setItem('jwt', JSON.stringify(jwt));
+  }, [jwt]);
+  ///--- end ---///
+  
 
   const homePage = (
     <div className="App">

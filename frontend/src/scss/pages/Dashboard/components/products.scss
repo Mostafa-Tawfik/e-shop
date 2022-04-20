@@ -3,6 +3,14 @@
     margin-bottom: 1em;
     color: $clr-sec;
   }
+  .dash-add-product-btn {
+    @include slideClrBtn($grd-sec, $clr-main);
+    margin: 0 0 2em 1em;
+    padding: 1em;
+    > p {
+      color: $clr-light;
+    }
+  }
   .dash-cards-container {
     display: flex;
     flex-wrap: wrap;
@@ -20,6 +28,7 @@
       align-items: center;
       gap: 1em;
       border-radius: 10px;
+      box-shadow: $boxShadow;
       img {
         height: 66px;
       }
@@ -52,6 +61,7 @@
         padding: 0.5em;
         border-radius: 10px;
         background: white;
+        box-shadow: $boxShadow;
         border: 1px solid rgb(128, 128, 128, 0.3);
         > p{
           cursor: pointer;
