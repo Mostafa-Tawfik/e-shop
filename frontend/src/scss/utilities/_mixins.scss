@@ -102,7 +102,7 @@
 }
 
 @mixin slideSolidBtn($primeClr:$clr-light) {
-  position: relative;
+  // position: relative;
   cursor: pointer;
   color: $primeClr;
   border: none;

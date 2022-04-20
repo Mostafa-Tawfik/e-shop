@@ -5,10 +5,10 @@
 @import './scss/layout/colors';
 
 // import mixins
-@import './scss/layout/mixins';
+@import './scss/utilities/mixins';
 
 // import headrer
-@import './scss/components/header';
+@import './scss/layout/header';
 
 // import home page
 @import './scss/pages/home';
@@ -23,7 +23,7 @@
 @import './scss/components/categories';
 
 // import footer
-@import './scss/components/footer';
+@import './scss/layout/footer';
 
 // import login
 @import './scss/pages/login';
@@ -33,3 +33,6 @@
 
 // import search
 @import './scss/pages/search';
+
+// import dashboard
+@import './scss/pages//Dashboard/dashboard.scss';

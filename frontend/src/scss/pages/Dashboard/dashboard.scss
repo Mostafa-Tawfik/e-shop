@@ -1,0 +1,39 @@
+@import './components/dashHome.scss';
+@import './components/products.scss';
+
+.dashboard {
+  display: flex;
+  background: $clr-light;
+  .admin-panel {
+    position: fixed;
+    padding: 2em;
+    width: 250px;
+    height: 100vh;
+    background: $grd-main;
+    > h4 {
+      margin: 1em 0;
+      color: white;
+    }
+    .panel-section {
+      padding: 1.5em;
+      color: white;
+      cursor: pointer;
+      &:hover{
+        background: $clr-light;
+        color: $clr-main;
+      }
+    }
+  }
+  .sections {
+    margin-left: 250px;
+    padding: 3em;
+    width: 80vw;
+  }
+  .logout {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    @include slideSolidBtn
+  }
+  
+}

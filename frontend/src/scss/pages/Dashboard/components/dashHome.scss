@@ -1,0 +1,18 @@
+.dashboard-section {
+  > h2 {
+    margin-bottom: 1em;
+    color: $clr-sec;
+  }
+  .summary-card {
+    margin-bottom: 0.5em;
+    background: white;
+    height: 100px;
+    width: min(40vw, 400px);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    img {
+      height: 66px;
+    }
+  }
+}
