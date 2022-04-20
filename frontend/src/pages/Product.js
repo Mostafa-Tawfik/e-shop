@@ -1,47 +1,48 @@
 import React from 'react'
-import AppData from '../AppData'
 import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
 function Product(props) {
 
-  const [product, setProduct] = React.useState(AppData.Products)
+  const [product, setProduct] = React.useState('')
   console.log(product)
 
   const params = useParams()
 
   React.useEffect(()=> {
-    setProduct(AppData.Products.filter(i=>i.id === params.id*1))
+    axios.get(`/api/products/${params.id}`)
+    .then(res => setProduct(res.data))
   },[params.id])
 
   return (
     <div className='product'>
       <div className='product-holder'>
-        <img src={product[0].image} alt='product'></img>
+        <img src={product.image} alt='product'></img>
         <div className='product-info'>
-          <p>{product[0].category}</p>
-          <h2>{product[0].title}</h2>
-          <p>Brand: {product[0].brand}</p>
-          <p>Colors: {product[0].colors}</p>
+          <p>{product.category}</p>
+          <h2>{product.name}</h2>
+          <p>Brand: {product.brand}</p>
+          {/* <p>Colors: {product.colors}</p> */}
           
           <div>
-            {product[0].discountprice ? 
+            {product.discount ? 
             // if price have a discount
             <div className='product-price-holder'>
-              <h5 className='product-price'>${product[0].discountprice}</h5>
+              <h5 className='product-price'>${product.price.toFixed() * ((100 - product.discount)/100)}</h5>
               <div className='product-price-savings'>
-                <h5>Save {product[0].discount}%</h5>
+                <h5>Save ${product.price.toFixed() * product.discount/100}</h5>
                 <p>All prices include VAT.</p>
               </div>
             </div> : 
             // // if price dosen't have a discount
             <div className='product-price-holder'>
               <h5 className='product-price'>
-                ${product[0].price}
+                ${product.price}
               </h5>
             </div>}
           </div>
 
-          {product[0].description && <p className='product-info-desc'>{product[0].description}</p>}
+          {product.description && <p className='product-info-desc'>{product.description}</p>}
 
           <hr></hr>
 
@@ -50,18 +51,18 @@ function Product(props) {
           <button onClick={()=> {
             // check if the item is already in the cart
               props.cart.length > 0 &&
-              props.cart.map(c => c.id).includes(product[0].id) ?
+              props.cart.map(c => c.id).includes(product.id) ?
               alert("Product already in your cart") :
-              props.addToCart(product[0])
+              props.addToCart(product)
             }}>
               {/* if product is on the cart show "added" */}
-              {props.cart && props.cart.map(c => c.id).includes(product[0].id) ? 
+              {props.cart && props.cart.map(c => c.id).includes(product.id) ? 
               <p>Added</p> :
               <p>Add to cart</p>}
               
             </button>
 
-          {product[0].discount && <h2 className='product-discount'>{product[0].discount}%</h2>}
+          {product.discount && <h2 className='product-discount'>{product.discount}%</h2>}
         </div>
       </div>
     </div>

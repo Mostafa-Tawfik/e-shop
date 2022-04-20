@@ -24,10 +24,10 @@
       padding: 0.5em;
       .discount {
         position: absolute;
-        top: 10px;
-        left: 10px;
-        h5 {
-          color: $clr-high;
+        top: 0px;
+        left: 0px;
+        img {
+          width: 80px;
         }
       }
       .product-img {
