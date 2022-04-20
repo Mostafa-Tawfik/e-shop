@@ -84,20 +84,20 @@ function DashboardProducts() {
     <div className='dash-products-section'>
       <h2>Products</h2>
 
-      {/* <Link to={'/dashboard/products/create'}> */}
-        <button 
-        onClick={()=>createProduct()}
-        className='dash-add-product-btn'>
-          <p>+ Create new product</p>
-        </button>
-      {/* </Link> */}
+      <button 
+      onClick={()=>createProduct()}
+      className='dash-add-product-btn'>
+        <p>+ Create new product</p>
+      </button>
 
       <div className='dash-cards-container'>
         {products.map(p => {
           return (
             <div key={p._id} className='dash-product-card'>
 
-              <img src='https://api.iconify.design/emojione/money-bag.svg' alt='money'></img>
+              {p.image ?
+              <img src={p.image} alt='money'></img> :
+              <img src='https://api.iconify.design/emojione/money-bag.svg' alt='money'></img>}
 
               <div className='dash-product-details'>
                 <h5>{p.name}</h5>
@@ -118,9 +118,15 @@ function DashboardProducts() {
               isOpen.id === p._id && 
               isOpen.open && 
               <div className='dash-product-actions'>
+
                 <p>View details</p>
-                <p>Edit info</p>
+
+                <Link to={`/dashboard/products/edit/${p._id}`}>
+                  <p>Edit info</p>
+                </Link>
+
                 <p onClick={()=>deleteProduct(p._id)}>Delete</p>
+
               </div>
               }
 
