@@ -13,53 +13,7 @@ import Dashboard from './pages/Dashboard/index'
 import Checkout from './pages/Checkout/Checkout'
 
 function App() {
-
-  ///-- handle cart --///
-  const [cart, setCart] = React.useState([])
-  console.log(cart)
-
-  // setup local storage for cart
-  React.useEffect(() => {
-    const items = JSON.parse(localStorage.getItem('cart'));
-    if (items) {
-      setCart(items);
-    }
-  }, []);
-
-  React.useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
-
-
-  // add to cart function
-  function addToCart(item) {
-    setCart([...cart, item])
-    setOrder(prev => ({
-      'orderItems': [...prev.orderItems,
-        {
-          name: item.name,
-          price: item.price,
-          product: item._id,
-          image: item.image
-        },
-      ]
-    }))
-  }
-
-
-  // remove from cart function
-  function removeFromCart(id) {
-    setCart([...cart.filter(item => item._id !== id)])
-
-    setOrder({'orderItems': order.orderItems.map(i => i).filter(p => p.product !== id)})
-
-    if(cart.length === 1) {
-      setCart([])
-    }
-  }
-  ///--- end ---///
-
-
+  
   ///-- handle user login details --///
   const [userLoggedIn, setUserLoggedIn,] = React.useState('')
 
@@ -76,14 +30,14 @@ function App() {
   }
 
   // setup local storage for signed in user
-  React.useEffect(() => {
+  useEffect(() => {
     const user = JSON.parse(localStorage.getItem('userLoggedIn'));
     if (user) {
       setUserLoggedIn(user);
     }
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     localStorage.setItem('userLoggedIn', JSON.stringify(userLoggedIn));
   }, [userLoggedIn]);
   ///--- end ---///
@@ -93,43 +47,99 @@ function App() {
   const [jwt, setjwt] = useState('')
 
   // store token in localStorage
-  React.useEffect(() => {
+  useEffect(() => {
     const user = JSON.parse(localStorage.getItem('jwt'));
     if (user) {
       setjwt(user);
     }
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     localStorage.setItem('jwt', JSON.stringify(jwt));
   }, [jwt]);
   ///--- end ---///
 
 
+  ///-- handle cart --///
+  const [cart, setCart] = useState([])
+  // console.log('cart', cart)
+
+  // setup local storage for cart
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('cart'));
+    if (items) {
+      setCart(items);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
+
+
+  // add to cart function
+  function addToCart(item) {
+    setCart([...cart, item])
+  }
+
+
+  // remove from cart function
+  function removeFromCart(id) {
+    setCart([...cart.filter(item => item._id !== id)])
+
+    if(cart.length === 1) {
+      setCart([])
+    }
+  }
+
+
+  // handle qty change
+  function setQty(qty, id) {
+    setCart(prev => (
+      // map over order items
+      prev.map(
+        //  if got matched
+        p => p._id === id ?
+        // update qty
+        {...p, qty: qty}
+        :
+        // if not match return defualt
+        p
+        )
+    ))
+  }
+  ///--- end ---///
+
+
   ///-- handle orders --///
-  const [order, setOrder] = useState({
-    'orderItems': [
-      {
-        'name': '',
-        'qty': '',
-        'image': '',
-        'price': '',
-        'product': ''
-      }
-    ]
-  })
+  const [order, setOrder] = useState('')
+  // console.log('order', order)
 
-  // function addToOrder(i) {
-  //   setOrder(prev => ({
-  //     orderItems: [
-  //       ...prev,
-  //       {'name': i.name}
-  //     ]
-  //   }))
-  // }
+  // generate orderItems
+  function generateOrder() {
+    setOrder(({
+      'orderItems': cart.map(item => ({
+        name: item.name,
+        price: item.price * ((100 - item.discount)/100),
+        product: item._id,
+        image: item.image,
+        qty: item.qty
+      }))
+    }))
+  }
 
-  console.log(order)
-  
+  // setup local storage for Orders
+  useEffect(() => {
+    const userOrder = JSON.parse(localStorage.getItem('order'));
+    if (userOrder) {
+      setOrder(userOrder);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('order', JSON.stringify(order));
+  }, [order]);
+  // ///--- end ---///
 
   const homePage = (
     <div className="App">
@@ -140,20 +150,41 @@ function App() {
 
       <main className="App-main">
       <Routes>
-          <Route path='/' element={<Home addToCart={addToCart} cart={cart}/>}/>
+          <Route path='/' element={
+          <Home 
+          addToCart={addToCart} 
+          cart={cart}
+          />}/>
           
-          <Route path='/cart' element={<Cart cart={cart} removeFromCart={removeFromCart}/>}/>
+          <Route path='/cart' element={
+          <Cart 
+          cart={cart} 
+          setQty={setQty} 
+          generateOrder={generateOrder} 
+          removeFromCart={removeFromCart}
+          />}/>
 
-          <Route path='/login' element={<Login userlogged={userlogged} isAdmin={userLoggedIn.isAdmin}/>}/>
+          <Route path='/login' element={
+          <Login 
+          userlogged={userlogged} 
+          isAdmin={userLoggedIn.isAdmin}
+          />}/>
 
           <Route path='/register' element={<Register />}/>
 
-          <Route path='/product/:id' element={<Product cart={cart} addToCart={addToCart}/>}/>
+          <Route path='/product/:id' element={
+          <Product 
+          cart={cart} 
+          addToCart={addToCart}
+          />}/>
 
-          <Route path='/search/:name' element={<Search cart={cart} addToCart={addToCart}/>}/>
+          <Route path='/search/:name' element={
+          <Search 
+          cart={cart} 
+          addToCart={addToCart}
+          />}/>
 
           <Route path='/checkout' element={<Checkout cart={cart} />}/>
-
           
       </Routes>
       </main>
@@ -167,7 +198,8 @@ function App() {
 
   return (
     <>
-      {userLoggedIn.isAdmin ? 
+      {
+      userLoggedIn.isAdmin ? 
       <Dashboard signOut={signOut}/> : 
       homePage
       }

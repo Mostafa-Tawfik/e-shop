@@ -20,13 +20,23 @@ function OrderSummary(props) {
 
 
   // Order Summary calc
-  const subtotalBeforeDiscount = props.cart.length > 0 ? props.cart.map(i => i.price).reduce((x, y) => x + y) : ''
+  const subtotalBeforeDiscount = 
+  props.cart.length > 0 ? 
+  props.cart.map(i => i.qty ? i.price * i.qty : i.price).reduce((x, y) => x + y) 
+  : 
+  ''
 
-  const discount = props.cart.length > 0 ? props.cart.map(i => (i.price * i.discount/100)).reduce((x, y) => x + y) : ''
+  const discount = 
+  props.cart.length > 0 ? 
+  props.cart.map(i => ((i.qty ? i.price * i.qty : i.price) * i.discount/100)).reduce((x, y) => x + y) 
+  : 
+  ''
 
-  const couponDiscount = (subtotalBeforeDiscount - (discount &&  discount)) * couponIsvalid/100
+  const couponDiscount = 
+  (subtotalBeforeDiscount - (discount && discount)) * couponIsvalid/100
 
-  const subtotal = subtotalBeforeDiscount - discount - (couponDiscount &&  couponDiscount)
+  const subtotal = 
+  subtotalBeforeDiscount - discount - (couponDiscount && couponDiscount)
 
   let shipping = 20
 
@@ -49,7 +59,7 @@ function OrderSummary(props) {
 
       <div className='calc'>
         <p>Subtotal</p>
-        <p>${subtotalBeforeDiscount}</p>
+        <p>${subtotalBeforeDiscount.toFixed(2)}</p>
       </div>
       {discount !== 0 && <div className='calc'>
         <p>Discount</p>
@@ -82,7 +92,7 @@ function OrderSummary(props) {
       </div>
 
       <Link to={'/checkout'}>
-        <button className='checkout-btn'>Checkout</button>
+        <button onClick={()=>props.generateOrder()} className='checkout-btn'>Checkout</button>
       </Link>
     </div>
   )

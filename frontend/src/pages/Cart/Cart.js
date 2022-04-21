@@ -43,7 +43,7 @@ function Cart(props) {
                 <div className='cart-filled-items-info'>
 
                   <Link to={`/product/${c._id}`}>
-                    <h3>{c.title || c.name}</h3>
+                    <h3>{c.name}</h3>
                   </Link>
 
                   
@@ -59,10 +59,11 @@ function Cart(props) {
   
                   <div className='dropdown'>
                     <Select
-                      placeholder='Qty'
+                      // if qty is not defined retun 1 if not display value
+                      placeholder={`Qty: ${c.qty ? c.qty : 1}`}
                       searchable= {false}
                       options={options}
-                      onChange={values => values}
+                      onChange={values => props.setQty(values[0].value, c._id)}
                     />
                   </div>
 
