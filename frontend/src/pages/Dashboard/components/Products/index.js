@@ -1,8 +1,11 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import popAlert from '../../../../components/popAlert'
 
 function DashboardProducts() {
+
+  const navigate = useNavigate()
 
   // store all products
   const [products, setProducts] = React.useState([])
@@ -31,7 +34,7 @@ function DashboardProducts() {
       })
   }
 
-  //-- create new product --//
+  ///-- start create new product --///
   async function createProduct() {
 
     await axios({
@@ -43,9 +46,7 @@ function DashboardProducts() {
     })
     .then((res) => {
       console.log('Product created')
-      alert('Product created')
-      console.log(res.data)
-      window.location.reload()
+      navigate(`/dashboard/products/edit/${res.data._id}`)
       return res.data
     },
     (error) => {
@@ -56,7 +57,7 @@ function DashboardProducts() {
   ///-- end --///
 
 
-  //-- create new product --//
+  //-- delete product --//
   async function deleteProduct(id) {
 
     await axios({
@@ -67,10 +68,8 @@ function DashboardProducts() {
         }
     })
     .then((res) => {
-      console.log('Product deleted')
-      alert('Product deleted')
-      console.log(res.data)
-      window.location.reload()
+      popAlert('Done!', 'Product deleted')
+      setTimeout(()=> window.location.reload(), 2000) 
       return res.data
     },
     (error) => {
