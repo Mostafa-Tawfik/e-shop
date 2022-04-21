@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import popAlert from '../../../../../components/popAlert'
 
 function EditProduct() {
 
@@ -38,6 +39,7 @@ function EditProduct() {
     })
   }
 
+
   // handle submit
   async function handleSubmit(event) {
     event.preventDefault() 
@@ -51,10 +53,10 @@ function EditProduct() {
       data: updateForm
     })
     .then((res) => {
-      console.log('Product updated')
-      alert('Product updated')
-      console.log(res.data)
-      navigate('/dashboard/products')
+      // show success message
+      popAlert('Done!', 'Product updated')
+      // retrun to products page
+      setTimeout(()=> navigate('/dashboard/products'), 2000) 
       return res.data
     },
     (error) => {
@@ -63,6 +65,7 @@ function EditProduct() {
     )
   }
 
+  
   return (
     <div className='dash-products-create'>
       <h2>Edit Product</h2>
