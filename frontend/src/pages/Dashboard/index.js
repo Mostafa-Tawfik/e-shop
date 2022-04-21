@@ -1,5 +1,6 @@
 import React from 'react'
 import {Routes, Route, Link} from 'react-router-dom'
+import Orders from '../Dashboard/components/Orders'
 import DashHome from './components/DashHome'
 import DashProducts from './components/Products'
 import EditProduct from './components/Products/components/EditProduct'
@@ -29,6 +30,7 @@ function Dashboard(props) {
           <Route path='/' element={<DashHome />}/>
           <Route path='/dashboard/products' element={<DashProducts />}/>
           <Route path='/dashboard/products/edit/:id' element={<EditProduct />}/>
+          <Route path='/dashboard/orders' element={<Orders />}/>
         </Routes>
       </div>
 
