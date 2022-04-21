@@ -52,6 +52,23 @@ const getOrderById = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc  Cancel a single order for current user
+// @route DELETE /api/orders/:id
+// @access Private
+const cancelOrder = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id).populate(
+    "user",
+    "name email"
+  );
+  if (order) {
+    await order.remove();
+    res.json({ message: "Order removed" });
+  } else {
+    res.status(404);
+    throw new Error("Order not found");
+  }
+});
+
 // @desc  Update order to paid
 // @route PUT /api/orders/:id/pay
 // @access Private
@@ -111,4 +128,5 @@ module.exports = {
   updateOrdertoDelivered,
   getMyOrders,
   getOrders,
+  cancelOrder,
 };

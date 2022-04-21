@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/user");
+const Order = require("../models/order");
 
 const protect = asyncHandler(async (req, res, next) => {
   let token;
@@ -40,4 +41,14 @@ const admin = (req, res, next) => {
   }
 };
 
-module.exports = { protect, admin };
+const order = asyncHandler(async (req, res, next) => {
+  req.order = await Order.findById(req.params.id);
+  if (req.user.id === req.order.user.toString()) {
+    next();
+  } else {
+    res.status(401);
+    throw new Error("Not authorized for this operation");
+  }
+});
+
+module.exports = { protect, admin, order };

@@ -69,9 +69,68 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route GET /api/users/me
 // @access Private
 const getUser = asyncHandler(async (req, res) => {
-  const { _id, name, email } = await User.findById(req.user.id);
+  const user = await User.findById(req.user.id);
+  if (user) {
+    res.status(200).json({ id: user._id, user: user.name, email: user.email });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
 
-  res.status(200).json({ id: _id, name, email });
+// @desc    Update user profile
+// @route   PUT /api/users/me
+// @access  Private
+const updateUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.image = req.body.image || user.image;
+    user.address = req.body.address || user.address;
+    user.phoneNumber = req.body.phoneNumber || user.phoneNumber;
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+
+    const updatedUser = await user.save();
+
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      image: updatedUser.image,
+      address: req.body.address,
+      phoneNumber: req.body.phoneNumber,
+      token: generateToken(updatedUser._id),
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+
+// @desc    Get all users
+// @route   GET /api/users
+// @access  Private/Admin
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({});
+  res.json(users);
+});
+
+// @desc    Get user by ID
+// @route   GET /api/users/:id
+// @access  Private/Admin
+const getUserById = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id).select("-password");
+
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
 });
 
 const generateToken = (id) => {
@@ -80,4 +139,11 @@ const generateToken = (id) => {
   });
 };
 
-module.exports = { registerUser, loginUser, getUser };
+module.exports = {
+  registerUser,
+  loginUser,
+  getUser,
+  updateUserProfile,
+  getUsers,
+  getUserById,
+};
