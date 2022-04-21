@@ -25,7 +25,7 @@ function Product(props) {
           {/* <p>Colors: {product.colors}</p> */}
           
           <div>
-            {product.discount ? 
+            {product.discount > 0 ? 
             // if price have a discount
             <div className='product-price-holder'>
               <h5 className='product-price'>${product.price.toFixed() * ((100 - product.discount)/100)}</h5>
@@ -62,7 +62,7 @@ function Product(props) {
               
             </button>
 
-          {product.discount && <h2 className='product-discount'>{product.discount}%</h2>}
+          {product.discount > 0 && <h2 className='product-discount'>{product.discount}%</h2>}
         </div>
       </div>
     </div>

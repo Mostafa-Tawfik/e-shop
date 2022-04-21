@@ -1,20 +1,22 @@
 import './App.scss';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {Routes, Route} from 'react-router-dom'
 import Footer from './layout/Footer';
 import Header from './layout/Header';
 import Home from './pages/Home';
-import Cart from './pages/Cart/index';
+import Cart from './pages/Cart/Cart';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Product from './pages/Product';
 import Search from './pages/Search';
 import Dashboard from './pages/Dashboard/index'
+import Checkout from './pages/Checkout/Checkout'
 
 function App() {
 
   ///-- handle cart --///
-  const [cart, setCart] = React.useState('')
+  const [cart, setCart] = React.useState([])
+  console.log(cart)
 
   // setup local storage for cart
   React.useEffect(() => {
@@ -30,14 +32,27 @@ function App() {
 
 
   // add to cart function
-  function addToCart(items) {
-    setCart([...cart, items])
+  function addToCart(item) {
+    setCart([...cart, item])
+    setOrder(prev => ({
+      'orderItems': [...prev.orderItems,
+        {
+          name: item.name,
+          price: item.price,
+          product: item._id,
+          image: item.image
+        },
+      ]
+    }))
   }
 
 
   // remove from cart function
   function removeFromCart(id) {
-    setCart([...cart.filter(item => item.id !== id)])
+    setCart([...cart.filter(item => item._id !== id)])
+
+    setOrder({'orderItems': order.orderItems.map(i => i).filter(p => p.product !== id)})
+
     if(cart.length === 1) {
       setCart([])
     }
@@ -89,6 +104,31 @@ function App() {
     localStorage.setItem('jwt', JSON.stringify(jwt));
   }, [jwt]);
   ///--- end ---///
+
+
+  ///-- handle orders --///
+  const [order, setOrder] = useState({
+    'orderItems': [
+      {
+        'name': '',
+        'qty': '',
+        'image': '',
+        'price': '',
+        'product': ''
+      }
+    ]
+  })
+
+  // function addToOrder(i) {
+  //   setOrder(prev => ({
+  //     orderItems: [
+  //       ...prev,
+  //       {'name': i.name}
+  //     ]
+  //   }))
+  // }
+
+  console.log(order)
   
 
   const homePage = (
@@ -111,6 +151,8 @@ function App() {
           <Route path='/product/:id' element={<Product cart={cart} addToCart={addToCart}/>}/>
 
           <Route path='/search/:name' element={<Search cart={cart} addToCart={addToCart}/>}/>
+
+          <Route path='/checkout' element={<Checkout cart={cart} />}/>
 
           
       </Routes>

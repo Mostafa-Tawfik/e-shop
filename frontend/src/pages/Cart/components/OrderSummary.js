@@ -53,35 +53,35 @@ function OrderSummary(props) {
       </div>
       {discount !== 0 && <div className='calc'>
         <p>Discount</p>
-        <p className='discount'>-${discount}</p>
+        <p className='discount'>-${discount.toFixed(2)}</p>
       </div>}
 
       {couponDiscount !== 0 && <div className='calc'>
         <p>Coupon</p>
-        <p className='discount'>-${couponDiscount}</p>
+        <p className='discount'>-${couponDiscount.toFixed(2)}</p>
       </div>}
 
       <hr className='calc'></hr>
 
       <div className='calc'>
         <p>Subtotal</p>
-        <p>${subtotal}</p>
+        <p>${subtotal.toFixed(2)}</p>
       </div>
 
 
       <div className='calc'>
         <p>Shipping</p>
-        <p>${shipping}</p>
+        <p>${shipping.toFixed(2)}</p>
       </div>
 
       <hr className='calc'></hr>
 
       <div className='calc'>
         <p className='total'>Total</p>
-        <p className='total'>${Total}</p>
+        <p className='total'>${Total.toFixed(2)}</p>
       </div>
 
-      <Link to={'/'}>
+      <Link to={'/checkout'}>
         <button className='checkout-btn'>Checkout</button>
       </Link>
     </div>

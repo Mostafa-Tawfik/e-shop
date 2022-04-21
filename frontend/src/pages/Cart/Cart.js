@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import OrderSummary from './components/OrderSummary'
+import Select from 'react-dropdown-select'
 
 function Cart(props) {
-  // console.log(props)
 
   // set delivery dates
   let date = new Date()
@@ -12,6 +12,15 @@ function Cart(props) {
   let day = ("0" + (date.getDate())).slice(-2)
   let month = ("0" + (date.getMonth() + 1)).slice(-2)
   let year = date.getFullYear()
+
+  const options = [
+    { value: 1, label: 'Qty: 1' },
+    { value: 2, label: 'Qty: 2' },
+    { value: 3, label: 'Qty: 3' },
+    { value: 4, label: 'Qty: 4' },
+    { value: 5, label: 'Qty: 5' },
+    { value: 6, label: 'Qty: 6' },
+  ]
   
   return (
     <div className='cart'>
@@ -25,15 +34,15 @@ function Cart(props) {
             return (
               
               // if the cart is filled
-              <div key={c.id || c._id} className='cart-filled-items'>
+              <div key={c._id} className='cart-filled-items'>
 
-                <Link to={`/product/${c.id}`}>
+                <Link to={`/product/${c._id}`}>
                   <img src={c.image} alt='product'></img>
                 </Link>
 
                 <div className='cart-filled-items-info'>
 
-                  <Link to={`/product/${c.id}`}>
+                  <Link to={`/product/${c._id}`}>
                     <h3>{c.title || c.name}</h3>
                   </Link>
 
@@ -43,17 +52,27 @@ function Cart(props) {
                     </p>
                   </div>
   
-                  {/* if there is a discount show it, if not show normal price */}
-                  {c.discountprice ?
-                  <p>${c.discountprice}</p> :
+                  {c.discount ?
+                  // if there is a discount show it, if not show normal price
+                  <p>${c.price.toFixed() * ((100 - c.discount)/100)}</p> :
                   <p>${c.price}</p> }
   
+                  <div className='dropdown'>
+                    <Select
+                      placeholder='Qty'
+                      searchable= {false}
+                      options={options}
+                      onChange={values => values}
+                    />
+                  </div>
+
                 </div>
 
-                <button onClick={()=> props.removeFromCart(c.id)}>
+                <button onClick={()=> props.removeFromCart(c._id)}>
                   <img className='cart-delete' src='https://api.iconify.design/fluent/delete-16-filled.svg?color=%23fc2e20' alt='delete item'></img>
                 </button>
-                
+
+
               </div>
             )
           })}

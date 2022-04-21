@@ -54,7 +54,7 @@ function EditProduct() {
     })
     .then((res) => {
       // show success message
-      popAlert('Done!', 'Product updated')
+      popAlert('success', 'Done!', 'Product updated')
       // retrun to products page
       setTimeout(()=> navigate('/dashboard/products'), 2000) 
       return res.data
@@ -101,7 +101,7 @@ function EditProduct() {
           <div>
             <p>Images</p>
             <input
-            type='text'
+            type='url'
             name='image'
             required
             onChange={handleChange}
