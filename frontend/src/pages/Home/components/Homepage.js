@@ -1,8 +1,8 @@
 import React from 'react'
-import HomeSection from '../components/HomeSection'
+import HomeSection from '../../../components/HomeSection'
 
 
-function Home(props) {
+function Homepage(props) {
   return (
     <div>
       <img src='../images/Free-Advertising-Ideas.jpg' alt='ad' className='ad-image'></img>
@@ -14,4 +14,4 @@ function Home(props) {
   )
 }
 
-export default Home
+export default Homepage

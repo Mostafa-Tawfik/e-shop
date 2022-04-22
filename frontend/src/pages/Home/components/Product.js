@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import popAlert from '../components/popAlert'
+import popAlert from '../../../components/popAlert'
 
 function Product(props) {
 

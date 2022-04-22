@@ -1,11 +1,25 @@
-// used in Cart.js
-
 import React from 'react'
 
 function Checkout() {
   return (
-    <div>
-      
+    <div className='checkout'>
+
+      <div className='checkout-wizard'>
+        <div>
+          <div>&rArr;</div>
+          <p>Billing</p>
+        </div>
+
+        <div>
+          <div>&rArr;</div>
+          <p>Shipping</p>
+        </div>
+        
+        <div>
+          <p>Payment</p>
+        </div>
+      </div>
+
     </div>
   )
 }

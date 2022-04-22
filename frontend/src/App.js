@@ -1,31 +1,31 @@
 import './App.scss';
 import React, { useEffect, useState } from 'react'
 import {Routes, Route} from 'react-router-dom'
-import Footer from './layout/Footer';
-import Header from './layout/Header';
-import Home from './pages/Home';
-import Cart from './pages/Cart/Cart';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Product from './pages/Product';
-import Search from './pages/Search';
-import Dashboard from './pages/Dashboard/index'
-import Checkout from './pages/Checkout/Checkout'
+
+import Dashboard from './pages/Dashboard/Dashboard'
+import Home from './pages/Home/Home';
+
 
 function App() {
   
   ///-- handle user login details --///
   const [userLoggedIn, setUserLoggedIn,] = React.useState('')
 
+  ///-- handle admin login details --///
+  const [isAdmin, setIsAdmin,] = React.useState(false)
+
+
   // a login function with the logged user id
   function userlogged(user) {
     setUserLoggedIn(user)
+    setIsAdmin(user.isAdmin)
     setjwt(user.token)
   }
 
   // a logout function
   function signOut() {
     setUserLoggedIn('')
+    setIsAdmin(false)
     localStorage.removeItem(userLoggedIn)
   }
 
@@ -40,6 +40,20 @@ function App() {
   useEffect(() => {
     localStorage.setItem('userLoggedIn', JSON.stringify(userLoggedIn));
   }, [userLoggedIn]);
+  ///--- end ---///
+
+
+  // setup local storage for signed in user
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('isAdmin'));
+    if (user) {
+      setIsAdmin(user);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('isAdmin', JSON.stringify(isAdmin));
+  }, [isAdmin]);
   ///--- end ---///
 
 
@@ -60,150 +74,30 @@ function App() {
   ///--- end ---///
 
 
-  ///-- handle cart --///
-  const [cart, setCart] = useState([])
-  // console.log('cart', cart)
-
-  // setup local storage for cart
-  useEffect(() => {
-    const items = JSON.parse(localStorage.getItem('cart'));
-    if (items) {
-      setCart(items);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
-
-
-  // add to cart function
-  function addToCart(item) {
-    setCart([...cart, item])
-  }
-
-
-  // remove from cart function
-  function removeFromCart(id) {
-    setCart([...cart.filter(item => item._id !== id)])
-
-    if(cart.length === 1) {
-      setCart([])
-    }
-  }
-
-
-  // handle qty change
-  function setQty(qty, id) {
-    setCart(prev => (
-      // map over order items
-      prev.map(
-        //  if got matched
-        p => p._id === id ?
-        // update qty
-        {...p, qty: qty}
-        :
-        // if not match return defualt
-        p
-        )
-    ))
-  }
-  ///--- end ---///
-
-
-  ///-- handle orders --///
-  const [order, setOrder] = useState('')
-  // console.log('order', order)
-
-  // generate orderItems
-  function generateOrder() {
-    setOrder(({
-      'orderItems': cart.map(item => ({
-        name: item.name,
-        price: item.price * ((100 - item.discount)/100),
-        product: item._id,
-        image: item.image,
-        qty: item.qty
-      }))
-    }))
-  }
-
-  // setup local storage for Orders
-  useEffect(() => {
-    const userOrder = JSON.parse(localStorage.getItem('order'));
-    if (userOrder) {
-      setOrder(userOrder);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('order', JSON.stringify(order));
-  }, [order]);
-  // ///--- end ---///
-
-  const homePage = (
-    <div className="App">
-      
-      <header className="App-header">
-        <Header cart={cart} userLoggedIn={userLoggedIn} signOut={signOut}/>
-      </header>
-
-      <main className="App-main">
-      <Routes>
-          <Route path='/' element={
-          <Home 
-          addToCart={addToCart} 
-          cart={cart}
-          />}/>
-          
-          <Route path='/cart' element={
-          <Cart 
-          cart={cart} 
-          setQty={setQty} 
-          generateOrder={generateOrder} 
-          removeFromCart={removeFromCart}
-          />}/>
-
-          <Route path='/login' element={
-          <Login 
-          userlogged={userlogged} 
-          isAdmin={userLoggedIn.isAdmin}
-          />}/>
-
-          <Route path='/register' element={<Register />}/>
-
-          <Route path='/product/:id' element={
-          <Product 
-          cart={cart} 
-          addToCart={addToCart}
-          />}/>
-
-          <Route path='/search/:name' element={
-          <Search 
-          cart={cart} 
-          addToCart={addToCart}
-          />}/>
-
-          <Route path='/checkout' element={<Checkout cart={cart} />}/>
-          
-      </Routes>
-      </main>
-
-      <footer className="App-footer">
-        <Footer />
-      </footer>
-      
-    </div>
-  )
-
   return (
-    <>
-      {
-      userLoggedIn.isAdmin ? 
-      <Dashboard signOut={signOut}/> : 
-      homePage
-      }
-    </>
+    <div className="App">
+      <Routes>
+
+        {isAdmin?
+          // if admin logged show dashboard
+          <Route path="/*" element={
+          <Dashboard 
+          isAdmin={isAdmin} 
+          signOut={signOut}
+          />} />
+          :
+          // if user logged show homepage
+          <Route path="/*" element={
+          <Home 
+          userLoggedIn={userLoggedIn}
+          userlogged={userlogged}
+          signOut={signOut}
+          />} />
+        }
+
+      </Routes>
+
+    </div>
   )
 }
 

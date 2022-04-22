@@ -9,7 +9,7 @@ function DashHome() {
 
   // get all products
   React.useEffect(()=> {
-    axios.get('/api/products')
+    axios.get('/api/products?productNum=Infinity')
     .then(data => setProducts(data.data.products))
   },[])
 

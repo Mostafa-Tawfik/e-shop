@@ -1,14 +1,13 @@
 import React from 'react'
 import {Routes, Route, Link} from 'react-router-dom'
-import Orders from '../Dashboard/components/Orders'
-import DashHome from './components/DashHome'
-import DashProducts from './components/Products'
+import Orders from './components/Orders'
+import Home from './components/Home'
+import Products from './components/Products/Products'
 import EditProduct from './components/Products/components/EditProduct'
 
 function Dashboard(props) {
 
   const adminPanel = ['Dashboard', 'Products', 'Orders', 'Users', 'Reviews', 'Brands']
-
 
   return (
     <div className='dashboard'>
@@ -27,8 +26,8 @@ function Dashboard(props) {
 
       <div className='sections'>
         <Routes>
-          <Route path='/' element={<DashHome />}/>
-          <Route path='/dashboard/products' element={<DashProducts />}/>
+          <Route path='/' element={<Home />}/>
+          <Route path='/dashboard/products' element={<Products />}/>
           <Route path='/dashboard/products/edit/:id' element={<EditProduct />}/>
           <Route path='/dashboard/orders' element={<Orders />}/>
         </Routes>

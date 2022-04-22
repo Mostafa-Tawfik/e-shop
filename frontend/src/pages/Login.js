@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link , useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import popAlert from '../components/popAlert';
 
 export default function Login(props) {
 
   const navigate = useNavigate()
-   
+
   // Error Message State
   const [errorMessages, setErrorMessages] = React.useState('');
 
@@ -19,6 +20,18 @@ export default function Login(props) {
   });
 
 
+  // handle input change
+  function handleChange(event) {
+    const {name, value} = event.target
+    setLoginUser(prev => {
+      return {
+        ...prev,
+        [name]: value
+      }
+    })
+  }
+
+
   const handleSubmit = async (login) => {
 
     // prevent default form submit
@@ -29,11 +42,15 @@ export default function Login(props) {
       password: loginUser.password
     })
     .then((res) => {
-      
       console.log('successfully logged in')
-      // declare user has logged in
+      // if admin go to dashboard
+      if(res.data.isAdmin){
+        navigate('/')
+      }
       setIsSubmitted(true)
+      // save user details
       props.userlogged(res.data)
+      popAlert(res.data.name, 'Welcome back')
       return res.data
     },
     (error) => {
@@ -49,6 +66,7 @@ export default function Login(props) {
     <div className='login'>
       <div className="text-center m-5-auto">
         <h2 >Log In</h2>
+
         <form action="/" onSubmit={handleSubmit}>
           <p>
             <label>Email address</label><br/>
@@ -58,12 +76,8 @@ export default function Login(props) {
               placeholder={'Enter your Email'}
               required
               autoFocus
-              onChange={(e) => setLoginUser(prev => {
-                return {
-                  ...prev,
-                  email: e.target.value
-                }
-              })}
+              onChange={handleChange}
+              value={loginUser.email}
             />
           </p>
           <p>
@@ -76,12 +90,8 @@ export default function Login(props) {
               name="password"   
               placeholder={'Enter your Password'} 
               required
-              onChange={(e) => setLoginUser(prev => {
-                return {
-                  ...prev,
-                  password: e.target.value
-                }
-              })}
+              onChange={handleChange}
+              value={loginUser.password}
             />
           </p>
           <div className="error">{errorMessages}</div>
@@ -89,6 +99,7 @@ export default function Login(props) {
           <button id="sub_btn" type="submit" >Login</button>
           </p>
         </form>
+
         <footer>
             <p>First time? <Link to="/register" style={{color: "#007bff"}}>Create an account</Link>.</p>
             <p ><Link to="/" style={{color: "#007bff"}}>Back to Homepage</Link>.</p>
@@ -97,9 +108,18 @@ export default function Login(props) {
       </div>
     </div>
   )
+
+  // if submitted go to home page
+  useEffect(()=> {
+    if(isSubmitted) {
+      navigate('/')
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[isSubmitted])
+
   return (
     <div>
-    {isSubmitted ? navigate('/') : loginForm}
+    {loginForm}
     </div>
   )
 }

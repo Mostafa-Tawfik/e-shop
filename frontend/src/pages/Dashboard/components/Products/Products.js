@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import popAlert from '../../../../components/popAlert'
 
-function DashboardProducts() {
+function Products() {
 
   const navigate = useNavigate()
 
@@ -13,7 +13,7 @@ function DashboardProducts() {
 
   // get all products
   React.useEffect(()=> {
-    axios.get('/api/products?pageNumber=1&productNum=20')
+    axios.get('/api/products?productNum=Infinity')
     .then(data => setProducts(data.data.products))
   },[])
 
@@ -138,4 +138,4 @@ function DashboardProducts() {
   )
 }
 
-export default DashboardProducts
+export default Products
