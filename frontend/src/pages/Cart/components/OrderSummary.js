@@ -20,13 +20,23 @@ function OrderSummary(props) {
 
 
   // Order Summary calc
-  const subtotalBeforeDiscount = props.cart.length > 0 ? props.cart.map(i => i.price).reduce((x, y) => x + y) : ''
+  const subtotalBeforeDiscount = 
+  props.cart.length > 0 ? 
+  props.cart.map(i => i.qty ? i.price * i.qty : i.price).reduce((x, y) => x + y) 
+  : 
+  ''
 
-  const discount = props.cart.length > 0 ? props.cart.map(i => (i.price * i.discount/100)).reduce((x, y) => x + y) : ''
+  const discount = 
+  props.cart.length > 0 ? 
+  props.cart.map(i => ((i.qty ? i.price * i.qty : i.price) * i.discount/100)).reduce((x, y) => x + y) 
+  : 
+  ''
 
-  const couponDiscount = (subtotalBeforeDiscount - (discount &&  discount)) * couponIsvalid/100
+  const couponDiscount = 
+  (subtotalBeforeDiscount - (discount && discount)) * couponIsvalid/100
 
-  const subtotal = subtotalBeforeDiscount - discount - (couponDiscount &&  couponDiscount)
+  const subtotal = 
+  subtotalBeforeDiscount - discount - (couponDiscount && couponDiscount)
 
   let shipping = 20
 
@@ -49,40 +59,40 @@ function OrderSummary(props) {
 
       <div className='calc'>
         <p>Subtotal</p>
-        <p>${subtotalBeforeDiscount}</p>
+        <p>${subtotalBeforeDiscount.toFixed(2)}</p>
       </div>
       {discount !== 0 && <div className='calc'>
         <p>Discount</p>
-        <p className='discount'>-${discount}</p>
+        <p className='discount'>-${discount.toFixed(2)}</p>
       </div>}
 
       {couponDiscount !== 0 && <div className='calc'>
         <p>Coupon</p>
-        <p className='discount'>-${couponDiscount}</p>
+        <p className='discount'>-${couponDiscount.toFixed(2)}</p>
       </div>}
 
       <hr className='calc'></hr>
 
       <div className='calc'>
         <p>Subtotal</p>
-        <p>${subtotal}</p>
+        <p>${subtotal.toFixed(2)}</p>
       </div>
 
 
       <div className='calc'>
         <p>Shipping</p>
-        <p>${shipping}</p>
+        <p>${shipping.toFixed(2)}</p>
       </div>
 
       <hr className='calc'></hr>
 
       <div className='calc'>
         <p className='total'>Total</p>
-        <p className='total'>${Total}</p>
+        <p className='total'>${Total.toFixed(2)}</p>
       </div>
 
-      <Link to={'/'}>
-        <button className='checkout-btn'>Checkout</button>
+      <Link to={'/checkout'}>
+        <button onClick={()=>props.generateOrder()} className='checkout-btn'>Checkout</button>
       </Link>
     </div>
   )

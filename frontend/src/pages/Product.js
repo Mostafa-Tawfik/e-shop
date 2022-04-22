@@ -1,6 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import popAlert from '../components/popAlert'
 
 function Product(props) {
 
@@ -25,7 +26,7 @@ function Product(props) {
           {/* <p>Colors: {product.colors}</p> */}
           
           <div>
-            {product.discount ? 
+            {product.discount > 0 ? 
             // if price have a discount
             <div className='product-price-holder'>
               <h5 className='product-price'>${product.price.toFixed() * ((100 - product.discount)/100)}</h5>
@@ -52,7 +53,7 @@ function Product(props) {
             // check if the item is already in the cart
               props.cart.length > 0 &&
               props.cart.map(c => c.id).includes(product.id) ?
-              alert("Product already in your cart") :
+              popAlert('info', 'Product already in your cart') :
               props.addToCart(product)
             }}>
               {/* if product is on the cart show "added" */}
@@ -62,7 +63,7 @@ function Product(props) {
               
             </button>
 
-          {product.discount && <h2 className='product-discount'>{product.discount}%</h2>}
+          {product.discount > 0 && <h2 className='product-discount'>{product.discount}%</h2>}
         </div>
       </div>
     </div>

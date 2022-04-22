@@ -13,7 +13,7 @@ function DashboardProducts() {
 
   // get all products
   React.useEffect(()=> {
-    axios.get('/api/products')
+    axios.get('/api/products?pageNumber=1&productNum=20')
     .then(data => setProducts(data.data.products))
   },[])
 
