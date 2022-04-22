@@ -47,6 +47,11 @@ function Home(props) {
     }
   }
 
+  // empty cart
+  function emptyCart() {
+    setCart([])
+  }
+
 
   // handle qty change
   function setQty(qty, id) {
@@ -80,6 +85,57 @@ function Home(props) {
         image: item.image,
         qty: item.qty ? item.qty : 1
       }))
+    }))
+  }
+
+  // generate shippingAddress
+  function setShippingAddress(form) {
+    setOrder(prev => ({
+      "orderItems": [
+        ...prev.orderItems
+      ],
+      "shippingAddress": {
+        "address": form.address,
+        "city": form.city,
+        "postalCode": form.postalCode,
+        "country": form.country,
+      }
+    }))
+  }
+
+
+  // generate paymentMethod
+  function setPaymentMethod(form) {
+    setOrder(prev => ({
+      "orderItems": [
+        ...prev.orderItems
+      ],
+      "shippingAddress": {
+        ...prev.shippingAddress
+      },
+      "paymentMethod": form.paymentMethod
+    }))
+  }
+
+  // set delivery dates
+  let date = new Date()
+  date.setDate(date.getDate());
+
+  // place the order
+  function placeOrder() {
+    setOrder(prev => ({
+      "orderItems": [
+        ...prev.orderItems
+      ],
+      "shippingAddress": {
+        ...prev.shippingAddress
+      },
+      "paymentMethod": prev.paymentMethod,
+      "shippingPrice": 20,
+      "totalPrice": prev.orderItems.map(i => i.price * i.qty).reduce((x, y) => x + y) + 20,
+      "isPaid": false,
+      "isDelivered": false,
+      "paidAt": date
     }))
   }
 
@@ -139,7 +195,15 @@ function Home(props) {
           addToCart={addToCart}
           />}/>
 
-          <Route path='/checkout' element={<Checkout cart={cart} />}/>
+          <Route path='/checkout' element={
+          <Checkout 
+          cart={cart} 
+          setShippingAddress={setShippingAddress}
+          setPaymentMethod={setPaymentMethod}
+          placeOrder={placeOrder}
+          order={order}
+          emptyCart={emptyCart}
+          />}/>
           
       </Routes>
       </main>

@@ -1,0 +1,46 @@
+.checkout-shipping {
+  width: min(80vw, 800px);
+  background: white;
+  padding: 2em;
+  box-shadow: $boxShadow;
+  border-radius: 10px;
+  .checkout-shipping-form {
+    background: white;
+    width: min(75vw, 740px);
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    border-radius: 10px;
+    > div {
+      width: 100%;
+      > input {
+        width: 100%;
+      }
+      > p {
+        padding: 5px;
+      }
+    }
+    input {
+      height: 40px;
+      border-radius: 10px;
+      padding-left: 1em;
+      border: $border;
+    }
+    button {
+      @include slideSolidBtn($clr-light);
+      width: 20%;
+      padding: 1em;
+      margin: 1em 0;
+      box-shadow: $boxShadow;
+    }
+    .checkout-shipping-form-address {
+      height: 120px;
+      border-radius: 10px;
+      padding: 1em;
+      width: 100%;
+      border: $border;
+    }
+  }
+}

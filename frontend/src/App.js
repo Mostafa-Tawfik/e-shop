@@ -1,9 +1,10 @@
 import './App.scss';
 import React, { useEffect, useState } from 'react'
-import {Routes, Route} from 'react-router-dom'
+import {Routes, Route, useNavigate} from 'react-router-dom'
 
 import Dashboard from './pages/Dashboard/Dashboard'
 import Home from './pages/Home/Home';
+import popAlert from './components/popAlert';
 
 
 function App() {
@@ -23,10 +24,14 @@ function App() {
   }
 
   // a logout function
+  const navigate = useNavigate()
+
   function signOut() {
     setUserLoggedIn('')
     setIsAdmin(false)
     localStorage.removeItem(userLoggedIn)
+    popAlert(userLoggedIn.name, 'See you soon')
+    navigate('/')
   }
 
   // setup local storage for signed in user
