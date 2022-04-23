@@ -12,6 +12,8 @@ import Cart from '../../pages/Cart/Cart';
 import Login from '../../pages/Login';
 import Register from '../../pages/Register';
 import Checkout from '../../pages/Checkout/Checkout';
+import UserOrders from './user/UserOrders';
+import UserOrderID from './user/UserOrderID';
 
 function Home(props) {
 
@@ -160,50 +162,68 @@ function Home(props) {
 
       <main className='App-main'>
       <Routes>
+        
           <Route path='/' element={
-          <Homepage 
-          addToCart={addToCart} 
-          cart={cart}
-          />}/>
-          
-          <Route path='/cart' element={
-          <Cart 
-          cart={cart} 
-          setQty={setQty} 
-          generateOrder={generateOrder} 
-          removeFromCart={removeFromCart}
-          />}/>
-
-          <Route path='/login' element={
-          <Login 
-          userlogged={props.userlogged} 
-          isAdmin={props.userLoggedIn.isAdmin}
-          />}/>
+            <Homepage 
+            addToCart={addToCart} 
+            cart={cart}
+            />
+          }/>
 
           <Route path='/register' element={<Register />}/>
+          
+          <Route path='/login' element={
+            <Login 
+            userlogged={props.userlogged} 
+            isAdmin={props.userLoggedIn.isAdmin}
+            />
+          }/>
+
+          <Route path='/user/orders' element={
+            <UserOrders 
+            isAdmin={props.userLoggedIn.isAdmin}
+            />
+          }/>
+
+          <Route path='/user/orders/:id' element={
+            <UserOrderID 
+            />
+          }/>
 
           <Route path='/product/:id' element={
-          <Product 
-          cart={cart} 
-          addToCart={addToCart}
-          />}/>
+            <Product 
+            cart={cart} 
+            addToCart={addToCart}
+            />
+          }/>
 
           <Route path='/search/:name' element={
-          <Search 
-          cart={cart} 
-          addToCart={addToCart}
-          />}/>
+            <Search 
+            cart={cart} 
+            addToCart={addToCart}
+            />
+          }/>
+
+            <Route path='/cart' element={
+              <Cart 
+              cart={cart} 
+              setQty={setQty} 
+              generateOrder={generateOrder} 
+              removeFromCart={removeFromCart}
+              />
+            }/>
 
           <Route path='/checkout' element={
-          <Checkout 
-          cart={cart} 
-          setShippingAddress={setShippingAddress}
-          setPaymentMethod={setPaymentMethod}
-          placeOrder={placeOrder}
-          order={order}
-          emptyCart={emptyCart}
-          userLoggedIn={props.userLoggedIn}
-          />}/>
+            <Checkout 
+            cart={cart} 
+            setShippingAddress={setShippingAddress}
+            setPaymentMethod={setPaymentMethod}
+            placeOrder={placeOrder}
+            order={order}
+            emptyCart={emptyCart}
+            userLoggedIn={props.userLoggedIn}
+            />
+          }/>
           
       </Routes>
       </main>
