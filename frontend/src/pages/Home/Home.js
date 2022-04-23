@@ -14,6 +14,7 @@ import Register from '../../pages/Register';
 import Checkout from '../../pages/Checkout/Checkout';
 import UserOrders from './user/UserOrders';
 import UserOrderID from './user/UserOrderID';
+import UserInfo from './user/UserInfo';
 
 function Home(props) {
 
@@ -176,6 +177,11 @@ function Home(props) {
             <Login 
             userlogged={props.userlogged} 
             isAdmin={props.userLoggedIn.isAdmin}
+            />
+          }/>
+
+          <Route path='/user/' element={
+            <UserInfo 
             />
           }/>
 

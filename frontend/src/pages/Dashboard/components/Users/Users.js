@@ -35,6 +35,7 @@ function Users() {
               <th>IMAGE</th>
               <th>NAME</th>
               <th>EMAIL</th>
+              <th>Phone Number</th>
               <th>ROLE</th>
             </tr>
 
@@ -50,6 +51,8 @@ function Users() {
                   <td>{user.name}</td>
 
                   <td>{user.email}</td>
+
+                  <td>{user.phoneNumber}</td>
 
                   <td>{user.isAdmin ? 'Admin' : 'User'}</td>
 
