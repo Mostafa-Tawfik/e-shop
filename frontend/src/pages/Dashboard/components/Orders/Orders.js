@@ -2,6 +2,9 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import changeToDelivered from '../../../../components/changeToDelivered'
+import changeToPaid from '../../../../components/changeToPaid'
+
 function Orders() {
 
   // store orders
@@ -10,13 +13,14 @@ function Orders() {
 
   // fetch all orders
   useEffect(()=> {
-    axios.get('/api/orders', {
+    axios.get('/api/orders/', {
       headers: {
         Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
-     }
+      }
     })
     .then(data => setOrders(data.data))
   },[])
+
 
    // control more btn
    const [isOpen, setIsOpen] = useState({
@@ -53,13 +57,9 @@ function Orders() {
         isOpen.open && 
         <div className='dash-orders-actions'>
 
-          <p>View details</p>
+          <p onClick={()=>changeToDelivered(id)}>Change to delivered</p>
 
-          <Link to={``}>
-            <p>Edit info</p>
-          </Link>
-
-          <p>Delete</p>
+          <p onClick={()=>changeToPaid(id)}>Change to paid</p>
 
         </div>
         }
@@ -84,18 +84,20 @@ function Orders() {
               <th>NAME</th>
               <th>DATE</th>
               <th>TOTAL</th>
-              <th>STATUS</th>
+              <th>Delivery</th>
+              <th>Payment</th>
               <th>ACTIONS</th>
             </tr>
 
             {orders[0] && orders.map(order => {
               return (
                 <tr key={order._id}>
-                  <td><Link to={'/'}>#{order._id}</Link></td>
+                  <td><Link to={`/dashboard/orders/${order._id}`}>#{order._id}</Link></td>
                   <td>{order.user.name}</td>
                   <td>{order.createdAt.substr(0, 10)}</td>
                   <td>${order.totalPrice.toFixed(2)}</td>
-                  <td>${order.isDelivered ? 'Completed' : 'Processing'}</td>
+                  <td>{order.isDelivered ? <p style={{color: 'green', fontWeight: 'bolder'}}>Delivered</p> : 'Processing'}</td>
+                  <td>{order.isPaid ? <p style={{color: 'green', fontWeight: 'bolder'}}>Paid</p> : 'Cash on delivery'}</td>
                   <td>{actions(order._id)}</td>
                 </tr>
               )
