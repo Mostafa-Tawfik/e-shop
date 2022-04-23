@@ -6,7 +6,7 @@ import popAlert from '../../../components/popAlert'
 function Product(props) {
 
   const [product, setProduct] = React.useState('')
-  console.log(product)
+  // console.log(product)
 
   const params = useParams()
 

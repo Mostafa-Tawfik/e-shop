@@ -5,6 +5,7 @@ import Home from './components/Home'
 import Products from './components/Products/Products'
 import EditProduct from './components/Products/components/EditProduct'
 import OrderID from './components/Orders/OrderID'
+import Users from './components/Users/Users'
 
 function Dashboard(props) {
 
@@ -35,6 +36,9 @@ function Dashboard(props) {
           <Route path='/dashboard/orders' element={<Orders isAdmin={props.isAdmin}/>}/>
 
           <Route path='/dashboard/orders/:id' element={<OrderID />}/>
+
+          <Route path='/dashboard/users' element={<Users />}/>
+          
         </Routes>
       </div>
 
