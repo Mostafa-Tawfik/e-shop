@@ -1,14 +1,28 @@
 import React, { useState } from 'react'
+import OrderPreview from './components/OrderPreview'
 import Payment from './components/Payment'
 import Shipping from './components/Shipping'
 
 function Checkout(props) {
 
   // handle go next section
-  const [isDone, setIsDone] = useState(false)
+  const [isDone, setIsDone] = useState({
+    shipping: false,
+    payment: false
+  })
 
-  function goNext() {
-    setIsDone(prev => !prev)
+  function goPayment() {
+    setIsDone(prev => ({
+      ...prev,
+      shipping: true
+    }))
+  }
+
+  function goOrderPreview() {
+    setIsDone(prev => ({
+      ...prev,
+      payment: true
+    }))
   }
 
   return (
@@ -18,24 +32,53 @@ function Checkout(props) {
 
         <div 
           className='checkout-wizard-step'
-          style={{background: isDone ? 'green' : 'block'}}
+          style={{background: isDone.shipping ? 'green' : 'block'}}
          >
           <p>Shipping</p>
         </div>
 
           <div>&rArr;</div>
         
-        <div className='checkout-wizard-step'>
+        <div 
+        className='checkout-wizard-step'
+        style={{background: isDone.payment ? 'green' : 'block'}}
+        >
           <p>Payment</p>
         </div>
+
+          <div>&rArr;</div>
+        
+        <div className='checkout-wizard-step'>
+          <p>Order Preview</p>
+        </div>
+
       </div>
 
-      <div style={{display: isDone ? 'none' : 'block'}}>
-        <Shipping {...props} goNext={goNext}/>
+      <div style={{
+        display: 
+        isDone.shipping ? 
+        'none' 
+        : 'block'
+        }}>
+        <Shipping {...props} goPayment={goPayment}/>
       </div>
 
-      <div style={{display: isDone ? 'block' : 'none'}}>
-        <Payment {...props} />
+      <div style={{
+        display: 
+        isDone.shipping ? 
+        isDone.payment ? 'none' : 'block' 
+        : 'none'
+      }}>
+        <Payment {...props} goOrderPreview={goOrderPreview}/>
+      </div>
+
+      <div style={{
+        display: 
+        isDone.shipping ? 
+        isDone.payment ? 'block' : 'none' 
+        : 'none'
+      }}>
+        <OrderPreview {...props} />
       </div>
       
     </div>

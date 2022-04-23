@@ -36,7 +36,7 @@ function Shipping(props) {
     event.preventDefault()
 
     props.setShippingAddress(shipping)
-    props.goNext()
+    props.goPayment()
   }
 
 

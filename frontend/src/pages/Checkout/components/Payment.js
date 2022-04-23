@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
-import popAlert from '../../../components/popAlert'
 
 function Payment(props) {
-
-  const navigate = useNavigate()
 
   ///-- handle shipping form --///
   const [payment, setPayment] = useState({
@@ -25,16 +21,15 @@ function Payment(props) {
   }
 
 
-  // handle submit
-  function handleSubmit(event) {
+  // handle placment
+  async function handleSubmit(event) {
     event.preventDefault()
 
     props.setPaymentMethod(payment)
-    props.placeOrder()
-    popAlert('Your order has been placed', 'Enjoy your order')
-    props.emptyCart()
-    navigate('/')
-  }
+    props.placeOrder()  
+    props.goOrderPreview()
+
+}
 
 
   return (
@@ -70,7 +65,7 @@ function Payment(props) {
         </div>
 
         <button>
-            Place order
+            Next
         </button>
 
       </form>

@@ -16,8 +16,9 @@ import Checkout from '../../pages/Checkout/Checkout';
 function Home(props) {
 
   ///-- handle cart --///
-  const [cart, setCart] = useState([])
+  const [cart, setCart] = useState('')
   // console.log('cart', cart)
+
 
   // setup local storage for cart
   useEffect(() => {
@@ -73,7 +74,7 @@ function Home(props) {
 
   ///-- handle orders --///
   const [order, setOrder] = useState('')
-  console.log('order', order)
+  // console.log('order', order)
 
   // generate orderItems
   function generateOrder() {
@@ -91,14 +92,14 @@ function Home(props) {
   // generate shippingAddress
   function setShippingAddress(form) {
     setOrder(prev => ({
-      "orderItems": [
+      'orderItems': [
         ...prev.orderItems
       ],
-      "shippingAddress": {
-        "address": form.address,
-        "city": form.city,
-        "postalCode": form.postalCode,
-        "country": form.country,
+      'shippingAddress': {
+        'address': form.address,
+        'city': form.city,
+        'postalCode': form.postalCode,
+        'country': form.country,
       }
     }))
   }
@@ -107,13 +108,13 @@ function Home(props) {
   // generate paymentMethod
   function setPaymentMethod(form) {
     setOrder(prev => ({
-      "orderItems": [
+      'orderItems': [
         ...prev.orderItems
       ],
-      "shippingAddress": {
+      'shippingAddress': {
         ...prev.shippingAddress
       },
-      "paymentMethod": form.paymentMethod
+      'paymentMethod': form.paymentMethod
     }))
   }
 
@@ -124,18 +125,16 @@ function Home(props) {
   // place the order
   function placeOrder() {
     setOrder(prev => ({
-      "orderItems": [
+      'orderItems': [
         ...prev.orderItems
       ],
-      "shippingAddress": {
-        ...prev.shippingAddress
-      },
-      "paymentMethod": prev.paymentMethod,
-      "shippingPrice": 20,
-      "totalPrice": prev.orderItems.map(i => i.price * i.qty).reduce((x, y) => x + y) + 20,
-      "isPaid": false,
-      "isDelivered": false,
-      "paidAt": date
+      'shippingAddress': prev.shippingAddress,
+      'paymentMethod': prev.paymentMethod,
+      'shippingPrice': 20,
+      'totalPrice': prev.orderItems.map(i => i.price * i.qty).reduce((x, y) => x + y) + 20,
+      'isPaid': false,
+      'isDelivered': false,
+      'paidAt': date
     }))
   }
 
@@ -155,11 +154,11 @@ function Home(props) {
 
   return (
     <>
-      <header className="App-header">
+      <header className='App-header'>
         <Header cart={cart} userLoggedIn={props.userLoggedIn} signOut={props.signOut}/>
       </header>
 
-      <main className="App-main">
+      <main className='App-main'>
       <Routes>
           <Route path='/' element={
           <Homepage 
@@ -203,12 +202,13 @@ function Home(props) {
           placeOrder={placeOrder}
           order={order}
           emptyCart={emptyCart}
+          userLoggedIn={props.userLoggedIn}
           />}/>
           
       </Routes>
       </main>
 
-      <footer className="App-footer">
+      <footer className='App-footer'>
         <Footer />
       </footer>
     </>
