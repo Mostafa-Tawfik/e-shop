@@ -107,7 +107,11 @@ function OrdersList(props) {
                 </td>
 
                 <td>
-                  {isAdmin ? actions(order._id) : cancelOrder(order._id)}
+                  {isAdmin 
+                  ? 
+                  actions(order._id) 
+                  : 
+                  !order.isDelivered ? cancelOrder(order._id) : ''}
                 </td>
 
               </tr>
