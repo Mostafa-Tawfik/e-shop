@@ -1,9 +1,10 @@
 import React from 'react'
 import {Routes, Route, Link} from 'react-router-dom'
-import Orders from './components/Orders'
+import Orders from './components/Orders/Orders'
 import Home from './components/Home'
 import Products from './components/Products/Products'
 import EditProduct from './components/Products/components/EditProduct'
+import OrderID from './components/Orders/OrderID'
 
 function Dashboard(props) {
 
@@ -27,9 +28,13 @@ function Dashboard(props) {
       <div className='sections'>
         <Routes>
           <Route path='/' element={<Home />}/>
+
           <Route path='/dashboard/products' element={<Products />}/>
           <Route path='/dashboard/products/edit/:id' element={<EditProduct />}/>
+
           <Route path='/dashboard/orders' element={<Orders />}/>
+
+          <Route path='/dashboard/orders/:id' element={<OrderID />}/>
         </Routes>
       </div>
 

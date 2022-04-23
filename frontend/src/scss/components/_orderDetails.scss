@@ -1,0 +1,90 @@
+.order-details {
+  width: min(80vw, 800px);
+  background: white;
+  padding: 2em;
+  box-shadow: $boxShadow;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  .order-details-contact {
+    display: flex;
+    gap: 2em;
+    padding: 1em;
+    margin-top: 1em;
+  }
+  .order-details-address {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    .order-details-address-card {
+      width: min(80vw, 400px);
+      border: $border;
+      border-radius: 10px;
+      padding: 1em;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
+  }
+  .order-details-items {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1em;
+    .order-details-items-table {
+      text-align: left;
+      position: relative;
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 10px;
+      img {
+        width: 60px;
+        border-radius: 10px;
+      }
+      tr {
+        border: $border;
+        outline: thin solid;
+        outline-color: rgb(128, 128, 128, 0.3);
+        border-radius: 10px;
+      }
+      td, th {
+        padding: 10px;
+        border-radius: 10px;
+        
+      }
+    }
+  }
+  .order-details-payment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    .order-details-payment-table {
+      text-align: left;
+      position: relative;
+      width: 40%;
+      border-collapse: collapse;
+      tr {
+        border-radius: 10px;
+      }
+      td, th {
+        padding: 10px;
+        border-radius: 10px;
+        
+      }
+    }
+  }
+  .place-order-btn {
+    display: flex;
+    justify-content: center;
+  }
+  button {
+    @include slideSolidBtn($clr-light);
+    width: 20%;
+    padding: 1em;
+    margin: 1em 0;
+    box-shadow: $boxShadow;
+  }
+}

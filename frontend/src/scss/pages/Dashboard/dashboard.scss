@@ -1,6 +1,8 @@
 @import './components/dashHome.scss';
 @import './components/products.scss';
 @import './components/editProduct.scss';
+@import './components/orders.scss';
+@import './components/orderID.scss';
 
 .dashboard {
   display: flex;
@@ -11,6 +13,7 @@
     width: 250px;
     height: 100vh;
     background: $grd-main;
+    z-index: 10;
     > h4 {
       margin: 1em 0;
       color: white;
