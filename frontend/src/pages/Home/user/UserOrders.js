@@ -1,9 +1,9 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-import OrdersList from '../../../../components/OrdersList'
+import OrdersList from '../../../components/OrdersList'
 
-function Orders(props) {
+function UserOrders(props) {
 
   // store orders
   const [orders, setOrders] = useState('')
@@ -11,7 +11,7 @@ function Orders(props) {
 
   // fetch all orders
   useEffect(()=> {
-    axios.get('/api/orders/', {
+    axios.get('/api/orders/myorders', {
       headers: {
         Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
       }
@@ -23,7 +23,7 @@ function Orders(props) {
   return (
     <div className='dash-orders'>
 
-      <h2>Orders</h2>
+      <h2>My Orders</h2>
 
       <OrdersList orders={orders} {...props}/>
 
@@ -31,4 +31,4 @@ function Orders(props) {
   )
 }
 
-export default Orders
+export default UserOrders
