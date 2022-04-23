@@ -5,7 +5,16 @@ import SearchBar from './components/SearchBar'
 
 function Header(props) {
 
-  const navItems = ['Smartphones', 'Tablets', 'Wearables', 'Electronics', 'Appliances']
+  const [products, setProducts] = React.useState([])
+
+  const categories = [...new Set(products.map(p => p.category))]
+
+  React.useEffect(()=> {
+    fetch('/api/products')
+    .then(res => res.json())
+    .then(data => setProducts(data.products))
+  },[])
+  
 
   // a state to controll account drop down menu
   const [accountIsOpen, setAccountIsOpen] = React.useState(false)
@@ -86,7 +95,7 @@ function Header(props) {
 
       {/* navbar */}
       <div className="navbar">
-        {navItems.map((i,index) => {
+        {categories.map((i,index) => {
           return (
             <h4 key={index} className="navbar-item">{i}</h4>
           )
