@@ -1,8 +1,8 @@
+import axios from 'axios'
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
-import AppData from '../../../AppData'
 
-function Search(props) {
+function Search() {
 
   const params = useParams()
 
@@ -11,11 +11,12 @@ function Search(props) {
   // a state to hold search queries
   const [results, setResults] = React.useState([])
 
-  console.log(results)
-
   React.useEffect(() => {
-    setResults(AppData.Products.filter(p => p.title.toUpperCase().includes(params.name.toUpperCase())))
-  },[params.name])
+    params.name === '' ?
+    setResults([]) :
+    axios.get(`/api/products?productNum=Infinity&keyword=${params.name}`)
+    .then(res => setResults(res.data.products))
+  },[params])
 
   return (
     <div className='search'>
@@ -23,8 +24,8 @@ function Search(props) {
       <section className='search-card-holder'>
         {results.map(p => {
           return (
-          <div key={p.id} className='search-card'>
-            <Link to={`/product/${p.id}`}>
+          <div key={p._id} className='search-card'>
+            <Link to={`/product/${p._id}`}>
               <img src={p.image} alt="product"></img>
             </Link>
 
@@ -33,7 +34,7 @@ function Search(props) {
               <p>{p.category}</p>
 
               <Link to={`/product/${p.id}`}>
-                <h5>{p.title}</h5>
+                <h5>{p.name}</h5>
               </Link>
 
               <p>${p.price}</p>
