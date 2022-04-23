@@ -9,7 +9,7 @@ function Products() {
 
   // store all products
   const [products, setProducts] = React.useState([])
-  console.log(products)
+  // console.log(products)
 
   // get all products
   React.useEffect(()=> {
