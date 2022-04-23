@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/user");
 const Order = require("../models/order");
+const Complaint = require("../models/complaint");
 
 const protect = asyncHandler(async (req, res, next) => {
   let token;
@@ -41,6 +42,7 @@ const admin = (req, res, next) => {
   }
 };
 
+// Middleware to make sure only the user that has this order can delete it
 const order = asyncHandler(async (req, res, next) => {
   req.order = await Order.findById(req.params.id);
   if (req.user.id === req.order.user.toString()) {
@@ -51,4 +53,15 @@ const order = asyncHandler(async (req, res, next) => {
   }
 });
 
-module.exports = { protect, admin, order };
+// Middleware to make sure only the user that opened the ticket can delete it
+const ticket = asyncHandler(async (req, res, next) => {
+  req.complaint = await Complaint.findById(req.params.id);
+  if (req.user.id === req.complaint.user.toString()) {
+    next();
+  } else {
+    res.status(401);
+    throw new Error("Not authorized for this operation");
+  }
+});
+
+module.exports = { protect, admin, order, ticket };
