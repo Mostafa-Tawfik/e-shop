@@ -1,17 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 function DashHome() {
 
   // store all products
-  const [products, setProducts] = React.useState([])
-  console.log(products)
+  const [products, setProducts] = useState([])
+  // console.log(products)
 
   // get all products
-  React.useEffect(()=> {
+  useEffect(()=> {
     axios.get('/api/products?productNum=Infinity')
     .then(data => setProducts(data.data.products))
   },[])
+
+
+    // store orders
+    const [orders, setOrders] = useState('')
+    // console.log('orders', orders)
+  
+    // fetch all orders
+    useEffect(()=> {
+      axios.get('/api/orders/', {
+        headers: {
+          Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+        }
+      })
+      .then(data => setOrders(data.data))
+    },[])
+
 
   return (
     <div className='dashboard-section'>
@@ -22,7 +38,7 @@ function DashHome() {
         <div className='summary-card'>
           <div>
             <h5>Total Sales</h5>
-            <p>$1000</p>
+            <p>${orders && orders.map(o => o.totalPrice).reduce((x, y) => x + y).toFixed()}</p>
           </div>
           <img src='https://api.iconify.design/emojione/money-bag.svg' alt='money'></img>
         </div>
@@ -30,7 +46,7 @@ function DashHome() {
         <div className='summary-card'>
           <div>
             <h5>Total Orders</h5>
-            <p>10</p>
+            <p>{orders.length}</p>
           </div>
           <img src='https://api.iconify.design/emojione/delivery-truck.svg' alt='truck'></img>
         </div>

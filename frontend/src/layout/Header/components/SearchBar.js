@@ -1,8 +1,8 @@
 // used in Header.js
 
+import axios from 'axios'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import AppData from '../../../AppData'
 
 function SearchBar() {
 
@@ -16,7 +16,8 @@ function SearchBar() {
   React.useEffect(() => {
     query === '' ?
     setResults([]) :
-    setResults(AppData.Products.filter(p => p.title.toUpperCase().includes(query.toUpperCase())))
+    axios.get(`/api/products?productNum=Infinity&keyword=${query}`)
+    .then(res => setResults(res.data.products))
   },[query])
 
   return (
@@ -32,19 +33,19 @@ function SearchBar() {
 
       <div className='header-search-results' onClick={()=>setQuery('')} style={query === '' ? {padding: '0'} : {padding: '1em'}}>
 
-        {/* return maximum 4 results */}
         {results.slice(0,4).map(r => {
+        // return maximum 4 results
           return (
-            <Link to={`/product/${r.id}`} key={r.id}>
+            <Link to={`/product/${r._id}`} key={r._id}>
               <div>
-                <div>{r.title}</div>
+                <div>{r.name}</div>
                 <p>{r.category}</p>
               </div>
             </Link>
           )
         })}
-        {/* if there are more than 4 results go to search page */}
         {results.length > 4 && 
+        // if there are more than 4 results go to search page
         <Link to={'/search/' + query}>
           <h4>More ...</h4>
         </Link>}
