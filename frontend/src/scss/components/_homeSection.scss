@@ -100,19 +100,28 @@
 
 @media (max-width: 480px) {
   .cat-holder {
+    h4 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
     .product-holder {
       flex-wrap: wrap;
+      gap: 3em;
       .product-card {
-        width: min(40vw, 300px);
-        height: min(30vh, 600px);
+        width: 85vw;
+        height: 400px;
+        box-shadow: none;
         .discount {
           top: 5px;
         }
         .product-img {
-          width: min(30vw, 200px);
-          height: min(15vh, 300px);
+          width: 70vw;
+          height: 250px;
           object-fit: cover;
           cursor: pointer;
+        }
+        .product-info{
+          width: 70vw;
         }
         button {
           img {
