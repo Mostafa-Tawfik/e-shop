@@ -11,6 +11,9 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  > div {
+    margin-top: 5em;
+  }
   .ad-image {
     object-fit: cover;
     width: min(85vw, 1200px);

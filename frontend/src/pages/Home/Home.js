@@ -2,7 +2,7 @@ import {React, useState, useEffect} from 'react'
 import {Routes, Route} from 'react-router-dom'
 
 import Footer from '../../layout/Footer';
-import Header from '../../layout/Header';
+import Header from '../../layout/Header/Header';
 
 import Homepage from './components/Homepage';
 import Product from './components/Product';
@@ -159,7 +159,11 @@ function Home(props) {
   return (
     <>
       <header className='App-header'>
-        <Header cart={cart} userLoggedIn={props.userLoggedIn} signOut={props.signOut}/>
+        <Header 
+          cart={cart} 
+          userLoggedIn={props.userLoggedIn} 
+          signOut={props.signOut}
+        />
       </header>
 
       <main className='App-main'>
