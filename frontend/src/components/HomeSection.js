@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import popAlert from './popAlert'
@@ -7,9 +8,8 @@ function HomeSection(props) {
   const [products, setProducts] = React.useState([])
 
   React.useEffect(()=> {
-    fetch('/api/products')
-    .then(res => res.json())
-    .then(data => setProducts(data.products))
+    axios.get('/api/products?productNum=Infinity')
+    .then(data => setProducts(data.data.products))
   },[])
 
   return (

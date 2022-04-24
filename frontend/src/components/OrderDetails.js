@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function OrderDetails(props) {
 
@@ -63,8 +64,17 @@ function OrderDetails(props) {
             {props.order.orderItems && props.order.orderItems.map(item => {
               return (
                 <tr key={item.product}>
-                  <td><img src={item.image} alt='product'></img></td>
-                  <td>{item.name}</td>
+
+                  <td>
+                    <Link to={`/product/${item.product}`}>
+                      <img src={item.image} alt='product'></img>
+                    </Link>
+                  </td>
+                  
+                  <td>
+                    <Link to={`/product/${item.product}`}>{item.name}</Link>
+                  </td>
+                  
                   <td>{item.qty}</td>
                   <td>${item.price.toFixed(2)}</td>
                   <td>${item.qty * item.price.toFixed(2)}</td>

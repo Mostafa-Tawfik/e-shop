@@ -78,5 +78,9 @@
     .orders-list-items-table-delete {
       @include slideSolidBtn
     }
+    .orders-list-items-table-review {
+      @include slideClrBtn(green, darkgreen);
+      color: white;
+    }
   }
 }
