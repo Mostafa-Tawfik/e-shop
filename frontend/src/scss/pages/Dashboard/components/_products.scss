@@ -78,3 +78,14 @@
     }
   }
 }
+
+
+@media (max-width: 440px) {
+  .dash-products-section {
+    .dash-cards-container {
+      .dash-product-card {
+        width: 85vw;
+      }
+    }
+  }
+}

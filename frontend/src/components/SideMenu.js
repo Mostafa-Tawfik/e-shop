@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+// important ***
+// mush pass array of li named 'content'
+
 function SideMenu(props) {
 
   // control side menu
@@ -37,9 +40,9 @@ function SideMenu(props) {
             `side-menu`} >
         <ul >
 
-          {props.categories.map((c, index) => (
+          {props.content.map((c, index) => (
             <li key={index}>
-              <Link to={'/'}>     
+              <Link to={`/${c == 'Dashboard' ? '': `dashboard/${c}`}`}>     
                 <p className="side-menu-li" onClick={toggleMenu}>
                   {c}
                 </p>

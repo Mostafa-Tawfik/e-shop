@@ -8,3 +8,10 @@
     color: $clr-sec;
   }
 }
+
+@media (max-width: 440px) {
+  .dash-orders {
+    padding: 0em;
+    gap: 0em;
+  }
+}

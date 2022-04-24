@@ -88,3 +88,44 @@
     box-shadow: $boxShadow;
   }
 }
+
+
+@media (max-width: 440px) {
+  .order-details {
+    width: 90vw;
+    padding: 1em;
+    .order-details-contact {
+      flex-direction: column;
+      gap: 0.5em;
+    }
+    .order-details-address {
+      flex-direction: column;
+      gap: 1em;
+      .order-details-address-card {
+        width: 80vw;
+        border: $border;
+        border-radius: 10px;
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+      }
+    }
+    .order-details-items {
+      padding: 0em;
+      overflow: auto;
+    }
+    .order-details-payment {
+      .order-details-payment-table {
+        width: 100%;
+        td, th {
+          white-space: nowrap;
+        }
+      }
+    }
+    button {
+      width: 100%;
+      padding: 1.5em;
+    }
+  }
+}

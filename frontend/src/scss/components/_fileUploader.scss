@@ -21,3 +21,23 @@
     width: 70px;
   }
 }
+
+@media (max-width: 440px) {
+  .file-uploader {
+    #file-uploader-input {
+      gap: 0em;
+      flex-direction: column;
+      input {
+        width: 100%;
+      }
+  
+    }
+    #file-uploader-input-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80px;
+      height: 30px;
+    }
+  }
+}

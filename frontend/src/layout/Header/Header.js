@@ -39,7 +39,7 @@ function Header(props) {
       <div className='bottom-pane'>
         <div className='bottom-pane_info'>
 
-          <SideMenu categories={categories}/>
+          <SideMenu content={categories}/>
 
           <Link to={'/'}>
             <div className="App-title">

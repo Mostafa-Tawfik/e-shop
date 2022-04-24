@@ -1,11 +1,14 @@
 import React from 'react'
 import {Routes, Route, Link} from 'react-router-dom'
+
 import Orders from './components/Orders/Orders'
 import Home from './components/Home'
 import Products from './components/Products/Products'
 import EditProduct from './components/Products/components/EditProduct'
 import OrderID from './components/Orders/OrderID'
 import Users from './components/Users/Users'
+import SideMenu from '../../components/SideMenu'
+
 
 function Dashboard(props) {
 
@@ -26,6 +29,14 @@ function Dashboard(props) {
         )})}
       </div>
 
+      <div className='admin-side-menu'>
+        <div>
+          <SideMenu content={adminPanel}/>
+        </div>
+
+        <button onClick={()=>props.signOut()} className='logout'>Logout</button>
+      </div>
+
       <div className='sections'>
         <Routes>
           <Route path='/' element={<Home />}/>
@@ -42,7 +53,7 @@ function Dashboard(props) {
         </Routes>
       </div>
 
-      <button onClick={()=>props.signOut()} className='logout'>Logout</button>
+      
 
     </div>
   )

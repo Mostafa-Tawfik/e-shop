@@ -39,5 +39,36 @@
     top: 30px;
     @include slideSolidBtn
   }
-  
+}
+
+
+@media (max-width: 440px) {
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .admin-panel {
+      display: none;
+    }
+    .admin-side-menu {
+      width: 100%;
+      padding: 1em;
+      // z-index: 20;
+      background: $grd-main;
+      display: flex;
+      justify-content: space-between;
+      .logout {
+        position: relative;
+        right: 0px;
+        top: 0px;
+        @include slideSolidBtn
+      }
+    }
+    .sections {
+      margin-left: 0px;
+      padding: 1em;
+      width: 90vw;
+    }
+  }
 }
