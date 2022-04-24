@@ -4,6 +4,10 @@
   padding: 2em;
   box-shadow: $boxShadow;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   .checkout-payment-form {
     background: white;
     width: min(75vw, 740px);
@@ -44,6 +48,17 @@
       padding: 1em;
       width: 100%;
       border: $border;
+    }
+  }
+}
+
+
+@media (max-width: 440px) {
+  .checkout-payment {
+    padding: 1em;
+    align-items: center;
+    .checkout-payment-form {
+      padding: 1em;
     }
   }
 }

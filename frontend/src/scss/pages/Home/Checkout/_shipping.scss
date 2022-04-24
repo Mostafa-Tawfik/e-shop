@@ -4,6 +4,10 @@
   padding: 2em;
   box-shadow: $boxShadow;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   .checkout-shipping-form {
     background: white;
     width: min(75vw, 740px);
@@ -49,9 +53,9 @@
 @media (max-width: 440px) {
   .checkout-shipping {
     padding: 1em;
+    align-items: center;
     .checkout-shipping-form {
       padding: 1em;
     }
   }
-
 }
