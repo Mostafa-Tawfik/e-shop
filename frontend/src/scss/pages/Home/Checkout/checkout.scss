@@ -25,3 +25,25 @@
     }
   }
 }
+
+
+@media (max-width: 440px) {
+  .checkout {
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .checkout-wizard {
+      gap: 1px;
+      padding: 2em 0;
+      .checkout-wizard-step {
+        // width: 25vw;
+        p {
+          white-space: nowrap;
+          font-size: 0.7rem;
+        }
+      }
+    }
+  }
+}

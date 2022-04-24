@@ -44,3 +44,14 @@
     }
   }
 }
+
+
+@media (max-width: 440px) {
+  .checkout-shipping {
+    padding: 1em;
+    .checkout-shipping-form {
+      padding: 1em;
+    }
+  }
+
+}
