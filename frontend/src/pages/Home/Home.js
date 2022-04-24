@@ -15,12 +15,13 @@ import Checkout from '../../pages/Checkout/Checkout';
 import UserOrders from './user/UserOrders';
 import UserOrderID from './user/UserOrderID';
 import UserInfo from './user/UserInfo';
+import ReviewOrder from './user/ReviewOrder';
 
 function Home(props) {
 
   ///-- handle cart --///
   const [cart, setCart] = useState('')
-  // console.log('cart', cart)
+  console.log('cart', cart)
 
 
   // setup local storage for cart
@@ -193,6 +194,11 @@ function Home(props) {
 
           <Route path='/user/orders/:id' element={
             <UserOrderID 
+            />
+          }/>
+
+          <Route path='/user/review/:id' element={
+            <ReviewOrder 
             />
           }/>
 

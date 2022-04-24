@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+
 import changeToDelivered from './changeToDelivered'
 import changeToPaid from './changeToPaid'
 import deleteOrder from './deleteOrder'
 
+
 function OrdersList(props) {
 
+  const navigate = useNavigate()
   const isAdmin = props.isAdmin 
 
   // control more btn
@@ -57,13 +61,23 @@ function OrdersList(props) {
 
 
   function cancelOrder(id) {
-
     return (
       <button 
       onClick={()=>deleteOrder(id)}
       className='orders-list-items-table-delete'
       >
         Cancel
+      </button>
+    )
+  }
+
+  function reviewOrder(id) {
+    return (
+      <button 
+      onClick={()=>navigate(`/user/review/${id}`)}
+      className='orders-list-items-table-review'
+      >
+        Review
       </button>
     )
   }
@@ -111,7 +125,7 @@ function OrdersList(props) {
                   ? 
                   actions(order._id) 
                   : 
-                  !order.isDelivered ? cancelOrder(order._id) : ''}
+                  order.isDelivered ? reviewOrder(order._id) : cancelOrder(order._id)}
                 </td>
 
               </tr>

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import popAlert from '../../../components/popAlert'
@@ -7,33 +7,34 @@ import popAlert from '../../../components/popAlert'
 function OrderPreview(props) {
 
   const navigate = useNavigate()
+  const {shippingAddress, orderItems, totalPrice, shippingPrice } = props.order
 
 
   // handle placment
   async function placeOrder(event) {
     event.preventDefault()
 
-  await axios({
-    url: '/api/orders',
-    method: 'POST',
-    data: props.order,
-    headers: {
-        Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`,
-      }
-  })
-  .then((res) => {
-    console.log('Order Placed')
-    popAlert('Your order has been placed', 'Enjoy your order')
-    props.emptyCart()
-    console.log(res.data)
-    navigate('/')
-    return res.data
-  },
-  (error) => {
-    console.log(error)
+    await axios({
+      url: '/api/orders',
+      method: 'POST',
+      data: props.order,
+      headers: {
+          Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`,
+        }
+    })
+    .then((res) => {
+      console.log('Order Placed')
+      popAlert('Your order has been placed', 'Enjoy your order')
+      props.emptyCart()
+      console.log(res.data)
+      navigate('/')
+      return res.data
+    },
+    (error) => {
+      console.log(error)
+    }
+    )
   }
-  )
-}
 
 
   return (
@@ -60,18 +61,18 @@ function OrderPreview(props) {
 
         <div className='order-preview-address-card'>
           <h4>Delivery Address</h4>
-          <p>Address: {props.order.shippingAddress && props.order.shippingAddress.address}</p>
-          <p>City: {props.order.shippingAddress && props.order.shippingAddress.city}</p>
-          <p>Country: {props.order.shippingAddress && props.order.shippingAddress.country}</p>
-          <p>Postal Code: {props.order.shippingAddress && props.order.shippingAddress.postalCode}</p>
+          <p>Address: {shippingAddress && shippingAddress.address}</p>
+          <p>City: {shippingAddress && shippingAddress.city}</p>
+          <p>Country: {shippingAddress && shippingAddress.country}</p>
+          <p>Postal Code: {shippingAddress && shippingAddress.postalCode}</p>
         </div>
 
         <div className='order-preview-address-card'>
           <h4>Billing Address</h4>
-          <p>Address: {props.order.shippingAddress && props.order.shippingAddress.address}</p>
-          <p>City: {props.order.shippingAddress && props.order.shippingAddress.city}</p>
-          <p>Country: {props.order.shippingAddress && props.order.shippingAddress.country}</p>
-          <p>Postal Code: {props.order.shippingAddress && props.order.shippingAddress.postalCode}</p>
+          <p>Address: {shippingAddress && shippingAddress.address}</p>
+          <p>City: {shippingAddress && shippingAddress.city}</p>
+          <p>Country: {shippingAddress && shippingAddress.country}</p>
+          <p>Postal Code: {shippingAddress && shippingAddress.postalCode}</p>
         </div>
 
       </div>
@@ -90,7 +91,7 @@ function OrderPreview(props) {
               <th>TOTAL</th>
             </tr>
 
-            {props.order.orderItems && props.order.orderItems.map(item => {
+            {orderItems && orderItems.map(item => {
               return (
                 <tr key={item.product}>
                   <td><img src={item.image} alt='product'></img></td>
@@ -107,7 +108,7 @@ function OrderPreview(props) {
           <tfoot>
             <tr>
               <td colSpan= "4"></td>
-              <th>${props.order.totalPrice && props.order.totalPrice.toFixed(2) - props.order.shippingPrice}</th>
+              <th>${totalPrice && totalPrice.toFixed(2) - shippingPrice}</th>
             </tr>
           </tfoot>
 
@@ -122,12 +123,12 @@ function OrderPreview(props) {
 
             <tr>
               <td>Subtotal</td>
-              <td>${props.order.totalPrice && props.order.totalPrice.toFixed(2) - props.order.shippingPrice}</td>
+              <td>${totalPrice && totalPrice.toFixed(2) - shippingPrice}</td>
             </tr>
 
             <tr>
               <td>Shipping</td>
-              <td>${props.order.shippingPrice && props.order.shippingPrice.toFixed(2)}</td>
+              <td>${shippingPrice && shippingPrice.toFixed(2)}</td>
             </tr>
 
           </tbody>
@@ -136,7 +137,7 @@ function OrderPreview(props) {
 
             <tr>
               <th>Total Payment</th>
-              <th>${props.order.totalPrice && props.order.totalPrice.toFixed(2)}</th>
+              <th>${totalPrice && totalPrice.toFixed(2)}</th>
             </tr>
 
           </tfoot>

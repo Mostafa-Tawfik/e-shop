@@ -18,8 +18,10 @@ function Homepage(props) {
     <div>
       <img src='../images/Free-Advertising-Ideas.jpg' alt='ad' className='ad-image'></img>
 
-      {categories.map(c => (
-        <HomeSection {...props} filter={c}/>
+      {categories.map((c,i) => (
+        <div key={i}>
+          <HomeSection {...props} filter={c}/>
+        </div>
       ))}
       
     </div>

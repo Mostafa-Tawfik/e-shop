@@ -1,0 +1,110 @@
+.user-review-id {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  padding: 2em;
+  .user-review-details {
+    width: min(80vw, 800px);
+    background: white;
+    padding: 2em;
+    box-shadow: $boxShadow;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    .user-review-details-contact {
+      display: flex;
+      gap: 2em;
+      padding: 1em;
+      margin-top: 1em;
+    }
+    .user-review-details-address {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2em;
+      .user-review-details-address-card {
+        width: min(80vw, 400px);
+        border: $border;
+        border-radius: 10px;
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+      }
+    }
+    .user-review-details-items {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 1em;
+      .user-review-details-items-table {
+        text-align: left;
+        position: relative;
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 30px;
+        img {
+          width: 60px;
+          height: 60px;
+          object-fit: cover;
+          border-radius: 10px;
+        }
+        tr {
+          border: $border;
+          outline: thin solid;
+          outline-color: rgb(128, 128, 128, 0.3);
+          border-radius: 10px;
+        }
+        td, th {
+          padding: 10px;
+          border-radius: 10px;
+          
+        }
+        textarea {
+          height: 120px;
+          border-radius: 10px;
+          padding: 1em;
+          width: 100%;
+          border: $border;
+        }
+        .user-review-details-items-table-lastraw {
+          border: none;
+          outline: none;
+        }
+      }
+    }
+    .user-review-details-payment {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1em;
+      .user-review-details-payment-table {
+        text-align: left;
+        position: relative;
+        width: 40%;
+        border-collapse: collapse;
+        tr {
+          border-radius: 10px;
+        }
+        td, th {
+          padding: 10px;
+          border-radius: 10px;
+          
+        }
+      }
+    }
+    .place-user-review-btn {
+      display: flex;
+      justify-content: center;
+    }
+    button {
+      @include slideClrBtn(green, darkgreen);
+      color: white;
+      padding: 1em;
+      margin: 1em 0;
+    }
+  }
+}

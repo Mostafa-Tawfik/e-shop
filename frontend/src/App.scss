@@ -1,8 +1,5 @@
-// improt glabal rules
-@import './scss/layout/_global-rules';
-
-// import colors
-@import './scss/layout/colors';
+// import layout
+@import './scss/layout/layout.scss';
 
 // import mixins
 @import './scss/utilities/mixins';
@@ -10,35 +7,17 @@
 // import mixins
 @import './scss/utilities/variables';
 
-// import headrer
-@import './scss/layout/header';
-
-// import home page
-@import './scss/pages/home';
-
-// import cart page
-@import './scss/pages/cart';
-
-// import product page
-@import './scss/pages/product';
-
 // import components
 @import './scss/components/components.scss';
 
-// import footer
-@import './scss/layout/footer';
+// import home page
+@import './scss/pages/home/home.scss';
+
+// import dashboard
+@import './scss/pages/Dashboard/dashboard.scss';
 
 // import login
 @import './scss/pages/login';
 
 // import register
 @import './scss/pages/register';
-
-// import search
-@import './scss/pages/search';
-
-// import dashboard
-@import './scss/pages/Dashboard/dashboard.scss';
-
-// import dashboard
-@import './scss/pages/Checkout/checkout.scss';

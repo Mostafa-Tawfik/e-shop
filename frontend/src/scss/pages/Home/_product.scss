@@ -1,8 +1,10 @@
 .product {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 2em;
+  gap: 2em;
   .product-holder{
     position: relative;
     display: flex;
@@ -65,6 +67,49 @@
           height: 45px;
         }
       }
+    }
+  }
+  .product-more-info {
+    width: min(85vw, 1300px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2em;
+    .product-more-info-header {
+      display: flex;
+      gap: 2em;
+      h4 {
+        cursor: pointer;
+        padding: 0.5em 1em;
+        border-radius: 10px;
+      }
+    }
+    .product-more-info-desc {
+      flex-direction: column;
+      gap: 2em;
+      padding: 2em 0;
+      display: none;
+    }
+    .product-more-info-desc.active {
+      display: flex;
+    }
+    .product-more-info-reviews {
+      display: none;
+      flex-direction: column;
+      gap: 2em;
+      padding: 2em;
+      .product-more-info-reviews-card {
+        display: flex;
+        gap: 2em;
+        img {
+          width: 50px;
+          height: 50px;
+        }
+      }
+    }
+    .product-more-info-reviews.active {
+      display: flex;
     }
   }
 }
