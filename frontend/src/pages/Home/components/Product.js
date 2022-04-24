@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
@@ -6,6 +6,11 @@ import popAlert from '../../../components/popAlert'
 import Ratings from 'react-ratings-declarative'
 
 function Product(props) {
+
+  // auto start top page
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   const [product, setProduct] = React.useState('')
   console.log(product)
