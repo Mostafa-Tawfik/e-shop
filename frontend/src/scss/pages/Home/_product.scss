@@ -116,6 +116,7 @@
 
 @media (max-width: 480px) {
   .product {
+    gap: 3em;
     .product-holder{
       flex-direction: column;
       img {
@@ -134,6 +135,12 @@
             height: 45px;
           }
         }
+      }
+    }
+    .product-more-info {
+      padding: 0;
+      .product-more-info-reviews {
+        padding: 2em 0;
       }
     }
   }

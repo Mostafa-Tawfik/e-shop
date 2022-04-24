@@ -193,7 +193,8 @@
 @media (max-width: 440px)  {
   .App-header {
     position: fixed;
-    height: 8vh;
+    justify-content: center;
+    height: 10vh;
     z-index: 10;
     .top-pane {
       display: none;
@@ -201,6 +202,7 @@
     .bottom-pane {
       align-items: center;
       width: 100%;
+      // padding: 1em;
       .App-title {
         justify-content: center;
         gap: 0.5em;
