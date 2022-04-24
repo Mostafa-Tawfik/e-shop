@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import OrderSummary from './components/OrderSummary'
 import Select from 'react-dropdown-select'
 
 function Cart(props) {
+
+   // auto start top page
+   useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   // set delivery dates
   let date = new Date()
