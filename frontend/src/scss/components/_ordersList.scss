@@ -84,3 +84,12 @@
     }
   }
 }
+
+
+@media (max-width: 440px) {
+  .orders-list-items {
+    justify-content: flex-start;
+    overflow: auto;
+    width: 90vw;
+  }
+}

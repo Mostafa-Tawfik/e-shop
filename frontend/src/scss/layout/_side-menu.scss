@@ -41,15 +41,14 @@ background-color: $clr-main;
   ul {
     position: relative;
     list-style: none;
-  }
-  a {
-    text-decoration: none;
-    font-size: 28px;
-    color: $clr-dark;
-    
-  }
-  a:hover, a:active {
-    color: $clr-main;
+    li {
+      a {
+        text-decoration: none;
+        p {
+          font-size: 1.5rem;
+        }
+      }
+    }
   }
 }
 
