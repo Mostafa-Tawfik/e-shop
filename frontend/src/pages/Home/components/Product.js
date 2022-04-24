@@ -47,7 +47,6 @@ function Product(props) {
           <p>{product.category}</p>
           <h2>{product.name}</h2>
           <p>Brand: {product.brand}</p>
-          {/* <p>Colors: {product.colors}</p> */}
           
           <div>
             {product.discount > 0 ? 
@@ -133,7 +132,7 @@ function Product(props) {
         <div className={`product-more-info-reviews ${(activeInfo === `reviews`) && `active`}`}>
 
         <div className='product-more-info-reviews-average'>
-          <h4>{average && average}</h4>
+          <h4>{average && average.toFixed(1)}</h4>
 
           {average && <Ratings
             rating={average}

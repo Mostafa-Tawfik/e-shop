@@ -192,36 +192,43 @@
 
 @media (max-width: 440px)  {
   .App-header {
-    height: 15vh;
+    position: fixed;
+    justify-content: center;
+    height: 10vh;
+    z-index: 10;
     .top-pane {
       display: none;
     }
     .bottom-pane {
+      align-items: center;
+      width: 100%;
+      // padding: 1em;
       .App-title {
-        width: min(85vw, 1200px);
+        justify-content: center;
+        gap: 0.5em;
+        margin-right: 2em;
+        h1 {
+          font-size: 1.5rem;
+        }
         .App-logo {
           width: 35px;
         }
       }
     .bottom-pane_info{
-      height: 15vh;
-      flex-direction: column;
-      position: relative;
+      height: 8vh;
       .header-cart{
-        position: absolute;
-        top: 20px;
-        right: 10px;
-        width: 35px;
-        height: 35px;
-        .cart-logo {
-        }
+        width: 40px;
+        height: 40px;
         .cart-counter{
+          top: -5px;
+          right: -4.5px;
           width: 3px;
           height: 3px;
           font-size: 0.8rem;
         }
       }
         .header-search {
+          display: none;
           .header-search-bar {
             width: min(85vw);
           }
@@ -231,25 +238,19 @@
           }
         }
         .header-account-holder {
-          position: absolute;
-          top: 20px;
-          right: 50px;
           .header-account {
+            img {
+              width: 40px;
+            }
             img:nth-child(3) {
               display: none;
             }
             .header-account-account {
-              position: absolute;
-              top: 85px;
-              right: -30px;
-              p {
-                font-size: smaller;
-              }
+              display: none;
             }
           }
           .header-account-li {
-            position: absolute;
-            left: -45px;
+            left: -40px;
           }
         }
       }

@@ -2,11 +2,13 @@ import React from 'react'
 import logo from '../../logo.svg'
 import { Link } from 'react-router-dom'
 import SearchBar from './components/SearchBar'
+import SideMenu from '../../components/SideMenu'
 
 function Header(props) {
 
   const [products, setProducts] = React.useState([])
 
+  // map over products and return only unique values
   const categories = [...new Set(products.map(p => p.category))]
 
   React.useEffect(()=> {
@@ -22,7 +24,8 @@ function Header(props) {
   function openAccount() {
     setAccountIsOpen(prev => !prev)
   }
- 
+
+
   return (
     <div>
       <div className='top-pane'>
@@ -35,6 +38,8 @@ function Header(props) {
 
       <div className='bottom-pane'>
         <div className='bottom-pane_info'>
+
+          <SideMenu categories={categories}/>
 
           <Link to={'/'}>
             <div className="App-title">
@@ -89,6 +94,7 @@ function Header(props) {
               <div className='cart-counter'>{props.cart.length}</div>
             </div>
           </Link>
+
           
         </div>
       </div>

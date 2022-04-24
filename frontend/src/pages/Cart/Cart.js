@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import OrderSummary from './components/OrderSummary'
 import Select from 'react-dropdown-select'
 
 function Cart(props) {
+
+   // auto start top page
+   useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   // set delivery dates
   let date = new Date()
@@ -53,15 +58,13 @@ function Cart(props) {
                   </Link>
 
                   
-                  <div>Delivery by 
+                  <div>
+                    <p>Delivery by </p>
                     <p className='cart-delivery'>{dayName} {day}/{month}/{year}
                     </p>
                   </div>
   
-                  {c.discount ?
-                  // if there is a discount show it, if not show normal price
-                  <p>${c.price.toFixed() * ((100 - c.discount)/100)}</p> :
-                  <p>${c.price}</p> }
+
   
                   <div className='dropdown'>
                     <Select
@@ -75,9 +78,19 @@ function Cart(props) {
 
                 </div>
 
-                <button onClick={()=> props.removeFromCart(c._id)}>
-                  <img className='cart-delete' src='https://api.iconify.design/fluent/delete-16-filled.svg?color=%23fc2e20' alt='delete item'></img>
-                </button>
+                <div className='cart-filled-items-info-right'>
+                  {c.discount ?
+                    // if there is a discount show it, if not show normal price
+                    <p>${c.price.toFixed() * ((100 - c.discount)/100)}</p> :
+                    <p>${c.price.toFixed()}</p>}
+
+                  <p>{c.discount > 0 && `$${c.price.toFixed()}`}</p>
+
+                  <button onClick={()=> props.removeFromCart(c._id)}>
+                    <img className='cart-delete' src='https://api.iconify.design/fluent/delete-16-filled.svg?color=%23fc2e20' alt='delete item'></img>
+                  </button>
+                </div>
+
 
 
               </div>

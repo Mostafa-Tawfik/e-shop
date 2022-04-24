@@ -1,10 +1,14 @@
-.checkout-payment {
+.checkout-shipping {
   width: min(80vw, 800px);
   background: white;
   padding: 2em;
   box-shadow: $boxShadow;
   border-radius: 10px;
-  .checkout-payment-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  .checkout-shipping-form {
     background: white;
     width: min(75vw, 740px);
     padding: 1em;
@@ -16,14 +20,14 @@
     > div {
       width: 100%;
       > input {
-        width: 50px;
+        width: 100%;
       }
       > p {
         padding: 5px;
       }
     }
     input {
-      height: 20px;
+      height: 40px;
       border-radius: 10px;
       padding-left: 1em;
       border: $border;
@@ -35,15 +39,23 @@
       margin: 1em 0;
       box-shadow: $boxShadow;
     }
-    .checkout-payment-form-radio {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      height: 80px;
+    .checkout-shipping-form-address {
+      height: 120px;
       border-radius: 10px;
       padding: 1em;
       width: 100%;
       border: $border;
+    }
+  }
+}
+
+
+@media (max-width: 440px) {
+  .checkout-shipping {
+    padding: 1em;
+    align-items: center;
+    .checkout-shipping-form {
+      padding: 1em;
     }
   }
 }

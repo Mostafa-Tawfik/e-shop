@@ -33,6 +33,7 @@
     justify-content: flex-start;
     align-items: center;
     padding: 1em;
+    overflow: auto;
     .order-preview-items-table {
       text-align: left;
       position: relative;
@@ -41,6 +42,8 @@
       border-spacing: 10px;
       img {
         width: 60px;
+        height: 60px;
+        object-fit: cover;
         border-radius: 10px;
       }
       tr {
@@ -86,5 +89,44 @@
     padding: 1em;
     margin: 1em 0;
     box-shadow: $boxShadow;
+  }
+}
+
+
+@media (max-width: 440px) {
+  .order-preview {
+    .order-preview-contact {
+      flex-direction: column;
+      gap: 0.5em;
+    }
+    .order-preview-address {
+      flex-direction: column;
+      gap: 1em;
+      .order-preview-address-card {
+        width: 60vw;
+        border: $border;
+        border-radius: 10px;
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+      }
+    }
+    .order-preview-items {
+      padding: 0em;
+      overflow: auto;
+    }
+    .order-preview-payment {
+      .order-preview-payment-table {
+        width: 100%;
+        td, th {
+          white-space: nowrap;
+        }
+      }
+    }
+    button {
+      width: 100%;
+      padding: 1.5em;
+    }
   }
 }

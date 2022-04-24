@@ -19,7 +19,7 @@
       gap: 1em;
       .cart-filled-items {
         position: relative;
-        width: min(40vw, 600px);
+        width: min(40vw, 500px);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -28,6 +28,7 @@
           width: min(15vw, 200px);
           height: min(15vh, 200px);
           object-fit: cover;
+          border-radius: 10px;
         }
         .dropdown {
           width: 90px;
@@ -43,7 +44,10 @@
           }
         }
         .cart-filled-items-info {
-          width: min(20vw, 300px);
+          width: 300px;
+          display: flex;
+            flex-direction: column;
+            gap: 3px;
           h3 {
             font-size: 1em;
           }
@@ -53,11 +57,22 @@
             font-size: smaller;
           }
         }
+        .cart-filled-items-info-right {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 0.5em;
+          p {
+            font-weight: 600;
+          }
+          p:nth-child(2) {
+            text-decoration: line-through;
+            color: gray;
+          }
+        }
         button {
           display: flex;
-          position: absolute;
-          top: 10px;
-          right: -10px;
           cursor: pointer;
         }
         .cart-delete {
@@ -129,30 +144,44 @@
     .cart-holder {
       display: flex;
       flex-direction: column;
-      width: min(85vw, 1200px);
+      width: 85vw;
       justify-content: center;
       align-items: center;
       gap: 2em;
       .cart-filled {
-        width: min(85vw, 600px);
+        width: 85vw;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: 1em;
         .cart-filled-items {
-          width: min(85vw, 600px);
+          width: 85vw;
           display: flex;
           justify-content: center;
           align-items: center;
           gap: 1em;
           img {
-            width: min(30vw, 200px);
-            height: min(15vh, 200px);
+            width: 30vw;
+            height: 140px;
             object-fit: cover;
           }
           .cart-filled-items-info {
-            width: min(55vw, 400px);
+            width: 40vw;
+            a {
+              font-size: 0.8rem;
+            }
+            p {
+              font-size: 0.8rem;
+            }
+            .cart-delivery {
+              font-size: 0.7rem;
+            }
+          }
+          .cart-filled-items-info-right {
+            p {
+              font-size: 0.8rem;
+            }
           }
         }
       }
