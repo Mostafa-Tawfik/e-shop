@@ -1,0 +1,23 @@
+.file-uploader {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  #file-uploader-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    input {
+      height: max-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1em;
+    }
+
+  }
+  #file-uploader-input-btn {
+    width: 70px;
+  }
+}

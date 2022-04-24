@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import FileUploader from '../../../../../components/FileUploader'
 import popAlert from '../../../../../components/popAlert'
 
 function EditProduct() {
@@ -27,6 +28,8 @@ function EditProduct() {
     countInStock: ``
   })
 
+  // console.log(updateForm);
+
 
   // handle input change
   function handleChange(event) {
@@ -35,6 +38,16 @@ function EditProduct() {
       return {
         ...prev,
         [name]: value
+      }
+    })
+  }
+
+  // handle uploaded image
+  function handleUpload(url) {
+    setUpdateForm(prev => {
+      return {
+        ...prev,
+        image: url
       }
     })
   }
@@ -98,7 +111,9 @@ function EditProduct() {
             </textarea>
           </div>
 
-          <div>
+          <FileUploader handleUpload={handleUpload}/>
+
+          {/* <div>
             <p>Images</p>
             <input
             type='url'
@@ -108,7 +123,7 @@ function EditProduct() {
             value={updateForm.image}
             >
             </input>
-          </div>
+          </div> */}
 
           <div className='dash-products-form-cat'>
             <div>

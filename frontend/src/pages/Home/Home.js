@@ -21,7 +21,7 @@ function Home(props) {
 
   ///-- handle cart --///
   const [cart, setCart] = useState('')
-  console.log('cart', cart)
+  // console.log('cart', cart)
 
 
   // setup local storage for cart

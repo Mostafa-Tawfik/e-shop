@@ -2,16 +2,11 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import popAlert from './popAlert';
 
-function FileUploader() {
+function FileUploader(props) {
 
   const [file, setFile] = useState('')
-  console.log(file)
+  // console.log(file)
 
-  const [url, setUrl] = useState({
-    image: ''
-  })
-  console.log(url)
-  
   
   // handle upload
   async function upload(event) {
@@ -34,12 +29,7 @@ function FileUploader() {
       console.log('uploaded')
       console.log(res)
       popAlert('Done!', 'Successfully uploaded')
-      setUrl(prev => {
-        return {
-          ...prev,
-          image: res.data.url
-        }
-      })
+      props.handleUpload(res.data.url)
       return res.data
     },
     (error) => {
@@ -50,22 +40,24 @@ function FileUploader() {
   
 
   return (
-    <form onSubmit={upload}>
-      <div>
-        <p>Image uploader</p>
+    <div className='file-uploader'>
+      <p>Image uploader</p>
+
+      <div id='file-uploader-input'>
         <input
         type='file'
         name='file'
-        required
         onChange={(e) => setFile(e.target.files[0])}
         >
         </input>
-      </div>
-      <button>
-        Submit
-      </button>
 
-    </form>
+        <button onClick={upload}  id='file-uploader-input-btn'>
+          Upload
+        </button>
+
+      </div>      
+
+    </div>
   )
 }
 
