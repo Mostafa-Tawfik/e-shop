@@ -3,19 +3,12 @@ import React, { useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import popAlert from '../../../../components/popAlert'
 
-function Products() {
+function Products(props) {
 
   const navigate = useNavigate()
 
   // store all products
-  const [products, setProducts] = React.useState([])
-  // console.log(products)
-
-  // get all products
-  React.useEffect(()=> {
-    axios.get('/api/products?productNum=Infinity')
-    .then(data => setProducts(data.data.products))
-  },[])
+  const products = props.products
 
   // control more btn
   const [isOpen, setIsOpen] = useState({

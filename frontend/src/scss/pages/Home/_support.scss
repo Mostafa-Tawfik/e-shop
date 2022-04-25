@@ -1,0 +1,63 @@
+.support-create {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  > h2 {
+    margin-bottom: 1em;
+    color: $clr-sec;
+  }
+  .support-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    .support-form {
+      padding: 1em;
+      background: white;
+      width: min(70vw, 700px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1em;
+      border-radius: 10px;
+      box-shadow: $boxShadow;
+      p {
+        font-size: 2rem;
+      }
+    }
+    button {
+      @include slideSolidBtn($clr-light);
+      width: 25%;
+      padding: 0.75em;
+      margin: 1em 0;
+      box-shadow: $boxShadow;
+    }
+    .support-form-desc {
+      height: 150px;
+      border-radius: 10px;
+      padding: 1em;
+      width: 100%;
+      border: $border;
+    }
+  }
+}
+
+
+@media (max-width: 440px) {
+  .support-create {
+    .support-form-container {
+      .support-form {
+        width: 85vw;
+        p {
+          font-size: 1rem;
+        }
+      }
+      button {
+        width: 100%;
+        padding: 1.5em;
+      }
+    }
+  }
+}

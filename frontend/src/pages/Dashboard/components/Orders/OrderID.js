@@ -10,7 +10,7 @@ function OrderID() {
 
   // store orders
   const [order, setOrder] = useState('')
-  console.log('order', order)
+  // console.log('order', order)
 
   // fetch all orders
   useEffect(()=> {

@@ -1,33 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React from 'react'
 
-function DashHome() {
+function Home(props) {
 
-  // store all products
-  const [products, setProducts] = useState([])
-  // console.log(products)
-
-  // get all products
-  useEffect(()=> {
-    axios.get('/api/products?productNum=Infinity')
-    .then(data => setProducts(data.data.products))
-  },[])
-
-
-    // store orders
-    const [orders, setOrders] = useState('')
-    // console.log('orders', orders)
-  
-    // fetch all orders
-    useEffect(()=> {
-      axios.get('/api/orders/', {
-        headers: {
-          Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
-        }
-      })
-      .then(data => setOrders(data.data))
-    },[])
-
+  const {products, orders, users} = props
 
   return (
     <div className='dashboard-section'>
@@ -59,10 +34,18 @@ function DashHome() {
           <img src='https://api.iconify.design/emojione/department-store.svg' alt='shop'></img>
         </div>
 
+        <div className='summary-card'>
+          <div>
+            <h5>Total Users</h5>
+            <p>{users.length}</p>
+          </div>
+          <img src='https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png' alt='user'></img>
+        </div>
+
       </div>
 
     </div>
   )
 }
 
-export default DashHome
+export default Home

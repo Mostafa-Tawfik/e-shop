@@ -16,6 +16,7 @@ import UserOrders from './user/UserOrders';
 import UserOrderID from './user/UserOrderID';
 import UserInfo from './user/UserInfo';
 import ReviewOrder from './user/ReviewOrder';
+import Support from './user/Support';
 
 function Home(props) {
 
@@ -238,6 +239,11 @@ function Home(props) {
             order={order}
             emptyCart={emptyCart}
             userLoggedIn={props.userLoggedIn}
+            />
+          }/>
+
+          <Route path='/support' element={
+            <Support 
             />
           }/>
           

@@ -77,13 +77,19 @@ function Header(props) {
               </Link>
               }
               <hr></hr>
+
               <Link to={'/user/orders'}>
                 <h5>My Orders</h5> 
               </Link>
+
               <Link to={'/user'}>
                 <h5>Update info</h5> 
               </Link>
-              {/* <h5>Favorite</h5> */}
+
+              <Link to={'/support'}>
+                <h5>Need help!</h5> 
+              </Link>
+
             </div>}
           </div>
 

@@ -1,0 +1,65 @@
+.support {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  > h2 {
+    margin-bottom: 1em;
+    color: $clr-sec;
+  }
+  .support-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    .support-items-table {
+      width: min(80vw, 1000px);
+      background: white;
+      box-shadow: $boxShadow;
+      border-radius: 10px;
+      padding: 1em;
+      text-align: left;
+      position: relative;
+      // width: 100%;
+      border-collapse: separate;
+      border-spacing: 10px;
+      a {
+        font-size: 0.8rem;
+        color: $clr-high;
+      }
+      img {
+        width: 60px;
+        border-radius: 10px;
+      }
+      tr {
+        border: $border;
+        outline: thin solid;
+        outline-color: rgb(128, 128, 128, 0.3);
+        border-radius: 10px;
+      }
+      td, th {
+        padding: 10px;
+        border-radius: 10px;
+        
+      }
+      .resolve-btn {
+        @include slideClrBtn(green, darkgreen);
+        color: white;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 440px) {
+  .support {
+    padding: 0em;
+    gap: 0em;
+    .support-items {
+      justify-content: flex-start;
+      overflow: auto;
+      width: 90vw;
+    }
+  }
+}
