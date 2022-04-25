@@ -23,3 +23,30 @@
     }
   }
 }
+
+
+@media (max-width: 440px) {
+  .user {
+    width: 90vw;
+    align-items: flex-start;
+    // gap: 2em;
+    .user-contact {
+      width: 85vw;
+      flex-direction: column;
+      // gap: 1em;
+    }
+    .user-reviews {
+      .user-reviews-card {
+        img {
+          width: 200px;
+          height: 200px;
+        }
+      }
+    }
+  }
+}
+
+
+@media (max-width: 440px) and (orientation: landscape) {
+  
+}

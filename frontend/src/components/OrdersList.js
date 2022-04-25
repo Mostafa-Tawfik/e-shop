@@ -90,7 +90,7 @@ function OrdersList(props) {
         <tbody>
 
           <tr>
-            <th>ID</th>
+            <th>Order ID</th>
             {isAdmin && <th>NAME</th>}
             <th>DATE</th>
             <th>TOTAL</th>

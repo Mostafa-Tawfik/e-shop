@@ -28,7 +28,7 @@ function Tickets(props) {
           <tbody>
 
             <tr>
-              <th>ID</th>
+              <th>Ticket ID</th>
               <th>NAME</th>
               <th>MESSAGE</th>
               <th>STATUS</th>

@@ -11,16 +11,17 @@ function UserID(props) {
   const params = useParams()
   const {orders, tickets, products, isAdmin} = props
 
-  // filter orders made by the user
-  const filterUserOrders = orders && orders.filter(o => o.user._id === params.id)
 
-  const userOrders = [...filterUserOrders]
+  // filter tickets made by the user
+  const filterByTickets = tickets && tickets.filter(t => t.user._id === params.id)
+  
+
+  // filter orders made by the user
+  const filterByOrders = orders && orders.filter(o => o.user._id === params.id)
 
 
   // filter products reviewed by the user
-  const filterUserReviews = products && products.filter(p => p.reviews.some(r => r.user === params.id))
-
-  const productReviewed = [...filterUserReviews]
+  const filterByReviews = products && products.filter(p => p.reviews.some(r => r.user === params.id))
 
 
   // filter user reviews
@@ -29,7 +30,6 @@ function UserID(props) {
 
   // store user details
   const [user, setUser] = useState('')
-  // console.log(products)
 
   // fetch the user details
   useEffect(()=> {
@@ -42,7 +42,7 @@ function UserID(props) {
   },[])
 
 
-  const userSection = user && (
+  const userContactSection = user && (
     <>
       <h2>{user.name}</h2>
 
@@ -98,7 +98,7 @@ function UserID(props) {
               <th>DATE</th>
             </tr>
 
-            {productReviewed.map((product, index) => {
+            {filterByReviews.map((product, index) => {
               return (
                 <tr key={product._id}>
 
@@ -146,26 +146,24 @@ function UserID(props) {
       </section>
   )
 
-  console.log(productReviewed);
-
 
   return (
     <section className='user'>
 
-     {userSection}   
+     {userContactSection}   
 
       <h3>Previous Orders</h3>
 
-      <div className='dash-order-id'>
+      <div className='user-order-id'>
 
         {orders && 
-          <OrdersList orders={userOrders} isAdmin={isAdmin}/>
+          <OrdersList orders={filterByOrders} isAdmin={isAdmin}/>
         }
       </div>
 
       <h3>Previous Tickets</h3>
       <div className='support'>
-        <Tickets tickets={tickets}/>
+        <Tickets tickets={filterByTickets}/>
       </div>
 
       <h3>Products Reviewed</h3>
