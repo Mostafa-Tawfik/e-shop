@@ -10,6 +10,8 @@ function Products(props) {
   // store all products
   const products = props.products
 
+  console.log(products);
+
   // control more btn
   const [isOpen, setIsOpen] = useState({
     open: false,
@@ -87,15 +89,19 @@ function Products(props) {
           return (
             <div key={p._id} className='dash-product-card'>
 
-              {p.image ?
-              <img src={p.image} alt='money'></img> :
-              <img src='https://api.iconify.design/emojione/money-bag.svg' alt='money'></img>}
+              <Link to={`/dashboard/products/${p._id}`}>
+                <img src={p.image.charAt(0) !== '/' ? p.image : 'https://api.iconify.design/bxs/error.svg'} alt='product'></img> 
+              </Link>
 
               <div className='dash-product-details'>
-                <h5>{p.name}</h5>
+
+                <Link to={`/dashboard/products/${p._id}`}>
+                  <h5>{p.name}</h5>
+                </Link>
                 <p>Price: ${p.price}</p>
                 {p.discount && <p>Discount: {p.discount}%</p>}
                 <p>In Stock: {p.countInStock}</p>
+
               </div>
 
               <button 
@@ -111,7 +117,9 @@ function Products(props) {
               isOpen.open && 
               <div className='dash-product-actions'>
 
+              <Link to={`/dashboard/products/${p._id}`}>
                 <p>View details</p>
+              </Link>
 
                 <Link to={`/dashboard/products/edit/${p._id}`}>
                   <p>Edit info</p>
