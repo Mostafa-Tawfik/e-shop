@@ -48,7 +48,7 @@ function UserID(props) {
 
       <section className='user-contact'>
 
-        <img src='https://thumbs.dreamstime.com/b/default-avatar-photo-placeholder-profile-picture-default-avatar-photo-placeholder-profile-picture-eps-file-easy-to-edit-125707135.jpg' alt='user'>      
+        <img src={user.image ? user.image :'https://thumbs.dreamstime.com/b/default-avatar-photo-placeholder-profile-picture-default-avatar-photo-placeholder-profile-picture-eps-file-easy-to-edit-125707135.jpg'} alt='user'>      
         </img>
 
         <article>

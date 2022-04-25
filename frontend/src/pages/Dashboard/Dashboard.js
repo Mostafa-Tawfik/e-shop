@@ -11,6 +11,7 @@ import SideMenu from '../../components/SideMenu'
 import axios from 'axios'
 import UserID from './components/Users/UserID'
 import Support from './components/Support/Support'
+import Product from '../Home/components/Product'
 
 
 function Dashboard(props) {
@@ -105,6 +106,9 @@ function Dashboard(props) {
 
           <Route path='/dashboard/products/edit/:id' 
           element={<EditProduct />}/>
+
+          <Route path='/dashboard/products/:id' 
+          element={<Product />}/>
 
           <Route path='/dashboard/orders' 
           element={<Orders isAdmin={props.isAdmin} orders={orders}/>}/>
