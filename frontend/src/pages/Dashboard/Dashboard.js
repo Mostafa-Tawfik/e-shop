@@ -104,7 +104,7 @@ function Dashboard(props) {
           element={<Products products={products}/>}/>
 
           <Route path='/dashboard/products/edit/:id' 
-          element={<EditProduct />}/>
+          element={<EditProduct products={products}/>}/>
 
           <Route path='/dashboard/orders' 
           element={<Orders isAdmin={props.isAdmin} orders={orders}/>}/>

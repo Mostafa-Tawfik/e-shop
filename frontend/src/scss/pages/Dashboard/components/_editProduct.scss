@@ -5,9 +5,18 @@
   }
   .dash-products-form-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 1em;
+    gap: 2em;
+    img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: $boxShadow;
+    }
     .dash-products-form {
       padding: 1em;
       background: white;
@@ -61,6 +70,18 @@
           padding: 5px;
         }
       }
+      .dropSelect {
+        border-radius: 10px;
+        input {
+          width: 100px;
+          margin-left: 0;
+        }
+        .css-v1jrxw-ContentComponent {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5em;
+        }
+      }
     }
   }
 }
@@ -72,6 +93,19 @@
       button {
         width: 100%;
         padding: 1.5em;
+      }
+      .dash-products-form {
+        width: 85vw;
+      }
+      .dash-products-form-cat {
+        flex-direction: column;
+        > div {
+          width: 100%;
+        }
+        .dropSelect {
+          border-radius: 10px;
+          
+        }
       }
     }
   }

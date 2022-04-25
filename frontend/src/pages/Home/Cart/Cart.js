@@ -27,11 +27,6 @@ function Cart(props) {
     { value: 6, label: 'Qty: 6' },
   ]
 
-  // function options(item) {
-  //   for (let i = 0; i < item.countInStock; i++) {
-  //     return { value: i, label: `Qty: ${i}` }
-  //   }
-  // }
   
   return (
     <div className='cart'>
