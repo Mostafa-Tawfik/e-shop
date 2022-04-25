@@ -34,7 +34,7 @@ function Dashboard(props) {
 
   // store tickets
   const [tickets , setTickets] = useState('')
-  console.log(tickets)
+  // console.log(tickets)
 
   // fetch all users
   useEffect(()=> {
@@ -116,7 +116,7 @@ function Dashboard(props) {
           element={<Users users={users}/>}/>
 
           <Route path='/dashboard/users/:id' 
-          element={<UserID users={users}/>}/>
+          element={<UserID tickets={tickets} orders={orders} isAdmin={props.isAdmin}/>}/>
 
           <Route path='/dashboard/support' 
           element={<Support tickets={tickets}/>}/>
