@@ -116,7 +116,7 @@ function Dashboard(props) {
           element={<Users users={users}/>}/>
 
           <Route path='/dashboard/users/:id' 
-          element={<UserID tickets={tickets} orders={orders} isAdmin={props.isAdmin}/>}/>
+          element={<UserID tickets={tickets} orders={orders} products={products} isAdmin={props.isAdmin}/>}/>
 
           <Route path='/dashboard/support' 
           element={<Support tickets={tickets}/>}/>

@@ -1,22 +1,37 @@
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
+
 import OrdersList from '../../../../components/OrdersList'
+import Tickets from '../../../../components/Tickets'
+import Ratings from 'react-ratings-declarative'
 
 function UserID(props) {
 
   const params = useParams()
-  const {orders, tickets, isAdmin} = props
+  const {orders, tickets, products, isAdmin} = props
 
+  // filter orders made by the user
   const filterUserOrders = orders && orders.filter(o => o.user._id === params.id)
 
   const userOrders = [...filterUserOrders]
 
-  // store users
-  const [user, setUser] = useState('')
-  console.log(user)
 
-  // fetch all users
+  // filter products reviewed by the user
+  const filterUserReviews = products && products.filter(p => p.reviews.some(r => r.user === params.id))
+
+  const productReviewed = [...filterUserReviews]
+
+
+  // filter user reviews
+  const userReviews = products && products.map(p => p.reviews.filter(r => r.user === params.id)).map(r => r[0]).filter(r=> r !== undefined)
+
+
+  // store user details
+  const [user, setUser] = useState('')
+  // console.log(products)
+
+  // fetch the user details
   useEffect(()=> {
     axios.get(`/api/users/${params.id}`, {
       headers: {
@@ -65,18 +80,97 @@ function UserID(props) {
   )
 
 
+  const userReviewsSection = products && (
+
+    <section className='user-reviews'>
+
+      <div className='orders-list-items'>
+
+        <table className='orders-list-items-table'>
+
+          <tbody>
+
+            <tr>
+              <th>IMAGE</th>
+              <th>NAME</th>
+              <th>RATING</th>
+              <th>COMMENT</th>
+              <th>DATE</th>
+            </tr>
+
+            {productReviewed.map((product, index) => {
+              return (
+                <tr key={product._id}>
+
+                  {/* if admin go to admin order route */}
+                  <td>
+                    <img src={product.image} alt={product}></img>
+                  </td>
+
+                  <td>
+                    <Link to={`/dashboard/products/edit/${product._id}`}>
+                      {product.name}
+                    </Link>
+                  </td>
+
+                  <td>
+                    <Ratings
+                      rating={userReviews[index].rating*1}
+                      widgetDimensions="20px"
+                      widgetSpacings="0px"
+                      widgetRatedColors="gold"
+                    >
+                      <Ratings.Widget />
+                      <Ratings.Widget />
+                      <Ratings.Widget />
+                      <Ratings.Widget />
+                      <Ratings.Widget />
+                    </Ratings>
+                  </td>
+
+                  <td>{userReviews[index].comment}</td>
+
+                  <td>{userReviews[index].createdAt.substr(0, 10)}</td>
+
+
+                </tr>
+              )
+            })}
+
+          </tbody>
+
+        </table>    
+
+      </div>
+
+      </section>
+  )
+
+  console.log(productReviewed);
+
+
   return (
     <section className='user'>
 
      {userSection}   
 
+      <h3>Previous Orders</h3>
+
       <div className='dash-order-id'>
 
-        <h3>Previous Orders</h3>
         {orders && 
           <OrdersList orders={userOrders} isAdmin={isAdmin}/>
         }
       </div>
+
+      <h3>Previous Tickets</h3>
+      <div className='support'>
+        <Tickets tickets={tickets}/>
+      </div>
+
+      <h3>Products Reviewed</h3>
+
+      {userReviewsSection}
 
     </section>
   )
