@@ -1,8 +1,8 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import FileUploader from '../../../../../components/FileUploader'
-import popAlert from '../../../../../components/popAlert'
+import FileUploader from '../../../../components/FileUploader'
+import popAlert from '../../../../components/popAlert'
 
 function EditProduct() {
 
@@ -25,10 +25,11 @@ function EditProduct() {
     image: ``,
     brand: ``,
     category: ``,
+    subCategory: ``,
     countInStock: ``
   })
 
-  // console.log(updateForm);
+  console.log(updateForm);
 
 
   // handle input change
@@ -67,7 +68,7 @@ function EditProduct() {
     })
     .then((res) => {
       // show success message
-      popAlert('Product updated', 'Done!')
+      popAlert('', 'Product updated')
       // retrun to products page
       setTimeout(()=> navigate('/dashboard/products'), 2000) 
       return res.data
@@ -113,18 +114,6 @@ function EditProduct() {
 
           <FileUploader handleUpload={handleUpload}/>
 
-          {/* <div>
-            <p>Images</p>
-            <input
-            type='url'
-            name='image'
-            required
-            onChange={handleChange}
-            value={updateForm.image}
-            >
-            </input>
-          </div> */}
-
           <div className='dash-products-form-cat'>
             <div>
               <p>Category</p>
@@ -134,6 +123,18 @@ function EditProduct() {
               required
               onChange={handleChange}
               value={updateForm.category}
+              >
+              </input>
+            </div>
+
+            <div>
+              <p>Sub Category</p>
+              <input
+              type='text'
+              name='subCategory'
+              required
+              onChange={handleChange}
+              value={updateForm.subCategory}
               >
               </input>
             </div>

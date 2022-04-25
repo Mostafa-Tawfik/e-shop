@@ -8,10 +8,10 @@ import Homepage from './components/Homepage';
 import Product from './components/Product';
 import Search from './components/Search';
 
-import Cart from '../../pages/Cart/Cart';
+import Cart from './Cart/Cart';
 import Login from '../../pages/Login';
 import Register from '../../pages/Register';
-import Checkout from '../../pages/Checkout/Checkout';
+import Checkout from './Checkout/Checkout';
 import UserOrders from './user/UserOrders';
 import UserOrderID from './user/UserOrderID';
 import UserInfo from './user/UserInfo';

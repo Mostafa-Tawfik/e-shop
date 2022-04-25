@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Tickets from '../../../../components/Tickets'
+import Tickets from '../../../components/Tickets'
 
 
 function Support(props) {

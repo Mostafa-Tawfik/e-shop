@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
-import OrderDetails from '../../../../components/OrderDetails'
+import OrderDetails from '../../../components/OrderDetails'
 
 function OrderID() {
   

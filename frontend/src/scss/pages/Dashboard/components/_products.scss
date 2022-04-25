@@ -21,8 +21,8 @@
       position: relative;
       margin-bottom: 0.5em;
       background: white;
-      height: 150px;
-      width: min(30vw, 500px);
+      height: 300px;
+      width: min(50vw, 500px);
       display: flex;
       justify-content: space-evenly;
       align-items: center;
@@ -30,7 +30,10 @@
       border-radius: 10px;
       box-shadow: $boxShadow;
       img {
-        height: 66px;
+        height: 80px;
+        width: 80px;
+        object-fit: cover;
+        border-radius: 10px;
       }
       .dash-product-details {
         width: 60%;
@@ -85,6 +88,11 @@
     .dash-cards-container {
       .dash-product-card {
         width: 85vw;
+        height: max-content;
+        padding: 2em;
+        .dash-product-details{
+          width: 80%;
+        }
       }
     }
   }

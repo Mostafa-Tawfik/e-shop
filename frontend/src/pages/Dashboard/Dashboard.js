@@ -1,17 +1,17 @@
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {Routes, Route, Link} from 'react-router-dom'
 
-import Orders from './components/Orders/Orders'
-import Home from './components/Home'
-import Products from './components/Products/Products'
-import EditProduct from './components/Products/components/EditProduct'
-import OrderID from './components/Orders/OrderID'
-import Users from './components/Users/Users'
+import Home from './Home'
+import Products from './Products/Products'
+import ProductID from './Products/ProductID'
+import EditProduct from './Products/components/EditProduct'
+import Orders from './Orders/Orders'
+import OrderID from './Orders/OrderID'
+import Users from './Users/Users'
 import SideMenu from '../../components/SideMenu'
-import axios from 'axios'
-import UserID from './components/Users/UserID'
-import Support from './components/Support/Support'
-import Product from '../Home/components/Product'
+import UserID from './Users/UserID'
+import Support from './Support/Support'
 
 
 function Dashboard(props) {
@@ -107,8 +107,8 @@ function Dashboard(props) {
           <Route path='/dashboard/products/edit/:id' 
           element={<EditProduct />}/>
 
-          <Route path='/dashboard/products/:id' 
-          element={<Product />}/>
+          <Route path='/dashboard/product/:id' 
+          element={<ProductID />}/>
 
           <Route path='/dashboard/orders' 
           element={<Orders isAdmin={props.isAdmin} orders={orders}/>}/>

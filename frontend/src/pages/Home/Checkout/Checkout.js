@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import OrderPreview from './components/OrderPreview'
-import Payment from './components/Payment'
-import Shipping from './components/Shipping'
+import OrderPreview from './Components/OrderPreview'
+import Payment from './Components/Payment'
+import Shipping from './Components/Shipping'
 
 function Checkout(props) {
 

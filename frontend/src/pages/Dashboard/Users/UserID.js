@@ -2,8 +2,8 @@ import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 
-import OrdersList from '../../../../components/OrdersList'
-import Tickets from '../../../../components/Tickets'
+import OrdersList from '../../../components/OrdersList'
+import Tickets from '../../../components/Tickets'
 import Ratings from 'react-ratings-declarative'
 
 function UserID(props) {

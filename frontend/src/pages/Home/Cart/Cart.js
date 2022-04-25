@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import OrderSummary from './components/OrderSummary'
+import OrderSummary from './OrderSummary'
 import Select from 'react-dropdown-select'
 
 function Cart(props) {

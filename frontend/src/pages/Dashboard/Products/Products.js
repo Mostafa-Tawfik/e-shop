@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
-import popAlert from '../../../../components/popAlert'
+import popAlert from '../../../components/popAlert'
 
 function Products(props) {
 
@@ -89,16 +89,19 @@ function Products(props) {
           return (
             <div key={p._id} className='dash-product-card'>
 
-              <Link to={`/dashboard/products/${p._id}`}>
+              <Link to={`/dashboard/product/${p._id}`}>
                 <img src={p.image.charAt(0) !== '/' ? p.image : 'https://api.iconify.design/bxs/error.svg'} alt='product'></img> 
               </Link>
 
               <div className='dash-product-details'>
 
-                <Link to={`/dashboard/products/${p._id}`}>
+                <Link to={`/dashboard/product/${p._id}`}>
                   <h5>{p.name}</h5>
                 </Link>
+                <p>Added: {p.createdAt.substr(0 ,10)}</p>
                 <p>Price: ${p.price}</p>
+                <p>Category: {p.category}</p>
+                <p>Sub Category: {p.subCategory}</p>
                 {p.discount && <p>Discount: {p.discount}%</p>}
                 <p>In Stock: {p.countInStock}</p>
 
