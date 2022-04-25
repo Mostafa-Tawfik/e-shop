@@ -59,23 +59,15 @@
       .dash-product-actions {
         position: absolute;
         right: 10px;
-        bottom: -90px;
+        bottom: 10px;
         z-index: 10;
         padding: 0.5em;
         border-radius: 10px;
         background: white;
         box-shadow: $boxShadow;
         border: 1px solid rgb(128, 128, 128, 0.3);
-        > p{
-          cursor: pointer;
-          padding: 0.1em;
-        }
-        p:nth-child(3){
-          color: $clr-high;
-        }
-        P:hover {
-          background: $clr-sub;
-          color: $clr-light;
+        input {
+          width: 50px;
         }
       }
     }
