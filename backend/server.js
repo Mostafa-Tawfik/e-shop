@@ -19,6 +19,7 @@ app.use("/api/products", require("./routes/productRoutes"));
 app.use("/api/upload", require("./routes/uploadRoutes"));
 app.use("/api/orders", require("./routes/orderRoutes"));
 app.use("/api/complaints", require("./routes/complaintRoutes"));
+app.use("/api/coupons", require("./routes/couponRoutes"));
 
 // Serve the frontend
 if (process.env.NODE_ENV === "production") {

@@ -1,4 +1,3 @@
-const e = require("express");
 const asyncHandler = require("express-async-handler");
 const Complaint = require("../models/complaint");
 
