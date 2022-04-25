@@ -2,9 +2,8 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {Routes, Route, Link} from 'react-router-dom'
 
-import Home from './Home'
+import Home from './Home/Home'
 import Products from './Products/Products'
-import ProductID from './Products/ProductID'
 import EditProduct from './Products/components/EditProduct'
 import Orders from './Orders/Orders'
 import OrderID from './Orders/OrderID'
@@ -106,9 +105,6 @@ function Dashboard(props) {
 
           <Route path='/dashboard/products/edit/:id' 
           element={<EditProduct />}/>
-
-          <Route path='/dashboard/product/:id' 
-          element={<ProductID />}/>
 
           <Route path='/dashboard/orders' 
           element={<Orders isAdmin={props.isAdmin} orders={orders}/>}/>
