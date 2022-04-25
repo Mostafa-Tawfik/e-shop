@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Order = require("../models/order");
+const Product = require("../models/product");
 
 // @desc Create new order
 // @route POST /api/orders
@@ -74,6 +75,17 @@ const cancelOrder = asyncHandler(async (req, res) => {
 // @access Private
 const updateOrdertoPaid = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id);
+  order.orderItems.map(async (item) => {
+    const product = await Product.findById(item.product.toString());
+    if (product.countInStock <= 0 || product.countInStock < item.qty) {
+      throw new Error("Product out of stock");
+    } else {
+      const newStock = product.countInStock - item.qty;
+      product.countInStock = newStock;
+      await product.save();
+    }
+    return newStock;
+  });
 
   if (order) {
     order.isPaid = true;
