@@ -11,7 +11,7 @@ async function changeToDelivered(id) {
   })
   .then((res) => {
     console.log(res.data)
-    popAlert('Status changed successfully', 'Delivered!')
+    popAlert('Status changed')
     setTimeout(()=> window.location.reload(), 2000) 
     return res.data
   },

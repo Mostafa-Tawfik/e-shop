@@ -11,7 +11,7 @@ async function deleteOrder(id) {
   })
   .then((res) => {
     console.log(res.data)
-    popAlert('Done!', 'Order deleted')
+    popAlert('Order deleted')
     setTimeout(()=> window.location.reload(), 2000) 
     return res.data
   },

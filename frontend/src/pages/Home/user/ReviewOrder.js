@@ -67,7 +67,7 @@ function ReviewOrder() {
         }
     })
     .then((res) => {
-      popAlert('Thank you for your time', 'Your feedback is invaluable')
+      popAlert('Your feedback is invaluable')
       console.log(res.data)
       navigate('/user/orders')
       return res.data
@@ -75,7 +75,7 @@ function ReviewOrder() {
     .catch(
       (error) => {
         if (error.response.status === 400) {
-          popAlert('', 'Product already reviewed', 'warning')
+          popAlert('Product already reviewed', 'warning')
         }
       console.log('err', error.response)
       }

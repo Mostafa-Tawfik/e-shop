@@ -1,7 +1,9 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
+
 import popAlert from '../../../components/popAlert'
+import Select from 'react-dropdown-select'
 
 function Products(props) {
 
@@ -12,22 +14,6 @@ function Products(props) {
 
   console.log(products);
 
-  // control more btn
-  const [isOpen, setIsOpen] = useState({
-    open: false,
-    id: ''
-  })
-
-  // toggle more btn
-  function toggleMoreBtn(id) {
-    setIsOpen(prev => {
-      return {
-        ...prev,
-        open: !isOpen.open,
-        id: id
-      }
-      })
-  }
 
   ///-- start create new product --///
   async function createProduct() {
@@ -63,7 +49,7 @@ function Products(props) {
         }
     })
     .then((res) => {
-      popAlert('Done!', 'Product deleted')
+      popAlert('Product deleted')
       setTimeout(()=> window.location.reload(), 2000) 
       return res.data
     },
@@ -73,6 +59,24 @@ function Products(props) {
     )
   }
   ///-- end --///
+
+  const actionMenu = [
+    {value: 'Edit', label: 'Edit'},
+    {value: 'Delete', label: 'Delete'},
+  ]
+
+  const [action, setAction] = useState('')
+
+  useEffect(()=>{
+    if (action.value === 'Edit') {
+      navigate(`/dashboard/products/edit/${action.id}`)
+    } else if (action.value === 'Delete') {
+      deleteProduct(action.id)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[action])
+
+  console.log(action);
   
   return (
     <div className='dash-products-section'>
@@ -89,13 +93,13 @@ function Products(props) {
           return (
             <div key={p._id} className='dash-product-card'>
 
-              <Link to={`/dashboard/product/${p._id}`}>
+              <Link to={`/dashboard/products/edit/${p._id}`}>
                 <img src={p.image.charAt(0) !== '/' ? p.image : 'https://api.iconify.design/bxs/error.svg'} alt='product'></img> 
               </Link>
 
               <div className='dash-product-details'>
 
-                <Link to={`/dashboard/product/${p._id}`}>
+                <Link to={`/dashboard/products/edit/${p._id}`}>
                   <h5>{p.name}</h5>
                 </Link>
                 <p>Added: {p.createdAt.substr(0 ,10)}</p>
@@ -107,31 +111,15 @@ function Products(props) {
 
               </div>
 
-              <button 
-              // toggle more btn
-              onClick={()=>toggleMoreBtn(p._id)} 
-              className='dash-product-action-btn'>
-                <img src='https://api.iconify.design/akar-icons/more-horizontal-fill.svg' alt='more'></img>
-              </button>
-              
-              {
-              // if target btn clicked toggle
-              isOpen.id === p._id && 
-              isOpen.open && 
               <div className='dash-product-actions'>
-
-              <Link to={`/dashboard/products/${p._id}`}>
-                <p>View details</p>
-              </Link>
-
-                <Link to={`/dashboard/products/edit/${p._id}`}>
-                  <p>Edit info</p>
-                </Link>
-
-                <p onClick={()=>deleteProduct(p._id)}>Delete</p>
-
+                <Select
+                  options={actionMenu}
+                  onChange={(value)=>(setAction({
+                    value: value[0].value,
+                    id: p._id
+                  }))}
+                />
               </div>
-              }
 
             </div>
           )

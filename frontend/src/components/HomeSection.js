@@ -48,7 +48,7 @@ function HomeSection(props) {
             <button onClick={()=> {
               props.cart.length > 0 &&
               props.cart.map(c => c._id).includes(i._id) ?
-              popAlert('info', 'Product already in your cart') :
+              popAlert('Product already in your cart', 'info') :
               props.addToCart(i)
             }}>
               <img src={`https://api.iconify.design/bi/${props.cart && props.cart.map(c => c._id).includes(i._id) ? 'cart-check-fill.svg?color=green':'cart-plus-fill.svg?color=%23073c81'}`} alt='add-to-cart'></img>
