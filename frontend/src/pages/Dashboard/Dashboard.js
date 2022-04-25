@@ -98,7 +98,7 @@ function Dashboard(props) {
       <div className='sections'>
         <Routes>
           <Route path='/' 
-          element={<Home users={users} products={products} orders={orders}/>}/>
+          element={<Home users={users} products={products} orders={orders} tickets={tickets}/>}/>
 
           <Route path='/dashboard/products' 
           element={<Products products={products}/>}/>

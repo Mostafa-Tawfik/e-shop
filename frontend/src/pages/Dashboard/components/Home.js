@@ -2,7 +2,7 @@ import React from 'react'
 
 function Home(props) {
 
-  const {products, orders, users} = props
+  const {products, orders, users, tickets} = props
 
   return (
     <div className='dashboard-section'>
@@ -40,6 +40,14 @@ function Home(props) {
             <p>{users.length}</p>
           </div>
           <img src='https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png' alt='user'></img>
+        </div>
+
+        <div className='summary-card'>
+          <div>
+            <h5>Total Tickets</h5>
+            <p>{tickets.length}</p>
+          </div>
+          <img src='https://api.iconify.design/icon-park/help.svg' alt='Tickets'></img>
         </div>
 
       </div>
