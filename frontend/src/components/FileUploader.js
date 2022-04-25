@@ -28,7 +28,7 @@ function FileUploader(props) {
       // show success message
       console.log('uploaded')
       console.log(res)
-      popAlert('Done!', 'Successfully uploaded')
+      popAlert('Uploaded')
       props.handleUpload(res.data.url)
       return res.data
     },

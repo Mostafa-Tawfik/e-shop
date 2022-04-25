@@ -68,7 +68,7 @@ function EditProduct() {
     })
     .then((res) => {
       // show success message
-      popAlert('', 'Product updated')
+      popAlert('Product updated')
       // retrun to products page
       setTimeout(()=> navigate('/dashboard/products'), 2000) 
       return res.data

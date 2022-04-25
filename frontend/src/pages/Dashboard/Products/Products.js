@@ -63,7 +63,7 @@ function Products(props) {
         }
     })
     .then((res) => {
-      popAlert('Done!', 'Product deleted')
+      popAlert('Product deleted')
       setTimeout(()=> window.location.reload(), 2000) 
       return res.data
     },

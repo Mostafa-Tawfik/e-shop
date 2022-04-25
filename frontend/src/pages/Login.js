@@ -50,7 +50,7 @@ export default function Login(props) {
       setIsSubmitted(true)
       // save user details
       props.userlogged(res.data)
-      popAlert(res.data.name, 'Welcome back')
+      popAlert(`Welcome back ${res.data.name}`)
       return res.data
     },
     (error) => {

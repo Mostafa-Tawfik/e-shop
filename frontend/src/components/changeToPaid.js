@@ -11,7 +11,7 @@ async function changeToPaid(id) {
   })
   .then((res) => {
     console.log(res.data)
-    popAlert('Status changed successfully', 'Paid!')
+    popAlert('Status changed')
     setTimeout(()=> window.location.reload(), 2000) 
     return res.data
   },

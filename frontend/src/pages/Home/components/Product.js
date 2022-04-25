@@ -76,7 +76,7 @@ function Product(props) {
             // check if the item is already in the cart
               props.cart.length > 0 &&
               props.cart.map(c => c._id).includes(product._id) ?
-              popAlert('Product already in your cart','!', 'info') :
+              popAlert('Product already in your cart', 'info') :
               props.addToCart(product)
             }}>
               {/* if product is on the cart show "added" */}
