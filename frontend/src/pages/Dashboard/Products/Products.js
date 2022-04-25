@@ -60,6 +60,7 @@ function Products(props) {
   }
   ///-- end --///
 
+  // set controls for actions drop menu
   const actionMenu = [
     {value: 'Edit', label: 'Edit'},
     {value: 'Delete', label: 'Delete'},
@@ -67,6 +68,7 @@ function Products(props) {
 
   const [action, setAction] = useState('')
 
+  // detect and execute actions from drop menu
   useEffect(()=>{
     if (action.value === 'Edit') {
       navigate(`/dashboard/products/edit/${action.id}`)
@@ -76,7 +78,6 @@ function Products(props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[action])
 
-  console.log(action);
   
   return (
     <div className='dash-products-section'>

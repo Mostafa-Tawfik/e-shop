@@ -23,14 +23,14 @@ function App() {
     setjwt(user.token)
   }
 
-  // a logout function
+  // a signOut function
   const navigate = useNavigate()
 
   function signOut() {
     setUserLoggedIn('')
     setIsAdmin(false)
     localStorage.removeItem(userLoggedIn)
-    popAlert(userLoggedIn.name, 'See you soon')
+    popAlert(`See you soon`)
     navigate('/')
   }
 
@@ -45,7 +45,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem('userLoggedIn', JSON.stringify(userLoggedIn));
   }, [userLoggedIn]);
-  ///--- end ---///
 
 
   // setup local storage for signed in user
@@ -59,7 +58,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem('isAdmin', JSON.stringify(isAdmin));
   }, [isAdmin]);
-  ///--- end ---///
 
 
   ///-- handle user token --///
@@ -76,7 +74,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem('jwt', JSON.stringify(jwt));
   }, [jwt]);
-  ///--- end ---///
 
 
   return (

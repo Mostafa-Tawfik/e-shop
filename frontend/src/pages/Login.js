@@ -43,14 +43,14 @@ export default function Login(props) {
     })
     .then((res) => {
       console.log('successfully logged in')
-      // if admin go to dashboard
-      if(res.data.isAdmin){
-        navigate('/')
-      }
       setIsSubmitted(true)
       // save user details
       props.userlogged(res.data)
       popAlert(`Welcome back ${res.data.name}`)
+      // if admin go to dashboard
+      if(res.data.isAdmin){
+        navigate('/')
+      }
       return res.data
     },
     (error) => {
