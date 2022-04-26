@@ -16,12 +16,13 @@ import Support from './Support/Support'
 function Dashboard(props) {
 
   const {isAdmin} = props
+  console.log(localStorage.isAdmin);
 
   const adminPanel = ['Products', 'Orders', 'Users', 'Support']
 
   // store users
   const [users, setUsers] = useState('')
-  console.log(users)
+  // console.log(users)
 
   // fetch all users
   useEffect(()=> {

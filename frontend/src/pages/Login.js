@@ -46,7 +46,7 @@ export default function Login(props) {
       // save user details
       props.userlogged(res.data)
       popAlert(`Welcome back`)
-      setTimeout(()=> window.location.reload(), 2000)
+      // setTimeout(()=> window.location.reload(), 2000)
       navigate('/')
       return res.data
     },

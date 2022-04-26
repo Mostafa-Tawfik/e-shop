@@ -15,8 +15,9 @@ function App() {
   
   ///-- handle admin login details --///
   const [isAdmin, setIsAdmin,] = React.useState(false)
+  // console.log(isAdmin)
 
-  console.log(localStorage.jwt);
+  console.log(localStorage.isAdmin);
 
   // a login function with the logged user id
   function userlogged(user) {
@@ -33,6 +34,7 @@ function App() {
     setIsAdmin(false)
     localStorage.removeItem(userLoggedIn)
     localStorage.removeItem(jwt)
+    localStorage.removeItem(isAdmin)
     popAlert(`See you soon`)
     navigate('/')
   }
