@@ -15,11 +15,13 @@ import Support from './Support/Support'
 
 function Dashboard(props) {
 
+  const {isAdmin} = props
+
   const adminPanel = ['Products', 'Orders', 'Users', 'Support']
 
   // store users
   const [users, setUsers] = useState('')
-  // console.log(users)
+  console.log(users)
 
   // fetch all users
   useEffect(()=> {
@@ -29,7 +31,7 @@ function Dashboard(props) {
       }
     })
     .then(data => setUsers(data.data))
-  },[])
+  },[isAdmin])
 
 
   // store tickets
@@ -44,7 +46,7 @@ function Dashboard(props) {
       }
     })
     .then(data => setTickets(data.data))
-  },[])
+  },[isAdmin])
 
 
   // store all products
@@ -55,7 +57,7 @@ function Dashboard(props) {
   useEffect(()=> {
     axios.get('/api/products?productNum=Infinity')
     .then(data => setProducts(data.data.products))
-  },[])
+  },[isAdmin])
 
 
   // store orders
@@ -70,13 +72,20 @@ function Dashboard(props) {
       }
     })
     .then(data => setOrders(data.data))
-  },[])
+  },[isAdmin])
 
   return (
     <div className='dashboard'>
 
       <div className='admin-panel'>
         <h4>Admin Panel</h4>
+
+        <Link to='/'>
+          <div className='panel-section'>
+            Dashboard
+          </div>
+        </Link>
+
         {adminPanel.map((section, index) => {
         return (
           <Link key={index} to={section !== 'Dashboard' ? `/${section.toLowerCase()}` : '/'}>
