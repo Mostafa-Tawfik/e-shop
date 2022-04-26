@@ -41,11 +41,20 @@ function SideMenu(props) {
             isActive.menuActive ? 
             `side-menu active` : 
             `side-menu`} >
-        <ul >
+
+        <ul>
+
+          <li>
+            <Link to={`/`}>    
+              <p className="side-menu-li" onClick={toggleMenu}>
+                Home
+              </p>
+            </Link>            
+          </li>
 
           {content.map((c, index) => (
             <li key={index}>
-              <Link to={`/${(c == 'Dashboard' || c ==  'Home') ? '': `${c}`}`}>    
+              <Link to={`/${c}`}>    
                 <p className="side-menu-li" onClick={toggleMenu}>
                   {c}
                 </p>

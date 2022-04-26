@@ -11,6 +11,9 @@ function Header(props) {
   // map over products and return only unique values
   const categories = [...new Set(products.map(p => p.category))]
 
+  // map over products and return only unique values
+  const subCategories = [...new Set(products.map(p => p.subCategory))]
+
   React.useEffect(()=> {
     fetch('/api/products')
     .then(res => res.json())
@@ -103,10 +106,19 @@ function Header(props) {
           
         </div>
       </div>
-
-      {/* navbar */}
+      
       <nav className="navbar">
         {categories.map((i,index) => {
+          return (
+            <Link to={`/${i}`} key={index}>
+              <h4 className="navbar-item">{i}</h4>
+            </Link>
+          )
+        })}
+      </nav>
+
+      <nav className="subNavbar">
+        {subCategories.map((i,index) => {
           return (
             <Link to={`/${i}`} key={index}>
               <h4 className="navbar-item">{i}</h4>

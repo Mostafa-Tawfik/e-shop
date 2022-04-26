@@ -15,7 +15,7 @@ import Support from './Support/Support'
 
 function Dashboard(props) {
 
-  const adminPanel = ['Dashboard', 'Products', 'Orders', 'Users', 'Support']
+  const adminPanel = ['Products', 'Orders', 'Users', 'Support']
 
   // store users
   const [users, setUsers] = useState('')

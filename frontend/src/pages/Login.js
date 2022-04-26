@@ -46,7 +46,7 @@ export default function Login(props) {
       setIsSubmitted(true)
       // save user details
       props.userlogged(res.data)
-      popAlert(`Welcome back ${res.data.name}`)
+      popAlert(`Welcome back`)
       // if admin go to dashboard
       if(res.data.isAdmin){
         navigate('/')

@@ -38,6 +38,7 @@ background-color: $clr-main;
   align-items: center;
   justify-content: center;
   transition: 0.7s ease;
+  z-index: 30;
   ul {
     position: relative;
     list-style: none;
