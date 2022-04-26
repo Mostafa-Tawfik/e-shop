@@ -94,6 +94,7 @@ function App() {
           userLoggedIn={userLoggedIn}
           userlogged={userlogged}
           signOut={signOut}
+          isAdmin={isAdmin}
           />} />
         }
 

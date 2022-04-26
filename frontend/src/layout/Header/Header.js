@@ -25,7 +25,6 @@ function Header(props) {
     setAccountIsOpen(prev => !prev)
   }
 
-
   return (
     <div>
       <div className='top-pane'>
@@ -39,7 +38,7 @@ function Header(props) {
       <div className='bottom-pane'>
         <div className='bottom-pane_info'>
 
-          <SideMenu content={categories}/>
+          <SideMenu content={categories} isAdmin={props.isAdmin}/>
 
           <Link to={'/'}>
             <div className="App-title">

@@ -165,6 +165,7 @@ function Home(props) {
           cart={cart} 
           userLoggedIn={props.userLoggedIn} 
           signOut={props.signOut}
+          isAdmin={props.isAdmin}
         />
       </header>
 

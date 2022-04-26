@@ -32,7 +32,7 @@ function Users(props) {
                 <tr key={user._id}>
 
                   {/* if admin go to admin user route */}
-                  <td><Link to={`/dashboard/users/${user._id}`}>#{user._id}</Link></td>
+                  <td><Link to={`/users/${user._id}`}>#{user._id}</Link></td>
 
                   <td><img src={user.image} alt='user'></img></td>
 

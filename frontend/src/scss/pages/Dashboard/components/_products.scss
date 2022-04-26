@@ -79,11 +79,20 @@
   .dash-products-section {
     .dash-cards-container {
       .dash-product-card {
+        flex-direction: column;
+        gap: 2em;
         width: 85vw;
         height: max-content;
         padding: 2em;
+        img {
+          height: 200px;
+          width: 200px;
+        }
         .dash-product-details{
           width: 80%;
+        }
+        .dash-product-actions{
+          position: relative;
         }
       }
     }

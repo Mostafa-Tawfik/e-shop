@@ -27,7 +27,7 @@ function Products(props) {
     })
     .then((res) => {
       console.log('Product created')
-      navigate(`/dashboard/products/edit/${res.data._id}`)
+      navigate(`/products/edit/${res.data._id}`)
       return res.data
     },
     (error) => {
@@ -71,7 +71,7 @@ function Products(props) {
   // detect and execute actions from drop menu
   useEffect(()=>{
     if (action.value === 'Edit') {
-      navigate(`/dashboard/products/edit/${action.id}`)
+      navigate(`/products/edit/${action.id}`)
     } else if (action.value === 'Delete') {
       deleteProduct(action.id)
     }
@@ -94,13 +94,13 @@ function Products(props) {
           return (
             <div key={p._id} className='dash-product-card'>
 
-              <Link to={`/dashboard/products/edit/${p._id}`}>
+              <Link to={`/products/edit/${p._id}`}>
                 <img src={p.image.charAt(0) !== '/' ? p.image : 'https://api.iconify.design/bxs/error.svg'} alt='product'></img> 
               </Link>
 
               <div className='dash-product-details'>
 
-                <Link to={`/dashboard/products/edit/${p._id}`}>
+                <Link to={`/products/edit/${p._id}`}>
                   <h5>{p.name}</h5>
                 </Link>
                 <p>Added: {p.createdAt.substr(0 ,10)}</p>

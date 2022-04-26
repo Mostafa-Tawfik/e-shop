@@ -71,7 +71,7 @@ function EditProduct(props) {
       // show success message
       popAlert('Product updated')
       // retrun to products page
-      setTimeout(()=> navigate('/dashboard/products'), 2000) 
+      setTimeout(()=> navigate('/products'), 2000) 
       return res.data
     },
     (error) => {

@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 
 function SideMenu(props) {
 
+  const {content} = props
+
   // control side menu
   const [isActive, setIsActive] = useState({
     menuActive: false,
@@ -20,6 +22,7 @@ function SideMenu(props) {
       }
     })
   }
+
 
   return (
     <>
@@ -40,9 +43,9 @@ function SideMenu(props) {
             `side-menu`} >
         <ul >
 
-          {props.content.map((c, index) => (
+          {content.map((c, index) => (
             <li key={index}>
-              <Link to={`/${c == 'Dashboard' ? '': `dashboard/${c}`}`}>     
+              <Link to={`/${(c == 'Dashboard' || c ==  'Home') ? '': `${c}`}`}>    
                 <p className="side-menu-li" onClick={toggleMenu}>
                   {c}
                 </p>

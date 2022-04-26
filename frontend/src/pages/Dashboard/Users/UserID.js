@@ -108,7 +108,7 @@ function UserID(props) {
                   </td>
 
                   <td>
-                    <Link to={`/dashboard/products/edit/${product._id}`}>
+                    <Link to={`/products/edit/${product._id}`}>
                       {product.name}
                     </Link>
                   </td>

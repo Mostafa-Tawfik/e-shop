@@ -79,7 +79,7 @@ function Dashboard(props) {
         <h4>Admin Panel</h4>
         {adminPanel.map((section, index) => {
         return (
-          <Link key={index} to={section !== 'Dashboard' ? `/dashboard/${section.toLowerCase()}` : '/'}>
+          <Link key={index} to={section !== 'Dashboard' ? `/${section.toLowerCase()}` : '/'}>
             <div className='panel-section'>
                 {section}
             </div>
@@ -100,25 +100,25 @@ function Dashboard(props) {
           <Route path='/' 
           element={<Home users={users} products={products} orders={orders} tickets={tickets}/>}/>
 
-          <Route path='/dashboard/products' 
+          <Route path='/products' 
           element={<Products products={products}/>}/>
 
-          <Route path='/dashboard/products/edit/:id' 
+          <Route path='/products/edit/:id' 
           element={<EditProduct products={products}/>}/>
 
-          <Route path='/dashboard/orders' 
+          <Route path='/orders' 
           element={<Orders isAdmin={props.isAdmin} orders={orders}/>}/>
 
-          <Route path='/dashboard/orders/:id' 
+          <Route path='/orders/:id' 
           element={<OrderID />}/>
 
-          <Route path='/dashboard/users' 
+          <Route path='/users' 
           element={<Users users={users}/>}/>
 
-          <Route path='/dashboard/users/:id' 
+          <Route path='/users/:id' 
           element={<UserID tickets={tickets} orders={orders} products={products} isAdmin={props.isAdmin}/>}/>
 
-          <Route path='/dashboard/support' 
+          <Route path='/support' 
           element={<Support tickets={tickets}/>}/>
           
         </Routes>
