@@ -5,10 +5,19 @@ import OrdersList from '../../../components/OrdersList'
 
 function Orders(props) {
 
-  // store orders
-  const {orders} = props
-  
- 
+// store orders
+const [orders, setOrders] = useState('')
+// console.log(orders)
+
+// fetch all orders
+useEffect(()=> {
+  axios.get('/api/orders/', {
+    headers: {
+      Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+    }
+  })
+  .then(data => setOrders(data.data))
+},[]) 
 
 
   return (

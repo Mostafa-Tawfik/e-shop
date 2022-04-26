@@ -1,11 +1,24 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 
 import Tickets from '../../../components/Tickets'
 
 
 function Support(props) {
 
-  const {tickets} = props 
+  // store tickets
+  const [tickets , setTickets] = useState('')
+  // console.log(tickets)
+
+  // fetch all tickets
+  useEffect(()=> {
+    axios.get('/api/complaints/', {
+      headers: {
+        Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+      }
+    })
+    .then(data => setTickets(data.data))
+  },[])
 
   return (
     <div className='support'>

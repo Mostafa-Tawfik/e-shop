@@ -41,7 +41,7 @@ function Dashboard(props) {
   const [tickets , setTickets] = useState('')
   // console.log(tickets)
 
-  // fetch all users
+  // fetch all tickets
   useEffect(()=> {
     axios.get('/api/complaints/', {
       headers: {
