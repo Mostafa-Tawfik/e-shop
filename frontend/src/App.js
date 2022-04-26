@@ -12,11 +12,11 @@ function App() {
   ///-- handle user login details --///
   const [userLoggedIn, setUserLoggedIn,] = React.useState('')
 
+  
   ///-- handle admin login details --///
   const [isAdmin, setIsAdmin,] = React.useState(false)
 
-  console.log(isAdmin);
-
+  console.log(localStorage.jwt);
 
   // a login function with the logged user id
   function userlogged(user) {
@@ -32,6 +32,7 @@ function App() {
     setUserLoggedIn('')
     setIsAdmin(false)
     localStorage.removeItem(userLoggedIn)
+    localStorage.removeItem(jwt)
     popAlert(`See you soon`)
     navigate('/')
   }
@@ -49,7 +50,7 @@ function App() {
   }, [userLoggedIn]);
 
 
-  // setup local storage for signed in user
+  // setup local storage for isAdmin
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('isAdmin'));
     if (user) {

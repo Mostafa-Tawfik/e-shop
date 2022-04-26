@@ -32,12 +32,12 @@ export default function Login(props) {
   }
 
 
-  const handleSubmit = async (login) => {
+  const handleSubmit = (login) => {
 
     // prevent default form submit
     login.preventDefault();
 
-    await axios.post('api/users/login',{
+    axios.post('api/users/login',{
       email: loginUser.email,
       password: loginUser.password
     })
@@ -46,11 +46,8 @@ export default function Login(props) {
       // save user details
       props.userlogged(res.data)
       popAlert(`Welcome back`)
-      // if admin go to dashboard
-      if(res.data.isAdmin){
-        navigate('/')
-      }
-      setIsSubmitted(true)
+      setTimeout(()=> window.location.reload(), 2000)
+      navigate('/')
       return res.data
     },
     (error) => {
