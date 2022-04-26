@@ -22,7 +22,7 @@ function ReviewOrder() {
       }
     })
     .then(data => setOrder(data.data))
-  },[])
+  },[params.id])
 
 
   // hold review input

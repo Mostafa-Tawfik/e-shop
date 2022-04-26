@@ -17,7 +17,11 @@ function Category() {
   },[])
 
   const filterByCategory = products.filter(p=> p.category === params.name)
-  console.log(filterByCategory);
+
+
+  const filterBySubCategory = products.filter(p=> p.category === params.name)
+
+  console.log(filterBySubCategory)
   
   return (
 

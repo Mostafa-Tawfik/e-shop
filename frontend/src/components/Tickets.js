@@ -41,7 +41,7 @@ function Tickets(props) {
                 <tr key={ticket._id}>
 
                   <td>
-                    <Link to={`/dashboard/complaints/${ticket._id}`}>#{ticket._id}</Link>
+                    <Link to={`/complaints/${ticket._id}`}>#{ticket._id}</Link>
                   </td>
 
                   <td>{ticket.user.name}</td>
