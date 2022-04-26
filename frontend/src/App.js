@@ -15,15 +15,19 @@ function App() {
   
   ///-- handle admin login details --///
   const [isAdmin, setIsAdmin,] = React.useState(false)
-  // console.log(isAdmin)
+  console.log(isAdmin)
 
-  console.log(localStorage.isAdmin);
 
   // a login function with the logged user id
   function userlogged(user) {
     setUserLoggedIn(user)
     setIsAdmin(user.isAdmin)
     setjwt(user.token)
+  }
+
+  // a login function with the logged user id
+  function adminLogged() {
+    setIsAdmin(true)
   }
 
   // a signOut function
@@ -100,6 +104,7 @@ function App() {
           userlogged={userlogged}
           signOut={signOut}
           isAdmin={isAdmin}
+          adminLogged={adminLogged}
           />} />
         }
 

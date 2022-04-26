@@ -46,6 +46,9 @@ export default function Login(props) {
       // save user details
       props.userlogged(res.data)
       popAlert(`Welcome back`)
+      if(res.data.isadmin) {
+        props.adminLogged()
+      }
       // setTimeout(()=> window.location.reload(), 2000)
       navigate('/')
       return res.data

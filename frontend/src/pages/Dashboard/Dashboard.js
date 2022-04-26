@@ -16,7 +16,6 @@ import Support from './Support/Support'
 function Dashboard(props) {
 
   const {isAdmin} = props
-  console.log(localStorage.isAdmin);
 
   const adminPanel = ['Products', 'Orders', 'Users', 'Support']
 
@@ -26,12 +25,15 @@ function Dashboard(props) {
 
   // fetch all users
   useEffect(()=> {
-    axios.get('/api/users/', {
-      headers: {
-        Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
-      }
-    })
-    .then(data => setUsers(data.data))
+    const fetchUsers = async () => {
+      await axios.get('/api/users/', {
+        headers: {
+          Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+        }
+      })
+      .then(data => setUsers(data.data))      
+    }
+    fetchUsers()
   },[isAdmin])
 
 
