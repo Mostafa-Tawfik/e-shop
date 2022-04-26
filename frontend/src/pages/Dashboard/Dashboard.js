@@ -119,7 +119,7 @@ function Dashboard(props) {
           element={<EditProduct products={products}/>}/>
 
           <Route path='/orders' 
-          element={<Orders isAdmin={props.isAdmin} orders={orders}/>}/>
+          element={<Orders isAdmin={props.isAdmin}/>}/>
 
           <Route path='/orders/:id' 
           element={<OrderID />}/>
