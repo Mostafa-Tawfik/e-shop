@@ -1,7 +1,5 @@
 import React from 'react'
 
-import hero from '../Dashboard.png'
-
 function Home() {
 
   return (
@@ -9,7 +7,7 @@ function Home() {
       <h2>Dashboard</h2>
 
       <div className='dashboard-section-hero'>
-        <img src={hero} alt='logo'></img>
+        <img src='http://res.cloudinary.com/hpzeojxtz/image/upload/v1651003212/niliuvogjlfter1bbvyj.png' alt='logo'></img>
       </div>
 
 
