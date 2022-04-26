@@ -10,9 +10,14 @@ function Products(props) {
   const navigate = useNavigate()
 
   // store all products
-  const products = props.products
+  const [products, setProducts] = useState([])
+  // console.log(products)
 
-  console.log(products);
+  // get all products
+  useEffect(()=> {
+    axios.get('/api/products?productNum=Infinity')
+    .then(data => setProducts(data.data.products))
+  },[])
 
 
   ///-- start create new product --///

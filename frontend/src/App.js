@@ -15,7 +15,7 @@ function App() {
   
   ///-- handle admin login details --///
   const [isAdmin, setIsAdmin,] = React.useState(false)
-  console.log(isAdmin)
+  // console.log(isAdmin)
 
 
   // a login function with the logged user id

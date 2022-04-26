@@ -7,7 +7,7 @@ function Orders(props) {
 
   // store orders
   const [orders, setOrders] = useState('')
-  console.log(orders)
+  // console.log(orders)
 
   // fetch all orders
   useEffect(()=> {

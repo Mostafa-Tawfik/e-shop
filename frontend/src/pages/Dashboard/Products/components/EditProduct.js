@@ -6,11 +6,20 @@ import FileUploader from '../../../../components/FileUploader'
 import popAlert from '../../../../components/popAlert'
 import Select from 'react-dropdown-select'
 
-function EditProduct(props) {
+function EditProduct() {
 
   const params = useParams()
   const navigate = useNavigate()
-  const {products} = props
+
+  // store all products
+  const [products, setProducts] = useState([])
+  // console.log(products)
+
+  // get all products
+  useEffect(()=> {
+    axios.get('/api/products?productNum=Infinity')
+    .then(data => setProducts(data.data.products))
+  },[])
 
   // pre filled the form with current infos
   React.useEffect(()=> {
