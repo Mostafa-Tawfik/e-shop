@@ -34,8 +34,8 @@ function App() {
   const navigate = useNavigate()
 
   function signOut() {
-    setUserLoggedIn('')
     setIsAdmin(false)
+    setUserLoggedIn('')
     localStorage.removeItem(userLoggedIn)
     localStorage.removeItem(jwt)
     localStorage.removeItem(isAdmin)
