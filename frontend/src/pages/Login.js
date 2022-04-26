@@ -43,7 +43,6 @@ export default function Login(props) {
     })
     .then((res) => {
       console.log('successfully logged in')
-      setIsSubmitted(true)
       // save user details
       props.userlogged(res.data)
       popAlert(`Welcome back`)
@@ -51,6 +50,7 @@ export default function Login(props) {
       if(res.data.isAdmin){
         navigate('/')
       }
+      setIsSubmitted(true)
       return res.data
     },
     (error) => {
