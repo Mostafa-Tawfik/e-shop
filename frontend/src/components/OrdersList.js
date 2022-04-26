@@ -104,7 +104,7 @@ function OrdersList(props) {
               <tr key={order._id}>
 
                 {/* if admin go to admin order route */}
-                <td><Link to={`/${isAdmin ? 'dashboard' : 'user'}/orders/${order._id}`}>#{order._id}</Link></td>
+                <td><Link to={`/${isAdmin ? '' : 'user/'}orders/${order._id}`}>#{order._id}</Link></td>
 
                 {isAdmin && <td>{order.user.name}</td>}
 

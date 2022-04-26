@@ -16,7 +16,7 @@ function Shipping(props) {
     if(props.order.shippingAddress) {
       setShipping(props.order.shippingAddress)
     }
-  },[])
+  },[props.order.shippingAddress])
 
 
    // handle input change

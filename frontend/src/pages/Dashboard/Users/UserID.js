@@ -39,7 +39,7 @@ function UserID(props) {
       }
     })
     .then(data => setUser(data.data))
-  },[])
+  },[params.id])
 
 
   const userContactSection = user && (

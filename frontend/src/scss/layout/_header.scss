@@ -152,7 +152,7 @@
           gap: 1em;
           padding: 1em;
           border-radius: 10px;
-          z-index: 10;
+          z-index: 50;
           button {
             cursor: pointer;
             background: $grd-main;
@@ -182,7 +182,7 @@
     align-items: center;
     background: whitesmoke;
     box-shadow: $boxShadow;
-    z-index: 10;
+    z-index: 20;
     .navbar-item {
       font-weight: 200;
       cursor: pointer;
@@ -195,6 +195,7 @@
 
   // sub nav
   .subNavbar {
+    position: relative;
     width: 100vw;
     display: flex;
     gap: 1em;
@@ -203,7 +204,7 @@
     background: whitesmoke;
     box-shadow: $boxShadow;
     transform: translateY(-35px);
-    z-index: -20;
+    z-index: 0;
     transition: 0.5s ease, visibility 0.1s;
     // visibility: hidden;
     .navbar-item {

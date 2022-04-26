@@ -188,7 +188,7 @@
       .cart-filled-summary {
         width: min(85vw, 600px);
         justify-content: center;
-        align-items: left;
+        align-items: flex-start;
         gap: 0.25em;
         input {
           text-indent: 0.5em;
