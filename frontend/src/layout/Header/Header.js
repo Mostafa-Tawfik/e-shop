@@ -106,13 +106,15 @@ function Header(props) {
       </div>
 
       {/* navbar */}
-      <div className="navbar">
+      <nav className="navbar">
         {categories.map((i,index) => {
           return (
-            <h4 key={index} className="navbar-item">{i}</h4>
+            <Link to={`/${i}`} key={index}>
+              <h4 className="navbar-item">{i}</h4>
+            </Link>
           )
         })}
-      </div>
+      </nav>
 
     </div>
   )

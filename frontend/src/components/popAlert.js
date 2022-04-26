@@ -13,7 +13,7 @@ function popAlert(tittle, icon) {
   MySwal.fire({
     icon: icon ? icon : 'success',
     title: tittle ? <i>{tittle}</i> : 'Done!',
-    html: <i>''</i>,
+    html: <i></i>,
   })
 }
 

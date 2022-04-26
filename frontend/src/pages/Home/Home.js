@@ -17,6 +17,7 @@ import UserOrderID from './user/UserOrderID';
 import UserInfo from './user/UserInfo';
 import ReviewOrder from './user/ReviewOrder';
 import Support from './user/Support';
+import Category from './Category/Category';
 
 function Home(props) {
 
@@ -183,6 +184,11 @@ function Home(props) {
             <Login 
             userlogged={props.userlogged} 
             isAdmin={props.userLoggedIn.isAdmin}
+            />
+          }/>
+
+          <Route path='/:name' element={
+            <Category 
             />
           }/>
 
