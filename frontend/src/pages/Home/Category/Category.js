@@ -19,7 +19,7 @@ function Category(props) {
     .then(res => setProducts(res.data.products))
   },[])
 
-  const filterByCategory = products.filter(p=> p.category === params.name || p.subCategory === params.name || p.brand === params.name)
+  const filterByCategory = products.filter(p=> p.category === params.name || p.subCategory === params.name || p.brand === params.name || p.rating >= params.name)
 
 
   // map over categories and return only unique values
@@ -28,8 +28,6 @@ function Category(props) {
   // map over brands and return only unique values
   const brandWithinCat = [...new Set(filterByCategory.map(p => p.brand).filter(c => c !== undefined))]
 
-  // map over rating and return only unique values
-  const ratingWithinCat = [...new Set(filterByCategory.map(p => p.rating).filter(c => c !== undefined))]
 
   console.log(filterByCategory)
   
@@ -41,8 +39,7 @@ function Category(props) {
       <aside className='category-menu-holder'>
 
         <div className='category-menu dep'>
-          <h4>Department</h4>
-          <h5>{params.name}</h5>
+          <h4>Department</h4>          
           <ul>
           {subCatWithinCat.map((subCat, index) => (
             <li key={index}>
@@ -70,70 +67,82 @@ function Category(props) {
         <div className='category-menu review'>
           <h4>Average Reviews</h4>
           <ul>
+
             <li>
-              <Ratings
-                rating={4}
-                widgetDimensions="20px"
-                widgetSpacings="0px"
-                widgetRatedColors="gold"
-              >
-                <Ratings.Widget />
-                <Ratings.Widget />
-                <Ratings.Widget />
-                <Ratings.Widget />
-                <Ratings.Widget />
-              </Ratings>
-            </li>                  
+              <Link to={`/4`}>
+                <Ratings
+                  rating={4}
+                  widgetDimensions="20px"
+                  widgetSpacings="0px"
+                  widgetRatedColors="gold"
+                >
+                  <Ratings.Widget />
+                  <Ratings.Widget />
+                  <Ratings.Widget />
+                  <Ratings.Widget />
+                  <Ratings.Widget />
+                </Ratings>
+              </Link>
+            </li>
+
             <li>
-              <Ratings
-                rating={3}
-                widgetDimensions="20px"
-                widgetSpacings="0px"
-                widgetRatedColors="gold"
-              >
-                <Ratings.Widget />
-                <Ratings.Widget />
-                <Ratings.Widget />
-                <Ratings.Widget />
-                <Ratings.Widget />
-              </Ratings>
-            </li>                  
+              <Link to={`/3`}>
+                <Ratings
+                  rating={3}
+                  widgetDimensions="20px"
+                  widgetSpacings="0px"
+                  widgetRatedColors="gold"
+                >
+                  <Ratings.Widget />
+                  <Ratings.Widget />
+                  <Ratings.Widget />
+                  <Ratings.Widget />
+                  <Ratings.Widget />
+                </Ratings>
+              </Link>                  
+            </li>
+
             <li>
-              <Ratings
-                rating={2}
-                widgetDimensions="20px"
-                widgetSpacings="0px"
-                widgetRatedColors="gold"
-              >
-                <Ratings.Widget />
-                <Ratings.Widget />
-                <Ratings.Widget />
-                <Ratings.Widget />
-                <Ratings.Widget />
-              </Ratings>
-            </li>                  
+              <Link to={`/2`}>
+                <Ratings
+                  rating={2}
+                  widgetDimensions="20px"
+                  widgetSpacings="0px"
+                  widgetRatedColors="gold"
+                >
+                  <Ratings.Widget />
+                  <Ratings.Widget />
+                  <Ratings.Widget />
+                  <Ratings.Widget />
+                  <Ratings.Widget />
+                </Ratings>                
+              </Link>
+            </li>   
+
             <li>
-              <Ratings
-                rating={1}
-                widgetDimensions="20px"
-                widgetSpacings="0px"
-                widgetRatedColors="gold"
-              >
-                <Ratings.Widget />
-                <Ratings.Widget />
-                <Ratings.Widget />
-                <Ratings.Widget />
-                <Ratings.Widget />
-              </Ratings>
+              <Link to={`/1`}>
+                <Ratings
+                  rating={1}
+                  widgetDimensions="20px"
+                  widgetSpacings="0px"
+                  widgetRatedColors="gold"
+                >
+                  <Ratings.Widget />
+                  <Ratings.Widget />
+                  <Ratings.Widget />
+                  <Ratings.Widget />
+                  <Ratings.Widget />
+                </Ratings>
+              </Link>
             </li>                  
           </ul>
         </div>
 
-
-
       </aside>
 
       <section>
+
+        <h3>{isNaN(params.name) ? params.name : `Average rating more than ${params.name}`}</h3>
 
         <div className='product-holder'>
           {filterByCategory.map(product => (
