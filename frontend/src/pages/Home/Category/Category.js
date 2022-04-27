@@ -19,7 +19,7 @@ function Category(props) {
     .then(res => setProducts(res.data.products))
   },[])
 
-  const filterByCategory = products.filter(p=> p.category === params.name)
+  const filterByCategory = products.filter(p=> p.category === params.name || p.subCategory === params.name)
 
 
   // map over categories and return only unique values
