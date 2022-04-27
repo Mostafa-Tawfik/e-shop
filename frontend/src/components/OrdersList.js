@@ -81,6 +81,11 @@ function OrdersList(props) {
       </button>
     )
   }
+
+  function date(date) {
+    const display = new Date(date)
+    return <p>{display.toLocaleDateString('en-GB')}</p>;
+  } 
   
   return (
     <div className='orders-list-items'>
@@ -108,7 +113,7 @@ function OrdersList(props) {
 
                 {isAdmin && <td>{order.user.name}</td>}
 
-                <td>{order.createdAt.substr(0, 10)}</td>
+                <td>{date(order.createdAt)}</td>
 
                 <td>${order.totalPrice.toFixed(2)}</td>
 

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import ProductCard from './ProductCard'
 
@@ -14,7 +15,9 @@ function HomeSection(props) {
 
   return (
     <div className='cat-holder'>
-      <h4>{props.filter}</h4>
+      <Link to={`/${props.filter}`}>
+        <h4>{props.filter}</h4>
+      </Link>
       <div className='product-holder'>
       {products.filter(i=>i.category === props.filter).map(i => {
         return (

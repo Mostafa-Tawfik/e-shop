@@ -1,14 +1,31 @@
 .category {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2em;
+  display: grid;
+  grid-template-areas:
+  'aside section section section section section'
+  'aside section section section section section'
+  'aside section section section section section';
+  aside { grid-area: aside; }
+  section { grid-area: section; }
   gap: 2em;
+  padding: 2em;
   .product-card-holder {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 1em;
+  }
+  .category-menu-holder {
+    padding: 1em;
+    .category-menu {
+      h4 {
+        font-size: 1.2rem;
+      }
+      ul {
+        padding: 1em;
+        li {
+          list-style: none;
+        }
+      }
+    }
   }
 }

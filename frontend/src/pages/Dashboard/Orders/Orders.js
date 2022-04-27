@@ -7,7 +7,9 @@ function Orders(props) {
 
   // store orders
   const [orders, setOrders] = useState('')
-  // console.log(orders)
+
+
+  console.log(orders)
 
   // fetch all orders
   useEffect(()=> {
@@ -16,7 +18,7 @@ function Orders(props) {
         Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
       }
     })
-    .then(data => setOrders(data.data))
+    .then(data => setOrders(data.data.slice(0).reverse()))
   },[]) 
 
 

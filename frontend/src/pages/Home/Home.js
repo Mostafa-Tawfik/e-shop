@@ -190,6 +190,8 @@ function Home(props) {
 
           <Route path='/:name' element={
             <Category 
+            addToCart={addToCart} 
+            cart={cart}
             />
           }/>
 
