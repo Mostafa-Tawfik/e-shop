@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from '../../logo.svg'
 import { Link } from 'react-router-dom'
 import SearchBar from './components/SearchBar'
@@ -6,13 +6,8 @@ import SideMenu from '../../components/SideMenu'
 
 function Header(props) {
 
+  // fetch products
   const [products, setProducts] = React.useState([])
-
-  // map over products and return only unique values
-  const categories = [...new Set(products.map(p => p.category))]
-
-  // map over products and return only unique values
-  const subCategories = [...new Set(products.map(p => p.subCategory))]
 
   React.useEffect(()=> {
     fetch('/api/products')
@@ -20,6 +15,17 @@ function Header(props) {
     .then(data => setProducts(data.products))
   },[])
   
+  // map over products and return only unique values
+  const categories = [...new Set(products.map(p => p.category))]
+
+  
+  // handle sub nav bar
+  // detect hover on cat on the main nav
+  const [detectCat, setDetectCat] = useState('')
+  
+  // map over detected category and return only unique values of sub cat
+  const subCategories = [...new Set(products.filter(p => p.category === detectCat).map(p => p.subCategory).filter(p => p !== undefined))]
+
 
   // a state to controll account drop down menu
   const [accountIsOpen, setAccountIsOpen] = React.useState(false)
@@ -110,7 +116,7 @@ function Header(props) {
       <nav className="navbar">
         {categories.map((i,index) => {
           return (
-            <Link to={`/${i}`} key={index}>
+            <Link to={`/${i}`} key={index} onMouseEnter={()=>setDetectCat(i)}>
               <h4 className="navbar-item">{i}</h4>
             </Link>
           )
@@ -118,7 +124,7 @@ function Header(props) {
       </nav>
 
       <nav className="subNavbar">
-        {subCategories.map((i,index) => {
+        {subCategories && subCategories.map((i,index) => {
           return (
             <Link to={`/${i}`} key={index}>
               <h4 className="navbar-item">{i}</h4>

@@ -186,6 +186,11 @@
     .navbar-item {
       font-weight: 200;
       cursor: pointer;
+      transition: 0.5s ease;
+      &:hover {
+        opacity: 0.5;
+        transform: scale(1.01);
+      }
     }
     &:hover ~ .subNavbar {
       transform: translate(0);
@@ -199,6 +204,7 @@
     width: 100vw;
     display: flex;
     gap: 1em;
+    padding: 0.25em;
     justify-content: center;
     align-items: center;
     background: whitesmoke;
@@ -206,11 +212,15 @@
     transform: translateY(-35px);
     z-index: 0;
     transition: 0.5s ease, visibility 0.1s;
-    // visibility: hidden;
     .navbar-item {
       font-weight: 200;
       font-size: 1.3rem;
       cursor: pointer;
+      transition: 0.5s ease;
+      &:hover {
+        opacity: 0.5;
+        transform: scale(1.02);
+      }
     }
     &:hover {
       transform: translate(0);
