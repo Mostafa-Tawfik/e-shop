@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+
 import resolveTicket from './resloveTicket'
 
 function Tickets(props) {
@@ -33,14 +34,14 @@ function Tickets(props) {
               <th>MESSAGE</th>
               <th>STATUS</th>
               <th>ACTIONS</th>
-            </tr>
+            </tr>            
 
-            {tickets[0] && tickets.map(ticket => {
+            {tickets[0] && tickets.slice(0).reverse().map(ticket => {
               return (
                 <tr key={ticket._id}>
 
                   <td>
-                    <Link to={`/dashboard/complaints/${ticket._id}`}>#{ticket._id}</Link>
+                    <Link to={`/complaints/${ticket._id}`}>#{ticket._id}</Link>
                   </td>
 
                   <td>{ticket.user.name}</td>

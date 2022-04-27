@@ -58,7 +58,7 @@ function UserInfo() {
     .then((res) => {
       // show success message
       console.log(res.data)
-      popAlert('User updated','Done!')
+      popAlert('User updated')
       // retrun to products page
       setTimeout(()=> navigate('/'), 2000) 
       return res.data

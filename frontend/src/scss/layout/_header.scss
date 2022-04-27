@@ -1,6 +1,6 @@
 /* header */
 .App-header {
-  height: 17.5vh;
+  height: 185px;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -16,7 +16,6 @@
     justify-content: center;
     .top-pane_info {
       width: min(85vw, 1200px);
-      height: 2.5vh;
       display: flex;
       align-items: center;
       gap: 1em;
@@ -47,11 +46,11 @@
     .bottom-pane_info {
       position: relative;
       width: min(85vw, 1200px);
-      height: 10vh;
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 1em;
+      margin: 0.5em 0;
       .header-cart {
         position: relative;
         width: 50px;
@@ -84,7 +83,7 @@
       .header-search {
         .header-search-bar {
           width: min(25vw, 500px);
-          height: 5vh;
+          padding: 1em;
           text-indent: 1em;
           border-radius: 20px;
           color: black;
@@ -101,7 +100,7 @@
           gap: 0.5em;
           background: white;
           padding: 1em;
-          z-index: 10;
+          z-index: 30;
           cursor: pointer;
           * {
             color: $clr-dark;
@@ -153,7 +152,7 @@
           gap: 1em;
           padding: 1em;
           border-radius: 10px;
-          z-index: 10;
+          z-index: 50;
           button {
             cursor: pointer;
             background: $grd-main;
@@ -175,20 +174,76 @@
   
   /* navbar */
   .navbar {
-    height: 5vh;
+    position: relative;
     display: flex;
     gap: 1em;
+    padding: 0.5em;
     justify-content: center;
     align-items: center;
     background: whitesmoke;
-    box-shadow: 1px 0px 10px 0px;
+    box-shadow: $boxShadow;
+    z-index: 20;
     .navbar-item {
-      font-weight: 400;
+      font-weight: 200;
       cursor: pointer;
+      transition: 0.5s ease;
+      &:hover {
+        opacity: 0.5;
+        transform: scale(1.01);
+      }
+    }
+    &:hover ~ .subNavbar {
+      transform: translate(0);
+      visibility: visible;
+    }
+  }
+
+  // sub nav
+  .subNavbar {
+    position: relative;
+    width: 100vw;
+    display: flex;
+    gap: 1em;
+    padding: 0.25em;
+    justify-content: center;
+    align-items: center;
+    background: whitesmoke;
+    box-shadow: $boxShadow;
+    transform: translateY(-35px);
+    z-index: 0;
+    transition: 0.5s ease, visibility 0.1s;
+    .navbar-item {
+      font-weight: 200;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: 0.5s ease;
+      &:hover {
+        opacity: 0.5;
+        transform: scale(1.02);
+      }
+    }
+    &:hover {
+      transform: translate(0);
+      visibility: visible;
     }
   }
 
 }
+
+
+@media (max-width: 1000px)  {
+  .App-header {
+    height: max-content;
+    .subNavbar {
+      gap: 0.5em;
+      transform: translate(0);
+      .navbar-item {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
 
 @media (max-width: 440px)  {
   .App-header {
@@ -259,10 +314,7 @@
       margin-bottom: -15px;
       font-weight: 700;
     }
-    h3 {
-      display: none;
-    }
-    .navbar {
+    .navbar, .subNavbar, h3 {
       display: none;
     }
   }

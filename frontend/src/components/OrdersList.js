@@ -81,6 +81,11 @@ function OrdersList(props) {
       </button>
     )
   }
+
+  function date(date) {
+    const display = new Date(date)
+    return <p>{display.toLocaleDateString('en-GB')}</p>;
+  } 
   
   return (
     <div className='orders-list-items'>
@@ -104,11 +109,11 @@ function OrdersList(props) {
               <tr key={order._id}>
 
                 {/* if admin go to admin order route */}
-                <td><Link to={`/${isAdmin ? 'dashboard' : 'user'}/orders/${order._id}`}>#{order._id}</Link></td>
+                <td><Link to={`/${isAdmin ? '' : 'user/'}orders/${order._id}`}>#{order._id}</Link></td>
 
                 {isAdmin && <td>{order.user.name}</td>}
 
-                <td>{order.createdAt.substr(0, 10)}</td>
+                <td>{date(order.createdAt)}</td>
 
                 <td>${order.totalPrice.toFixed(2)}</td>
 

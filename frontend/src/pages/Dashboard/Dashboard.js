@@ -1,10 +1,8 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {Routes, Route, Link} from 'react-router-dom'
 
-import Home from './Home'
+import Home from './Home/Home'
 import Products from './Products/Products'
-import ProductID from './Products/ProductID'
 import EditProduct from './Products/components/EditProduct'
 import Orders from './Orders/Orders'
 import OrderID from './Orders/OrderID'
@@ -12,75 +10,30 @@ import Users from './Users/Users'
 import SideMenu from '../../components/SideMenu'
 import UserID from './Users/UserID'
 import Support from './Support/Support'
+import Statistics from './Statistics/Statistics'
 
 
 function Dashboard(props) {
 
-  const adminPanel = ['Dashboard', 'Products', 'Orders', 'Users', 'Support']
 
-  // store users
-  const [users, setUsers] = useState('')
-  // console.log(users)
-
-  // fetch all users
-  useEffect(()=> {
-    axios.get('/api/users/', {
-      headers: {
-        Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
-      }
-    })
-    .then(data => setUsers(data.data))
-  },[])
-
-
-  // store tickets
-  const [tickets , setTickets] = useState('')
-  // console.log(tickets)
-
-  // fetch all users
-  useEffect(()=> {
-    axios.get('/api/complaints/', {
-      headers: {
-        Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
-      }
-    })
-    .then(data => setTickets(data.data))
-  },[])
-
-
-  // store all products
-  const [products, setProducts] = useState([])
-  // console.log(products)
-
-  // get all products
-  useEffect(()=> {
-    axios.get('/api/products?productNum=Infinity')
-    .then(data => setProducts(data.data.products))
-  },[])
-
-
-  // store orders
-  const [orders, setOrders] = useState('')
-  // console.log(orders)
-
-  // fetch all orders
-  useEffect(()=> {
-    axios.get('/api/orders/', {
-      headers: {
-        Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
-      }
-    })
-    .then(data => setOrders(data.data))
-  },[])
+  const adminPanel = ['Products', 'Orders', 'Users', 'Support', 'Statistics']
+ 
 
   return (
     <div className='dashboard'>
 
       <div className='admin-panel'>
         <h4>Admin Panel</h4>
+
+        <Link to='/'>
+          <div className='panel-section'>
+            Dashboard
+          </div>
+        </Link>
+
         {adminPanel.map((section, index) => {
         return (
-          <Link key={index} to={section !== 'Dashboard' ? `/dashboard/${section.toLowerCase()}` : '/'}>
+          <Link key={index} to={section !== 'Dashboard' ? `/${section.toLowerCase()}` : '/'}>
             <div className='panel-section'>
                 {section}
             </div>
@@ -99,31 +52,31 @@ function Dashboard(props) {
       <div className='sections'>
         <Routes>
           <Route path='/' 
-          element={<Home users={users} products={products} orders={orders} tickets={tickets}/>}/>
+          element={<Home />}/>
 
-          <Route path='/dashboard/products' 
-          element={<Products products={products}/>}/>
+          <Route path='/products' 
+          element={<Products />}/>
 
-          <Route path='/dashboard/products/edit/:id' 
+          <Route path='/products/edit/:id' 
           element={<EditProduct />}/>
 
-          <Route path='/dashboard/product/:id' 
-          element={<ProductID />}/>
+          <Route path='/orders' 
+          element={<Orders isAdmin={props.isAdmin}/>}/>
 
-          <Route path='/dashboard/orders' 
-          element={<Orders isAdmin={props.isAdmin} orders={orders}/>}/>
-
-          <Route path='/dashboard/orders/:id' 
+          <Route path='/orders/:id' 
           element={<OrderID />}/>
 
-          <Route path='/dashboard/users' 
-          element={<Users users={users}/>}/>
+          <Route path='/users' 
+          element={<Users />}/>
 
-          <Route path='/dashboard/users/:id' 
-          element={<UserID tickets={tickets} orders={orders} products={products} isAdmin={props.isAdmin}/>}/>
+          <Route path='/users/:id' 
+          element={<UserID isAdmin={props.isAdmin}/>}/>
 
-          <Route path='/dashboard/support' 
-          element={<Support tickets={tickets}/>}/>
+          <Route path='/support' 
+          element={<Support />}/>
+
+          <Route path='/statistics' 
+          element={<Statistics />}/>
           
         </Routes>
       </div>

@@ -12,8 +12,10 @@ function App() {
   ///-- handle user login details --///
   const [userLoggedIn, setUserLoggedIn,] = React.useState('')
 
+  
   ///-- handle admin login details --///
   const [isAdmin, setIsAdmin,] = React.useState(false)
+  // console.log(isAdmin)
 
 
   // a login function with the logged user id
@@ -23,14 +25,21 @@ function App() {
     setjwt(user.token)
   }
 
-  // a logout function
+  // a login function with the logged user id
+  function adminLogged() {
+    setIsAdmin(true)
+  }
+
+  // a signOut function
   const navigate = useNavigate()
 
   function signOut() {
-    setUserLoggedIn('')
     setIsAdmin(false)
+    setUserLoggedIn('')
     localStorage.removeItem(userLoggedIn)
-    popAlert(userLoggedIn.name, 'See you soon')
+    localStorage.removeItem(jwt)
+    localStorage.removeItem(isAdmin)
+    popAlert(`See you soon`)
     navigate('/')
   }
 
@@ -45,10 +54,9 @@ function App() {
   useEffect(() => {
     localStorage.setItem('userLoggedIn', JSON.stringify(userLoggedIn));
   }, [userLoggedIn]);
-  ///--- end ---///
 
 
-  // setup local storage for signed in user
+  // setup local storage for isAdmin
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('isAdmin'));
     if (user) {
@@ -59,7 +67,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem('isAdmin', JSON.stringify(isAdmin));
   }, [isAdmin]);
-  ///--- end ---///
 
 
   ///-- handle user token --///
@@ -76,7 +83,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem('jwt', JSON.stringify(jwt));
   }, [jwt]);
-  ///--- end ---///
 
 
   return (
@@ -97,6 +103,8 @@ function App() {
           userLoggedIn={userLoggedIn}
           userlogged={userlogged}
           signOut={signOut}
+          isAdmin={isAdmin}
+          adminLogged={adminLogged}
           />} />
         }
 

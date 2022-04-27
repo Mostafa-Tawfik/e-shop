@@ -1,10 +1,22 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-function Users(props) {
+function Users() {
 
-  // store users
-  const users = props.users
+   // store users
+   const [users, setUsers] = useState('')
+   // console.log(users)
+ 
+   // fetch all users
+   useEffect(()=> {
+     axios.get('/api/users/', {
+       headers: {
+         Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+       }
+     })
+     .then(data => setUsers(data.data))      
+   },[])
 
 
   return (
@@ -32,7 +44,7 @@ function Users(props) {
                 <tr key={user._id}>
 
                   {/* if admin go to admin user route */}
-                  <td><Link to={`/dashboard/users/${user._id}`}>#{user._id}</Link></td>
+                  <td><Link to={`/users/${user._id}`}>#{user._id}</Link></td>
 
                   <td><img src={user.image} alt='user'></img></td>
 

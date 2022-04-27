@@ -1,13 +1,25 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+
 import FileUploader from '../../../../components/FileUploader'
 import popAlert from '../../../../components/popAlert'
+import Select from 'react-dropdown-select'
 
 function EditProduct() {
 
   const params = useParams()
   const navigate = useNavigate()
+
+  // store all products
+  const [products, setProducts] = useState([])
+  // console.log(products)
+
+  // get all products
+  useEffect(()=> {
+    axios.get('/api/products?productNum=Infinity')
+    .then(data => setProducts(data.data.products))
+  },[])
 
   // pre filled the form with current infos
   React.useEffect(()=> {
@@ -28,8 +40,6 @@ function EditProduct() {
     subCategory: ``,
     countInStock: ``
   })
-
-  console.log(updateForm);
 
 
   // handle input change
@@ -68,9 +78,9 @@ function EditProduct() {
     })
     .then((res) => {
       // show success message
-      popAlert('', 'Product updated')
+      popAlert('Product updated')
       // retrun to products page
-      setTimeout(()=> navigate('/dashboard/products'), 2000) 
+      setTimeout(()=> navigate('/products'), 2000) 
       return res.data
     },
     (error) => {
@@ -79,12 +89,67 @@ function EditProduct() {
     )
   }
 
+
+  // handle sub category drop menu
+  // map over products and return only unique values without undefined
+  const categories = [...new Set(products.map(p => p.category).filter(p => p !== undefined))]
+
+  const [optionsCategories, setOptionsCategories] = useState('')
+
+  useEffect(()=> {
+    setOptionsCategories(categories.map(c => (
+      {
+      value: c, 
+      label: c
+    })))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[products])
+
+  // handle input change
+  function handleCategoryChange(value) {
+    setUpdateForm(prev => {
+      return {
+        ...prev,
+        category: value.length > 0 ? value[0].value : 'none'
+      }
+    })
+  }
+
+
+  // handle sub category drop
+  // map over products and return only unique values without undefined
+  const subCategories = [...new Set(products.map(p => p.subCategory).filter(p => p !== undefined))]
+
+  const [optionsSubCategories, setOptionsSubCategories] = useState('')
+
+  useEffect(()=> {
+    setOptionsSubCategories(subCategories.map(c => (
+      {
+      value: c, 
+      label: c
+    })))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[products])
+
+  // handle input change
+  function handleSubCategoryChange(value) {
+    setUpdateForm(prev => {
+      return {
+        ...prev,
+        subCategory: value.length > 0 ? value[0].value : 'none'
+      }
+    })
+  }
+
   
   return (
     <div className='dash-products-create'>
       <h2>Edit Product</h2>
 
       <div className='dash-products-form-container'>
+
+        <img src={updateForm.image} alt='product'></img>
+
         <form className='dash-products-form' onSubmit={handleSubmit}>
 
           <div>
@@ -115,29 +180,6 @@ function EditProduct() {
           <FileUploader handleUpload={handleUpload}/>
 
           <div className='dash-products-form-cat'>
-            <div>
-              <p>Category</p>
-              <input
-              type='text'
-              name='category'
-              required
-              onChange={handleChange}
-              value={updateForm.category}
-              >
-              </input>
-            </div>
-
-            <div>
-              <p>Sub Category</p>
-              <input
-              type='text'
-              name='subCategory'
-              required
-              onChange={handleChange}
-              value={updateForm.subCategory}
-              >
-              </input>
-            </div>
 
             <div>
               <p>Brand</p>
@@ -150,6 +192,47 @@ function EditProduct() {
               >
               </input>
             </div>
+
+            <div>
+              <p>In Stock</p>
+              <input
+              type='text'
+              name='countInStock'
+              required
+              onChange={handleChange}
+              value={updateForm.countInStock}
+              >
+              </input>
+            </div>
+
+          </div>
+
+          <div className='dash-products-form-cat'>
+
+            <div>
+              <p>Category</p>
+              <Select
+                create
+                clearable
+                placeholder={updateForm.category}
+                options={optionsCategories}
+                onChange={(value)=>handleCategoryChange(value)}
+                className='dropSelect'
+              />
+            </div>
+
+            <div>
+              <p>Sub Category</p>
+              <Select
+                create
+                clearable
+                placeholder={updateForm.subCategory}
+                options={optionsSubCategories}
+                onChange={(value)=>handleSubCategoryChange(value)}
+                className='dropSelect'
+              />
+            </div>
+
           </div>
 
           <div className='dash-products-form-cat'>
@@ -176,21 +259,7 @@ function EditProduct() {
               >
               </input>
             </div>
-          </div>
-
-          <div className='dash-products-form-cat'>
-            <div>
-              <p>In Stock</p>
-              <input
-              type='text'
-              name='countInStock'
-              required
-              onChange={handleChange}
-              value={updateForm.countInStock}
-              >
-              </input>
-            </div>
-          </div>
+          </div>          
 
           <button>
             Update info

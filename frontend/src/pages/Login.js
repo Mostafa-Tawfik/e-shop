@@ -32,25 +32,25 @@ export default function Login(props) {
   }
 
 
-  const handleSubmit = async (login) => {
+  const handleSubmit = (login) => {
 
     // prevent default form submit
     login.preventDefault();
 
-    await axios.post('api/users/login',{
+    axios.post('api/users/login',{
       email: loginUser.email,
       password: loginUser.password
     })
     .then((res) => {
       console.log('successfully logged in')
-      // if admin go to dashboard
-      if(res.data.isAdmin){
-        navigate('/')
-      }
-      setIsSubmitted(true)
       // save user details
       props.userlogged(res.data)
-      popAlert(res.data.name, 'Welcome back')
+      popAlert(`Welcome back`)
+      if(res.data.isadmin) {
+        props.adminLogged()
+      }
+      // setTimeout(()=> window.location.reload(), 2000)
+      navigate('/')
       return res.data
     },
     (error) => {

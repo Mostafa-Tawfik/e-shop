@@ -11,7 +11,7 @@ async function resolveTicket(id) {
   })
   .then((res) => {
     console.log(res.data)
-    popAlert('', 'Resolved')
+    popAlert('Resolved')
     setTimeout(()=> window.location.reload(), 2000) 
     return res.data
   },

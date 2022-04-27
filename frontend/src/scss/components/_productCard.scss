@@ -1,0 +1,120 @@
+.product-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2em 0;
+  flex-wrap: wrap;
+  gap: 1em;
+  .product-card {
+    width: 280px;
+    height: 380px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    box-shadow: 0px 0px 1px 0px gray;
+    padding: 0.5em;
+    border-radius: 20px;
+    transition: 0.5s;
+    &:hover {
+      transform: scale(1.02);
+    }
+    .discount {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      img {
+        width: 80px;
+      }
+    }
+    .product-img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      cursor: pointer;
+      border-radius: 20px;
+    }
+    .product-info {
+      height: 100px;
+      display: flex;
+      flex-direction: column;
+      width: 70%;
+      justify-content: flex-start;
+      h5 {
+        font-weight: 500;
+      }
+      .product-title{
+        height: 60px;
+        cursor: pointer;
+        font-family: $rf;
+        font-weight: 400;
+        font-size: 1.2rem;
+      }
+      .product-category{
+        color: gray;
+        font-size: 0.7rem;
+        margin-top: -2px;
+      }
+      .product-price-com {
+        display: flex;
+        gap: 0.5em;
+        .product-newprice{
+          color: green;
+        }
+        .product-oldprice{
+          text-decoration: line-through;
+          color: $clr-high;
+        }
+      }
+    }
+    button {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      border-color: transparent;
+      cursor: pointer;
+      img {
+        width: min(3vw, 40px);
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+}
+
+
+@media (max-width: 480px) {
+  .product-holder {
+    flex-wrap: wrap;
+    gap: 3em;
+    h4 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    .product-card {
+      width: 85vw;
+      height: 400px;
+      box-shadow: none;
+      .discount {
+        top: 5px;
+      }
+      .product-img {
+        width: 70vw;
+        height: 250px;
+        object-fit: cover;
+        cursor: pointer;
+      }
+      .product-info{
+        width: 70vw;
+      }
+      button {
+        img {
+          width: 25px;
+        }
+      }
+    }
+  }
+}

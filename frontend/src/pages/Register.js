@@ -1,6 +1,7 @@
 import React from "react";
 import { Link ,Navigate} from "react-router-dom";
 import axios from 'axios'
+import popAlert from "../components/popAlert";
 
 export default function Register(){
 
@@ -30,6 +31,7 @@ export default function Register(){
             alert('successfully registered')
             console.log(res.data)
             setIsSubmitted(true)
+            popAlert('Completed')
             return <Navigate to="/login"/>
         },
         (error) => {

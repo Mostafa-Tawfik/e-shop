@@ -24,7 +24,7 @@ function OrderPreview(props) {
     })
     .then((res) => {
       console.log('Order Placed')
-      popAlert('Your order has been placed', 'Enjoy your order')
+      popAlert('Enjoy your order')
       props.emptyCart()
       console.log(res.data)
       navigate('/')

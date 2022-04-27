@@ -8,8 +8,47 @@ import Ratings from 'react-ratings-declarative'
 
 function UserID(props) {
 
+  // store tickets
+  const [tickets , setTickets] = useState('')
+  // console.log(tickets)
+
+  // fetch all tickets
+  useEffect(()=> {
+    axios.get('/api/complaints/', {
+      headers: {
+        Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+      }
+    })
+    .then(data => setTickets(data.data))
+  },[])
+
+
+  // store all products
+  const [products, setProducts] = useState([])
+  // console.log(products)
+
+  // get all products
+  useEffect(()=> {
+    axios.get('/api/products?productNum=Infinity')
+    .then(data => setProducts(data.data.products))
+  },[])
+
+
+  // store orders
+  const [orders, setOrders] = useState('')
+  // console.log(orders)
+
+  // fetch all orders
+  useEffect(()=> {
+    axios.get('/api/orders/', {
+      headers: {
+        Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+      }
+    })
+    .then(data => setOrders(data.data))
+  },[])
+
   const params = useParams()
-  const {orders, tickets, products, isAdmin} = props
 
 
   // filter tickets made by the user
@@ -39,7 +78,7 @@ function UserID(props) {
       }
     })
     .then(data => setUser(data.data))
-  },[])
+  },[params.id])
 
 
   const userContactSection = user && (
@@ -108,7 +147,7 @@ function UserID(props) {
                   </td>
 
                   <td>
-                    <Link to={`/dashboard/products/edit/${product._id}`}>
+                    <Link to={`/products/edit/${product._id}`}>
                       {product.name}
                     </Link>
                   </td>
@@ -157,7 +196,7 @@ function UserID(props) {
       <div className='user-order-id'>
 
         {orders && 
-          <OrdersList orders={filterByOrders} isAdmin={isAdmin}/>
+          <OrdersList orders={filterByOrders} isAdmin={props.isAdmin}/>
         }
       </div>
 

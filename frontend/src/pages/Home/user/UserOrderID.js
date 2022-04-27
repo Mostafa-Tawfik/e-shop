@@ -20,7 +20,7 @@ function UserOrderID() {
       }
     })
     .then(data => setOrder(data.data))
-  },[])
+  },[params.id])
 
   return (
     

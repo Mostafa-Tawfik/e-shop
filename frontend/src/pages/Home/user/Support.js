@@ -42,7 +42,7 @@ function Support() {
     .then((res) => {
       // show success message
       console.log(res.data)
-      popAlert('We will get back to you ASAP','')
+      popAlert('We will get back to you ASAP')
       // retrun to products page
       setTimeout(()=> navigate('/'), 2000) 
       return res.data
