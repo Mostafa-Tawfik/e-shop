@@ -10,13 +10,13 @@ function Header(props) {
   const [products, setProducts] = React.useState([])
 
   React.useEffect(()=> {
-    fetch('/api/products')
+    fetch('/api/products?productNum=Infinity')
     .then(res => res.json())
     .then(data => setProducts(data.products))
   },[])
   
   // map over products and return only unique values
-  const categories = [...new Set(products.map(p => p.category))]
+  const categories = [...new Set(products.filter(p => p.category !== 'Sample category').map(p => p.category))]
 
   
   // handle sub nav bar

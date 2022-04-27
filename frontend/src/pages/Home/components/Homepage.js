@@ -10,7 +10,7 @@ function Homepage(props) {
   const categories = [...new Set(products.map(p => p.category))]
 
   React.useEffect(()=> {
-    fetch('/api/products')
+    fetch('/api/products?productNum=Infinity')
     .then(res => res.json())
     .then(data => setProducts(data.products))
   },[])

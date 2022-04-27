@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import OrderSummary from './OrderSummary'
-import Select from 'react-dropdown-select'
 import popAlert from '../../../components/popAlert'
 
 function Cart(props) {
