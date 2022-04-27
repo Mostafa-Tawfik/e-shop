@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import OrderSummary from './OrderSummary'
 import Select from 'react-dropdown-select'
+import popAlert from '../../../components/popAlert'
 
 function Cart(props) {
 
@@ -18,14 +19,34 @@ function Cart(props) {
   let month = ("0" + (date.getMonth() + 1)).slice(-2)
   let year = date.getFullYear()
 
-  const options = [
-    { value: 1, label: 'Qty: 1' },
-    { value: 2, label: 'Qty: 2' },
-    { value: 3, label: 'Qty: 3' },
-    { value: 4, label: 'Qty: 4' },
-    { value: 5, label: 'Qty: 5' },
-    { value: 6, label: 'Qty: 6' },
-  ]
+
+  const [qtyCount, setQtyCount] = useState(1)
+  console.log(qtyCount);
+
+  function qtyInc(id, maxQty) {
+    const inc = parseInt(qtyCount) + 1
+    if(inc <= maxQty) {
+      setQtyCount(inc, id)
+      props.setQty(inc, id)
+    } else {
+      popAlert('Maximum limit reached', 'info')
+    }
+  }
+
+  function qtyDec(v, id) {
+    const dec = parseInt(qtyCount) - 1
+    if(dec > 0) {
+      setQtyCount(dec, id)
+      props.setQty(dec, id)
+    }
+  }
+
+  function handleQtyInput(e, id) {
+    if (e.target.value > 0) {
+      setQtyCount(e.target.value, id)
+      props.setQty(e.target.value, id)
+    }
+  }
 
   
   return (
@@ -58,28 +79,36 @@ function Cart(props) {
                     <p className='cart-delivery'>{dayName} {day}/{month}/{year}
                     </p>
                   </div>
-  
 
-  
-                  <div className='dropdown'>
-                    <Select
-                      // if qty is not defined retun 1 if not display value
-                      placeholder={`Qty: ${c.qty ? c.qty : 1}`}
-                      searchable= {false}
-                      options={options}
-                      onChange={values => props.setQty(values[0].value, c._id)}
-                    />
+
+                  <div className='cart-qty-counter'>
+                    
+                    <img src='https://api.iconify.design/akar-icons/circle-minus-fill.svg?color=%23073c81' alt='plus'
+                    onClick={()=>qtyDec(c._id)}></img>
+
+                    <input 
+                      type='text'
+                      name='qtyCount'
+                      value={c.countInStock ? qtyCount : 0}
+                      onChange={(e)=>handleQtyInput(e, c._id)}
+                      className='cart-qty-count'>
+                    </input>
+
+                    <img src='https://api.iconify.design/clarity/plus-circle-solid.svg?color=%23073c81' alt='plus'
+                    onClick={()=>qtyInc(c._id, c.countInStock)}></img>
+
                   </div>
 
+  
                 </div>
 
                 <div className='cart-filled-items-info-right'>
+                  <p>{c.discount > 0 && `$${c.price.toFixed()}`}</p>
                   {c.discount ?
                     // if there is a discount show it, if not show normal price
                     <p>${c.price.toFixed() * ((100 - c.discount)/100)}</p> :
                     <p>${c.price.toFixed()}</p>}
 
-                  <p>{c.discount > 0 && `$${c.price.toFixed()}`}</p>
 
                   <button onClick={()=> props.removeFromCart(c._id)}>
                     <img className='cart-delete' src='https://api.iconify.design/fluent/delete-16-filled.svg?color=%23fc2e20' alt='delete item'></img>

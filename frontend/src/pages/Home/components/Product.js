@@ -45,8 +45,10 @@ function Product(props) {
         <img src={product.image} alt='product'></img>
         <div className='product-info'>
           <p>{product.category}</p>
+          <p>{product.subCategory}</p>
           <h2>{product.name}</h2>
           <p>Brand: {product.brand}</p>
+          <p>Stock: {product.countInStock ? product.countInStock : <span style={{color: 'red'}}>"Out of stock"</span>}</p>
           
           <div>
             {product.discount > 0 ? 
@@ -65,6 +67,8 @@ function Product(props) {
               </h5>
             </div>}
           </div>
+
+          
 
           {product.description && <p className='product-info-desc'>{product.description}</p>}
 
