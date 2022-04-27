@@ -77,7 +77,7 @@ const updateOrdertoPaid = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id);
   order.orderItems.map(async (item) => {
     const product = await Product.findById(item.product.toString());
-    if (product.countInStock <= 0 || product.countInStock < item.qty) {
+    if ((product.countInStock = 0 || product.countInStock < item.qty)) {
       throw new Error("Product out of stock");
     } else {
       const newStock = product.countInStock - item.qty;
