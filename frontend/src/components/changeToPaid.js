@@ -6,7 +6,7 @@ async function changeToPaid(id) {
   await axios(`/api/orders/${id}/pay`, {
     method: 'PUT',
     headers: {
-      Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+      Authorization: `Bearer ${localStorage.jwt}`
     }
   })
   .then((res) => {

@@ -6,6 +6,8 @@ import SideMenu from '../../components/SideMenu'
 
 function Header(props) {
 
+  const {userName} = localStorage
+
   // fetch products
   const [products, setProducts] = React.useState([])
 
@@ -67,7 +69,7 @@ function Header(props) {
 
               <div className='header-account-account'>
                 {/* if signed in show a user welcome */}
-                {props.userLoggedIn && <p>Hi {props.userLoggedIn.name}!</p>}
+                {userName && <p>Hi {userName}!</p>}
                 <h3>Account</h3>
               </div>
 
@@ -75,7 +77,7 @@ function Header(props) {
             </div>
             {accountIsOpen && <div className="header-account-li" tabIndex='true' onBlur={openAccount}>
 
-              {props.userLoggedIn ?
+              {userName ?
               // if signed in
               <button onBlur={openAccount} onClick={props.signOut}>Sign Out</button>
               :

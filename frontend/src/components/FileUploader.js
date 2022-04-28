@@ -21,7 +21,7 @@ function FileUploader(props) {
       data: formData,
       headers: {
         "Content-Type": "multipart/form-data",
-         Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+         Authorization: `Bearer ${localStorage.jwt}`
       },
     })
     .then((res) => {

@@ -5,6 +5,8 @@ import popAlert from '../../../components/popAlert'
 
 function Cart(props) {
 
+  console.log(props);
+
    // auto start top page
    useEffect(() => {
     window.scrollTo(0, 0)
@@ -19,31 +21,38 @@ function Cart(props) {
   let year = date.getFullYear()
 
 
-  const [qtyCount, setQtyCount] = useState(1)
-  console.log(qtyCount);
-
-  function qtyInc(id, maxQty) {
-    const inc = parseInt(qtyCount) + 1
+  // handle qty increase
+  function qtyInc(id, qty, maxQty) {
+    const inc = parseInt(qty ? qty : 1) + 1
     if(inc <= maxQty) {
-      setQtyCount(inc, id)
       props.setQty(inc, id)
     } else {
       popAlert('Maximum limit reached', 'info')
     }
   }
 
-  function qtyDec(v, id) {
-    const dec = parseInt(qtyCount) - 1
+  // handle qty decrease
+  function qtyDec(id, qty) {
+    const dec = parseInt(qty) - 1
     if(dec > 0) {
-      setQtyCount(dec, id)
       props.setQty(dec, id)
     }
   }
 
-  function handleQtyInput(e, id) {
-    if (e.target.value > 0) {
-      setQtyCount(e.target.value, id)
+  // handle qty manual inputs
+  function handleQtyInput(e, id, maxQty) {
+    if (e.target.value > 0 && e.target.value <= maxQty) {
       props.setQty(e.target.value, id)
+    }
+  }
+
+  // handles what to diplay on qty counter
+  function handleQtyCounterValue(id, qty) {
+    if (qty) {
+      return props.cart.filter(p=>p._id === id).map(p=>p.qty)
+    }
+    else {
+      return 1
     }
   }
 
@@ -83,18 +92,18 @@ function Cart(props) {
                   <div className='cart-qty-counter'>
                     
                     <img src='https://api.iconify.design/akar-icons/circle-minus-fill.svg?color=%23073c81' alt='plus'
-                    onClick={()=>qtyDec(c._id)}></img>
+                    onClick={()=>qtyDec(c._id, c.qty, c.countInStock)}></img>
 
                     <input 
                       type='text'
                       name='qtyCount'
-                      value={c.countInStock ? qtyCount : 0}
-                      onChange={(e)=>handleQtyInput(e, c._id)}
+                      value={handleQtyCounterValue(c._id, c.qty)}
+                      onChange={(e)=>handleQtyInput(e, c._id, c.countInStock)}
                       className='cart-qty-count'>
                     </input>
 
                     <img src='https://api.iconify.design/clarity/plus-circle-solid.svg?color=%23073c81' alt='plus'
-                    onClick={()=>qtyInc(c._id, c.countInStock)}></img>
+                    onClick={()=>qtyInc(c._id, c.qty, c.countInStock)}></img>
 
                   </div>
 

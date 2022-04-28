@@ -51,7 +51,7 @@ function UserInfo() {
       url: `/api/users/me`,
       method: 'PUT',
       headers: {
-         Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+         Authorization: `Bearer ${localStorage.jwt}`
       },
       data: updateForm
     })

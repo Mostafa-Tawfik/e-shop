@@ -6,7 +6,7 @@ async function deleteOrder(id) {
   await axios(`/api/orders/${id}`, {
     method: 'DELETE',
     headers: {
-      Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+      Authorization: `Bearer ${localStorage.jwt}`
     }
   })
   .then((res) => {

@@ -10,13 +10,13 @@ function OrderID() {
 
   // store orders
   const [order, setOrder] = useState('')
-  // console.log('order', order)
+  console.log('order', order)
 
   // fetch all orders
   useEffect(()=> {
     axios.get(`/api/orders/${params.id}`, {
       headers: {
-        Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+        Authorization: `Bearer ${localStorage.jwt}`
      }
     })
     .then(data => setOrder(data.data))

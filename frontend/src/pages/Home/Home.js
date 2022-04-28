@@ -9,8 +9,6 @@ import Product from './components/Product';
 import Search from './components/Search';
 
 import Cart from './Cart/Cart';
-import Login from '../../pages/Login';
-import Register from '../../pages/Register';
 import Checkout from './Checkout/Checkout';
 import UserOrders from './user/UserOrders';
 import UserOrderID from './user/UserOrderID';
@@ -18,6 +16,9 @@ import UserInfo from './user/UserInfo';
 import ReviewOrder from './user/ReviewOrder';
 import Support from './user/Support';
 import Category from './Category/Category';
+import Register from '../Register';
+import Login from '../Login';
+import popAlert from '../../components/popAlert';
 
 function Home(props) {
 
@@ -41,7 +42,11 @@ function Home(props) {
 
   // add to cart function
   function addToCart(item) {
-    setCart([...cart, item])
+    if(item.countInStock >= 1) {
+      setCart([...cart, item])
+    } else {
+      popAlert('Sorry product out of stock', 'warning')
+    }
   }
 
 
@@ -163,28 +168,21 @@ function Home(props) {
       <header className='App-header'>
         <Header 
           cart={cart} 
-          userLoggedIn={props.userLoggedIn} 
           signOut={props.signOut}
-          isAdmin={props.isAdmin}
         />
       </header>
 
       <main className='App-main'>
-      <Routes>
+        <Routes>
+
+          <Route path='/register' element={<Register />}/>
+            
+          <Route path='/login' element={<Login adminLogged={props.adminLogged}/> }/>
         
           <Route path='/' element={
             <Homepage 
             addToCart={addToCart} 
             cart={cart}
-            />
-          }/>
-
-          <Route path='/register' element={<Register />}/>
-          
-          <Route path='/login' element={
-            <Login 
-            userlogged={props.userlogged} 
-            isAdmin={props.userLoggedIn.isAdmin}
             />
           }/>
 
@@ -202,7 +200,6 @@ function Home(props) {
 
           <Route path='/user/orders' element={
             <UserOrders 
-            isAdmin={props.userLoggedIn.isAdmin}
             />
           }/>
 
@@ -247,7 +244,6 @@ function Home(props) {
             placeOrder={placeOrder}
             order={order}
             emptyCart={emptyCart}
-            userLoggedIn={props.userLoggedIn}
             />
           }/>
 
@@ -255,8 +251,8 @@ function Home(props) {
             <Support 
             />
           }/>
-          
-      </Routes>
+            
+        </Routes>
       </main>
 
       <footer className='App-footer'>

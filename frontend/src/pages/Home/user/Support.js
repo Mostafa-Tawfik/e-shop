@@ -35,7 +35,7 @@ function Support() {
       url: `/api/complaints`,
       method: 'POST',
       headers: {
-         Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+         Authorization: `Bearer ${localStorage.jwt}`
       },
       data: support
     })

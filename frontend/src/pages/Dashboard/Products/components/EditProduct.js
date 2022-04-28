@@ -72,7 +72,7 @@ function EditProduct() {
       url: `/api/products/${params.id}`,
       method: 'PUT',
       headers: {
-         Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+         Authorization: `Bearer ${localStorage.jwt}`
       },
       data: updateForm
     })

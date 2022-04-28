@@ -2,112 +2,57 @@ import './App.scss';
 import React, { useEffect, useState } from 'react'
 import {Routes, Route, useNavigate} from 'react-router-dom'
 
+import popAlert from './components/popAlert';
+
 import Dashboard from './pages/Dashboard/Dashboard'
 import Home from './pages/Home/Home';
-import popAlert from './components/popAlert';
 
 
 function App() {
-  
-  ///-- handle user login details --///
-  const [userLoggedIn, setUserLoggedIn,] = React.useState('')
 
-  
-  ///-- handle admin login details --///
-  const [isAdmin, setIsAdmin,] = React.useState(false)
-  // console.log(isAdmin)
+  // save admin in a state
+  const [isAdmin, setIsAdmin] = useState(false)
 
-
-  // a login function with the logged user id
-  function userlogged(user) {
-    setUserLoggedIn(user)
-    setIsAdmin(user.isAdmin)
-    setjwt(user.token)
-  }
-
-  // a login function with the logged user id
-  function adminLogged() {
-    setIsAdmin(true)
-  }
-
-  // a signOut function
-  const navigate = useNavigate()
-
-  function signOut() {
-    setIsAdmin(false)
-    setUserLoggedIn('')
-    localStorage.removeItem(userLoggedIn)
-    localStorage.removeItem(jwt)
-    localStorage.removeItem(isAdmin)
-    popAlert(`See you soon`)
-    navigate('/')
-  }
-
-  // setup local storage for signed in user
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('userLoggedIn'));
-    if (user) {
-      setUserLoggedIn(user);
+  useEffect(()=> {
+    const admin = JSON.parse(localStorage.getItem('isAdmin'))
+    if(admin) {
+      setIsAdmin(admin)
     }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('userLoggedIn', JSON.stringify(userLoggedIn));
-  }, [userLoggedIn]);
-
-
-  // setup local storage for isAdmin
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('isAdmin'));
-    if (user) {
-      setIsAdmin(user);
-    }
-  }, []);
+  },[])
 
   useEffect(() => {
     localStorage.setItem('isAdmin', JSON.stringify(isAdmin));
   }, [isAdmin]);
 
 
-  ///-- handle user token --///
-  const [jwt, setjwt] = useState('')
+  function adminLogged() {
+    setIsAdmin(true)
+  }
+  
+  // a signOut function
+  const navigate = useNavigate()
 
-  // store token in localStorage
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('jwt'));
-    if (user) {
-      setjwt(user);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('jwt', JSON.stringify(jwt));
-  }, [jwt]);
+  function signOut() {
+    localStorage.removeItem('jwt')
+    localStorage.removeItem('userName')
+    localStorage.removeItem('userEmail')
+    localStorage.removeItem('isAdmin')
+    setIsAdmin(false)
+    popAlert(`See you soon`)
+    navigate('/')
+  }
 
 
   return (
     <div className="App">
       <Routes>
 
-        {isAdmin?
-          // if admin logged show dashboard
-          <Route path="/*" element={
-          <Dashboard 
-          isAdmin={isAdmin} 
-          signOut={signOut}
-          />} />
-          :
-          // if user logged show homepage
-          <Route path="/*" element={
-          <Home 
-          userLoggedIn={userLoggedIn}
-          userlogged={userlogged}
-          signOut={signOut}
-          isAdmin={isAdmin}
-          adminLogged={adminLogged}
-          />} />
+        {isAdmin ? 
+        <Route path="/*" element={<Dashboard signOut={signOut}/>}/>
+        :
+        <Route path="/*" element={<Home signOut={signOut} adminLogged={adminLogged}/>}/>
         }
-
+        
       </Routes>
 
     </div>
