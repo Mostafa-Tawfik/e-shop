@@ -13,7 +13,7 @@ function UserOrders(props) {
   useEffect(()=> {
     axios.get('/api/orders/myorders', {
       headers: {
-        Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+        Authorization: `Bearer ${localStorage.jwt}`
       }
     })
     .then(data => setOrders(data.data))

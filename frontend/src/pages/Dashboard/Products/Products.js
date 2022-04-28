@@ -27,7 +27,7 @@ function Products(props) {
       url: '/api/products',
       method: 'POST',
       headers: {
-         Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+         Authorization: `Bearer ${localStorage.jwt}`
         }
     })
     .then((res) => {
@@ -50,7 +50,7 @@ function Products(props) {
       url: `/api/products/${id}`,
       method: 'DELETE',
       headers: {
-         Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+         Authorization: `Bearer ${localStorage.jwt}`
         }
     })
     .then((res) => {

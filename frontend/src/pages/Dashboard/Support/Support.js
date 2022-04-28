@@ -14,7 +14,7 @@ function Support(props) {
   useEffect(()=> {
     axios.get('/api/complaints/', {
       headers: {
-        Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+        Authorization: `Bearer ${localStorage.jwt}`
       }
     })
     .then(data => setTickets(data.data))

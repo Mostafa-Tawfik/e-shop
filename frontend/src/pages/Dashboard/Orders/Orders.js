@@ -15,7 +15,7 @@ function Orders(props) {
   useEffect(()=> {
     axios.get('/api/orders/', {
       headers: {
-        Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+        Authorization: `Bearer ${localStorage.jwt}`
       }
     })
     .then(data => setOrders(data.data.slice(0).reverse()))

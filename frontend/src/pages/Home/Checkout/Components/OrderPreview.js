@@ -19,7 +19,7 @@ function OrderPreview(props) {
       method: 'POST',
       data: props.order,
       headers: {
-          Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`,
+          Authorization: `Bearer ${localStorage.jwt}`,
         }
     })
     .then((res) => {
@@ -47,12 +47,12 @@ function OrderPreview(props) {
 
         <div className='order-preview-contact-section'>
           <h5>Name</h5>
-          <p>{props.userLoggedIn.name}</p>
+          <p>{localStorage.userName}</p>
         </div>
 
         <div className='order-preview-contact-section'>
           <h5>Email</h5>
-          <p>{props.userLoggedIn.email}</p>
+          <p>{localStorage.userEmail}</p>
         </div>
 
       </div>
@@ -97,8 +97,8 @@ function OrderPreview(props) {
                   <td><img src={item.image} alt='product'></img></td>
                   <td>{item.name}</td>
                   <td>{item.qty}</td>
-                  <td>${item.price.toFixed(2)}</td>
-                  <td>${item.qty * item.price.toFixed(2)}</td>
+                  <td>${Number(item.price).toFixed(2)}</td>
+                  <td>${Number(item.qty * item.price).toFixed(2)}</td>
                 </tr>
               )
             })}
@@ -123,7 +123,7 @@ function OrderPreview(props) {
 
             <tr>
               <td>Subtotal</td>
-              <td>${totalPrice && totalPrice.toFixed(2) - shippingPrice}</td>
+              <td>${totalPrice && Number(totalPrice).toFixed(2) - shippingPrice}</td>
             </tr>
 
             <tr>
@@ -137,7 +137,7 @@ function OrderPreview(props) {
 
             <tr>
               <th>Total Payment</th>
-              <th>${totalPrice && totalPrice.toFixed(2)}</th>
+              <th>${totalPrice && Number(totalPrice).toFixed(2)}</th>
             </tr>
 
           </tfoot>

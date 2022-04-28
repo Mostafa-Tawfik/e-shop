@@ -12,7 +12,7 @@ function Statistics() {
      const fetchUsers = async () => {
        await axios.get('/api/users/', {
          headers: {
-           Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+           Authorization: `Bearer ${localStorage.jwt}`
          }
        })
        .then(data => setUsers(data.data))      
@@ -29,7 +29,7 @@ function Statistics() {
    useEffect(()=> {
      axios.get('/api/complaints/', {
        headers: {
-         Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+         Authorization: `Bearer ${localStorage.jwt}`
        }
      })
      .then(data => setTickets(data.data))
@@ -55,7 +55,7 @@ function Statistics() {
    useEffect(()=> {
      axios.get('/api/orders/', {
        headers: {
-         Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+         Authorization: `Bearer ${localStorage.jwt}`
        }
      })
      .then(data => setOrders(data.data))

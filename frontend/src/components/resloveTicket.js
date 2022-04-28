@@ -6,7 +6,7 @@ async function resolveTicket(id) {
   await axios(`/api/complaints/${id}`, {
     method: 'PUT',
     headers: {
-      Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+      Authorization: `Bearer ${localStorage.jwt}`
     }
   })
   .then((res) => {

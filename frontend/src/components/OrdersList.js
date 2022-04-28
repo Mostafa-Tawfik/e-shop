@@ -10,7 +10,7 @@ import deleteOrder from './deleteOrder'
 function OrdersList(props) {
 
   const navigate = useNavigate()
-  const isAdmin = props.isAdmin 
+  const {isAdmin} = localStorage
 
   // control more btn
   const [isOpen, setIsOpen] = useState({
@@ -96,7 +96,7 @@ function OrdersList(props) {
 
           <tr>
             <th>Order ID</th>
-            {isAdmin && <th>NAME</th>}
+            {isAdmin === 'true' && <th>NAME</th>}
             <th>DATE</th>
             <th>TOTAL</th>
             <th>Delivery</th>
@@ -109,9 +109,9 @@ function OrdersList(props) {
               <tr key={order._id}>
 
                 {/* if admin go to admin order route */}
-                <td><Link to={`/${isAdmin ? '' : 'user/'}orders/${order._id}`}>#{order._id}</Link></td>
+                <td><Link to={`/${isAdmin === 'true' ? '' : 'user/'}orders/${order._id}`}>#{order._id}</Link></td>
 
-                {isAdmin && <td>{order.user.name}</td>}
+                {isAdmin === 'true' && <td>{order.user.name}</td>}
 
                 <td>{date(order.createdAt)}</td>
 
@@ -126,7 +126,7 @@ function OrdersList(props) {
                 </td>
 
                 <td>
-                  {isAdmin 
+                  {isAdmin === 'true'
                   ? 
                   actions(order._id) 
                   : 

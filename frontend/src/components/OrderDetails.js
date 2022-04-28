@@ -76,8 +76,8 @@ function OrderDetails(props) {
                   </td>
                   
                   <td>{item.qty}</td>
-                  <td>${item.price.toFixed(2)}</td>
-                  <td>${item.qty * item.price.toFixed(2)}</td>
+                  <td>${Number(item.price).toFixed(2)}</td>
+                  <td>${Number(item.qty * item.price).toFixed(2)}</td>
                 </tr>
               )
             })}

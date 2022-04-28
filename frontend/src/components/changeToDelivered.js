@@ -6,7 +6,7 @@ async function changeToDelivered(id) {
   await axios(`/api/orders/${id}/deliver`, {
     method: 'PUT',
     headers: {
-      Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+      Authorization: `Bearer ${localStorage.jwt}`
     }
   })
   .then((res) => {

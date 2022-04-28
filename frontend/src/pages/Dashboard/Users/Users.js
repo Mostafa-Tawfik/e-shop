@@ -12,7 +12,7 @@ function Users() {
    useEffect(()=> {
      axios.get('/api/users/', {
        headers: {
-         Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+         Authorization: `Bearer ${localStorage.jwt}`
        }
      })
      .then(data => setUsers(data.data))      

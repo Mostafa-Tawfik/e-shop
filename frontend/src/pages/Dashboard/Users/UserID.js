@@ -16,10 +16,10 @@ function UserID(props) {
   useEffect(()=> {
     axios.get('/api/complaints/', {
       headers: {
-        Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+        Authorization: `Bearer ${localStorage.jwt}`
       }
     })
-    .then(data => setTickets(data.data))
+    .then(data => setTickets(data.data.slice(0).reverse()))
   },[])
 
 
@@ -42,10 +42,10 @@ function UserID(props) {
   useEffect(()=> {
     axios.get('/api/orders/', {
       headers: {
-        Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+        Authorization: `Bearer ${localStorage.jwt}`
       }
     })
-    .then(data => setOrders(data.data))
+    .then(data => setOrders(data.data.slice(0).reverse()))
   },[])
 
   const params = useParams()
@@ -74,7 +74,7 @@ function UserID(props) {
   useEffect(()=> {
     axios.get(`/api/users/${params.id}`, {
       headers: {
-        Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
+        Authorization: `Bearer ${localStorage.jwt}`
       }
     })
     .then(data => setUser(data.data))
