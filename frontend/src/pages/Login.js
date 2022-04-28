@@ -35,8 +35,8 @@ export default function Login(props) {
     login.preventDefault();
 
     axios.post('api/users/login',{
-      email: loginUser.email,
-      password: loginUser.password
+      email: loginUser.email.toLowerCase().trim(),
+      password: loginUser.password.trim()
     })
     .then((res) => {
       console.log('successfully logged in')

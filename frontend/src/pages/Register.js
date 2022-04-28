@@ -35,8 +35,8 @@ export default function Register(){
 
 		await axios.post('api/users/',{
 			name: newUser.name,
-			email: newUser.email,
-			password: newUser.password
+			email: newUser.email.toLowerCase().trim(),
+			password: newUser.password.trim()
 		})
 		.then((res) => {
 			console.log(res.data)
