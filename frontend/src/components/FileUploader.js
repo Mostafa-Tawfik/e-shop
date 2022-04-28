@@ -7,10 +7,13 @@ function FileUploader(props) {
   const [file, setFile] = useState('')
   // console.log(file)
 
+  const [isLoading, setIsLoading] = useState(false)
+  
   
   // handle upload
   async function upload(event) {
     event.preventDefault() 
+    setIsLoading(true)
     
     const formData = new FormData()
     formData.append('file', file)
@@ -30,10 +33,12 @@ function FileUploader(props) {
       console.log(res)
       popAlert('Uploaded')
       props.handleUpload(res.data.url)
+      setIsLoading(false)
       return res.data
     },
     (error) => {
       console.log(error)
+      setIsLoading(false)
     }
     )
   }
@@ -52,7 +57,7 @@ function FileUploader(props) {
         </input>
 
         <button onClick={upload}  id='file-uploader-input-btn'>
-          Upload
+          {isLoading ? 'Loading...' : 'Upload'}
         </button>
 
       </div>      
