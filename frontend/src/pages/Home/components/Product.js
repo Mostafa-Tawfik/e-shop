@@ -54,20 +54,19 @@ function Product(props) {
             {product.discount > 0 ? 
             // if price have a discount
             <div className='product-price-holder'>
-              <h5 className='product-price'>${product.price.toFixed() * ((100 - product.discount)/100)}</h5>
+              <h5 className='product-price'>${Number(product.price * ((100 - product.discount)/100)).toFixed(2)}</h5>
               <div className='product-price-savings'>
-                <h5>Save ${product.price.toFixed() * product.discount/100}</h5>
+                <h5>Save ${Number(product.price * product.discount/100).toFixed(2)}</h5>
                 <p>All prices include VAT.</p>
               </div>
             </div> : 
             // // if price dosen't have a discount
             <div className='product-price-holder'>
               <h5 className='product-price'>
-                ${product.price}
+                ${Number(product.price).toFixed(2)}
               </h5>
             </div>}
           </div>
-
           
 
           {product.description && <p className='product-info-desc'>{product.description}</p>}
