@@ -35,6 +35,7 @@
   }
   .footer-bottom-pane {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background: $clr-dark;

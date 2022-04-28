@@ -4,6 +4,8 @@ import {Link, useNavigate} from 'react-router-dom'
 
 import popAlert from '../../../components/popAlert'
 import Select from 'react-dropdown-select'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 function Products(props) {
 
@@ -54,8 +56,7 @@ function Products(props) {
         }
     })
     .then((res) => {
-      popAlert('Product deleted')
-      setTimeout(()=> window.location.reload(), 2000) 
+      setTimeout(()=> window.location.reload(), 1500) 
       return res.data
     },
     (error) => {
@@ -73,12 +74,31 @@ function Products(props) {
 
   const [action, setAction] = useState('')
 
+  const MySwal = withReactContent(Swal)
+
   // detect and execute actions from drop menu
   useEffect(()=>{
     if (action.value === 'Edit') {
       navigate(`/products/edit/${action.id}`)
     } else if (action.value === 'Delete') {
-      deleteProduct(action.id)
+      MySwal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Deleted!',
+            'Product has been deleted.',
+            'success',
+            deleteProduct(action.id),
+          )
+        }
+      })
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[action])

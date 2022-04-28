@@ -10,11 +10,11 @@ function Footer() {
     },
     {
       title: 'Shop with Us',
-      sections: ['Your Account', 'Your Orders', 'Your Addresses', 'Your Lists']
+      sections: ['Your Orders', 'Your Addresses', 'Your Tickets']
     },
     {
       title: 'More About Us',
-      sections: ['About E-Shop', 'Careers', 'Your Addresses', 'Your Lists']
+      sections: ['About E-Shop', 'Careers']
     },
   ]
 
@@ -43,6 +43,9 @@ function Footer() {
       </div>
 
       <div className='footer-bottom-pane'>
+        <p>All products are fake</p>
+        <p>This is a protfolio project</p>
+        <p>Images Powered by Unsplash</p>
         <p>© 2022 E-Shop. All rights reserved.</p>
       </div>
     </div>
