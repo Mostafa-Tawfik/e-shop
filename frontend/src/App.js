@@ -1,6 +1,7 @@
 import './App.scss';
 import React, { useEffect, useState } from 'react'
 import {Routes, Route, useNavigate} from 'react-router-dom'
+import {QueryClientProvider, QueryClient} from 'react-query'
 
 import popAlert from './components/popAlert';
 
@@ -9,6 +10,8 @@ import Home from './pages/Home/Home';
 
 
 function App() {
+
+  const queryClient = new QueryClient()
 
   // save admin in a state
   const [isAdmin, setIsAdmin] = useState(false)
@@ -44,18 +47,22 @@ function App() {
 
 
   return (
-    <div className="App">
-      <Routes>
+    <QueryClientProvider client={queryClient}>
 
-        {isAdmin ? 
-        <Route path="/*" element={<Dashboard signOut={signOut}/>}/>
-        :
-        <Route path="/*" element={<Home signOut={signOut} adminLogged={adminLogged}/>}/>
-        }
-        
-      </Routes>
+      <div className="App">
+        <Routes>
 
-    </div>
+          {isAdmin ? 
+          <Route path="/*" element={<Dashboard signOut={signOut}/>}/>
+          :
+          <Route path="/*" element={<Home signOut={signOut} adminLogged={adminLogged}/>}/>
+          }
+          
+        </Routes>
+
+      </div>
+
+    </QueryClientProvider>
   )
 }
 
