@@ -36,7 +36,7 @@ function Tickets(props) {
               <th>ACTIONS</th>
             </tr>            
 
-            {tickets[0] && tickets.slice(0).reverse().map(ticket => {
+            {tickets && tickets.slice(0).reverse().map(ticket => {
               return (
                 <tr key={ticket._id}>
 

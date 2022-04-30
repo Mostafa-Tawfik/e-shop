@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import OrderSummary from './OrderSummary'
-import popAlert from '../../../components/popAlert'
+import popAlert from '../../../Helpers/popAlert'
 
 function Cart(props) {
 

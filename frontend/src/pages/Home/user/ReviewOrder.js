@@ -3,7 +3,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import Ratings from 'react-ratings-declarative';
 
-import popAlert from '../../../components/popAlert'
+import popAlert from '../../../Helpers/popAlert'
 
 function ReviewOrder() {
 

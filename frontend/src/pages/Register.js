@@ -2,7 +2,7 @@ import React from "react";
 import { Link ,useNavigate} from "react-router-dom";
 import axios from 'axios'
 
-import popAlert from "../components/popAlert";
+import popAlert from "../Helpers/popAlert";
 
 export default function Register(){
 

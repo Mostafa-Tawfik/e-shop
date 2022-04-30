@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import {Routes, Route, useNavigate} from 'react-router-dom'
 import {QueryClientProvider, QueryClient} from 'react-query'
 
-import popAlert from './components/popAlert';
+import popAlert from './Helpers/popAlert';
 
 import Dashboard from './pages/Dashboard/Dashboard'
 import Home from './pages/Home/Home';

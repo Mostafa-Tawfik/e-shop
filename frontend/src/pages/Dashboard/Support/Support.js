@@ -1,31 +1,29 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import Tickets from '../../../components/Tickets'
+import popAlert from '../../../Helpers/popAlert'
+import useApi from '../../../hooks/useApi'
+import { SpinnerDotted } from 'spinners-react'
 
 
-function Support(props) {
+function Support() {
 
-  // store tickets
-  const [tickets , setTickets] = useState('')
-  // console.log(tickets)
+  // fetch tickets
+  const {status, data: tickets, error} = useApi('/api/complaints', 'GET')
 
-  // fetch all tickets
-  useEffect(()=> {
-    axios.get('/api/complaints/', {
-      headers: {
-        Authorization: `Bearer ${localStorage.jwt}`
-      }
-    })
-    .then(data => setTickets(data.data))
-  },[])
+  if(error) {
+    popAlert('Somthing went wrong', 'error')
+  }
+
 
   return (
     <div className='support'>
 
       <h2>Tickets</h2>
 
-      <Tickets tickets={tickets}/>
+      {status === 'loading' && <SpinnerDotted />}
+      {status === 'success' && <Tickets tickets={tickets}/>} 
+
     </div>
   )
 }

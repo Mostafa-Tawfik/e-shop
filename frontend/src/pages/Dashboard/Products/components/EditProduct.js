@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
 import FileUploader from '../../../../components/FileUploader'
-import popAlert from '../../../../components/popAlert'
+import popAlert from '../../../../Helpers/popAlert'
 import Select from 'react-dropdown-select'
 
 function EditProduct() {

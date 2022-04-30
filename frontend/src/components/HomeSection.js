@@ -2,8 +2,8 @@ import axios from 'axios'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useQuery } from 'react-query'
-import { SpinnerDotted } from 'spinners-react'
 
+import { SpinnerDotted } from 'spinners-react'
 import ProductCard from './ProductCard'
 
 const fetchProducts = async () => {
@@ -14,8 +14,6 @@ const fetchProducts = async () => {
 function HomeSection(props) {
 
   const {data, status} = useQuery('products', fetchProducts)
-  // console.log(data);
-  console.log(status);
 
   return (
     <div className='cat-holder'>

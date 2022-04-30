@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import {useQuery} from 'react-query'
 
-import popAlert from '../components/popAlert';
+import popAlert from '../Helpers/popAlert';
 
 export default function Login(props) {
 

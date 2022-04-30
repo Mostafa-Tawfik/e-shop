@@ -1,86 +1,39 @@
-import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import OrdersList from '../../../components/OrdersList'
 import Tickets from '../../../components/Tickets'
 import Ratings from 'react-ratings-declarative'
+import useApi from '../../../hooks/useApi'
 
 function UserID(props) {
 
-  // store tickets
-  const [tickets , setTickets] = useState('')
-  // console.log(tickets)
-
-  // fetch all tickets
-  useEffect(()=> {
-    axios.get('/api/complaints/', {
-      headers: {
-        Authorization: `Bearer ${localStorage.jwt}`
-      }
-    })
-    .then(data => setTickets(data.data.slice(0).reverse()))
-  },[])
-
-
-  // store all products
-  const [products, setProducts] = useState([])
-  // console.log(products)
-
-  // get all products
-  useEffect(()=> {
-    axios.get('/api/products?productNum=Infinity')
-    .then(data => setProducts(data.data.products))
-  },[])
-
-
-  // store orders
-  const [orders, setOrders] = useState('')
-  // console.log(orders)
-
-  // fetch all orders
-  useEffect(()=> {
-    axios.get('/api/orders/', {
-      headers: {
-        Authorization: `Bearer ${localStorage.jwt}`
-      }
-    })
-    .then(data => setOrders(data.data.slice(0).reverse()))
-  },[])
-
   const params = useParams()
 
-
-  // filter tickets made by the user
-  const filterByTickets = tickets && tickets.filter(t => t.user._id === params.id)
-  
-
-  // filter orders made by the user
-  const filterByOrders = orders && orders.filter(o => o.user._id === params.id)
+  // fetch tickets
+  const {data: tickets} = useApi('/api/complaints', 'GET')
+  const filterByTickets = tickets && tickets.slice(0).reverse().filter(t => t.user._id === params.id)
 
 
-  // filter products reviewed by the user
-  const filterByReviews = products && products.filter(p => p.reviews.some(r => r.user === params.id))
+  // fetch orders
+  const {status, data: orders} = useApi('/api/orders', 'GET')
+  const filterByOrders = status === 'success' && orders.slice(0).reverse().filter(o => o.user._id === params.id)
 
+
+  // fetch products
+  const {data: products} = useApi('/api/products?productNum=Infinity', 'GET')
+
+  const filterByReviews = products && products.products.filter(p => p.reviews.some(r => r.user === params.id))
 
   // filter user reviews
-  const userReviews = products && products.map(p => p.reviews.filter(r => r.user === params.id)).map(r => r[0]).filter(r=> r !== undefined)
+  const userReviews = products && products.products.map(p => p.reviews.filter(r => r.user === params.id)).map(r => r[0]).filter(r=> r !== undefined)
 
 
-  // store user details
-  const [user, setUser] = useState('')
-
-  // fetch the user details
-  useEffect(()=> {
-    axios.get(`/api/users/${params.id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.jwt}`
-      }
-    })
-    .then(data => setUser(data.data))
-  },[params.id])
+  // fetch orders
+  const {data: user} = useApi(`/api/users/${params.id}`, 'GET')
 
 
+  
   const userContactSection = user && (
     <>
       <h2>{user.name}</h2>

@@ -1,33 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
+import { SpinnerDotted } from 'spinners-react'
 
 import OrderDetails from '../../../components/OrderDetails'
+import useApi from '../../../hooks/useApi'
+import popAlert from '../../../Helpers/popAlert'
 
 function OrderID() {
   
   const params = useParams()
 
-  // store orders
-  const [order, setOrder] = useState('')
-  console.log('order', order)
+  // fetch order by id
+  const {status, data, error} = useApi(`/api/orders/${params.id}`, 'GET')
 
-  // fetch all orders
-  useEffect(()=> {
-    axios.get(`/api/orders/${params.id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.jwt}`
-     }
-    })
-    .then(data => setOrder(data.data))
-  },[params.id])
+  if(error) {
+    popAlert('Somthing went wrong', 'error')
+  }
 
   return (
     
     <div className='dash-order-id'>
 
-    {order && 
-      <OrderDetails order={order}/>
+      {status === 'loading' && <SpinnerDotted />}
+      {status === 'success' && <OrderDetails order={data}/>
     }
     </div>
   )

@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import popAlert from './popAlert'
+import popAlert from '../Helpers/popAlert'
 
 function ProductCard(props) {
 

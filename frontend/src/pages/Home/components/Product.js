@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
-import popAlert from '../../../components/popAlert'
+import popAlert from '../../../Helpers/popAlert'
 import Ratings from 'react-ratings-declarative'
 
 function Product(props) {

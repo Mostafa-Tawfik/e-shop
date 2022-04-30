@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import popAlert from '../../../components/popAlert'
+import popAlert from '../../../Helpers/popAlert'
 import supportlogo from './support.png'
 
 function Support() {

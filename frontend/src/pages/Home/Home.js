@@ -18,7 +18,7 @@ import Support from './user/Support';
 import Category from './Category/Category';
 import Register from '../Register';
 import Login from '../Login';
-import popAlert from '../../components/popAlert';
+import popAlert from '../../Helpers/popAlert';
 
 function Home(props) {
 
