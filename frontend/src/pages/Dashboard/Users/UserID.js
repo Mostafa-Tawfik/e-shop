@@ -5,6 +5,7 @@ import OrdersList from '../../../components/OrdersList'
 import Tickets from '../../../components/Tickets'
 import Ratings from 'react-ratings-declarative'
 import useApi from '../../../hooks/useApi'
+import useGetProducts from '../../../hooks/useGetProducts'
 
 function UserID(props) {
 
@@ -21,12 +22,12 @@ function UserID(props) {
 
 
   // fetch products
-  const {data: products} = useApi('/api/products?productNum=Infinity', 'GET')
+  const {data: products} = useGetProducts()
 
-  const filterByReviews = products && products.products.filter(p => p.reviews.some(r => r.user === params.id))
+  const filterByReviews = products && products.filter(p => p.reviews.some(r => r.user === params.id))
 
   // filter user reviews
-  const userReviews = products && products.products.map(p => p.reviews.filter(r => r.user === params.id)).map(r => r[0]).filter(r=> r !== undefined)
+  const userReviews = products && products.map(p => p.reviews.filter(r => r.user === params.id)).map(r => r[0]).filter(r=> r !== undefined)
 
 
   // fetch orders

@@ -5,7 +5,7 @@ import {Link, useNavigate} from 'react-router-dom'
 import Select from 'react-dropdown-select'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import useApi from '../../../hooks/useApi'
+import useGetProducts from '../../../hooks/useGetProducts'
 import { SpinnerDotted } from 'spinners-react'
 import popAlert from '../../../Helpers/popAlert'
 import authApiFnc from '../../../Helpers/authApiFnc'
@@ -14,9 +14,7 @@ function Products() {
 
   const navigate = useNavigate()
 
-  const productsUrl = '/api/products?productNum=Infinity'
-
-  const {status, data, error} = useApi(productsUrl, 'GET')
+  const {status, data: products, error} = useGetProducts()
 
   if(error) {
     popAlert('Somthing went wrong', 'error')
@@ -102,7 +100,7 @@ function Products() {
 
       <div className='dash-cards-container'>
         {status === 'loading' && <SpinnerDotted />}
-        {status === 'success' && data.products.map(p => {
+        {status === 'success' && products.map(p => {
           return (
             <div key={p._id} className='dash-product-card'>
 

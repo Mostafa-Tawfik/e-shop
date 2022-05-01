@@ -1,27 +1,41 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
-import HomeSection from '../../../components/HomeSection'
+import { SpinnerDotted } from 'spinners-react'
+import ProductCard from '../../../components/ProductCard';
+import useGetProducts from '../../../hooks/useGetProducts'
 
 
 function Homepage(props) {
 
-  const [products, setProducts] = React.useState([])
+  const {status, data: products} = useGetProducts()
 
-  const categories = [...new Set(products.map(p => p.category))]
-
-  React.useEffect(()=> {
-    fetch('/api/products?productNum=Infinity')
-    .then(res => res.json())
-    .then(data => setProducts(data.products))
-  },[])
+  const categories = status === 'success' && [...new Set(products.map(p => p.category))]
 
   return (
     <div>
       <img src='../images/Free-Advertising-Ideas.jpg' alt='ad' className='ad-image'></img>
 
-      {categories.map((c,i) => (
+      {status === 'success' && categories.map((c,i) => (
         <div key={i}>
-          <HomeSection {...props} filter={c}/>
+          <div className='cat-holder'>
+
+            <Link to={`/${c}`}>
+              <h4>{c}</h4>
+            </Link>
+
+            <div className='product-holder'>
+              {status === 'loading' && <SpinnerDotted />}
+              {status === 'success' && products.filter(i=>i.category === c).map(i => {
+                return (
+                  <div key={i._id}>
+                    <ProductCard content={i} {...props}/>
+                  </div>
+                )
+              })}
+            </div>
+
+          </div>
         </div>
       ))}
       

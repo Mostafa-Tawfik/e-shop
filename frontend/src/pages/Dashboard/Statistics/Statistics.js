@@ -1,5 +1,6 @@
 import React from 'react'
 import useApi from '../../../hooks/useApi'
+import useGetProducts from '../../../hooks/useGetProducts'
 
 function Statistics() {
 
@@ -13,7 +14,7 @@ function Statistics() {
    const { data: tickets} = useApi('/api/complaints/', 'GET')
 
    // fetch products
-   const { data: products} = useApi('/api/products?productNum=Infinity', 'GET')
+   const {data: products} = useGetProducts()
 
  
   return (
@@ -41,7 +42,7 @@ function Statistics() {
         <div className='summary-card'>
           <div>
             <h5>Total Products</h5>
-            <p>{products && products.products.length}</p>
+            <p>{products && products.length}</p>
           </div>
           <img src='https://api.iconify.design/emojione/department-store.svg' alt='shop'></img>
         </div>
