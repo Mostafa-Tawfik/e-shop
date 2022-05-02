@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import popAlert from './popAlert';
+import popAlert from '../Helpers/popAlert';
 
 function FileUploader(props) {
 

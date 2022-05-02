@@ -1,25 +1,20 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import OrdersList from '../../../components/OrdersList'
+import useApi from '../../../hooks/useApi'
+import { SpinnerDotted } from 'spinners-react'
+import popAlert from '../../../Helpers/popAlert'
 
 function Orders(props) {
 
-  // store orders
-  const [orders, setOrders] = useState('')
+  // fetch orders
+  const {status, data, error} = useApi('/api/orders', 'GET')
 
+  const orders = data && data.slice(0).reverse()
 
-  console.log(orders)
-
-  // fetch all orders
-  useEffect(()=> {
-    axios.get('/api/orders/', {
-      headers: {
-        Authorization: `Bearer ${localStorage.jwt}`
-      }
-    })
-    .then(data => setOrders(data.data.slice(0).reverse()))
-  },[]) 
+  if(error) {
+    popAlert('Somthing went wrong', 'error')
+  }
 
 
   return (
@@ -27,7 +22,8 @@ function Orders(props) {
 
       <h2>Orders</h2>
 
-      <OrdersList orders={orders} {...props}/>
+      {status === 'loading' && <SpinnerDotted />}
+      {status === 'success' && <OrdersList orders={orders} {...props}/>}      
 
     </div>
   )

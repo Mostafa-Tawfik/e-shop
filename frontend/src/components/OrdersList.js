@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-
-import changeToDelivered from './changeToDelivered'
-import changeToPaid from './changeToPaid'
-import deleteOrder from './deleteOrder'
+import apiCrud from '../Helpers/apiCrud'
 
 
 function OrdersList(props) {
@@ -27,6 +24,18 @@ function OrdersList(props) {
         id: id
       }
       })
+  }
+
+  function changeToDelivered(id) {
+    apiCrud(`/api/orders/${id}/deliver`, 'PUT', 'Status updated')
+  }
+
+  function changeToPaid(id) {
+    apiCrud(`/api/orders/${id}/pay`, 'PUT', 'Status updated')
+  }
+
+  function deleteOrder(id) {
+    apiCrud(`/api/orders/${id}`, 'DELETE', 'Order canceled')
   }
 
 

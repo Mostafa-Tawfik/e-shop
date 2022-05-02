@@ -1,12 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
-import resolveTicket from './resloveTicket'
+import apiCrud from '../Helpers/apiCrud'
 
 function Tickets(props) {
 
   // store orders
   const {tickets} = props  
+
+  // resolve ticket
+  function resolveTicket(id) {
+    apiCrud(`/api/complaints/${id}`, 'PUT', 'Resolved')
+  }
 
   // handle actions btn
   function resolve(id) {
@@ -36,7 +40,7 @@ function Tickets(props) {
               <th>ACTIONS</th>
             </tr>            
 
-            {tickets[0] && tickets.slice(0).reverse().map(ticket => {
+            {tickets && tickets.slice(0).reverse().map(ticket => {
               return (
                 <tr key={ticket._id}>
 

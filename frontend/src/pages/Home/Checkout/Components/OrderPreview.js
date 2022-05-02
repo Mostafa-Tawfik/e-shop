@@ -1,41 +1,17 @@
-import axios from 'axios'
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import apiCrud from '../../../../Helpers/apiCrud'
 
-import popAlert from '../../../../components/popAlert'
 
 function OrderPreview(props) {
 
-  const navigate = useNavigate()
+  // destrcture sections form the order
   const {shippingAddress, orderItems, totalPrice, shippingPrice } = props.order
-
 
   // handle placment
   async function placeOrder(event) {
     event.preventDefault()
-
-    await axios({
-      url: '/api/orders',
-      method: 'POST',
-      data: props.order,
-      headers: {
-          Authorization: `Bearer ${localStorage.jwt}`,
-        }
-    })
-    .then((res) => {
-      console.log('Order Placed')
-      popAlert('Enjoy your order')
-      props.emptyCart()
-      console.log(res.data)
-      navigate('/')
-      return res.data
-    },
-    (error) => {
-      console.log(error)
-    }
-    )
+    apiCrud('/api/orders', 'POST', 'Enjoy your order', props.order)
   }
-
 
   return (
     <div className='order-preview'>

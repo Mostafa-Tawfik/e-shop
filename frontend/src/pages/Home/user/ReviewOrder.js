@@ -1,28 +1,47 @@
-import axios from 'axios'
-import React, { Fragment, useEffect, useState } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import React, { Fragment, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import Ratings from 'react-ratings-declarative';
 
-import popAlert from '../../../components/popAlert'
+import useApi from '../../../hooks/useApi';
+import apiCrud from '../../../Helpers/apiCrud';
+import useGetProducts from '../../../hooks/useGetProducts';
 
 function ReviewOrder() {
 
   const params = useParams()
-  const navigate = useNavigate()
 
-  // store the order
-  const [order, setOrder] = useState('')
-  // console.log('order', order)
+  const {data: order, status} = useApi(`/api/orders/${params.id}`, 'GET')
 
-  // fetch the selected order
-  useEffect(()=> {
-    axios.get(`/api/orders/${params.id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
-      }
-    })
-    .then(data => setOrder(data.data))
-  },[params.id])
+  const {data: products} = useGetProducts()
+
+
+  // extract products form the order
+  const purchasedProductsIds = products && status === 'success' && order.orderItems.map(p => p.product);
+  // extract the purchased products form products
+  const filterProducts = purchasedProductsIds && products.filter(p => purchasedProductsIds.includes(p._id));
+  // extract the the products already reviewed by the user
+  const productsReviewed = filterProducts && filterProducts.filter(p => p.reviews.some(r => r.user === order.user._id));
+
+
+  // check if the target product already reviewed
+  function isReviewed(item) {
+    if(productsReviewed && productsReviewed.some(p => p._id === item.product)) {
+      return true
+    }else{
+      return false
+    }
+  }
+
+  // display already existed comment
+  function existedComment(item) {
+    return productsReviewed && productsReviewed.filter(p=>p._id===item.product).map(p=>p.reviews.filter(r=> r.user === order.user._id)).map(r=>r[0].comment)
+  }
+
+  // display already existed rating
+  function existedRating(item) {
+    const check = productsReviewed && productsReviewed.filter(p=>p._id===item.product).map(p=>p.reviews.filter(r=> r.user === order.user._id)).map(r=>r[0].rating)
+    return check[0]
+  }
 
 
   // hold review input
@@ -31,7 +50,6 @@ function ReviewOrder() {
     rating: '',
     comment: ''
   })
-
 
   // handle comment change
   function handleChange(event, id) {
@@ -57,29 +75,7 @@ function ReviewOrder() {
   // handle submition
   async function handleReviewSubmition(e, id) {
     e.preventDefault()
-    
-    await axios({
-      url: `/api/products/${id}/reviews`,
-      method: 'POST',
-      data: review,
-      headers: {
-          Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`,
-        }
-    })
-    .then((res) => {
-      popAlert('Your feedback is invaluable')
-      console.log(res.data)
-      navigate('/user/orders')
-      return res.data
-    })
-    .catch(
-      (error) => {
-        if (error.response.status === 400) {
-          popAlert('Product already reviewed', 'warning')
-        }
-      console.log('err', error.response)
-      }
-    )
+    apiCrud(`/api/products/${id}/reviews`, 'POST', 'Your feedback is invaluable', review)
   }
 
   return (
@@ -122,14 +118,13 @@ function ReviewOrder() {
                       </td>
 
                       <td>
+                        {isReviewed(item) ? 
                         <Ratings
-                          rating={review.rating ? review.id === item.product ? review.rating : 0 : 0}
-                          changeRating={(x)=>changeRating(x, item.product)}
+                          rating={existedRating(item)}
                           widgetDimensions="20px"
                           widgetSpacings="0px"
                           widgetRatedColors="gold"
                           widgetHoverColors="gold"
-                          
                         >
                           <Ratings.Widget />
                           <Ratings.Widget />
@@ -137,11 +132,36 @@ function ReviewOrder() {
                           <Ratings.Widget />
                           <Ratings.Widget />
                         </Ratings>
+                        :
+                        <Ratings
+                          rating={review.rating ? review.id === item.product ? review.rating : 0 : 0}
+                          changeRating={(x)=>changeRating(x, item.product)}
+                          widgetDimensions="20px"
+                          widgetSpacings="0px"
+                          widgetRatedColors="gold"
+                          widgetHoverColors="gold"
+                        >
+                          <Ratings.Widget />
+                          <Ratings.Widget />
+                          <Ratings.Widget />
+                          <Ratings.Widget />
+                          <Ratings.Widget />
+                        </Ratings>
+                        }
                       </td>
                     </tr>
 
                     <tr className='user-review-details-items-table-lastraw'>
                       <td colSpan= "2">
+                        {isReviewed(item) ? 
+                        <textarea
+                          type='text'
+                          name='comment'
+                          disabled
+                          value={existedComment(item)}
+                        >
+                        </textarea>
+                        :
                         <textarea
                           type='text'
                           name='comment'
@@ -149,12 +169,17 @@ function ReviewOrder() {
                           onChange={e => handleChange(e, item.product)}
                           value={review.id === item.product ? review.comment : ''}
                         >
-                        </textarea>
+                        </textarea>                        
+                        }
                       </td>
                       <td>
+                        {isReviewed(item) ?
+                        <></>
+                        :
                         <button onClick={e => handleReviewSubmition(e, item.product)}>
                           Submit Reivew
                         </button>
+                        }
                       </td>
                     </tr>
                   </Fragment>

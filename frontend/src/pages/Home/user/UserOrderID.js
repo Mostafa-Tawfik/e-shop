@@ -1,26 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
 
 import OrderDetails from '../../../components/OrderDetails'
+import useApi from '../../../hooks/useApi'
 
 function UserOrderID() {
 
   const params = useParams()
 
   // store orders
-  const [order, setOrder] = useState('')
-  // console.log('order', order)
-
-  // fetch all orders
-  useEffect(()=> {
-    axios.get(`/api/orders/${params.id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
-      }
-    })
-    .then(data => setOrder(data.data))
-  },[params.id])
+  const {data: order} = useApi(`/api/orders/${params.id}`, 'GET')
 
   return (
     

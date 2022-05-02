@@ -1,70 +1,35 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 
-import popAlert from '../../../components/popAlert'
 import Select from 'react-dropdown-select'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import useGetProducts from '../../../hooks/useGetProducts'
+import { SpinnerDotted } from 'spinners-react'
+import popAlert from '../../../Helpers/popAlert'
+import apiCrud from '../../../Helpers/apiCrud'
 
-function Products(props) {
+function Products() {
 
   const navigate = useNavigate()
 
-  // store all products
-  const [products, setProducts] = useState([])
-  // console.log(products)
+  const {status, data: products, error} = useGetProducts()
 
-  // get all products
-  useEffect(()=> {
-    axios.get('/api/products?productNum=Infinity')
-    .then(data => setProducts(data.data.products))
-  },[])
-
-
-  ///-- start create new product --///
-  async function createProduct() {
-
-    await axios({
-      url: '/api/products',
-      method: 'POST',
-      headers: {
-         Authorization: `Bearer ${localStorage.jwt}`
-        }
-    })
-    .then((res) => {
-      console.log('Product created')
-      navigate(`/products/edit/${res.data._id}`)
-      return res.data
-    },
-    (error) => {
-      console.log(error)
-    }
-    )
+  if(error) {
+    popAlert('Somthing went wrong', 'error')
   }
-  ///-- end --///
 
 
-  //-- delete product --//
+  // create new product
+  function createProduct() {
+    apiCrud('/api/products', 'POST', 'Product added')
+  }
+
+  
+  // delete product
   async function deleteProduct(id) {
-
-    await axios({
-      url: `/api/products/${id}`,
-      method: 'DELETE',
-      headers: {
-         Authorization: `Bearer ${localStorage.jwt}`
-        }
-    })
-    .then((res) => {
-      setTimeout(()=> window.location.reload(), 1500) 
-      return res.data
-    },
-    (error) => {
-      console.log(error)
-    }
-    )
+    apiCrud(`/api/products/${id}`, 'DELETE')
   }
-  ///-- end --///
 
   // set controls for actions drop menu
   const actionMenu = [
@@ -115,7 +80,8 @@ function Products(props) {
       </button>
 
       <div className='dash-cards-container'>
-        {products.map(p => {
+        {status === 'loading' && <SpinnerDotted />}
+        {status === 'success' && products.map(p => {
           return (
             <div key={p._id} className='dash-product-card'>
 

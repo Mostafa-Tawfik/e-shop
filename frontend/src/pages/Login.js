@@ -1,7 +1,7 @@
+import axios from 'axios';
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import popAlert from '../components/popAlert';
+import popAlert from '../Helpers/popAlert';
 
 export default function Login(props) {
 
@@ -29,35 +29,34 @@ export default function Login(props) {
   }
 
 
-  const handleSubmit = (login) => {
+  function handleSubmit(login) {
 
-    // prevent default form submit
     login.preventDefault();
 
-    axios.post('api/users/login',{
+    axios.post('api/users/login', {
       email: loginUser.email.toLowerCase().trim(),
       password: loginUser.password.trim()
     })
-    .then((res) => {
-      console.log('successfully logged in')
-      // save user details
-      localStorage.setItem('isAdmin', res.data.isAdmin)
-      localStorage.setItem('userName', res.data.name)
-      localStorage.setItem('userEmail', res.data.email)
-      localStorage.setItem('jwt', res.data.token)
-      if (res.data.isAdmin) {
-        props.adminLogged()
-      }
-      popAlert(`Welcome back`)
-      navigate('/')
-      return res.data
-    },
-    (error) => {
-      console.log(error)
-      setErrorMessages('invalid username or password');
-    }
-    )
-  };
+      .then((res) => {
+        console.log('successfully logged in');
+        // save user details
+        localStorage.setItem('isAdmin', res.data.isAdmin);
+        localStorage.setItem('userName', res.data.name);
+        localStorage.setItem('userEmail', res.data.email);
+        localStorage.setItem('jwt', res.data.token);
+        if (res.data.isAdmin) {
+          props.adminLogged();
+        }
+        popAlert(`Welcome back`);
+        navigate('/');
+        return res.data;
+      },
+        (error) => {
+          console.log(error);
+          setErrorMessages('invalid username or password');
+        }
+      );
+  }
 
   // Generate JSX code for login form
   const loginForm = (

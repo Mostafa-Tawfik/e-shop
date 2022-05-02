@@ -1,22 +1,18 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
+
+import popAlert from '../../../Helpers/popAlert'
+import useApi from '../../../hooks/useApi'
+import { SpinnerDotted } from 'spinners-react'
 
 function Users() {
 
-   // store users
-   const [users, setUsers] = useState('')
-   // console.log(users)
- 
-   // fetch all users
-   useEffect(()=> {
-     axios.get('/api/users/', {
-       headers: {
-         Authorization: `Bearer ${localStorage.jwt}`
-       }
-     })
-     .then(data => setUsers(data.data))      
-   },[])
+  // fetch users
+  const {status, data: users, error} = useApi('/api/users', 'GET')
+
+  if(error) {
+    popAlert('Somthing went wrong', 'error')
+  }
 
 
   return (
@@ -26,6 +22,8 @@ function Users() {
 
       <div className='orders-list-items'>
 
+        {status === 'loading' && <SpinnerDotted />}
+        
         <table className='orders-list-items-table'>
 
           <tbody>
@@ -39,7 +37,7 @@ function Users() {
               <th>ROLE</th>
             </tr>
 
-            {users[0] && users.map(user => {
+            {status === 'success' && users.map(user => {
               return (
                 <tr key={user._id}>
 
