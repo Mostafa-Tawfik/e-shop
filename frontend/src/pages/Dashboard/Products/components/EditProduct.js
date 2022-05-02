@@ -41,6 +41,8 @@ function EditProduct() {
     countInStock: ``
   })
 
+  console.log(updateForm)
+
 
   // handle input change
   function handleChange(event) {

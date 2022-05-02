@@ -1,14 +1,15 @@
 import axios from 'axios'
 import popAlert from './popAlert'
 
-async function apiCrud(url, method, message) {
+async function apiCrud(url, method, message, data) {
 
   await axios({
     url: url,
     method: method,
     headers: {
       Authorization: `Bearer ${localStorage.jwt}`
-    }
+    },
+    data: data && data
   })
   .then((res) => {
     console.log(res.data)

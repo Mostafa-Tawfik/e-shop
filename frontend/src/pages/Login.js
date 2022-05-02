@@ -1,10 +1,7 @@
+import axios from 'axios';
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import {useQuery} from 'react-query'
-
 import popAlert from '../Helpers/popAlert';
-import useAuth from '../hooks/useAuth';
 
 export default function Login(props) {
 
@@ -32,66 +29,34 @@ export default function Login(props) {
   }
 
 
-  const {mutate: auth} = useAuth()
-
-
-  const handleSubmit = (login) => {
+  function handleSubmit(login) {
 
     login.preventDefault();
 
-    const userData = ({
+    axios.post('api/users/login', {
       email: loginUser.email.toLowerCase().trim(),
       password: loginUser.password.trim()
     })
-
-    auth(userData, {
-      onSuccess:(data) => {
-        // if (data.isAdmin) {
-        //   props.adminLogged()
-        // }
-        navigate('/')
-      }
-    })
-
-    // if(isSuccess) {
-    //   console.log(data);
-    //   console.log('successfully logged in')
-    //   localStorage.setItem('isAdmin', data.isAdmin)
-    //   localStorage.setItem('userName', data.name)
-    //   localStorage.setItem('userEmail', data.email)
-    //   localStorage.setItem('jwt', data.token)
-    //   if (data.isAdmin) {
-    //     props.adminLogged()
-    //   }
-    //   popAlert(`Welcome back`)
-    //   navigate('/')
-    //   return data
-    // }
-
-    // axios.post('api/users/login',{
-    //   email: loginUser.email.toLowerCase().trim(),
-    //   password: loginUser.password.trim()
-    // })
-    // .then((res) => {
-    //   console.log('successfully logged in')
-    //   // save user details
-    //   localStorage.setItem('isAdmin', res.data.isAdmin)
-    //   localStorage.setItem('userName', res.data.name)
-    //   localStorage.setItem('userEmail', res.data.email)
-    //   localStorage.setItem('jwt', res.data.token)
-    //   if (res.data.isAdmin) {
-    //     props.adminLogged()
-    //   }
-    //   popAlert(`Welcome back`)
-    //   navigate('/')
-    //   return res.data
-    // },
-    // (error) => {
-    //   console.log(error)
-    //   setErrorMessages('invalid username or password');
-    // }
-    // )
-  };
+      .then((res) => {
+        console.log('successfully logged in');
+        // save user details
+        localStorage.setItem('isAdmin', res.data.isAdmin);
+        localStorage.setItem('userName', res.data.name);
+        localStorage.setItem('userEmail', res.data.email);
+        localStorage.setItem('jwt', res.data.token);
+        if (res.data.isAdmin) {
+          props.adminLogged();
+        }
+        popAlert(`Welcome back`);
+        navigate('/');
+        return res.data;
+      },
+        (error) => {
+          console.log(error);
+          setErrorMessages('invalid username or password');
+        }
+      );
+  }
 
   // Generate JSX code for login form
   const loginForm = (

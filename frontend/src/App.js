@@ -18,15 +18,10 @@ function App() {
 
   useEffect(()=> {
     const admin = JSON.parse(localStorage.getItem('isAdmin'))
-    if(admin === 'true') {
+    if(admin) {
       setIsAdmin(admin)
     }
   },[])
-
-  useEffect(() => {
-    localStorage.setItem('isAdmin', JSON.stringify(isAdmin));
-  }, [isAdmin]);
-
 
   function adminLogged() {
     setIsAdmin(true)
