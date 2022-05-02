@@ -59,7 +59,10 @@
     .support-items {
       justify-content: flex-start;
       overflow: auto;
-      width: 90vw;
+      width: 95vw;
+      .support-items-table {
+        width: 95vw;
+      }
     }
   }
 }

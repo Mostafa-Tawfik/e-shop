@@ -51,8 +51,7 @@ function OrderDetails(props) {
 
         <table className='order-details-items-table'>
 
-          <tbody>
-
+          <thead>
             <tr>
               <th>PHOTO</th>
               <th>NAME</th>
@@ -60,24 +59,27 @@ function OrderDetails(props) {
               <th>PRICE</th>
               <th>TOTAL</th>
             </tr>
+          </thead>
+
+          <tbody>
 
             {props.order.orderItems && props.order.orderItems.map(item => {
               return (
                 <tr key={item.product}>
 
-                  <td>
+                  <td data-label="PHOTO">
                     <Link to={`/product/${item.product}`}>
                       <img src={item.image} alt='product'></img>
                     </Link>
                   </td>
                   
-                  <td>
+                  <td data-label="NAME">
                     <Link to={`/product/${item.product}`}>{item.name}</Link>
                   </td>
                   
-                  <td>{item.qty}</td>
-                  <td>${Number(item.price).toFixed(2)}</td>
-                  <td>${Number(item.qty * item.price).toFixed(2)}</td>
+                  <td data-label="QUANTITY">{item.qty}</td>
+                  <td data-label="PRICE">${Number(item.price).toFixed(2)}</td>
+                  <td data-label="TOTAL">${Number(item.qty * item.price).toFixed(2)}</td>
                 </tr>
               )
             })}
@@ -87,7 +89,7 @@ function OrderDetails(props) {
           <tfoot>
             <tr>
               <td colSpan= "4"></td>
-              <th>${props.order.totalPrice && props.order.totalPrice.toFixed(2) - props.order.shippingPrice}</th>
+              <td>${props.order.totalPrice && props.order.totalPrice.toFixed(2) - props.order.shippingPrice}</td>
             </tr>
           </tfoot>
 
@@ -101,13 +103,13 @@ function OrderDetails(props) {
           <tbody>
 
             <tr>
-              <td>Subtotal</td>
-              <td>${props.order.totalPrice && props.order.totalPrice.toFixed(2) - props.order.shippingPrice}</td>
+              <th>Subtotal</th>
+              <th>${props.order.totalPrice && props.order.totalPrice.toFixed(2) - props.order.shippingPrice}</th>
             </tr>
 
             <tr>
-              <td>Shipping</td>
-              <td>${props.order.shippingPrice && props.order.shippingPrice.toFixed(2)}</td>
+              <th>Shipping</th>
+              <th>${props.order.shippingPrice && props.order.shippingPrice.toFixed(2)}</th>
             </tr>
 
           </tbody>

@@ -5,6 +5,7 @@
   align-items: center;
   gap: 2em;
   .user-contact {
+    width: min(90vw, 1200px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,8 +28,7 @@
 
 @media (max-width: 440px) {
   .user {
-    width: 90vw;
-    align-items: flex-start;
+    width: 95vw;
     // gap: 2em;
     .user-contact {
       width: 85vw;

@@ -65,7 +65,7 @@
       text-align: left;
       position: relative;
       width: 40%;
-      border-collapse: collapse;
+      border-collapse: separate;
       tr {
         border-radius: 10px;
       }
@@ -118,9 +118,6 @@
     .order-details-payment {
       .order-details-payment-table {
         width: 100%;
-        td, th {
-          white-space: nowrap;
-        }
       }
     }
     button {
