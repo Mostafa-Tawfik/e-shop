@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 
@@ -8,7 +7,7 @@ import withReactContent from 'sweetalert2-react-content'
 import useGetProducts from '../../../hooks/useGetProducts'
 import { SpinnerDotted } from 'spinners-react'
 import popAlert from '../../../Helpers/popAlert'
-import authApiFnc from '../../../Helpers/authApiFnc'
+import apiCrud from '../../../Helpers/apiCrud'
 
 function Products() {
 
@@ -21,33 +20,15 @@ function Products() {
   }
 
 
-  ///-- start create new product --///
-  async function createProduct() {
-
-    await axios({
-      url: '/api/products',
-      method: 'POST',
-      headers: {
-          Authorization: `Bearer ${localStorage.jwt}`
-        }
-    })
-    .then((res) => {
-      console.log('Product created')
-      navigate(`/products/edit/${res.data._id}`)
-      return res.data
-    })
-    .catch(
-      (error) => {
-        console.log('error', error.response)
-        popAlert('Somthing went wrong', 'error')
-      }
-    )
+  // create new product
+  function createProduct() {
+    apiCrud('/api/products', 'POST', 'Product added')
   }
 
-
-  //-- delete product --//
+  
+  // delete product
   async function deleteProduct(id) {
-    authApiFnc(`/api/products/${id}`, 'DELETE')
+    apiCrud(`/api/products/${id}`, 'DELETE')
   }
 
   // set controls for actions drop menu

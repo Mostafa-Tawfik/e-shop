@@ -18,7 +18,7 @@ function App() {
 
   useEffect(()=> {
     const admin = JSON.parse(localStorage.getItem('isAdmin'))
-    if(admin) {
+    if(admin === 'true') {
       setIsAdmin(admin)
     }
   },[])

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import popAlert from './popAlert'
 
-async function authApiFnc(url, method, message) {
+async function apiCrud(url, method, message) {
 
   await axios({
     url: url,
@@ -24,4 +24,4 @@ async function authApiFnc(url, method, message) {
   )
 }
 
-export default authApiFnc
+export default apiCrud
