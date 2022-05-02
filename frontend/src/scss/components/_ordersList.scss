@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   gap: 1em;
+  overflow: auto;
   .orders-list-items-table {
     width: min(80vw, 1000px);
     background: white;
@@ -12,7 +13,6 @@
     padding: 1em;
     text-align: left;
     position: relative;
-    // width: 100%;
     border-collapse: separate;
     border-spacing: 10px;
     a {
@@ -34,7 +34,6 @@
     td, th {
       padding: 10px;
       border-radius: 10px;
-      
     }
     .orders-list-actions-holder {
       position: relative;
@@ -92,6 +91,28 @@
   .orders-list-items {
     justify-content: flex-start;
     overflow: auto;
-    width: 90vw;
+    .orders-list-items-table {
+      table-layout: fixed;
+      td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+      }
+      td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      thead {
+        display: none;
+      }
+      tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+      }
+    }
   }
 }

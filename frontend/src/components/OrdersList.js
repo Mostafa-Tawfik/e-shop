@@ -101,8 +101,7 @@ function OrdersList(props) {
 
       <table className='orders-list-items-table'>
 
-        <tbody>
-
+        <thead>
           <tr>
             <th>Order ID</th>
             {isAdmin === 'true' && <th>NAME</th>}
@@ -112,29 +111,32 @@ function OrdersList(props) {
             <th>Payment</th>
             <th>ACTIONS</th>
           </tr>
+        </thead>
+
+        <tbody>
 
           {props.orders[0] && props.orders.map(order => {
             return (
               <tr key={order._id}>
 
                 {/* if admin go to admin order route */}
-                <td><Link to={`/${isAdmin === 'true' ? '' : 'user/'}orders/${order._id}`}>#{order._id}</Link></td>
+                <td data-label="Order ID"><Link to={`/${isAdmin === 'true' ? '' : 'user/'}orders/${order._id}`}>#{order._id}</Link></td>
 
-                {isAdmin === 'true' && <td>{order.user.name}</td>}
+                {isAdmin === 'true' && <td data-label="Name">{order.user.name}</td>}
 
-                <td>{date(order.createdAt)}</td>
+                <td data-label="Date">{date(order.createdAt)}</td>
 
-                <td>${order.totalPrice.toFixed(2)}</td>
+                <td data-label="Total">${order.totalPrice.toFixed(2)}</td>
 
-                <td>
+                <td data-label="Delivery">
                   {order.isDelivered ? <p style={{color: 'green', fontWeight: 'bolder'}}>Delivered</p> : 'Processing'}
                 </td>
 
-                <td>
+                <td data-label="Payment">
                   {order.isPaid ? <p style={{color: 'green', fontWeight: 'bolder'}}>Paid</p> : 'Cash on delivery'}
                 </td>
 
-                <td>
+                <td data-label="ACTIONS">
                   {isAdmin === 'true'
                   ? 
                   actions(order._id) 
