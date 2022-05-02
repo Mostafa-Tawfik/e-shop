@@ -45,6 +45,43 @@ h4 {
   font-weight: 600;
 }
 
+// tabels
+table {
+  width: min(80vw, 1200px);
+  background: white;
+  box-shadow: $boxShadow;
+  border-radius: 10px;
+  padding: 1em;
+  text-align: left;
+  position: relative;
+  border-collapse: separate;
+  border-spacing: 10px;
+  table-layout:fixed;
+  a {
+    font-size: 0.8rem;
+    color: $clr-high;
+  }
+  img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  tr {
+    border: $border;
+    outline: thin solid;
+    outline-color: rgb(128, 128, 128, 0.3);
+    border-radius: 10px;
+  }
+  td, th {
+    padding: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+}
+
+
+
 @media (max-width: 800px) {
     /* fonts */
   P {
@@ -69,7 +106,32 @@ h4 {
     font-size: 1.2rem;
     font-weight: 600;
   }
+  // tabels
+  table {
+    td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: right;
+    }
+    td::before {
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    thead {
+      display: none;
+    }
+    tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: .625em;
+    }
+  }
 }
+
+
 
 @media (max-width: 440px) {
     /* fonts */
@@ -94,5 +156,29 @@ h4 {
   h4 {
     font-size: 1.1rem;
     font-weight: 600;
+  }
+
+  // tabels
+  table {
+    td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: right;
+    }
+    td::before {
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    thead {
+      display: none;
+    }
+    tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: .625em;
+    }
   }
 }

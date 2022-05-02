@@ -30,33 +30,35 @@ function Tickets(props) {
 
         <table className='support-items-table'>
 
-          <tbody>
-
+          <thead>
             <tr>
               <th>Ticket ID</th>
               <th>NAME</th>
               <th>MESSAGE</th>
               <th>STATUS</th>
               <th>ACTIONS</th>
-            </tr>            
+            </tr>         
+          </thead>
+
+          <tbody>
 
             {tickets && tickets.slice(0).reverse().map(ticket => {
               return (
                 <tr key={ticket._id}>
 
-                  <td>
+                  <td data-label="Ticket ID">
                     <Link to={`/complaints/${ticket._id}`}>#{ticket._id}</Link>
                   </td>
 
-                  <td>{ticket.user.name}</td>
+                  <td data-label="NAME">{ticket.user.name}</td>
 
-                  <td>{ticket.complaintMessage.substr(0, 40)}</td>
+                  <td data-label="MESSAGE">{ticket.complaintMessage.substr(0, 40)}</td>
 
-                  <td>
+                  <td data-label="STATUS">
                     {ticket.resolved ? <p style={{color: 'green', fontWeight: 'bolder'}}>Resolved</p> : 'Opened'}
                   </td>
                   
-                  <td>{!ticket.resolved && resolve(ticket._id)}</td>
+                  <td data-label="ACTIONS">{!ticket.resolved && resolve(ticket._id)}</td>
 
                 </tr>
               )

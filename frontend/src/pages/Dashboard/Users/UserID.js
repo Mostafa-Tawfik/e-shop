@@ -81,8 +81,7 @@ function UserID(props) {
 
         <table className='orders-list-items-table'>
 
-          <tbody>
-
+          <thead>
             <tr>
               <th>IMAGE</th>
               <th>NAME</th>
@@ -90,23 +89,26 @@ function UserID(props) {
               <th>COMMENT</th>
               <th>DATE</th>
             </tr>
+          </thead>
+
+          <tbody>
 
             {filterByReviews.map((product, index) => {
               return (
                 <tr key={product._id}>
 
                   {/* if admin go to admin order route */}
-                  <td>
+                  <td data-label="IMAGE">
                     <img src={product.image} alt={product}></img>
                   </td>
 
-                  <td>
+                  <td data-label="NAME">
                     <Link to={`/products/edit/${product._id}`}>
                       {product.name}
                     </Link>
                   </td>
 
-                  <td>
+                  <td data-label="RATING">
                     <Ratings
                       rating={userReviews[index].rating*1}
                       widgetDimensions="20px"
@@ -121,9 +123,9 @@ function UserID(props) {
                     </Ratings>
                   </td>
 
-                  <td>{userReviews[index].comment}</td>
+                  <td data-label="COMMENT">{userReviews[index].comment}</td>
 
-                  <td>{userReviews[index].createdAt.substr(0, 10)}</td>
+                  <td data-label="DATE">{userReviews[index].createdAt.substr(0, 10)}</td>
 
 
                 </tr>

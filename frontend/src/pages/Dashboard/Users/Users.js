@@ -26,8 +26,7 @@ function Users() {
         
         <table className='orders-list-items-table'>
 
-          <tbody>
-
+          <thead>
             <tr>
               <th>ID</th>
               <th>IMAGE</th>
@@ -36,23 +35,26 @@ function Users() {
               <th>Phone Number</th>
               <th>ROLE</th>
             </tr>
+          </thead>
+
+          <tbody>
 
             {status === 'success' && users.map(user => {
               return (
                 <tr key={user._id}>
 
                   {/* if admin go to admin user route */}
-                  <td><Link to={`/users/${user._id}`}>#{user._id}</Link></td>
+                  <td data-label="ID"><Link to={`/users/${user._id}`}>#{user._id}</Link></td>
 
-                  <td><img src={user.image} alt='user'></img></td>
+                  <td data-label="IMAGE"><img src={user.image} alt='user'></img></td>
 
-                  <td>{user.name}</td>
+                  <td data-label="NAME">{user.name}</td>
 
-                  <td>{user.email}</td>
+                  <td data-label="EMAIL">{user.email}</td>
 
-                  <td>{user.phoneNumber}</td>
+                  <td data-label="Phone Number">{user.phoneNumber}</td>
 
-                  <td>{user.isAdmin ? 'Admin' : 'User'}</td>
+                  <td data-label="ROLE">{user.isAdmin ? 'Admin' : 'User'}</td>
 
                 </tr>
               )
