@@ -3,13 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
 import FileUploader from '../../../../components/FileUploader'
-import popAlert from '../../../../Helpers/popAlert'
 import Select from 'react-dropdown-select'
+import apiCrud from '../../../../Helpers/apiCrud'
 
 function EditProduct() {
 
   const params = useParams()
-  const navigate = useNavigate()
 
   // store all products
   const [products, setProducts] = useState([])
@@ -69,26 +68,7 @@ function EditProduct() {
   // handle submit
   async function handleSubmit(event) {
     event.preventDefault() 
-
-    await axios({
-      url: `/api/products/${params.id}`,
-      method: 'PUT',
-      headers: {
-         Authorization: `Bearer ${localStorage.jwt}`
-      },
-      data: updateForm
-    })
-    .then((res) => {
-      // show success message
-      popAlert('Product updated')
-      // retrun to products page
-      setTimeout(()=> navigate('/products'), 2000) 
-      return res.data
-    },
-    (error) => {
-      console.log(error)
-    }
-    )
+    apiCrud(`/api/products/${params.id}`, 'PUT', 'Product updated', updateForm)
   }
 
 

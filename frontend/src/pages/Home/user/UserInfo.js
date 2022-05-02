@@ -1,24 +1,7 @@
-import axios from 'axios'
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import popAlert from '../../../Helpers/popAlert'
+import apiCrud from '../../../Helpers/apiCrud'
 
 function UserInfo() {
-
-  const navigate = useNavigate()
-
-  // pre filled the form with current infos
-  React.useEffect(()=> {
-    axios.get(`/api/users/me`, {
-      headers: {
-         Authorization: `Bearer ${localStorage.jwt.slice(1, -1)}`
-      }
-    })
-    .then(res => setUpdateForm({
-      name: res.data.user
-    }))
-  },[])
-
 
   ///-- handle update form --///
   const [updateForm, setUpdateForm] = useState({
@@ -27,9 +10,6 @@ function UserInfo() {
     address: ``,
     phoneNumber: ``,
   })
-
-  console.log(updateForm)
-
 
   // handle input change
   function handleChange(event) {
@@ -42,33 +22,11 @@ function UserInfo() {
     })
   }
 
-
   // handle submit
   async function handleSubmit(event) {
     event.preventDefault() 
-
-    await axios({
-      url: `/api/users/me`,
-      method: 'PUT',
-      headers: {
-         Authorization: `Bearer ${localStorage.jwt}`
-      },
-      data: updateForm
-    })
-    .then((res) => {
-      // show success message
-      console.log(res.data)
-      popAlert('User updated')
-      // retrun to products page
-      setTimeout(()=> navigate('/'), 2000) 
-      return res.data
-    },
-    (error) => {
-      console.log(error)
-    }
-    )
+    apiCrud(`/api/users/me`,'PUT','User updated',updateForm)
   }
-
   
   return (
     <div className='dash-products-create' style={{padding: '3em'}}>
@@ -83,7 +41,7 @@ function UserInfo() {
             name='name'
             required
             onChange={handleChange}
-            value={updateForm.name}
+            value={updateForm.name ? updateForm.name : localStorage.userName}
             >
             </input>
           </div>

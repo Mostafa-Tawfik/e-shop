@@ -1,12 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
-import resolveTicket from './resloveTicket'
+import apiCrud from '../Helpers/apiCrud'
 
 function Tickets(props) {
 
   // store orders
   const {tickets} = props  
+
+  // resolve ticket
+  function resolveTicket(id) {
+    apiCrud(`/api/complaints/${id}`, 'PUT', 'Resolved')
+  }
 
   // handle actions btn
   function resolve(id) {
