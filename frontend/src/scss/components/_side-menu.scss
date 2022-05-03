@@ -30,10 +30,10 @@ background-color: $clr-main;
 .side-menu {
   position: fixed;
   left: -100vw;
-  top: 0%;
+  top: 70px;
   background: $grd-main;
   width: 100vw;
-  min-height: 100vh;
+  min-height: calc(100vh - 70px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,16 +61,17 @@ background-color: $clr-main;
 }
 
 
-@media (min-width: 440px) {
+@media (min-width: 1000px) {
   .side-menu {
     display: none;
+    
   }
   .menuToggler {
     display: none;
   }
 }
 
-@media (max-width: 440px) {
+@media (max-width: 1000px) {
   .side-menu {
     display:flex;
   }
