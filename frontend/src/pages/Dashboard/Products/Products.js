@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 
 import Select from 'react-dropdown-select'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
 import useProducts from '../../../hooks/useProducts'
 import { SpinnerDotted } from 'spinners-react'
 import popAlert from '../../../Helpers/popAlert'
 import apiCrud from '../../../Helpers/apiCrud'
+import popAction from '../../../Helpers/popAction'
+import useCreateProduct from '../../../hooks/useCreateProduct'
 
 function Products() {
 
   const navigate = useNavigate()
+  const createProduct = useCreateProduct()
 
   const {status, data: products, error} = useProducts()
 
@@ -19,18 +20,7 @@ function Products() {
     popAlert('Somthing went wrong', 'error')
   }
 
-
-  // create new product
-  function createProduct() {
-    apiCrud('/api/products', 'POST', 'Product added')
-  }
-
   
-  // delete product
-  async function deleteProduct(id) {
-    apiCrud(`/api/products/${id}`, 'DELETE')
-  }
-
   // set controls for actions drop menu
   const actionMenu = [
     {value: 'Edit', label: 'Edit'},
@@ -39,31 +29,16 @@ function Products() {
 
   const [action, setAction] = useState('')
 
-  const MySwal = withReactContent(Swal)
-
   // detect and execute actions from drop menu
   useEffect(()=>{
     if (action.value === 'Edit') {
       navigate(`/products/edit/${action.id}`)
     } else if (action.value === 'Delete') {
-      MySwal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire(
-            'Deleted!',
-            'Product has been deleted.',
-            'success',
-            deleteProduct(action.id),
-          )
-        }
-      })
+      popAction('Are you sure?', 
+      "You won't be able to revert this!",
+      'Yes, delete it!',
+      ()=>apiCrud(`/api/products/${action.id}`, 'DELETE', 'Product deleted')()
+      )
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[action])

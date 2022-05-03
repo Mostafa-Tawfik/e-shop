@@ -1,21 +1,22 @@
 import axios from 'axios'
+import { useNavigate } from 'react-router'
 import popAlert from './popAlert'
 
-async function apiCrud(url, method, message, data, action) {
+async function addProduct() {
+
+  const navigate = useNavigate()
 
   await axios({
-    url: url,
-    method: method,
+    url: '/api/products',
+    method: 'POST',
     headers: {
       Authorization: `Bearer ${localStorage.jwt}`
     },
-    data: data && data
   })
   .then((res) => {
     console.log(res.data)
-    message && popAlert(message)
+    popAlert('Product added')
     setTimeout(()=> window.location.reload(), 1500) 
-    action && action()
     return res.data
   })
   .catch(
@@ -26,4 +27,4 @@ async function apiCrud(url, method, message, data, action) {
   )
 }
 
-export default apiCrud
+export default addProduct
