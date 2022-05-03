@@ -2,10 +2,13 @@
   padding: 2em;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 1em;
   > h2 {
     margin-bottom: 1em;
     color: $clr-sec;
+    align-self: flex-start;
   }
   .support-items {
     display: flex;
@@ -52,13 +55,24 @@
 }
 
 
-@media (max-width: 440px) {
+@media (max-width: 1000px) {
   .support {
     padding: 0em;
     gap: 0em;
     .support-items {
       justify-content: flex-start;
       overflow: auto;
+      width: 80vw;
+      .support-items-table {
+        width: 80vw;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .support {
+    .support-items {
       width: 95vw;
       .support-items-table {
         width: 95vw;

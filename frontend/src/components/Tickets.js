@@ -1,28 +1,22 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+
 import apiCrud from '../Helpers/apiCrud'
+import popAction from '../Helpers/popAction'
 
 function Tickets(props) {
 
   // store orders
   const {tickets} = props  
 
-  // resolve ticket
-  function resolveTicket(id) {
-    apiCrud(`/api/complaints/${id}`, 'PUT', 'Resolved')
-  }
-
-  // handle actions btn
-  function resolve(id) {
-    return (
-      <button 
-      onClick={()=>resolveTicket(id)}
-      className='resolve-btn'
-      >
-        Resolve
-      </button>
+  function moreDetails(id, msg, isResolved) {
+    isResolved ?
+    popAction('Message', msg, 'Close!')
+    :
+    popAction('Message', msg, 'Resolve', 
+      ()=>apiCrud(`/api/complaints/${id}`, 'PUT', 'Resolved')()
     )
   }
+
 
   return (
     <>
@@ -36,7 +30,6 @@ function Tickets(props) {
               <th>NAME</th>
               <th>MESSAGE</th>
               <th>STATUS</th>
-              <th>ACTIONS</th>
             </tr>         
           </thead>
 
@@ -44,10 +37,12 @@ function Tickets(props) {
 
             {tickets && tickets.slice(0).reverse().map(ticket => {
               return (
-                <tr key={ticket._id}>
+                <tr key={ticket._id} 
+                style={{cursor: 'pointer'}} 
+                onClick={()=>moreDetails(ticket._id, ticket.complaintMessage, ticket.resolved)}>
 
                   <td data-label="Ticket ID">
-                    <Link to={`/complaints/${ticket._id}`}>#{ticket._id}</Link>
+                   #{ticket._id}
                   </td>
 
                   <td data-label="NAME">{ticket.user.name}</td>
@@ -58,8 +53,6 @@ function Tickets(props) {
                     {ticket.resolved ? <p style={{color: 'green', fontWeight: 'bolder'}}>Resolved</p> : 'Opened'}
                   </td>
                   
-                  <td data-label="ACTIONS">{!ticket.resolved && resolve(ticket._id)}</td>
-
                 </tr>
               )
             })}

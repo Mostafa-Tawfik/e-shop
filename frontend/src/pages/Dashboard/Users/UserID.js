@@ -6,6 +6,7 @@ import Tickets from '../../../components/Tickets'
 import Ratings from 'react-ratings-declarative'
 import useApi from '../../../hooks/useApi'
 import useProducts from '../../../hooks/useProducts'
+import popAction from '../../../Helpers/popAction'
 
 function UserID(props) {
 
@@ -73,6 +74,11 @@ function UserID(props) {
   )
 
 
+  function moreDetails(rating, msg) {
+    popAction(`Rating: ${rating}`, msg, 'Close!')
+  }
+
+
   const userReviewsSection = products && (
 
     <section className='user-reviews'>
@@ -83,11 +89,11 @@ function UserID(props) {
 
           <thead>
             <tr>
-              <th>IMAGE</th>
-              <th>NAME</th>
-              <th>RATING</th>
-              <th>COMMENT</th>
-              <th>DATE</th>
+              <th className='smCell'>IMAGE</th>
+              <th >NAME</th>
+              <th className='smCell'>RATING</th>
+              <th >COMMENT</th>
+              <th className='smCell'>DATE</th>
             </tr>
           </thead>
 
@@ -95,7 +101,9 @@ function UserID(props) {
 
             {filterByReviews.map((product, index) => {
               return (
-                <tr key={product._id}>
+                <tr key={product._id} 
+                onClick={()=>moreDetails(userReviews[index].rating, userReviews[index].comment)}
+                style={{cursor: 'pointer'}}>
 
                   {/* if admin go to admin order route */}
                   <td data-label="IMAGE">
