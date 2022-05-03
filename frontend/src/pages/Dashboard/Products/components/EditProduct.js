@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 import FileUploader from '../../../../components/FileUploader'
 import Select from 'react-dropdown-select'
@@ -9,6 +9,7 @@ import apiCrud from '../../../../Helpers/apiCrud'
 function EditProduct() {
 
   const params = useParams()
+  const navigate = useNavigate()
 
   // store all products
   const [products, setProducts] = useState([])
@@ -68,7 +69,8 @@ function EditProduct() {
   // handle submit
   async function handleSubmit(event) {
     event.preventDefault() 
-    apiCrud(`/api/products/${params.id}`, 'PUT', 'Product updated', updateForm)
+    apiCrud(`/api/products/${params.id}`, 'PUT', 'Product updated', updateForm,
+    ()=>navigate('/products/'))
   }
 
 
