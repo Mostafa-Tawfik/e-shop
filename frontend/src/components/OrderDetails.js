@@ -89,7 +89,7 @@ function OrderDetails(props) {
           <tfoot>
             <tr>
               <th colSpan= "4">TOTAL</th>
-              <td data-label="Grand TOTAL">${props.order.totalPrice && Number(props.order.totalPrice - props.order.shippingPrice).toFixed(2)}</td>
+              <td data-label="Subtotal">${props.order.totalPrice && Number(props.order.totalPrice - props.order.shippingPrice).toFixed(2)}</td>
             </tr>
           </tfoot>
 
@@ -114,7 +114,7 @@ function OrderDetails(props) {
 
             <tr>
               <th>Total Payment</th>
-              <td data-label="TOTAL">${props.order.totalPrice && Number(props.order.totalPrice).toFixed(2)}</td>
+              <td data-label="Grand TOTAL">${props.order.totalPrice && Number(props.order.totalPrice).toFixed(2)}</td>
             </tr>
 
           </tfoot>
