@@ -5,7 +5,7 @@ import OrdersList from '../../../components/OrdersList'
 import Tickets from '../../../components/Tickets'
 import Ratings from 'react-ratings-declarative'
 import useApi from '../../../hooks/useApi'
-import useGetProducts from '../../../hooks/useGetProducts'
+import useProducts from '../../../hooks/useProducts'
 
 function UserID(props) {
 
@@ -22,7 +22,7 @@ function UserID(props) {
 
 
   // fetch products
-  const {data: products} = useGetProducts()
+  const {data: products} = useProducts()
 
   const filterByReviews = products && products.filter(p => p.reviews.some(r => r.user === params.id))
 

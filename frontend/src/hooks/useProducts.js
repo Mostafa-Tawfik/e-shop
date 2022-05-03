@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import axios from "axios";
 
-const useGetProducts = async () => {
+const useProducts = async () => {
 
   const { data } = await axios({
     url: '/api/products?productNum=Infinity',
@@ -11,5 +11,8 @@ const useGetProducts = async () => {
 };
 
 export default function useApi() {
-  return useQuery(["products"], useGetProducts);
+  return useQuery(["products"], useProducts, {
+    refetchOnMount: false,
+    refetchOnWindowFocus: false
+  });
 }

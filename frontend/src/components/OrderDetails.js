@@ -88,8 +88,8 @@ function OrderDetails(props) {
 
           <tfoot>
             <tr>
-              <td colSpan= "4"></td>
-              <td>${props.order.totalPrice && props.order.totalPrice.toFixed(2) - props.order.shippingPrice}</td>
+              <th colSpan= "4">TOTAL</th>
+              <td data-label="Grand TOTAL">${props.order.totalPrice && Number(props.order.totalPrice - props.order.shippingPrice).toFixed(2)}</td>
             </tr>
           </tfoot>
 
@@ -98,27 +98,23 @@ function OrderDetails(props) {
       </div>
 
       <div className='order-details-payment'>
-        <table className='order-details-payment-table'>
-
-          <tbody>
-
-            <tr>
-              <th>Subtotal</th>
-              <th>${props.order.totalPrice && props.order.totalPrice.toFixed(2) - props.order.shippingPrice}</th>
-            </tr>
-
-            <tr>
-              <th>Shipping</th>
-              <th>${props.order.shippingPrice && props.order.shippingPrice.toFixed(2)}</th>
-            </tr>
-
-          </tbody>
+        <table>
 
           <tfoot>
 
             <tr>
+              <th>Subtotal</th>
+              <td data-label="Subtotal">${props.order.totalPrice && Number(props.order.totalPrice - props.order.shippingPrice).toFixed(2)}</td>
+            </tr>
+
+            <tr>
+              <th>Shipping</th>
+              <td data-label="Shipping">${props.order.shippingPrice && Number(props.order.shippingPrice).toFixed(2)}</td>
+            </tr>
+
+            <tr>
               <th>Total Payment</th>
-              <th>${props.order.totalPrice && props.order.totalPrice.toFixed(2)}</th>
+              <td data-label="TOTAL">${props.order.totalPrice && Number(props.order.totalPrice).toFixed(2)}</td>
             </tr>
 
           </tfoot>

@@ -1,6 +1,6 @@
 import React from 'react'
 import useApi from '../../../hooks/useApi'
-import useGetProducts from '../../../hooks/useGetProducts'
+import useProducts from '../../../hooks/useProducts'
 
 function Statistics() {
 
@@ -14,7 +14,7 @@ function Statistics() {
    const { data: tickets} = useApi('/api/complaints/', 'GET')
 
    // fetch products
-   const {data: products} = useGetProducts()
+   const {data: products} = useProducts()
 
  
   return (

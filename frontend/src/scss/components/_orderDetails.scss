@@ -33,47 +33,18 @@
     justify-content: flex-start;
     align-items: center;
     padding: 1em;
-    .order-details-items-table {
-      text-align: left;
-      position: relative;
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 10px;
-      img {
-        width: 60px;
-        border-radius: 10px;
-      }
-      tr {
-        border: $border;
-        outline: thin solid;
-        outline-color: rgb(128, 128, 128, 0.3);
-        border-radius: 10px;
-      }
-      td, th {
-        padding: 10px;
-        border-radius: 10px;
-        
-      }
-    }
+  }
+  table {
+    box-shadow: none;
   }
   .order-details-payment {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 1em;
-    .order-details-payment-table {
-      text-align: left;
-      position: relative;
-      width: 40%;
-      border-collapse: separate;
-      tr {
-        border-radius: 10px;
-      }
-      td, th {
-        padding: 10px;
-        border-radius: 10px;
-        
-      }
+    table {
+      text-align: center;
+      width: 66%;
     }
   }
   .place-order-btn {
@@ -116,7 +87,7 @@
       overflow: auto;
     }
     .order-details-payment {
-      .order-details-payment-table {
+      table {
         width: 100%;
       }
     }

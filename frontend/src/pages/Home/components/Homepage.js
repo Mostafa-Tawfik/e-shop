@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 
 import { SpinnerDotted } from 'spinners-react'
 import ProductCard from '../../../components/ProductCard';
-import useGetProducts from '../../../hooks/useGetProducts'
+import useProducts from '../../../hooks/useProducts'
 
 
 function Homepage(props) {
 
-  const {status, data: products} = useGetProducts()
+  const {status, data: products} = useProducts()
 
   const categories = status === 'success' && [...new Set(products.map(p => p.category))]
 

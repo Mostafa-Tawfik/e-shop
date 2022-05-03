@@ -4,7 +4,7 @@ import {Link, useNavigate} from 'react-router-dom'
 import Select from 'react-dropdown-select'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import useGetProducts from '../../../hooks/useGetProducts'
+import useProducts from '../../../hooks/useProducts'
 import { SpinnerDotted } from 'spinners-react'
 import popAlert from '../../../Helpers/popAlert'
 import apiCrud from '../../../Helpers/apiCrud'
@@ -13,7 +13,7 @@ function Products() {
 
   const navigate = useNavigate()
 
-  const {status, data: products, error} = useGetProducts()
+  const {status, data: products, error} = useProducts()
 
   if(error) {
     popAlert('Somthing went wrong', 'error')

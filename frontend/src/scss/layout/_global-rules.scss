@@ -133,6 +133,11 @@ table {
       display: block;
       margin-bottom: .625em;
     }
+    tfoot {
+      th {
+        display: none;
+      }
+    }
   }
 }
 

@@ -4,7 +4,7 @@ import Ratings from 'react-ratings-declarative';
 
 import useApi from '../../../hooks/useApi';
 import apiCrud from '../../../Helpers/apiCrud';
-import useGetProducts from '../../../hooks/useGetProducts';
+import useProducts from '../../../hooks/useProducts';
 
 function ReviewOrder() {
 
@@ -12,7 +12,7 @@ function ReviewOrder() {
 
   const {data: order, status} = useApi(`/api/orders/${params.id}`, 'GET')
 
-  const {data: products} = useGetProducts()
+  const {data: products} = useProducts()
 
 
   // extract products form the order
