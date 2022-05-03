@@ -23,8 +23,6 @@ function SideMenu(props) {
     })
   }
 
-  console.log(localStorage.isAdmin);
-
   // hide menu toggler on homepage for medium screens
   function checkAdmin() {
     if(localStorage.isAdmin === 'false') {

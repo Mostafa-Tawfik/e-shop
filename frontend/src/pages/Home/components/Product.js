@@ -1,27 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
 
 import popAlert from '../../../Helpers/popAlert'
 import Ratings from 'react-ratings-declarative'
+import useApi from '../../../hooks/useApi'
 
 function Product(props) {
+  
+  const params = useParams()
 
   // auto start top page
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
-  const [product, setProduct] = React.useState('')
-  console.log(product)
-
-  const params = useParams()
-
-  React.useEffect(()=> {
-    axios.get(`/api/products/${params.id}`)
-    .then(res => setProduct(res.data))
-  },[params.id])
-
+  const {data: product, status} = useApi(`/api/products/${params.id}`, 'GET')
 
   // control active info section
   const [activeInfo, SetActiveInfo] = useState('desc')
@@ -39,6 +32,7 @@ function Product(props) {
 
 
   return (
+    status === 'success' && 
     <div className='product'>
 
       <div className='product-holder'>

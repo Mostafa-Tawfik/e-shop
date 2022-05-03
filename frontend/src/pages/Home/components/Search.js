@@ -1,24 +1,18 @@
-import axios from 'axios'
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
+import useApi from '../../../hooks/useApi'
 
 function Search() {
 
   const params = useParams()
 
-  console.log(params.name)
-
   // a state to hold search queries
-  const [results, setResults] = React.useState([])
+  const {data: resultsData, status} = useApi(`/api/products?productNum=Infinity&keyword=${params.name}`, 'GET')
 
-  React.useEffect(() => {
-    params.name === '' ?
-    setResults([]) :
-    axios.get(`/api/products?productNum=Infinity&keyword=${params.name}`)
-    .then(res => setResults(res.data.products))
-  },[params])
+  const results = resultsData && resultsData.products
 
   return (
+    status === 'success' &&
     <div className='search'>
       <h5>{results.length} Results for"{params.name}"</h5>
       <section className='search-card-holder'>
