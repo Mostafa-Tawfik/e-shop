@@ -7,7 +7,7 @@ const useProducts = async () => {
     url: '/api/products?productNum=Infinity',
     method: 'GET',
   });
-  return data.products;
+  return data.products.slice(0).reverse();
 };
 
 export default function useApi() {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 // important ***
@@ -23,45 +23,54 @@ function SideMenu(props) {
     })
   }
 
+  console.log(localStorage.isAdmin);
+
+  // hide menu toggler on homepage for medium screens
+  function checkAdmin() {
+    if(localStorage.isAdmin === 'false') {
+      return `menuToggler user`
+    } else if (localStorage.isAdmin === 'true') {
+      return 'menuToggler'
+    } else return `menuToggler user`
+  }
+
 
   return (
     <>
-      <div className='menuToggler'>
-        <button 
-          className={
-            isActive.menuActive ? 
-            `toggle active` : 
-            `toggle`} 
-            onClick={toggleMenu}
+      <div className={checkAdmin()}>
+        <button className={
+          isActive.menuActive ? 
+          `toggle active` : 
+          `toggle`} 
+          onClick={toggleMenu}
         >
         </button>
       </div>
 
       <div className={
-            isActive.menuActive ? 
-            `side-menu active` : 
-            `side-menu`} >
+        isActive.menuActive ? 
+        `side-menu active` : 
+        `side-menu`} 
+      >
 
-        <ul>
+      <ul>
+        <li>
+          <Link to={`/`}>    
+            <p className="side-menu-li" onClick={toggleMenu}>
+              Home
+            </p>
+          </Link>            
+        </li>
 
-          <li>
-            <Link to={`/`}>    
+        {content.map((c, index) => (
+          <li key={index}>
+            <Link to={`/${c}`}>    
               <p className="side-menu-li" onClick={toggleMenu}>
-                Home
+                {c}
               </p>
-            </Link>            
+            </Link>
           </li>
-
-          {content.map((c, index) => (
-            <li key={index}>
-              <Link to={`/${c}`}>    
-                <p className="side-menu-li" onClick={toggleMenu}>
-                  {c}
-                </p>
-              </Link>
-            </li>
-          ))}
-
+        ))}
         </ul>
       </div>
     </>

@@ -81,4 +81,16 @@ background-color: $clr-main;
     display: flex;
     align-items: center;
   }
+  .menuToggler.user {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .menuToggler.user {
+    z-index: 100;
+    filter: invert(1);
+    display: flex;
+    align-items: center;
+  }
 }

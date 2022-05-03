@@ -1,24 +1,20 @@
 import React, { useState } from 'react'
-import logo from '../../logo.svg'
 import { Link } from 'react-router-dom'
+
+import logo from '../../logo.svg'
 import SearchBar from './components/SearchBar'
 import SideMenu from '../../components/SideMenu'
+import useProducts from '../../hooks/useProducts'
 
 function Header(props) {
 
   const {userName} = localStorage
 
   // fetch products
-  const [products, setProducts] = React.useState([])
-
-  React.useEffect(()=> {
-    fetch('/api/products?productNum=Infinity')
-    .then(res => res.json())
-    .then(data => setProducts(data.products))
-  },[])
+  const {data: products} = useProducts()
   
   // map over products and return only unique values
-  const categories = [...new Set(products.filter(p => p.category !== 'Sample category').map(p => p.category))]
+  const categories = products && [...new Set(products.filter(p => p.category !== 'Sample category').map(p => p.category))]
 
   
   // handle sub nav bar
@@ -26,7 +22,7 @@ function Header(props) {
   const [detectCat, setDetectCat] = useState('')
   
   // map over detected category and return only unique values of sub cat
-  const subCategories = [...new Set(products.filter(p => p.category === detectCat).map(p => p.subCategory).filter(p => p !== undefined))]
+  const subCategories = products && [...new Set(products.filter(p => p.category === detectCat).map(p => p.subCategory).filter(p => p !== undefined))]
 
 
   // a state to controll account drop down menu
@@ -49,7 +45,7 @@ function Header(props) {
       <div className='bottom-pane'>
         <div className='bottom-pane_info'>
 
-          <SideMenu content={categories} isAdmin={props.isAdmin}/>
+          {categories && <SideMenu content={categories}/>}
 
           <Link to={'/'}>
             <div className="App-title">
@@ -116,7 +112,7 @@ function Header(props) {
       </div>
       
       <nav className="navbar">
-        {categories.map((i,index) => {
+        {categories && categories.map((i,index) => {
           return (
             <Link to={`/${i}`} key={index} onMouseEnter={()=>setDetectCat(i)}>
               <h4 className="navbar-item">{i}</h4>
