@@ -9,18 +9,11 @@ function SideMenu(props) {
   const {content} = props
 
   // control side menu
-  const [isActive, setIsActive] = useState({
-    menuActive: false,
-  })
+  const [isMenuActive, setIsMenuActive] = useState(false)
 
   // toggle menu
   function toggleMenu() {
-    setIsActive(prev => {
-      return {
-        ...prev,
-        menuActive: !isActive.menuActive
-      }
-    })
+    setIsMenuActive(prev => !prev)
   }
 
   // hide menu toggler on homepage for medium screens
@@ -37,16 +30,17 @@ function SideMenu(props) {
     <>
       <div className={checkAdmin()}>
         <button className={
-          isActive.menuActive ? 
+          isMenuActive ? 
           `toggle active` : 
           `toggle`} 
           onClick={toggleMenu}
+          onBlur={()=>setIsMenuActive(false)}
         >
         </button>
       </div>
 
       <div className={
-        isActive.menuActive ? 
+        isMenuActive ? 
         `side-menu active` : 
         `side-menu`} 
       >
@@ -54,7 +48,7 @@ function SideMenu(props) {
       <ul>
         <li>
           <Link to={`/`}>    
-            <p className="side-menu-li" onClick={toggleMenu}>
+            <p className="side-menu-li" onClick={()=>setIsMenuActive(false)}>
               Home
             </p>
           </Link>            
@@ -63,7 +57,7 @@ function SideMenu(props) {
         {content.map((c, index) => (
           <li key={index}>
             <Link to={`/${c}`}>    
-              <p className="side-menu-li" onClick={toggleMenu}>
+              <p className="side-menu-li" onClick={()=>setIsMenuActive(false)}>
                 {c}
               </p>
             </Link>

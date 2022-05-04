@@ -21,7 +21,7 @@ function Footer() {
   return (
     <div>
       <div className='footer-top-pane'>
-        <h3>BACK TO TOP</h3>
+        <h3 onClick={()=>window.scrollTo(0, 0)}>BACK TO TOP</h3>
       </div>
 
       <div>

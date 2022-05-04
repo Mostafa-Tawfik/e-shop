@@ -7,7 +7,7 @@ import EditProduct from './Products/components/EditProduct'
 import Orders from './Orders/Orders'
 import OrderID from './Orders/OrderID'
 import Users from './Users/Users'
-import SideMenu from '../../components/SideMenu'
+import SideMenu from '../../layout/SideMenu'
 import UserID from './Users/UserID'
 import Support from './Support/Support'
 import Statistics from './Statistics/Statistics'
@@ -22,8 +22,26 @@ function Dashboard(props) {
   return (
     <div className='dashboard'>
 
+      <div className='admin-header'>
+        <div className="admin-top-pane">
+          <div>
+            <SideMenu content={adminPanel}/>
+          </div>
+
+          <button onClick={()=>props.signOut()} className='logout'>Logout</button>
+        </div>
+
+        <div className="admin-bottom-pane">
+          <img src="https://cdn-icons-png.flaticon.com/512/237/237474.png?w=996&t=st=1651700886~exp=1651701486~hmac=f95531cdefbead1db2e79d20e5d3d66b3b7f4878bf4ee0c3746bb34376fe8815" alt="" />
+          <Link to={'/'}>
+            <h1>Dashboard</h1>
+          </Link>
+        </div>
+      </div>
+
       <div className='admin-panel'>
         <h4>Admin Panel</h4>
+
 
         <Link to='/'>
           <div className='panel-section'>
@@ -41,13 +59,6 @@ function Dashboard(props) {
         )})}
       </div>
 
-      <div className='admin-side-menu'>
-        <div>
-          <SideMenu content={adminPanel}/>
-        </div>
-
-        <button onClick={()=>props.signOut()} className='logout'>Logout</button>
-      </div>
 
       <div className='sections'>
         <Routes>

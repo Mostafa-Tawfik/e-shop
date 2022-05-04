@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import logo from '../../logo.svg'
 import SearchBar from './components/SearchBar'
-import SideMenu from '../../components/SideMenu'
+import SideMenu from '../SideMenu'
 import useProducts from '../../hooks/useProducts'
 
 function Header(props) {

@@ -10,6 +10,11 @@
 .dashboard {
   display: flex;
   background: $clr-light;
+  .admin-header{
+    .admin-bottom-pane{
+      display: none;
+    }
+  }
   .admin-panel {
     position: fixed;
     padding: 2em;
@@ -51,25 +56,41 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 70px;
-    .admin-panel {
-      display: none;
-    }
-    .admin-side-menu {
+    margin-top: 200px;
+    .admin-header {
+      width: 100%;
       position: fixed;
       top: 0;
       z-index: 100;
-      width: 100%;
-      padding: 1em;
-      background: $grd-main;
-      display: flex;
-      justify-content: space-between;
-      .logout {
-        position: relative;
-        right: 0px;
-        top: 0px;
-        @include slideSolidBtn
+      .admin-top-pane {
+        padding: 1em;
+        background: $clr-sec;
+        display: flex;
+        justify-content: space-between;
+        .logout {
+          position: relative;
+          right: 0px;
+          top: 0px;
+          @include slideSolidBtn
+        }
       }
+      .admin-bottom-pane {
+        padding: 1em;
+        background: $grd-main;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        h1 {
+          color: $clr-light;
+        }
+        img {
+          width: 96px;
+          filter: invert(1);
+        }
+      }
+    }
+    .admin-panel {
+      display: none;
     }
     .sections {
       margin-left: 0px;
