@@ -1,5 +1,5 @@
 .cat-holder {
-  width: min(85vw, 1200px);
+  width: min(90vw, 1200px);
   margin: 1em 0;
   > h4 {
     margin-bottom: 1em;
@@ -7,14 +7,44 @@
   }
 }
 
-@media (max-width: 800px) {
+.flash {
+  padding: 1em;
+  margin: 2em 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  .flash-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2em;
+  }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 1000px) {
+}
+
+@media (max-width: 600px) {
   .cat-holder {
     h4 {
       font-size: 1.5rem;
       font-weight: 600;
+    }
+  }
+  .flash {
+    padding: 0em;
+    margin: 2em 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    .flash-holder {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2em;
     }
   }
 }

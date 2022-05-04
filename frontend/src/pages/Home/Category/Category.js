@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 
-import ProductCard from '../../../components/ProductCard'
+import ProductCard from '../components/ProductCard'
 import Ratings from 'react-ratings-declarative'
 import useProducts from '../../../hooks/useProducts'
 

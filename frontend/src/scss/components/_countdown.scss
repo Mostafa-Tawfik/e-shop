@@ -1,0 +1,24 @@
+.countdown {
+  display: flex;
+  font-family: sans-serif;
+  gap: 0.5em;
+  text-align: center;
+  .time {
+    font-size: 12px;
+  }  
+  span {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .countdown {
+    gap: 0.1em;
+    .time {
+      font-size: 10px;
+    }  
+    span {
+      font-size: 6px;
+    }
+  }
+}

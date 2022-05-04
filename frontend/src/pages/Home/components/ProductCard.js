@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import popAlert from '../Helpers/popAlert'
+import popAlert from '../../../Helpers/popAlert'
 
 function ProductCard(props) {
 
@@ -29,11 +29,11 @@ function ProductCard(props) {
       
         {content.discount ? 
         <div className='product-price-com'>
-          <h5 className='product-newprice'>${content.price.toFixed(0) * (100 - content.discount)/100}</h5>
-          <h5 className='product-oldprice'>${content.price}</h5>
+          <h5 className='product-newprice'>${Number(content.price * (100 - content.discount)/100).toFixed(2)}</h5>
+          <h5 className='product-oldprice'>${Number(content.price).toFixed(2)}</h5>
         </div>
           : 
-        <h5 className='product-price'>${content.price}</h5>}
+        <h5 className='product-price'>${Number(content.price).toFixed(2)}</h5>}
       </div>
       
       {/* onclick add to cart */}

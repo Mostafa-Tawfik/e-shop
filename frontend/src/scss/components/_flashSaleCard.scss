@@ -1,0 +1,105 @@
+.flash-card {
+  width: min(90vw, 500px);
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  transition: 0.3s ease-in;
+  &:hover, &:active {
+    transform: scale(1.03);
+  }
+  .flash-card-header {
+    height: 150px;
+    img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+  }
+  .flash-card-main {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    > img {
+      width: 40%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .flash-card-main-info {
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.5em;
+      .flash-card-main-info-cat {
+        width: 100%;
+        display: flex;
+        gap: 0.5em;
+        p {
+          font-size: 0.8rem;
+          padding: 0 0.5em;
+          background: $clr-main;
+          color: $clr-light;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+      .flash-card-main-info-price {
+        display: flex;
+        gap: 0.5em;
+        .flash-card-main-info-oldprice {
+          color: gray;
+          text-decoration: line-through;
+        }
+      }
+    }
+  }
+}
+
+
+@media (max-width: 1000px) {
+  .flash-card {
+    width: 40vw;
+    height: 550px;
+    .flash-card-header {
+      img {
+        object-position: left;
+      }
+    }
+    .flash-card-main {
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.5em;
+      > img {
+        width: 100%;
+        height: 200px;
+      }
+      .flash-card-main-info {
+        height: 150px;
+        width: 100%;
+        gap: 0.2em;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 600px) {
+  .flash-card {
+    width: 90vw;
+    height: 350px;
+    .flash-card-main {
+      flex-direction: row;
+      justify-content: space-between;
+      > img {
+        width: 40%;
+        height: 200px;
+      }
+      .flash-card-main-info {
+        height: 200px;
+        width: 60%;
+        gap: 0.5em;
+      }
+    }
+  }
+}

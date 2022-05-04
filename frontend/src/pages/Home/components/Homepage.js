@@ -2,8 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 import { SpinnerDotted } from 'spinners-react'
-import ProductCard from '../../../components/ProductCard';
+import ProductCard from './ProductCard';
 import useProducts from '../../../hooks/useProducts'
+import FlashSaleCard from './FlashSaleCard';
 
 
 function Homepage(props) {
@@ -16,12 +17,22 @@ function Homepage(props) {
     <div>
       <img src='../images/Free-Advertising-Ideas.jpg' alt='ad' className='ad-image'></img>
 
+      {products && 
+      <section className='flash'>
+        <h2>Flash Sale</h2>
+        <article className='flash-holder'>
+          <FlashSaleCard content={products[2]}/>
+          <FlashSaleCard content={products[11]}/>
+        </article>
+      </section>
+      }
+
       {status === 'success' && categories.map((c,i) => (
         <div key={i}>
           <div className='cat-holder'>
 
             <Link to={`/${c}`}>
-              <h4>{c}</h4>
+              <h3>{c}</h3>
             </Link>
 
             <div className='product-holder'>
