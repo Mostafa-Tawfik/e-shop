@@ -30,6 +30,11 @@
       flex-direction: column;
       justify-content: center;
       gap: 0.5em;
+      p {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
       .flash-card-main-info-cat {
         width: 100%;
         display: flex;
