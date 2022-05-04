@@ -91,8 +91,9 @@ background-color: $clr-main;
 
 @media (max-width: 600px) {
   .menuToggler.user {
+    width: fit-content;
     z-index: 100;
-    filter: invert(1);
+    filter: invert(0.7);
     display: flex;
     align-items: center;
   }

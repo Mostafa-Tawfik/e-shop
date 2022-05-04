@@ -99,6 +99,13 @@
         font-size: 15px;
       }
 
+}
 
 
+@media (max-width: 600px) {
+	.login{
+    .m-5-auto {
+        margin-top: -10rem
+    }
+	}
 }

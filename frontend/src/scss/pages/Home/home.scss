@@ -23,9 +23,7 @@
 
 @media (max-width: 480px) {
   .App-main {
-    > div {
-      margin-top: 6em;
-    }
+    margin-top: 200px;
     .ad-image {
       object-fit: cover;
       width: 90vw;

@@ -32,105 +32,140 @@ function Header(props) {
     setAccountIsOpen(prev => !prev)
   }
 
+
+  const userAccount = (
+    <div onClick={openAccount}className="header-account-holder">
+      <div className="header-account">
+
+        <img src='https://api.iconify.design/mdi/account-circle.svg?color=whitesmoke' alt='account'></img>
+
+        <div className='header-account-account'>
+          {/* if signed in show a user welcome */}
+          {userName && <p>Hi {userName}!</p>}
+          <h3>Account</h3>
+        </div>
+
+        <img src='https://api.iconify.design/mdi/menu-down.svg?color=whitesmoke' alt='arrow'></img>
+      </div>
+      {accountIsOpen && <div className="header-account-li" tabIndex='true' onBlur={openAccount}>
+
+        {userName ?
+        // if signed in
+        <button onBlur={openAccount} onClick={props.signOut}>Sign Out</button>
+        :
+        // if signed out
+        <Link to={'/login'}>
+          <button onBlur={openAccount}>Sign In</button>
+        </Link>
+        }
+        <hr></hr>
+
+        <Link to={'/user/orders'}>
+          <h5>My Orders</h5> 
+        </Link>
+
+        <Link to={'/user'}>
+          <h5>Update info</h5> 
+        </Link>
+
+        <Link to={'/support'}>
+          <h5>Need help!</h5> 
+        </Link>
+
+      </div>}
+    </div>
+  )
+
+
+  const cartSection = (
+    <Link to={'/cart'}>
+      <div className='header-cart'>
+        <img src='https://api.iconify.design/clarity/shopping-cart-solid-badged.svg?color=whitesmoke' className="cart-logo" alt="cart"/>
+        <div className='cart-counter'>{props.cart.length}</div>
+      </div>
+    </Link>
+  )
+
   return (
     <div>
-      <div className='top-pane'>
-        <div className='top-pane_info'>
-          <p>Fast & Free Delivery</p>
-          <p>Shop though a wide range of products</p>
-          <p>Free Returns</p>
+      <div className="main-header">
+        <div className='top-pane'>
+          <div className='top-pane_info'>
+            <p>Fast & Free Delivery</p>
+            <p>Shop though a wide range of products</p>
+            <p>Free Returns</p>
+          </div>
         </div>
+
+        <div className='bottom-pane'>
+          <div className='bottom-pane_info'>
+
+            {categories && <SideMenu content={categories}/>}
+
+            <Link to={'/'}>
+              <div className="App-title">
+                <img src={logo} className="App-logo" alt="logo"/>
+                <h1>E-Shop</h1>
+              </div>
+            </Link>
+
+            <SearchBar />
+            
+            {userAccount}
+
+            {cartSection}        
+
+          </div>
+        </div>
+        
+        <nav className="navbar">
+          {categories && categories.map((i,index) => {
+            return (
+              <Link to={`/${i}`} key={index} onMouseEnter={()=>setDetectCat(i)}>
+                <h4 className="navbar-item">{i}</h4>
+              </Link>
+            )
+          })}
+        </nav>
+
+        <nav className="subNavbar">
+          {subCategories && subCategories.map((i,index) => {
+            return (
+              <Link to={`/${i}`} key={index}>
+                <h4 className="navbar-item">{i}</h4>
+              </Link>
+            )
+          })}
+        </nav>
       </div>
 
-      <div className='bottom-pane'>
-        <div className='bottom-pane_info'>
+      <div className="mobile-header">
+        <div className='top-pane'>
+          
+          {userAccount}
+        </div>
 
-          {categories && <SideMenu content={categories}/>}
-
+        <div className='mid-pane'>
           <Link to={'/'}>
             <div className="App-title">
               <img src={logo} className="App-logo" alt="logo"/>
               <h1>E-Shop</h1>
             </div>
           </Link>
+        </div>
 
-          {/* search bar */}
+        <div className='bottom-pane'>
+          {categories && <SideMenu content={categories}/>}          
           <SearchBar />
-          
-          {/* user account */}
-          <div onClick={openAccount}className="header-account-holder">
-            <div className="header-account">
-
-              <img src='https://api.iconify.design/mdi/account-circle.svg?color=whitesmoke' alt='account'></img>
-
-              <div className='header-account-account'>
-                {/* if signed in show a user welcome */}
-                {userName && <p>Hi {userName}!</p>}
-                <h3>Account</h3>
-              </div>
-
-              <img src='https://api.iconify.design/mdi/menu-down.svg?color=whitesmoke' alt='arrow'></img>
-            </div>
-            {accountIsOpen && <div className="header-account-li" tabIndex='true' onBlur={openAccount}>
-
-              {userName ?
-              // if signed in
-              <button onBlur={openAccount} onClick={props.signOut}>Sign Out</button>
-              :
-              // if signed out
-              <Link to={'/login'}>
-                <button onBlur={openAccount}>Sign In</button>
-              </Link>
-              }
-              <hr></hr>
-
-              <Link to={'/user/orders'}>
-                <h5>My Orders</h5> 
-              </Link>
-
-              <Link to={'/user'}>
-                <h5>Update info</h5> 
-              </Link>
-
-              <Link to={'/support'}>
-                <h5>Need help!</h5> 
-              </Link>
-
-            </div>}
-          </div>
-
-          {/* cart */}
           <Link to={'/cart'}>
             <div className='header-cart'>
-              <img src='https://api.iconify.design/clarity/shopping-cart-solid-badged.svg?color=whitesmoke' className="cart-logo" alt="cart"/>
+              <img src='https://api.iconify.design/clarity/shopping-cart-solid-badged.svg?color=%23073c81' className="cart-logo" alt="cart"/>
               <div className='cart-counter'>{props.cart.length}</div>
             </div>
           </Link>
-
-          
         </div>
+        
       </div>
-      
-      <nav className="navbar">
-        {categories && categories.map((i,index) => {
-          return (
-            <Link to={`/${i}`} key={index} onMouseEnter={()=>setDetectCat(i)}>
-              <h4 className="navbar-item">{i}</h4>
-            </Link>
-          )
-        })}
-      </nav>
-
-      <nav className="subNavbar">
-        {subCategories && subCategories.map((i,index) => {
-          return (
-            <Link to={`/${i}`} key={index}>
-              <h4 className="navbar-item">{i}</h4>
-            </Link>
-          )
-        })}
-      </nav>
-
     </div>
   )
 }
