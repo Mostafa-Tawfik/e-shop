@@ -1,12 +1,13 @@
 import axios from 'axios';
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { setLocalStorage } from '../Helpers/localStorage';
+import { AuthContext } from '../context/Auth-context';
 import popAlert from '../Helpers/popAlert';
 
-export default function Login(props) {
+export default function Login() {
 
   const navigate = useNavigate()
+  const {signIn} = useContext(AuthContext)
 
   // Error Message State
   const [errorMessages, setErrorMessages] = React.useState('');
@@ -40,12 +41,10 @@ export default function Login(props) {
     })
       .then((res) => {
         console.log('successfully logged in');
-        // save user details
         localStorage.setItem('jwt', res.data.token);
-        setLocalStorage('auth', res.data);
+        signIn(res.data);
         popAlert(`Welcome back`);
         navigate('/');
-        setTimeout(()=> window.location.reload(), 1500) 
         return res.data;
       },
         (error) => {
