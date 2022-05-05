@@ -6,7 +6,7 @@ import ProductCard from '../components/ProductCard'
 import Ratings from 'react-ratings-declarative'
 import useProducts from '../../../hooks/useProducts'
 
-function Category(props) {
+function Category() {
 
   const params = useParams()
 
@@ -171,7 +171,7 @@ function Category(props) {
 
         <div className='product-holder'>
           {filterBy.map(product => (
-            <ProductCard content={product} {...props} key={product._id}/>
+            <ProductCard content={product} key={product._id}/>
           ))}
         </div>
       </section>

@@ -7,7 +7,7 @@ import useProducts from '../../../hooks/useProducts'
 import FlashSaleCard from './FlashSaleCard';
 
 
-function Homepage(props) {
+function Homepage() {
 
   const {status, data: products} = useProducts()
 
@@ -40,7 +40,7 @@ function Homepage(props) {
               {status === 'success' && products.filter(i=>i.category === c).map(i => {
                 return (
                   <div key={i._id}>
-                    <ProductCard content={i} {...props}/>
+                    <ProductCard content={i}/>
                   </div>
                 )
               })}

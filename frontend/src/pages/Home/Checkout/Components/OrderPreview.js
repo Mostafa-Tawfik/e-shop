@@ -1,16 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { useNavigate } from 'react-router'
+import { CartContext } from '../../../../context/CartContext'
+import { OrderContext } from '../../../../context/OrderContext'
 import apiCrud from '../../../../Helpers/apiCrud'
 
 
-function OrderPreview(props) {
+function OrderPreview() {
+
+  const navigate = useNavigate()
+
+  const {emptyCart} = useContext(CartContext)
+  const order = useContext(OrderContext).order
 
   // destrcture sections form the order
-  const {shippingAddress, orderItems, totalPrice, shippingPrice } = props.order
+  const {shippingAddress, orderItems, totalPrice, shippingPrice } = order
 
   // handle placment
   async function placeOrder(event) {
     event.preventDefault()
-    apiCrud('/api/orders', 'POST', 'Enjoy your order', props.order)
+    apiCrud('/api/orders', 'POST', 'Enjoy your order', order, 
+    ()=> {return emptyCart(), navigate('/')})
   }
 
   return (

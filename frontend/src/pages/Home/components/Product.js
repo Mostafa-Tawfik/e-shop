@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import popAlert from '../../../Helpers/popAlert'
 import Ratings from 'react-ratings-declarative'
 import useApi from '../../../hooks/useApi'
+import { CartContext } from '../../../context/CartContext'
 
-function Product(props) {
+function Product() {
   
   const params = useParams()
+
+  const cart = useContext(CartContext).cart
+  const addToCart = useContext(CartContext).addToCart
 
   // auto start top page
   useEffect(() => {
@@ -71,13 +75,13 @@ function Product(props) {
           {/* onclick add to cart */}
           <button onClick={()=> {
             // check if the item is already in the cart
-              props.cart.length > 0 &&
-              props.cart.map(c => c._id).includes(product._id) ?
+              cart.length > 0 &&
+              cart.map(c => c._id).includes(product._id) ?
               popAlert('Product already in your cart', 'info') :
-              props.addToCart(product)
+              addToCart(product)
             }}>
               {/* if product is on the cart show "added" */}
-              {props.cart && props.cart.map(c => c._id).includes(product._id) ? 
+              {cart && cart.map(c => c._id).includes(product._id) ? 
               <p>Added</p> :
               <p>Add to cart</p>}
               

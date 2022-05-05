@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import OrderSummary from './OrderSummary'
 import popAlert from '../../../Helpers/popAlert'
+import { CartContext } from '../../../context/CartContext';
 
-function Cart(props) {
+function Cart() {
 
-  console.log(props);
+  const {cart, setQty, removeFromCart} = useContext(CartContext)
 
    // auto start top page
    useEffect(() => {
@@ -25,7 +26,7 @@ function Cart(props) {
   function qtyInc(id, qty, maxQty) {
     const inc = parseInt(qty ? qty : 1) + 1
     if(inc <= maxQty) {
-      props.setQty(inc, id)
+      setQty(inc, id)
     } else {
       popAlert('Maximum limit reached', 'info')
     }
@@ -35,21 +36,21 @@ function Cart(props) {
   function qtyDec(id, qty) {
     const dec = parseInt(qty) - 1
     if(dec > 0) {
-      props.setQty(dec, id)
+      setQty(dec, id)
     }
   }
 
   // handle qty manual inputs
   function handleQtyInput(e, id, maxQty) {
     if (e.target.value > 0 && e.target.value <= maxQty) {
-      props.setQty(e.target.value, id)
+      setQty(e.target.value, id)
     }
   }
 
   // handles what to diplay on qty counter
   function handleQtyCounterValue(id, qty) {
     if (qty) {
-      return props.cart.filter(p=>p._id === id).map(p=>p.qty)
+      return cart.filter(p=>p._id === id).map(p=>p.qty)
     }
     else {
       return 1
@@ -60,12 +61,12 @@ function Cart(props) {
   return (
     <div className='cart'>
       
-      {props.cart.length > 0 ? 
+      {cart.length > 0 ? 
       
       // if the cart is filled
       <div className='cart-holder'>
         <div className='cart-filled'>
-          {props.cart.map(c => {
+          {cart.map(c => {
             return (
               
               // if the cart is filled
@@ -118,7 +119,7 @@ function Cart(props) {
                     <p>${c.price.toFixed()}</p>}
 
 
-                  <button onClick={()=> props.removeFromCart(c._id)}>
+                  <button onClick={()=> removeFromCart(c._id)}>
                     <img className='cart-delete' src='https://api.iconify.design/fluent/delete-16-filled.svg?color=%23fc2e20' alt='delete item'></img>
                   </button>
                 </div>
@@ -130,7 +131,7 @@ function Cart(props) {
           })}
         </div>
 
-        <OrderSummary {...props}/>
+        <OrderSummary />
 
       </div>
 

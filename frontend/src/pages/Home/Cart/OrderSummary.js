@@ -1,10 +1,14 @@
 // used in Cart.js
 
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import AppData from '../../../AppData'
+import { CartContext } from '../../../context/CartContext'
+import { OrderContext } from '../../../context/OrderContext'
 
-function OrderSummary(props) {
+function OrderSummary() {
+
+  const {cart, generateOrder} = useContext(CartContext, OrderContext)
 
   // a state to hold coupon input
   const [coupon, setCoupon] = React.useState('')
@@ -21,14 +25,14 @@ function OrderSummary(props) {
 
   // Order Summary calc
   const subtotalBeforeDiscount = 
-  props.cart.length > 0 ? 
-  props.cart.map(i => i.qty ? i.price * i.qty : i.price).reduce((x, y) => x + y) 
+  cart.length > 0 ? 
+  cart.map(i => i.qty ? i.price * i.qty : i.price).reduce((x, y) => x + y) 
   : 
   ''
 
   const discount = 
-  props.cart.length > 0 ? 
-  props.cart.map(i => ((i.qty ? i.price * i.qty : i.price) * i.discount/100)).reduce((x, y) => x + y) 
+  cart.length > 0 ? 
+  cart.map(i => ((i.qty ? i.price * i.qty : i.price) * i.discount/100)).reduce((x, y) => x + y) 
   : 
   ''
 
@@ -92,7 +96,7 @@ function OrderSummary(props) {
       </div>
 
       <Link to={'/checkout'}>
-        <button onClick={()=>props.generateOrder()} className='checkout-btn'>Checkout</button>
+        <button onClick={()=>generateOrder()} className='checkout-btn'>Checkout</button>
       </Link>
     </div>
   )

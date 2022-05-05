@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
-
+import React, { useContext, useState } from 'react'
+import { OrderContext } from '../../../../context/OrderContext'
 
 function Payment(props) {
+  
+  const {setPaymentMethod, placeOrder} = useContext(OrderContext)
 
   ///-- handle shipping form --///
   const [payment, setPayment] = useState({
@@ -25,8 +27,8 @@ function Payment(props) {
   async function handleSubmit(event) {
     event.preventDefault()
 
-    props.setPaymentMethod(payment)
-    props.placeOrder()  
+    setPaymentMethod(payment)
+    placeOrder()  
     props.goOrderPreview()
 
 }

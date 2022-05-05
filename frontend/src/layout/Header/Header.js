@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import logo from '../../logo.svg'
 import SearchBar from './components/SearchBar'
 import SideMenu from '../SideMenu'
 import useProducts from '../../hooks/useProducts'
+import { CartContext } from '../../context/CartContext'
 
 function Header(props) {
 
   const {userName} = localStorage
+  const {cart} = useContext(CartContext)
 
   // fetch products
   const {data: products} = useProducts()
@@ -81,7 +83,7 @@ function Header(props) {
     <Link to={'/cart'}>
       <div className='header-cart'>
         <img src='https://api.iconify.design/clarity/shopping-cart-solid-badged.svg?color=whitesmoke' className="cart-logo" alt="cart"/>
-        <div className='cart-counter'>{props.cart.length}</div>
+        <div className='cart-counter'>{cart.length}</div>
       </div>
     </Link>
   )
@@ -160,7 +162,7 @@ function Header(props) {
           <Link to={'/cart'}>
             <div className='header-cart'>
               <img src='https://api.iconify.design/clarity/shopping-cart-solid-badged.svg?color=%23073c81' className="cart-logo" alt="cart"/>
-              <div className='cart-counter'>{props.cart.length}</div>
+              <div className='cart-counter'>{cart.length}</div>
             </div>
           </Link>
         </div>

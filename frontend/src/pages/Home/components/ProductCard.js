@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import popAlert from '../../../Helpers/popAlert'
+import { CartContext } from '../../../context/CartContext'
 
 function ProductCard(props) {
 
   const {content} = props
+
+  const cart = useContext(CartContext).cart
+  const addToCart = useContext(CartContext).addToCart
 
   return (
 
@@ -38,12 +42,12 @@ function ProductCard(props) {
       
       {/* onclick add to cart */}
       <button onClick={()=> {
-        props.cart.length > 0 &&
-        props.cart.map(c => c._id).includes(content._id) ?
+        cart.length > 0 &&
+        cart.map(c => c._id).includes(content._id) ?
         popAlert('Product already in your cart', 'info') :
-        props.addToCart(content)
+        addToCart(content)
       }}>
-        <img src={`https://api.iconify.design/bi/${props.cart && props.cart.map(c => c._id).includes(content._id) ? 'cart-check-fill.svg?color=green':'cart-plus-fill.svg?color=%23073c81'}`} alt='add-to-cart'></img>
+        <img src={`https://api.iconify.design/bi/${cart && cart.map(c => c._id).includes(content._id) ? 'cart-check-fill.svg?color=green':'cart-plus-fill.svg?color=%23073c81'}`} alt='add-to-cart'></img>
       </button>
       
     </motion.div>

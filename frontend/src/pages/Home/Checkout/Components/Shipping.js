@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { OrderContext } from '../../../../context/OrderContext';
 
 function Shipping(props) {
+
+  const {order, setShippingAddress} = useContext(OrderContext)
 
   ///-- handle shipping form --///
   const [shipping, setShipping] = useState({
@@ -13,10 +16,10 @@ function Shipping(props) {
 
   // auto fill the shipping form if submitted
   useEffect(()=> {
-    if(props.order.shippingAddress) {
-      setShipping(props.order.shippingAddress)
+    if(order.shippingAddress) {
+      setShipping(order.shippingAddress)
     }
-  },[props.order.shippingAddress])
+  },[order.shippingAddress])
 
 
    // handle input change
@@ -35,7 +38,7 @@ function Shipping(props) {
   function handleSubmit(event) {
     event.preventDefault()
 
-    props.setShippingAddress(shipping)
+    setShippingAddress(shipping)
     props.goPayment()
   }
 
