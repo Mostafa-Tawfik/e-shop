@@ -5,7 +5,7 @@ import useApi from '../../../hooks/useApi'
 import { SpinnerDotted } from 'spinners-react'
 import popAlert from '../../../Helpers/popAlert'
 
-function Orders(props) {
+function Orders() {
 
   // fetch orders
   const {status, data, error} = useApi('/api/orders', 'GET')
@@ -23,7 +23,7 @@ function Orders(props) {
       <h2>Orders</h2>
 
       {status === 'loading' && <SpinnerDotted />}
-      {status === 'success' && <OrdersList orders={orders} {...props}/>}      
+      {status === 'success' && <OrdersList orders={orders}/>}      
 
     </div>
   )

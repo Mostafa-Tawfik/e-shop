@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../context/Auth-context'
 
 // important ***
 // mush pass array of li named 'content'
@@ -7,6 +8,7 @@ import { Link } from 'react-router-dom'
 function SideMenu(props) {
 
   const {content} = props
+  const {isAdmin} = useContext(AuthContext)
 
   // control side menu
   const [isMenuActive, setIsMenuActive] = useState(false)
@@ -18,11 +20,11 @@ function SideMenu(props) {
 
   // hide menu toggler on homepage for medium screens
   function checkAdmin() {
-    if(localStorage.isAdmin === 'false') {
+    if(!isAdmin) {
       return `menuToggler user`
-    } else if (localStorage.isAdmin === 'true') {
+    } else if (isAdmin) {
       return 'menuToggler'
-    } else return `menuToggler user`
+    }
   }
 
 

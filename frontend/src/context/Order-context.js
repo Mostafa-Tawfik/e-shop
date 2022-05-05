@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getLocalStorage, setLocalStorage } from "../Helpers/localStorage";
-import { CartContext } from "./CartContext";
+import { CartContext } from "./Cart-context";
 
 export const OrderContext = createContext({
   order: {}

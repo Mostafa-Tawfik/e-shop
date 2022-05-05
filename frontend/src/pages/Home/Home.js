@@ -25,7 +25,7 @@ function Home(props) {
     <>
     
       <header className='App-header'>
-        <Header signOut={props.signOut}/>
+        <Header />
       </header>
 
       <main className='App-main'>

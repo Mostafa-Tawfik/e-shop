@@ -1,7 +1,8 @@
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router'
-import { CartContext } from '../../../../context/CartContext'
-import { OrderContext } from '../../../../context/OrderContext'
+import { AuthContext } from '../../../../context/Auth-context'
+import { CartContext } from '../../../../context/Cart-context'
+import { OrderContext } from '../../../../context/Order-context'
 import apiCrud from '../../../../Helpers/apiCrud'
 
 
@@ -9,6 +10,7 @@ function OrderPreview() {
 
   const navigate = useNavigate()
 
+  const {userName, userEmail}= useContext(AuthContext)
   const {emptyCart} = useContext(CartContext)
   const order = useContext(OrderContext).order
 
@@ -32,12 +34,12 @@ function OrderPreview() {
 
         <div className='order-preview-contact-section'>
           <h5>Name</h5>
-          <p>{localStorage.userName}</p>
+          <p>{userName}</p>
         </div>
 
         <div className='order-preview-contact-section'>
           <h5>Email</h5>
-          <p>{localStorage.userEmail}</p>
+          <p>{userEmail}</p>
         </div>
 
       </div>

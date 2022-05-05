@@ -3,8 +3,8 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import AppData from '../../../AppData'
-import { CartContext } from '../../../context/CartContext'
-import { OrderContext } from '../../../context/OrderContext'
+import { CartContext } from '../../../context/Cart-context'
+import { OrderContext } from '../../../context/Order-context'
 
 function OrderSummary() {
 

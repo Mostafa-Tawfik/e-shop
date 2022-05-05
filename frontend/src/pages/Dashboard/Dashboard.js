@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {Routes, Route, Link} from 'react-router-dom'
 
 import Home from './Home/Home'
@@ -11,9 +11,12 @@ import SideMenu from '../../layout/SideMenu'
 import UserID from './Users/UserID'
 import Support from './Support/Support'
 import Statistics from './Statistics/Statistics'
+import { AuthContext } from '../../context/Auth-context'
 
 
-function Dashboard(props) {
+function Dashboard() {
+
+  const {signOut} = useContext(AuthContext)
 
 
   const adminPanel = ['Products', 'Orders', 'Users', 'Support', 'Statistics']
@@ -28,7 +31,7 @@ function Dashboard(props) {
             <SideMenu content={adminPanel}/>
           </div>
 
-          <button onClick={()=>props.signOut()} className='logout'>Logout</button>
+          <button onClick={signOut} className='logout'>Logout</button>
         </div>
 
         <div className="admin-bottom-pane">
@@ -72,7 +75,7 @@ function Dashboard(props) {
           element={<EditProduct />}/>
 
           <Route path='/orders' 
-          element={<Orders isAdmin={props.isAdmin}/>}/>
+          element={<Orders />}/>
 
           <Route path='/orders/:id' 
           element={<OrderID />}/>
@@ -81,7 +84,7 @@ function Dashboard(props) {
           element={<Users />}/>
 
           <Route path='/users/:id' 
-          element={<UserID isAdmin={props.isAdmin}/>}/>
+          element={<UserID />}/>
 
           <Route path='/support' 
           element={<Support />}/>

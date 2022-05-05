@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { setLocalStorage } from '../Helpers/localStorage';
 import popAlert from '../Helpers/popAlert';
 
 export default function Login(props) {
@@ -40,15 +41,11 @@ export default function Login(props) {
       .then((res) => {
         console.log('successfully logged in');
         // save user details
-        localStorage.setItem('isAdmin', res.data.isAdmin);
-        localStorage.setItem('userName', res.data.name);
-        localStorage.setItem('userEmail', res.data.email);
         localStorage.setItem('jwt', res.data.token);
-        if (res.data.isAdmin) {
-          props.adminLogged();
-        }
+        setLocalStorage('auth', res.data);
         popAlert(`Welcome back`);
         navigate('/');
+        setTimeout(()=> window.location.reload(), 1500) 
         return res.data;
       },
         (error) => {

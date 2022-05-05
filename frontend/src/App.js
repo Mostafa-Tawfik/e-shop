@@ -1,45 +1,18 @@
 import './App.scss';
-import React, { useEffect, useState } from 'react'
-import {Routes, Route, useNavigate} from 'react-router-dom'
+import React, { useContext } from 'react'
+import {Routes, Route} from 'react-router-dom'
 import {QueryClientProvider, QueryClient} from 'react-query'
-
-import popAlert from './Helpers/popAlert';
 
 import Dashboard from './pages/Dashboard/Dashboard'
 import Home from './pages/Home/Home';
+import { AuthContext } from './context/Auth-context';
 
 
 function App() {
 
   const queryClient = new QueryClient()
 
-  // save admin in a state
-  const [isAdmin, setIsAdmin] = useState(false)
-
-  useEffect(()=> {
-    const admin = JSON.parse(localStorage.getItem('isAdmin'))
-    if(admin) {
-      setIsAdmin(admin)
-    }
-  },[])
-
-  function adminLogged() {
-    setIsAdmin(true)
-  }
-  
-  // a signOut function
-  const navigate = useNavigate()
-
-  function signOut() {
-    localStorage.removeItem('jwt')
-    localStorage.removeItem('userName')
-    localStorage.removeItem('userEmail')
-    localStorage.removeItem('isAdmin')
-    setIsAdmin(false)
-    popAlert(`See you soon`)
-    navigate('/')
-  }
-
+  const {isAdmin} = useContext(AuthContext)
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -47,9 +20,9 @@ function App() {
         <div className="App">
           <Routes>
             {isAdmin ? 
-            <Route path="/*" element={<Dashboard signOut={signOut}/>}/>
+            <Route path="/*" element={<Dashboard />}/>
             :
-            <Route path="/*" element={<Home signOut={signOut} adminLogged={adminLogged}/>}/>
+            <Route path="/*" element={<Home />}/>
             }          
           </Routes>
         </div>

@@ -160,7 +160,7 @@ function UserID(props) {
       <div className='user-order-id'>
 
         {orders && 
-          <OrdersList orders={filterByOrders} isAdmin={props.isAdmin}/>
+          <OrdersList orders={filterByOrders} />
         }
       </div>
 

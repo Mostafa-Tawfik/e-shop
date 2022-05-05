@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import OrderSummary from './OrderSummary'
 import popAlert from '../../../Helpers/popAlert'
-import { CartContext } from '../../../context/CartContext';
+import { CartContext } from '../../../context/Cart-context';
 
 function Cart() {
 

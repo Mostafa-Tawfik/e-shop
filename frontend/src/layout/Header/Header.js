@@ -5,12 +5,13 @@ import logo from '../../logo.svg'
 import SearchBar from './components/SearchBar'
 import SideMenu from '../SideMenu'
 import useProducts from '../../hooks/useProducts'
-import { CartContext } from '../../context/CartContext'
+import { CartContext } from '../../context/Cart-context'
+import { AuthContext } from '../../context/Auth-context'
 
 function Header(props) {
 
-  const {userName} = localStorage
   const {cart} = useContext(CartContext)
+  const {signOut, userName} = useContext(AuthContext)
 
   // fetch products
   const {data: products} = useProducts()
@@ -53,7 +54,7 @@ function Header(props) {
 
         {userName ?
         // if signed in
-        <button onBlur={openAccount} onClick={props.signOut}>Sign Out</button>
+        <button onBlur={openAccount} onClick={()=>signOut()}>Sign Out</button>
         :
         // if signed out
         <Link to={'/login'}>

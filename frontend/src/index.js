@@ -5,8 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom'
 import {QueryClientProvider, QueryClient} from 'react-query'
-import { CartProvider } from './context/CartContext';
-import { OrderProvider } from './context/OrderContext';
+import { CartProvider } from './context/Cart-context';
+import { OrderProvider } from './context/Order-context';
+import { AuthProvider } from './context/Auth-context';
 
 const queryClient = new QueryClient()
 
@@ -15,11 +16,13 @@ root.render(
   <BrowserRouter>
     <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <CartProvider>
-        <OrderProvider>
-          <App />
-        </OrderProvider>
-      </CartProvider>
+      <AuthProvider>
+        <CartProvider>
+          <OrderProvider>
+            <App />
+          </OrderProvider>
+        </CartProvider>
+      </AuthProvider>
     </QueryClientProvider>
     </React.StrictMode>
   </BrowserRouter>

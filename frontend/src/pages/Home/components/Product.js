@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import popAlert from '../../../Helpers/popAlert'
 import Ratings from 'react-ratings-declarative'
 import useApi from '../../../hooks/useApi'
-import { CartContext } from '../../../context/CartContext'
+import { CartContext } from '../../../context/Cart-context'
 
 function Product() {
   

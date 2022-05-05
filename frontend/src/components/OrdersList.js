@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../context/Auth-context'
 import apiCrud from '../Helpers/apiCrud'
 
 
 function OrdersList(props) {
 
   const navigate = useNavigate()
-  const {isAdmin} = localStorage
+  const {isAdmin} = useContext(AuthContext)
 
   // control more btn
   const [isOpen, setIsOpen] = useState({
@@ -104,7 +105,7 @@ function OrdersList(props) {
         <thead>
           <tr>
             <th>Order ID</th>
-            {isAdmin === 'true' && <th>NAME</th>}
+            {isAdmin && <th>NAME</th>}
             <th>DATE</th>
             <th>TOTAL</th>
             <th>Delivery</th>
@@ -120,9 +121,9 @@ function OrdersList(props) {
               <tr key={order._id}>
 
                 {/* if admin go to admin order route */}
-                <td data-label="Order ID"><Link to={`/${isAdmin === 'true' ? '' : 'user/'}orders/${order._id}`}>#{order._id}</Link></td>
+                <td data-label="Order ID"><Link to={`/${isAdmin ? '' : 'user/'}orders/${order._id}`}>#{order._id}</Link></td>
 
-                {isAdmin === 'true' && <td data-label="Name">{order.user.name}</td>}
+                {isAdmin && <td data-label="Name">{order.user.name}</td>}
 
                 <td data-label="Date">{date(order.createdAt)}</td>
 
@@ -137,7 +138,7 @@ function OrdersList(props) {
                 </td>
 
                 <td data-label="ACTIONS">
-                  {isAdmin === 'true'
+                  {isAdmin
                   ? 
                   actions(order._id) 
                   : 

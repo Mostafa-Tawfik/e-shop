@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { AuthContext } from '../../../context/Auth-context'
 import apiCrud from '../../../Helpers/apiCrud'
 
 function UserInfo() {
+
+  const {userName} = useContext(AuthContext)
 
   ///-- handle update form --///
   const [updateForm, setUpdateForm] = useState({
@@ -41,7 +44,7 @@ function UserInfo() {
             name='name'
             required
             onChange={handleChange}
-            value={updateForm.name ? updateForm.name : localStorage.userName}
+            value={updateForm.name ? updateForm.name : userName}
             >
             </input>
           </div>

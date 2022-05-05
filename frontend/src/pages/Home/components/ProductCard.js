@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import popAlert from '../../../Helpers/popAlert'
-import { CartContext } from '../../../context/CartContext'
+import { CartContext } from '../../../context/Cart-context'
 
 function ProductCard(props) {
 
