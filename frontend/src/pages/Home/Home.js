@@ -1,4 +1,4 @@
-import {React, useState, useEffect} from 'react'
+import {React, useState, useEffect, useContext} from 'react'
 import {Routes, Route} from 'react-router-dom'
 
 import Footer from '../../layout/Footer';
@@ -18,69 +18,15 @@ import Support from './user/Support';
 import Category from './Category/Category';
 import Register from '../Register';
 import Login from '../Login';
-import popAlert from '../../Helpers/popAlert';
+import { CartContext } from '../../context/CartContext';
 
 function Home(props) {
 
-  ///-- handle cart --///
-  const [cart, setCart] = useState('')
-  // console.log('cart', cart)
-
-
-  // setup local storage for cart
-  useEffect(() => {
-    const items = JSON.parse(localStorage.getItem('cart'));
-    if (items) {
-      setCart(items);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
-
-
-  // add to cart function
-  function addToCart(item) {
-    if(item.countInStock >= 1) {
-      setCart([...cart, item])
-    } else {
-      popAlert('Sorry product out of stock', 'warning')
-    }
-  }
-
-
-  // remove from cart function
-  function removeFromCart(id) {
-    setCart([...cart.filter(item => item._id !== id)])
-
-    if(cart.length === 1) {
-      setCart([])
-    }
-  }
-
-  // empty cart
-  function emptyCart() {
-    setCart([])
-  }
-
-
-  // handle qty change
-  function setQty(qty, id) {
-    setCart(prev => (
-      // map over order items
-      prev.map(
-        //  if got matched
-        p => p._id === id ?
-        // update qty
-        {...p, qty: qty}
-        :
-        // if not match return defualt
-        p
-        )
-    ))
-  }
-  ///--- end ---///
+  const cart = useContext(CartContext).cart
+  const addToCart = useContext(CartContext).addToCart
+  const removeFromCart = useContext(CartContext).removeFromCart
+  const setQty = useContext(CartContext).setQty
+  // console.log(CartContext);
 
 
   ///-- handle orders --///
@@ -165,6 +111,7 @@ function Home(props) {
 
   return (
     <>
+    
       <header className='App-header'>
         <Header 
           cart={cart} 
@@ -243,7 +190,7 @@ function Home(props) {
             setPaymentMethod={setPaymentMethod}
             placeOrder={placeOrder}
             order={order}
-            emptyCart={emptyCart}
+            // emptyCart={emptyCart}
             />
           }/>
 
@@ -254,10 +201,11 @@ function Home(props) {
             
         </Routes>
       </main>
-
+      
       <footer className='App-footer'>
         <Footer />
       </footer>
+    
     </>
   )
 }

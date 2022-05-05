@@ -44,18 +44,15 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
 
-      <div className="App">
-        <Routes>
-
-          {isAdmin ? 
-          <Route path="/*" element={<Dashboard signOut={signOut}/>}/>
-          :
-          <Route path="/*" element={<Home signOut={signOut} adminLogged={adminLogged}/>}/>
-          }
-          
-        </Routes>
-
-      </div>
+        <div className="App">
+          <Routes>
+            {isAdmin ? 
+            <Route path="/*" element={<Dashboard signOut={signOut}/>}/>
+            :
+            <Route path="/*" element={<Home signOut={signOut} adminLogged={adminLogged}/>}/>
+            }          
+          </Routes>
+        </div>
 
     </QueryClientProvider>
   )
