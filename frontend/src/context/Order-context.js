@@ -3,7 +3,11 @@ import { getLocalStorage, setLocalStorage } from "../Helpers/localStorage";
 import { CartContext } from "./Cart-context";
 
 export const OrderContext = createContext({
-  order: {}
+  order: [],
+  generateOrder: ()=>{},
+  setShippingAddress: ()=>{},
+  setPaymentMethod: ()=>{},
+  placeOrder: ()=>{}
 })
 
 export function OrderProvider({children}) {
@@ -11,6 +15,7 @@ export function OrderProvider({children}) {
   const {cart} = useContext(CartContext)
 
   const [order, setOrder] = useState(()=>getLocalStorage('order', {}))
+  console.log(order);
 
   useEffect(()=>setLocalStorage('order', order),[order])
 
@@ -78,10 +83,10 @@ export function OrderProvider({children}) {
 
   return <OrderContext.Provider value={{
     order: order,
-    generateOrder,
-    setShippingAddress,
-    setPaymentMethod,
-    placeOrder
+    generateOrder: generateOrder,
+    setShippingAddress: setShippingAddress,
+    setPaymentMethod: setPaymentMethod,
+    placeOrder: placeOrder
   }}>
     {children}
   </OrderContext.Provider>

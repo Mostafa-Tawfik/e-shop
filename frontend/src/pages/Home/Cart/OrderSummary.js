@@ -8,7 +8,8 @@ import { OrderContext } from '../../../context/Order-context'
 
 function OrderSummary() {
 
-  const {cart, generateOrder} = useContext(CartContext, OrderContext)
+  const {cart} = useContext(CartContext, OrderContext)
+  const {generateOrder} = useContext(OrderContext)
 
   // a state to hold coupon input
   const [coupon, setCoupon] = React.useState('')
@@ -96,7 +97,7 @@ function OrderSummary() {
       </div>
 
       <Link to={'/checkout'}>
-        <button onClick={()=>generateOrder()} className='checkout-btn'>Checkout</button>
+        <button onClick={generateOrder} className='checkout-btn'>Checkout</button>
       </Link>
     </div>
   )
