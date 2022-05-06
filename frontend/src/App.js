@@ -23,7 +23,7 @@ function App() {
             <Route path="/*" element={<Dashboard />}/>
             :
             <Route path="/*" element={<Home />}/>
-            }          
+            }
           </Routes>
         </div>
 

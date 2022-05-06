@@ -1,5 +1,5 @@
-import {React} from 'react'
-import {Routes, Route} from 'react-router-dom'
+import {React, useContext} from 'react'
+import {Routes, Route, Navigate} from 'react-router-dom'
 
 import Footer from '../../layout/Footer';
 import Header from '../../layout/Header/Header';
@@ -18,8 +18,11 @@ import Support from './user/Support';
 import Category from './Category/Category';
 import Register from '../Register';
 import Login from '../Login';
+import { AuthContext } from '../../context/Auth-context';
 
 function Home(props) {
+
+  const {jwt} = useContext(AuthContext)
 
   return (
     <>
@@ -31,14 +34,8 @@ function Home(props) {
       <main className='App-main'>
         <Routes>
 
-          <Route path='/register' element={<Register />}/>
-            
-          <Route path='/login' element={<Login adminLogged={props.adminLogged}/> }/>
-        
-          <Route path='/' element={<Homepage />}/>
-
-          <Route path='/:name' element={<Category />}/>
-
+          {jwt ? 
+          <>
           <Route path='/user/' element={<UserInfo />}/>
 
           <Route path='/user/orders' element={<UserOrders />}/>
@@ -47,15 +44,29 @@ function Home(props) {
 
           <Route path='/user/review/:id' element={<ReviewOrder />}/>
 
+          <Route path='/checkout' element={<Checkout />}/>
+
+          <Route path='/support' element={<Support />}/>
+          </>
+          :
+          <>
+          <Route path='/register' element={<Register />}/>
+            
+          <Route path='/login' element={<Login adminLogged={props.adminLogged}/> }/>      
+          </>
+          }
+        
+          <Route path='/' element={<Homepage />}/>
+
+          <Route path='/:name' element={<Category />}/>
+
           <Route path='/product/:id' element={<Product />}/>
 
           <Route path='/search/:name' element={<Search />}/>
 
           <Route path='/cart' element={<Cart />}/>
 
-          <Route path='/checkout' element={<Checkout />}/>
-
-          <Route path='/support' element={<Support />}/>
+          <Route path="*" element={<Navigate to ="/" replace/>}/>
             
         </Routes>
       </main>

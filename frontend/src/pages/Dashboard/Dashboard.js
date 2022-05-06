@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import {Routes, Route, Link} from 'react-router-dom'
+import {Routes, Route, Link, Navigate} from 'react-router-dom'
 
 import Home from './Home/Home'
 import Products from './Products/Products'
@@ -65,32 +65,25 @@ function Dashboard() {
 
       <div className='sections'>
         <Routes>
-          <Route path='/' 
-          element={<Home />}/>
+          <Route path='/' element={<Home />}/>
 
-          <Route path='/products' 
-          element={<Products />}/>
+          <Route path='/products' element={<Products />}/>
 
-          <Route path='/products/edit/:id' 
-          element={<EditProduct />}/>
+          <Route path='/products/edit/:id' element={<EditProduct />}/>
 
-          <Route path='/orders' 
-          element={<Orders />}/>
+          <Route path='/orders' element={<Orders />}/>
 
-          <Route path='/orders/:id' 
-          element={<OrderID />}/>
+          <Route path='/orders/:id' element={<OrderID />}/>
 
-          <Route path='/users' 
-          element={<Users />}/>
+          <Route path='/users' element={<Users />}/>
 
-          <Route path='/users/:id' 
-          element={<UserID />}/>
+          <Route path='/users/:id' element={<UserID />}/>
 
-          <Route path='/support' 
-          element={<Support />}/>
+          <Route path='/support' element={<Support />}/>
 
-          <Route path='/statistics' 
-          element={<Statistics />}/>
+          <Route path='/statistics'element={<Statistics />}/>
+
+          <Route path="*" element={<Navigate to ="/" replace/>}/>
           
         </Routes>
       </div>

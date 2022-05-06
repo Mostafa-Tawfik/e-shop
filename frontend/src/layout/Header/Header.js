@@ -8,7 +8,7 @@ import useProducts from '../../hooks/useProducts'
 import { CartContext } from '../../context/Cart-context'
 import { AuthContext } from '../../context/Auth-context'
 
-function Header(props) {
+function Header() {
 
   const {cart} = useContext(CartContext)
   const {signOut, userName} = useContext(AuthContext)
@@ -54,13 +54,9 @@ function Header(props) {
 
         {userName ?
         // if signed in
+        <>
         <button onBlur={openAccount} onClick={()=>signOut()}>Sign Out</button>
-        :
-        // if signed out
-        <Link to={'/login'}>
-          <button onBlur={openAccount}>Sign In</button>
-        </Link>
-        }
+
         <hr></hr>
 
         <Link to={'/user/orders'}>
@@ -74,6 +70,13 @@ function Header(props) {
         <Link to={'/support'}>
           <h5>Need help!</h5> 
         </Link>
+        </>
+        :
+        // if signed out
+        <Link to={'/login'}>
+          <button onBlur={openAccount}>Sign In</button>
+        </Link>
+        }
 
       </div>}
     </div>
