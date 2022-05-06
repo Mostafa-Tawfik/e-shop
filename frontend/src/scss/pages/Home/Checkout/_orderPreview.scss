@@ -34,50 +34,50 @@
     align-items: center;
     padding: 1em;
     overflow: auto;
-    .order-preview-items-table {
-      text-align: left;
-      position: relative;
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 10px;
-      img {
-        width: 60px;
-        height: 60px;
-        object-fit: cover;
-        border-radius: 10px;
-      }
-      tr {
-        border: $border;
-        outline: thin solid;
-        outline-color: rgb(128, 128, 128, 0.3);
-        border-radius: 10px;
-      }
-      td, th {
-        padding: 10px;
-        border-radius: 10px;
+    // .order-preview-items-table {
+    //   text-align: left;
+    //   position: relative;
+    //   width: 100%;
+    //   border-collapse: separate;
+    //   border-spacing: 10px;
+    //   img {
+    //     width: 60px;
+    //     height: 60px;
+    //     object-fit: cover;
+    //     border-radius: 10px;
+    //   }
+    //   tr {
+    //     border: $border;
+    //     outline: thin solid;
+    //     outline-color: rgb(128, 128, 128, 0.3);
+    //     border-radius: 10px;
+    //   }
+    //   td, th {
+    //     padding: 10px;
+    //     border-radius: 10px;
         
-      }
-    }
+    //   }
+    // }
   }
   .order-preview-payment {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 1em;
-    .order-preview-payment-table {
-      text-align: left;
-      position: relative;
-      width: 40%;
-      border-collapse: collapse;
-      tr {
-        border-radius: 10px;
-      }
-      td, th {
-        padding: 10px;
-        border-radius: 10px;
+    // .order-preview-payment-table {
+    //   text-align: left;
+    //   position: relative;
+    //   width: 40%;
+    //   border-collapse: collapse;
+    //   tr {
+    //     border-radius: 10px;
+    //   }
+    //   td, th {
+    //     padding: 10px;
+    //     border-radius: 10px;
         
-      }
-    }
+    //   }
+    // }
   }
   .place-order-btn {
     display: flex;

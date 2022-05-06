@@ -5,7 +5,7 @@ import popAlert from '../../../Helpers/popAlert'
 import { CartContext } from '../../../context/Cart-context';
 
 function Cart() {
-
+ 
   const {cart, setQty, removeFromCart} = useContext(CartContext)
 
    // auto start top page

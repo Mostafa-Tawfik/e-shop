@@ -68,8 +68,7 @@ function OrderPreview() {
 
         <table className='order-preview-items-table'>
 
-          <tbody>
-
+          <thead>
             <tr>
               <th>PHOTO</th>
               <th>NAME</th>
@@ -77,15 +76,18 @@ function OrderPreview() {
               <th>PRICE</th>
               <th>TOTAL</th>
             </tr>
+          </thead>
+
+          <tbody>
 
             {orderItems && orderItems.map(item => {
               return (
                 <tr key={item.product}>
-                  <td><img src={item.image} alt='product'></img></td>
-                  <td>{item.name}</td>
-                  <td>{item.qty}</td>
-                  <td>${Number(item.price).toFixed(2)}</td>
-                  <td>${Number(item.qty * item.price).toFixed(2)}</td>
+                  <td data-label="PHOTO"><img src={item.image} alt='product'></img></td>
+                  <td data-label="NAME">{item.name}</td>
+                  <td data-label="QUANTITY">{item.qty}</td>
+                  <td data-label="PRICE">${Number(item.price).toFixed(2)}</td>
+                  <td data-label="TOTAL">${Number(item.qty * item.price).toFixed(2)}</td>
                 </tr>
               )
             })}
@@ -94,8 +96,8 @@ function OrderPreview() {
 
           <tfoot>
             <tr>
-              <td colSpan= "4"></td>
-              <th>${totalPrice && totalPrice.toFixed(2) - shippingPrice}</th>
+              <th colSpan= "4"></th>
+              <td data-label="Subtotal">${Number(totalPrice && totalPrice - shippingPrice).toFixed(2)}</td>
             </tr>
           </tfoot>
 
@@ -106,25 +108,21 @@ function OrderPreview() {
       <div className='order-preview-payment'>
         <table className='order-preview-payment-table'>
 
-          <tbody>
-
-            <tr>
-              <td>Subtotal</td>
-              <td>${totalPrice && Number(totalPrice).toFixed(2) - shippingPrice}</td>
-            </tr>
-
-            <tr>
-              <td>Shipping</td>
-              <td>${shippingPrice && shippingPrice.toFixed(2)}</td>
-            </tr>
-
-          </tbody>
-
           <tfoot>
 
             <tr>
+              <th>Subtotal</th>
+              <td data-label="Subtotal">${Number(totalPrice && totalPrice - shippingPrice).toFixed(2)}</td>
+            </tr>
+
+            <tr>
+              <th>Shipping</th>
+              <td data-label="Shipping">${Number(shippingPrice && shippingPrice).toFixed(2)}</td>
+            </tr>
+
+            <tr>
               <th>Total Payment</th>
-              <th>${totalPrice && Number(totalPrice).toFixed(2)}</th>
+              <td data-label="Grand TOTAL">${Number(totalPrice && totalPrice).toFixed(2)}</td>
             </tr>
 
           </tfoot>

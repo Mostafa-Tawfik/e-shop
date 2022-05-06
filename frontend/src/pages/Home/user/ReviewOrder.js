@@ -92,32 +92,34 @@ function ReviewOrder() {
 
           <table className='user-review-details-items-table'>
 
-            <tbody>
-
+            <thead>
               <tr>
                 <th>PHOTO</th>
                 <th>NAME</th>
                 <th>RATING</th>
               </tr>
+            </thead>
+
+            <tbody>
 
               {order.orderItems && order.orderItems.map(item => {
                 return (
                   <Fragment key={item.product}>
                     <tr>
 
-                      <td>
+                      <td data-label="PHOTO">
                         <Link to={`/product/${item.product}`}>
                           <img src={item.image} alt='product'></img>
                         </Link>
                       </td>
                       
-                      <td>
+                      <td data-label="NAME">
                         <Link to={`/product/${item.product}`}>
                           {item.name}
                         </Link>
                       </td>
 
-                      <td>
+                      <td data-label="RATING">
                         {isReviewed(item) ? 
                         <Ratings
                           rating={existedRating(item)}
