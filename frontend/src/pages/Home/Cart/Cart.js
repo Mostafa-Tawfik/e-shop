@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion';
+
 import OrderSummary from './OrderSummary'
 import popAlert from '../../../Helpers/popAlert'
 import { CartContext } from '../../../context/Cart-context';
@@ -57,9 +59,21 @@ function Cart() {
     }
   }
 
+
+  const pageMotion= {
+    initial: { opacity: 0, x: 0 },
+    animate: { opacity: 1, transition: { duration: 0.5 } },
+    exit: { opacity: 0, x: 0, transition: { duration: 0.5 } }
+  }
+
   
   return (
-    <div className='cart'>
+    <motion.div 
+    initial='initial'
+    animate='animate'
+    exit='exit'
+    variants={pageMotion} 
+    className='cart'>
       
       {cart.length > 0 ? 
       
@@ -115,8 +129,8 @@ function Cart() {
                   <p>{c.discount > 0 && `$${c.price.toFixed()}`}</p>
                   {c.discount ?
                     // if there is a discount show it, if not show normal price
-                    <p>${c.price.toFixed() * ((100 - c.discount)/100)}</p> :
-                    <p>${c.price.toFixed()}</p>}
+                    <p>${Number(c.price * ((100 - c.discount)/100)).toFixed()}</p> :
+                    <p>${Number(c.price).toFixed()}</p>}
 
 
                   <button onClick={()=> removeFromCart(c._id)}>
@@ -152,7 +166,7 @@ function Cart() {
       
       }
 
-    </div>
+    </motion.div>
   )
 }
 

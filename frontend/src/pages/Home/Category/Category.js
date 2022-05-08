@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion';
 
 import ProductCard from '../components/ProductCard'
 import Ratings from 'react-ratings-declarative'
@@ -33,13 +34,21 @@ function Category() {
   // map over brands and return only unique values
   const brandWithinCat = products && [...new Set(filterBy.map(p => p.brand).filter(c => c !== undefined))]
 
-
-  // console.log(filterBy)
   
+  const pageMotion= {
+    initial: { opacity: 0, x: 0 },
+    animate: { opacity: 1, transition: { duration: 0.5 } },
+    exit: { opacity: 0, x: 0, transition: { duration: 0.5 } }
+  }
   
   return (
     products &&
-    <main className='category'>
+    <motion.main 
+    initial='initial'
+    animate='animate'
+    exit='exit'
+    variants={pageMotion}
+    className='category'>
 
       <aside className='category-menu-holder'>
 
@@ -176,7 +185,7 @@ function Category() {
         </div>
       </section>
       
-    </main>
+    </motion.main>
 
   )
 }

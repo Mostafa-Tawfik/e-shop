@@ -1,5 +1,6 @@
 import {React, useContext} from 'react'
-import {Routes, Route, Navigate} from 'react-router-dom'
+import {Routes, Route, Navigate, useLocation} from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion';
 
 import Footer from '../../layout/Footer';
 import Header from '../../layout/Header/Header';
@@ -24,6 +25,9 @@ function Home(props) {
 
   const {jwt} = useContext(AuthContext)
 
+  const location = useLocation()
+  console.log(location);
+
   return (
     <>
     
@@ -32,44 +36,47 @@ function Home(props) {
       </header>
 
       <main className='App-main'>
-        <Routes>
+        <AnimatePresence exitBeforeEnter>
+          <Routes location={location} key={location.pathname}>
 
-          {jwt ? 
-          <>
-          <Route path='/user/' element={<UserInfo />}/>
+            {jwt ? 
+            <>
+            <Route path='/user/' element={<UserInfo />}/>
 
-          <Route path='/user/orders' element={<UserOrders />}/>
+            <Route path='/user/orders' element={<UserOrders />}/>
 
-          <Route path='/user/orders/:id' element={<UserOrderID />}/>
+            <Route path='/user/orders/:id' element={<UserOrderID />}/>
 
-          <Route path='/user/review/:id' element={<ReviewOrder />}/>
+            <Route path='/user/review/:id' element={<ReviewOrder />}/>
 
-          <Route path='/checkout' element={<Checkout />}/>
+            <Route path='/checkout' element={<Checkout />}/>
 
-          <Route path='/support' element={<Support />}/>
-          </>
-          :
-          <>
-          <Route path='/register' element={<Register />}/>
-            
-          <Route path='/login' element={<Login adminLogged={props.adminLogged}/> }/>      
-          </>
-          }
-        
-          <Route path='/' element={<Homepage />}/>
+            <Route path='/support' element={<Support />}/>
+            </>
+            :
+            <>
+            <Route path='/register' element={<Register />}/>
+              
+            <Route path='/login' element={<Login adminLogged={props.adminLogged}/> }/>      
+            </>
+            }
+          
+            <Route path='/' element={<Homepage />}/>
 
-          <Route path='/:name' element={<Category />}/>
+            <Route path='/:name' element={<Category />}/>
 
-          <Route path='/product/:id' element={<Product />}/>
+            <Route path='/product/:id' element={<Product />}/>
 
-          <Route path='/search/:name' element={<Search />}/>
+            <Route path='/search/:name' element={<Search />}/>
 
-          <Route path='/cart' element={<Cart />}/>
+            <Route path='/cart' element={<Cart />}/>
 
-          <Route path="*" element={<Navigate to ="/" replace/>}/>
-            
-        </Routes>
+            <Route path="*" element={<Navigate to ="/" replace/>}/>
+              
+          </Routes>
+        </AnimatePresence>
       </main>
+
       
       <footer className='App-footer'>
         <Footer />

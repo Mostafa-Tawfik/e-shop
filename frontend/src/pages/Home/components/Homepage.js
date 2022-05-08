@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import { SpinnerDotted } from 'spinners-react'
 import ProductCard from './ProductCard';
@@ -13,8 +14,19 @@ function Homepage() {
 
   const categories = status === 'success' && [...new Set(products.map(p => p.category))]
 
+  const pageMotion= {
+    initial: { opacity: 0, x: 0 },
+    animate: { opacity: 1, transition: { duration: 0.7 } },
+    exit: { opacity: 0, x: 0, transition: { duration: 1 } }
+  }
+
   return (
-    <div>
+    <motion.div
+      initial='initial'
+      animate='animate'
+      exit='exit'
+      variants={pageMotion}
+    >
       <img src='../images/Free-Advertising-Ideas.jpg' alt='ad' className='ad-image'></img>
 
       {products && 
@@ -50,7 +62,7 @@ function Homepage() {
         </div>
       ))}
       
-    </div>
+    </motion.div>
   )
 }
 

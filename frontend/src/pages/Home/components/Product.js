@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { motion } from 'framer-motion';
 
 import popAlert from '../../../Helpers/popAlert'
 import Ratings from 'react-ratings-declarative'
@@ -30,15 +31,25 @@ function Product() {
 
   // calc average of reviews
   const average = 
-    product && product.reviews.length > 0 ? 
-    product.reviews.map(r => r.rating).reduce((x, y) => x + y)/product.reviews.length
-    : ''
+  product && product.reviews.length > 0 ? 
+  product.reviews.map(r => r.rating).reduce((x, y) => x + y)/product.reviews.length
+  : ''
 
+  const pageMotion= {
+    initial: { opacity: 0, x: 0 },
+    animate: { opacity: 1, transition: { duration: 0.7 } },
+    exit: { opacity: 0, x: 0, transition: { duration: 1 } }
+  }
 
   return (
     status === 'success' && 
-    <div className='product'>
-
+    <motion.div
+      initial='initial'
+      animate='animate'
+      exit='exit'
+      variants={pageMotion}
+      className='product'
+    >
       <div className='product-holder'>
         <img src={product.image} alt='product'></img>
         <div className='product-info'>
@@ -186,7 +197,7 @@ function Product() {
         
       </section>
 
-    </div>
+    </motion.div>
   )
 }
 

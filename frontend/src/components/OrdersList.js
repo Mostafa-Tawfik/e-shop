@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion';
+
 import { AuthContext } from '../context/Auth-context'
 import apiCrud from '../Helpers/apiCrud'
 
@@ -96,9 +98,20 @@ function OrdersList(props) {
     const display = new Date(date)
     return <p>{display.toLocaleDateString('en-GB')}</p>;
   } 
+
+  const pageMotion= {
+    initial: { opacity: 0, x: 0 },
+    animate: { opacity: 1, transition: { duration: 0.5 } },
+    exit: { opacity: 0, x: 0, transition: { duration: 0.5 } }
+  }
   
   return (
-    <div className='orders-list-items'>
+    <motion.main 
+    initial='initial'
+    animate='animate'
+    exit='exit'
+    variants={pageMotion} 
+    className='orders-list-items'>
 
       <table className='orders-list-items-table'>
 
@@ -153,7 +166,7 @@ function OrdersList(props) {
 
       </table>    
 
-    </div>
+    </motion.main>
   )
 }
 

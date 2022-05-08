@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { motion } from 'framer-motion';
+
 import OrderPreview from './Components/OrderPreview'
 import Payment from './Components/Payment'
 import Shipping from './Components/Shipping'
 
-function Checkout(props) {
+function Checkout() {
 
   // handle go next section
   const [isDone, setIsDone] = useState({
@@ -25,8 +27,19 @@ function Checkout(props) {
     }))
   }
 
+  const pageMotion= {
+    initial: { opacity: 0, x: 0 },
+    animate: { opacity: 1, transition: { duration: 0.5 } },
+    exit: { opacity: 0, x: 0, transition: { duration: 0.5 } }
+  }
+
   return (
-    <div className='checkout'>
+    <motion.div 
+    initial='initial'
+    animate='animate'
+    exit='exit'
+    variants={pageMotion} 
+    className='checkout'>
 
       <div className='checkout-wizard'>
 
@@ -54,34 +67,19 @@ function Checkout(props) {
 
       </div>
 
-      <div style={{
-        display: 
-        isDone.shipping ? 
-        'none' 
-        : 'block'
-        }}>
-        <Shipping {...props} goPayment={goPayment}/>
+      <div style={{display: isDone.shipping ? 'none' : 'block'}}>
+        <Shipping goPayment={goPayment}/>
       </div>
 
-      <div style={{
-        display: 
-        isDone.shipping ? 
-        isDone.payment ? 'none' : 'block' 
-        : 'none'
-      }}>
-        <Payment {...props} goOrderPreview={goOrderPreview}/>
+      <div style={{display: isDone.shipping ? isDone.payment ? 'none' : 'block' : 'none'}}>
+        <Payment goOrderPreview={goOrderPreview}/>
       </div>
 
-      <div style={{
-        display: 
-        isDone.shipping ? 
-        isDone.payment ? 'block' : 'none' 
-        : 'none'
-      }}>
-        <OrderPreview {...props} />
+      <div style={{display: isDone.shipping ? isDone.payment ? 'block' : 'none' : 'none'}}>
+        <OrderPreview />
       </div>
       
-    </div>
+    </motion.div>
   )
 }
 

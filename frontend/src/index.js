@@ -15,15 +15,15 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <CartProvider>
-          <OrderProvider>
-            <App />
-          </OrderProvider>
-        </CartProvider>
-      </AuthProvider>
-    </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <CartProvider>
+            <OrderProvider>
+              <App />
+            </OrderProvider>
+          </CartProvider>
+        </AuthProvider>
+      </QueryClientProvider>
     </React.StrictMode>
   </BrowserRouter>
 );

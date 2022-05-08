@@ -1,10 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion';
 
 function OrderDetails(props) {
 
+  const pageMotion= {
+    initial: { opacity: 0, x: 0 },
+    animate: { opacity: 1, transition: { duration: 0.5 } },
+    exit: { opacity: 0, x: 0, transition: { duration: 0.5 } }
+  }
+
   return (
-    <div className='order-details'>
+    <motion.main 
+    initial='initial'
+    animate='animate'
+    exit='exit'
+    variants={pageMotion}  
+    className='order-details'>
+
       <h2>Order</h2>
       
       <h5>Number: #{props.order._id}</h5>
@@ -104,17 +117,17 @@ function OrderDetails(props) {
 
             <tr>
               <th>Subtotal</th>
-              <td data-label="Subtotal">${props.order.totalPrice && Number(props.order.totalPrice - props.order.shippingPrice).toFixed(2)}</td>
+              <td data-label="Subtotal">${Number(props.order.totalPrice && props.order.totalPrice - props.order.shippingPrice).toFixed(2)}</td>
             </tr>
 
             <tr>
               <th>Shipping</th>
-              <td data-label="Shipping">${props.order.shippingPrice && Number(props.order.shippingPrice).toFixed(2)}</td>
+              <td data-label="Shipping">${Number(props.order.shippingPrice && props.order.shippingPrice).toFixed(2)}</td>
             </tr>
 
             <tr>
               <th>Total Payment</th>
-              <td data-label="Grand TOTAL">${props.order.totalPrice && Number(props.order.totalPrice).toFixed(2)}</td>
+              <td data-label="Grand TOTAL">${Number(props.order.totalPrice && props.order.totalPrice).toFixed(2)}</td>
             </tr>
 
           </tfoot>
@@ -122,7 +135,7 @@ function OrderDetails(props) {
         </table>
       </div>
 
-    </div>
+    </motion.main>
   )
 }
 
