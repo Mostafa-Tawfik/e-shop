@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 
 import { AuthContext } from '../context/Auth-context'
 import apiCrud from '../Helpers/apiCrud'
+import popAction from '../Helpers/popAction';
 
 
 function OrdersList(props) {
@@ -36,11 +37,6 @@ function OrdersList(props) {
   function changeToPaid(id) {
     apiCrud(`/api/orders/${id}/pay`, 'PUT', 'Status updated')
   }
-
-  function deleteOrder(id) {
-    apiCrud(`/api/orders/${id}`, 'DELETE', 'Order canceled')
-  }
-
 
   // handle actions btn
   function actions(id) {
@@ -75,7 +71,10 @@ function OrdersList(props) {
   function cancelOrder(id) {
     return (
       <button 
-      onClick={()=>deleteOrder(id)}
+      onClick={()=>popAction('Are you sure?', 
+      "You won't be able to revert this!",
+      'Yes, cancel it!',
+      ()=>apiCrud(`/api/orders/${id}` ,'DELETE' ,'Order canceled')())}
       className='orders-list-items-table-delete'
       >
         Cancel

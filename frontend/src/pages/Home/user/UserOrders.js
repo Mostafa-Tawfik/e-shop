@@ -3,7 +3,7 @@ import React from 'react'
 import OrdersList from '../../../components/OrdersList'
 import useApi from '../../../hooks/useApi'
 
-function UserOrders(props) {
+function UserOrders() {
 
   // store orders
   const {data: orders, status} = useApi('/api/orders/myorders', 'GET')
@@ -13,7 +13,7 @@ function UserOrders(props) {
 
       <h2>My Orders</h2>
 
-      {status === 'success' && <OrdersList orders={orders} {...props}/>}
+      {status === 'success' && <OrdersList orders={orders}/>}
 
     </div>
   )
