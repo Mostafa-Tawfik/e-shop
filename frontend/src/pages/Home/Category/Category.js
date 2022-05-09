@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion';
@@ -8,6 +8,11 @@ import Ratings from 'react-ratings-declarative'
 import useProducts from '../../../hooks/useProducts'
 
 function Category() {
+
+  // auto start top page
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  },[])
 
   const params = useParams()
 

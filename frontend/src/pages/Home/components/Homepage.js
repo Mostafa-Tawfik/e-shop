@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -9,6 +9,11 @@ import FlashSaleCard from './FlashSaleCard';
 
 
 function Homepage() {
+
+  // auto start top page
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  },[])
 
   const {status, data: products} = useProducts()
 

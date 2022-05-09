@@ -1,7 +1,8 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion';
+import Select from 'react-dropdown-select'
 
 import { AuthContext } from '../context/Auth-context'
 import apiCrud from '../Helpers/apiCrud'
@@ -13,23 +14,6 @@ function OrdersList(props) {
   const navigate = useNavigate()
   const {isAdmin} = useContext(AuthContext)
 
-  // control more btn
-  const [isOpen, setIsOpen] = useState({
-  open: false,
-  id: ''
-  })
-
-  // toggle more btn
-  function toggleMoreBtn(id) {
-    setIsOpen(prev => {
-      return {
-        ...prev,
-        open: !isOpen.open,
-        id: id
-      }
-      })
-  }
-
   function changeToDelivered(id) {
     apiCrud(`/api/orders/${id}/deliver`, 'PUT', 'Status updated')
   }
@@ -38,34 +22,23 @@ function OrdersList(props) {
     apiCrud(`/api/orders/${id}/pay`, 'PUT', 'Status updated')
   }
 
-  // handle actions btn
-  function actions(id) {
-    return (
-      <div className='orders-list-actions-holder'>
-        <button 
-        // toggle more btn
-        onClick={()=>toggleMoreBtn(id)} 
-        className='orders-list-action-btn'>
-          <img src='https://api.iconify.design/akar-icons/more-horizontal-fill.svg' alt='more'></img>
-        </button>
+  // set controls for actions drop menu
+  const actionMenu = [
+    {value: 'changeToDelivered', label: 'Delivered'},
+    {value: 'changeToPaid', label: 'Paid'},
+  ]
 
-        {
-        // if target btn clicked toggle
-        isOpen.id === id && 
-        isOpen.open && 
-        
-        <div className='orders-list-actions'>
+  const [action, setAction] = useState('')
 
-          <p onClick={()=>changeToDelivered(id)}>Change to delivered</p>
-
-          <p onClick={()=>changeToPaid(id)}>Change to paid</p>
-
-          </div>
-        }
-      </div>
-
-    )
-  } 
+  // detect and execute actions from drop menu
+  useEffect(()=>{
+    if (action.value === 'changeToDelivered') {
+      changeToDelivered(action.id)
+    } else if (action.value === 'changeToPaid') {
+      changeToPaid(action.id)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[action])
 
 
   function cancelOrder(id) {
@@ -149,11 +122,17 @@ function OrdersList(props) {
                   {order.isPaid ? <p style={{color: 'green', fontWeight: 'bolder'}}>Paid</p> : 'Cash on delivery'}
                 </td>
 
-                <td data-label="ACTIONS">
+                <td data-label="ACTIONS" className='orders-list-items-table-actions'>
                   {isAdmin
                   ? 
-                  actions(order._id) 
-                  : 
+                  <Select
+                    options={actionMenu}
+                    onChange={(value)=>(setAction({
+                      value: value[0].value,
+                      id: order._id
+                    }))}
+                  />
+                  :
                   order.isDelivered ? reviewOrder(order._id) : cancelOrder(order._id)}
                 </td>
 

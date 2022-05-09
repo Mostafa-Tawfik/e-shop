@@ -10,10 +10,10 @@ function Cart() {
  
   const {cart, setQty, removeFromCart} = useContext(CartContext)
 
-   // auto start top page
-   useEffect(() => {
+  // auto start top page
+  useEffect(() => {
     window.scrollTo(0, 0)
-  }, [])
+  },[])
 
   // set delivery dates
   let date = new Date()
