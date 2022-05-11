@@ -9,6 +9,18 @@
   gap: 2em;
   padding: 2em;
   width: 100vw;
+  .category-sort-select {
+    margin-left: auto;
+    &,* {
+      border-radius: 10px;
+      width: max-content;
+      font-size: 0.8rem;
+    }
+    // remove secondery placeholder space
+    .css-rqioh1-InputComponent {
+      width: 0;
+    }
+  }
   .product-card-holder {
     display: flex;
     flex-wrap: wrap;

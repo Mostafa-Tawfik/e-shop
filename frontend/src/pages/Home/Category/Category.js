@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router'
-import { Link, useLocation } from 'react-router-dom'
+import { useParams } from 'react-router'
+import { Link, useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion';
 import Select from 'react-dropdown-select'
 
@@ -15,31 +15,26 @@ function Category() {
     window.scrollTo(0, 0)
   },[])
 
+  // use react router hooks
   const params = useParams()
-  const location = useLocation()
-  const navigate = useNavigate()
-  const queryParams = new URLSearchParams(location.search)
-  const sortQueryParams = queryParams.get('sort')
-
-  console.log(sortQueryParams);
+  const [searchParams, setSearchParams] = useSearchParams()
+  const paramsQuery = Object.fromEntries([...searchParams])
 
   // store all products
   const {data: products} = useProducts()
 
+  // extract unique categories
   const categories = products && [...new Set(products.map(p => p.category))]
 
   const [rating, setRating] = useState('')
 
-  let filterBy = products && products.filter(
-    p=> 
+  // filter by any of avaiable filters
+  let filterBy = products && products.filter(p=> 
     (p.category === params.name && p.rating >= rating) || 
     (p.subCategory === params.name && p.rating >= rating) || 
     (p.brand === params.name && p.rating >= rating) || 
     (p.rating >= params.name && p.rating >= rating)
   )
-
-  console.log(filterBy);
-
 
   // map over categories and return only unique values
   const subCatWithinCat = products && [...new Set(filterBy.map(p => p.subCategory).filter(c => c !== undefined))]
@@ -47,35 +42,31 @@ function Category() {
   // map over brands and return only unique values
   const brandWithinCat = products && [...new Set(filterBy.map(p => p.brand).filter(c => c !== undefined))]
 
-
-  // const 
-  // sort menu functions
-  // function sortBy(sortQueryParams) {
-  //   filterBy && console.log(filterBy.sort((productA, productB) => {
-  //     if(sortQueryParams === 'price') {
-  //       return productA.price - productB.price
-  //     }
-  //   }))
-  // }
-
-  const sortedProducts =
-    filterBy && filterBy.sort((productA, productB) => {
-      if(sortQueryParams === 'price') {
-        return productA.price - productB.price
-      } else if (sortQueryParams === 'rating') {
-        return productB.rating - productA.rating
-      }
-    })
+  // sort the products
+  const sortedProducts = filterBy && filterBy.sort((productA, productB) => {
+    if (paramsQuery.sort === 'price' && paramsQuery.order === 'desc') {
+      return productB.price - productA.price
+    } else if(paramsQuery.sort === 'price') {
+      return productA.price - productB.price
+    } else if (paramsQuery.sort === 'rating') {
+      return productB.rating - productA.rating
+    } else if (paramsQuery.sort === 'discount') {
+      return productB.discount - productA.discount
+    }
+  })
 
     console.log(sortedProducts);
   
   
   // set controls for sort drop menu
   const sortMenu = [
-    {value: ()=>navigate(`/${params.name}?sort=price`), label: 'Price: Low to High'},
-    {value: ()=>navigate(`/${params.name}?sort=rating`), label: 'Average Ratings'},
+    {value: ()=>setSearchParams({sort: 'discount'}), label: 'Discount'},
+    {value: ()=>setSearchParams({sort: 'price', order: 'asc'}), label: 'Price: Low to High'},
+    {value: ()=>setSearchParams({sort: 'price', order: 'desc'}), label: 'Price: High to Low'},
+    {value: ()=>setSearchParams({sort: 'rating'}), label: 'Average Ratings'},
   ]
   
+  // controll page motion
   const pageMotion= {
     initial: { opacity: 0, x: 0 },
     animate: { opacity: 1, transition: { duration: 0.5 } },
@@ -221,8 +212,11 @@ function Category() {
 
         <div>
           <Select
+            placeholder='Sort by:'
+            searchable= {false}
             options={sortMenu}
             onChange={(value)=>value[0].value()}
+            className= 'category-sort-select'
           />
         </div>
 
