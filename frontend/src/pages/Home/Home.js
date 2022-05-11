@@ -26,7 +26,6 @@ function Home(props) {
   const {jwt} = useContext(AuthContext)
 
   const location = useLocation()
-  console.log(location);
 
   return (
     <>
