@@ -11,12 +11,17 @@
   width: 100vw;
   .category-sort-select {
     margin-left: auto;
-    width: 122px;
     border-radius: 10px;
+    width: max-content;
     * {
       border-radius: 10px;
-      width: max-content;
       font-size: 0.8rem;
+    }
+    .react-dropdown-select-dropdown {
+      width: max-content;
+      .react-dropdown-select-item {
+        width: max-content;
+      }
     }
     // remove secondery placeholder space
     .css-rqioh1-InputComponent {

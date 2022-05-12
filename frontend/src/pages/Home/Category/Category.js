@@ -210,13 +210,12 @@ function Category() {
 
         <h3>{isNaN(params.name) ? params.name : `Average rating more than ${params.name}`}</h3>
 
-        <div>
+        <div className= 'category-sort-select'>
           <Select
             placeholder='Sort by:'
             searchable= {false}
             options={sortMenu}
             onChange={(value)=>value[0].value()}
-            className= 'category-sort-select'
           />
         </div>
 
