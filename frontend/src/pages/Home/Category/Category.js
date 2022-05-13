@@ -52,7 +52,7 @@ function Category() {
       return productB.rating - productA.rating
     } else if (paramsQuery.sort === 'discount') {
       return productB.discount - productA.discount
-    }
+    } else return filterBy
   })
 
     console.log(sortedProducts);

@@ -12,6 +12,7 @@ import UserID from './Users/UserID'
 import Support from './Support/Support'
 import Statistics from './Statistics/Statistics'
 import { AuthContext } from '../../context/Auth-context'
+import Coupons from './Coupons/Coupons'
 
 
 function Dashboard() {
@@ -19,7 +20,7 @@ function Dashboard() {
   const {signOut} = useContext(AuthContext)
 
 
-  const adminPanel = ['Products', 'Orders', 'Users', 'Support', 'Statistics']
+  const adminPanel = ['Products', 'Coupons' , 'Orders', 'Users', 'Support', 'Statistics']
  
 
   return (
@@ -44,8 +45,7 @@ function Dashboard() {
 
       <div className='admin-panel'>
         <h4>Admin Panel</h4>
-
-
+        
         <Link to='/'>
           <div className='panel-section'>
             Dashboard
@@ -70,6 +70,8 @@ function Dashboard() {
           <Route path='/products' element={<Products />}/>
 
           <Route path='/products/edit/:id' element={<EditProduct />}/>
+
+          <Route path='/coupons' element={<Coupons />}/>
 
           <Route path='/orders' element={<Orders />}/>
 
