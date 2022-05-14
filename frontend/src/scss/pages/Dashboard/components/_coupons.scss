@@ -1,0 +1,34 @@
+.coupons {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  > h2 {
+    margin-bottom: 1em;
+    color: $clr-sec;
+  }
+  .coupons-table-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .coupons-table-actions {
+      overflow: visible;
+      .react-dropdown-select {
+        width: max-content;   
+        border-radius: 10px;
+        margin-left: auto;
+        .react-dropdown-select-dropdown {
+          width: max-content;    
+          border-radius: 10px;  
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .coupons {
+    padding: 0em;
+    gap: 0em;
+  }
+}

@@ -1,10 +1,32 @@
 import React from 'react'
 import useApi from '../../../hooks/useApi'
+import Select from 'react-dropdown-select'
+import popCrud from '../../../Helpers/popCrud'
 
 function Coupons() {
 
   const {data: coupons} = useApi('/api/coupons', 'GET')
-  console.log(coupons);
+
+  // set controls for sort drop menu
+  const actionsMenu = [
+
+    {value: (id)=> popCrud(
+      'Coupon Update', 
+      'Update', 
+      ['coupon', 'value'], 
+      `/api/coupons/${id}`,
+      'PUT',
+      'Coupon updated'),
+    label: 'Update'},
+
+    {value: ()=>({sort: 'discount'}),
+    label: 'Delete'},
+
+  ]
+
+  function action(rating, msg) {
+    popCrud(`Rating: ${rating}`, msg, 'Close!')
+  }
 
   return (
     <div className='coupons'>
@@ -22,7 +44,7 @@ function Coupons() {
           </thead>
 
           <tbody>
-            {coupons.map(coupon => (
+            {coupons.slice(0).reverse().map(coupon => (
               <tr key={coupon._id}>
 
                 <td 
@@ -36,7 +58,14 @@ function Coupons() {
 
                 <td data-label="Value">{coupon.value}</td>
 
-                <td data-label="Actions"></td>
+                <td data-label="Actions" className='coupons-table-actions'>
+                  <Select
+                    placeholder='...'
+                    searchable= {false}
+                    options={actionsMenu}
+                    onChange={(value, id)=>value[0].value(coupon._id)}
+                  />
+                </td>
 
               </tr>
             ))}
