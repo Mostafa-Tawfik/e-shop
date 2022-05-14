@@ -7,6 +7,15 @@
     margin-bottom: 1em;
     color: $clr-sec;
   }
+  .coupons-create-btn {
+    @include slideClrBtn($grd-sec, $clr-main);
+    width: 200px;
+    margin: 0 0 2em 1em;
+    padding: 1em;
+    > p {
+      color: $clr-light;
+    }
+  }
   .coupons-table-holder {
     display: flex;
     justify-content: center;

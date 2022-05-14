@@ -2,35 +2,61 @@ import React from 'react'
 import useApi from '../../../hooks/useApi'
 import Select from 'react-dropdown-select'
 import popCrud from '../../../Helpers/popCrud'
+import popAction from '../../../Helpers/popAction'
+import apiCrud from '../../../Helpers/apiCrud'
 
 function Coupons() {
 
   const {data: coupons} = useApi('/api/coupons', 'GET')
 
-  // set controls for sort drop menu
-  const actionsMenu = [
-
-    {value: (id)=> popCrud(
-      'Coupon Update', 
-      'Update', 
+  // create new coupon
+  function createCoupon() {
+    popCrud(
+      'Create a coupon', 
+      'Create', 
       ['coupon', 'value'], 
-      `/api/coupons/${id}`,
-      'PUT',
-      'Coupon updated'),
-    label: 'Update'},
-
-    {value: ()=>({sort: 'discount'}),
-    label: 'Delete'},
-
-  ]
-
-  function action(rating, msg) {
-    popCrud(`Rating: ${rating}`, msg, 'Close!')
+      `/api/coupons/`,
+      'POST',
+      'Coupon created'
+    )
   }
+
+  // set controls for the action menu
+  const actionsMenu = [
+    {
+      value: (id)=> popCrud(
+        'Coupon Update', 
+        'Update', 
+        ['coupon', 'value'], 
+        `/api/coupons/${id}`,
+        'PUT',
+        'Coupon updated'
+      ),
+      label: 'Update'
+    },
+
+    {
+      value: (id)=>popAction(
+        'Are you sure?', 
+        "You won't be able to revert this!",
+        'Yes, delete it!',
+        ()=>apiCrud(`/api/coupons/${id}`, 'DELETE', 'Coupon deleted')()
+      ),
+      label: 'Delete'
+    },
+  ]
 
   return (
     <div className='coupons'>
+
       <h2>Coupons</h2>
+
+      <button 
+      onClick={()=>createCoupon()}
+      className='coupons-create-btn'>
+        <p>+ Create new coupon</p>
+      </button>
+
       {coupons &&
       <div className="coupons-table-holder">
         <table>
