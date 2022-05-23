@@ -80,6 +80,7 @@ function Products() {
 
               <div className='dash-product-actions'>
                 <Select
+                  searchable={false}
                   options={actionMenu}
                   onChange={(value)=>(setAction({
                     value: value[0].value,
