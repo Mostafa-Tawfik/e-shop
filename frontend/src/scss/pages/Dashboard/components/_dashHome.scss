@@ -10,12 +10,18 @@
     img {
       width: 50vw;
     }
-
+  }
+  .sales-chart-holder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .sales-chart {
+      width: min(90vw, 800px);
+    }
   }
 }
 
 
-@media (max-width: 440px) {
-  .dashboard-section {
-  }
+@media (max-width: 600px) {
 }

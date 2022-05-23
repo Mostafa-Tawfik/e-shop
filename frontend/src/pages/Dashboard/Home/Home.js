@@ -10,9 +10,18 @@ function Home() {
   const {data: orders} = useApi('/api/orders', 'GET')
   // console.log(orders);
 
-  const seriesData = orders && orders.map(order => ([
-    Date.parse(order.createdAt), Number(order.totalPrice).toFixed(0)
-  ]))
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun' , 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+  const monthlyData = orders && months.map((month, index)=> (
+    orders.filter(order => (
+      (order.createdAt.charAt(6) == index + 1)
+    ))
+  ))
+
+  const seriesData = monthlyData && monthlyData.map(data => {
+    if(data.length > 0) return data.map(d=>d.totalPrice).reduce((x,y)=> x+y).toFixed(0)
+    else return 0
+  })
 
   // sales chart
   const salesChart = {
@@ -21,7 +30,7 @@ function Home() {
         id: "basic-bar",
       },
       xaxis: {
-        type: 'datetime'
+        categories: months
       }
     },
     series: [
@@ -39,15 +48,15 @@ function Home() {
   
         <Statistics />
   
-        <article>
-  
-          <h3>Sales</h3>
+        <h3>Sales</h3>
+
+        <article className='sales-chart-holder'>  
   
           <Chart
+            className='sales-chart'
             options={salesChart.options}
             series={salesChart.series}
-            type="bar"
-            width="100%"
+            type="line"
           />
   
         </article>
