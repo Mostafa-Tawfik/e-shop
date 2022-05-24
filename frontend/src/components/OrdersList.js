@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion';
@@ -14,32 +14,17 @@ function OrdersList(props) {
   const navigate = useNavigate()
   const {isAdmin} = useContext(AuthContext)
 
-  function changeToDelivered(id) {
-    apiCrud(`/api/orders/${id}/deliver`, 'PUT', 'Status updated')
-  }
-
-  function changeToPaid(id) {
-    apiCrud(`/api/orders/${id}/pay`, 'PUT', 'Status updated')
-  }
-
-  // set controls for actions drop menu
+  // set controls for the action menu
   const actionMenu = [
-    {value: 'changeToDelivered', label: 'Delivered'},
-    {value: 'changeToPaid', label: 'Paid'},
+    {
+      value: (id)=> apiCrud(`/api/orders/${id}/deliver`, 'PUT', 'Status updated'),
+      label: 'Delivered'
+    },
+    {
+      value: (id)=> apiCrud(`/api/orders/${id}/pay`, 'PUT', 'Status updated'),
+      label: 'Paid'
+    },
   ]
-
-  const [action, setAction] = useState('')
-
-  // detect and execute actions from drop menu
-  useEffect(()=>{
-    if (action.value === 'changeToDelivered') {
-      changeToDelivered(action.id)
-    } else if (action.value === 'changeToPaid') {
-      changeToPaid(action.id)
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[action])
-
 
   function cancelOrder(id) {
     return (
@@ -128,10 +113,7 @@ function OrdersList(props) {
                   <Select
                     searchable={false}
                     options={actionMenu}
-                    onChange={(value)=>(setAction({
-                      value: value[0].value,
-                      id: order._id
-                    }))}
+                    onChange={(value, id)=>value[0].value(order._id)}
                   />
                   :
                   order.isDelivered ? reviewOrder(order._id) : cancelOrder(order._id)}
