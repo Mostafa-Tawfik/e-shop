@@ -3,13 +3,15 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import AppData from '../../../AppData'
+import { AuthContext } from '../../../context/Auth-context'
 import { CartContext } from '../../../context/Cart-context'
 import { OrderContext } from '../../../context/Order-context'
 
 function OrderSummary() {
 
-  const {cart} = useContext(CartContext, OrderContext)
+  const {cart} = useContext(CartContext)
   const {generateOrder} = useContext(OrderContext)
+  const {userId} = useContext(AuthContext)
 
   // a state to hold coupon input
   const [coupon, setCoupon] = React.useState('')
@@ -96,9 +98,16 @@ function OrderSummary() {
         <p className='total'>${Total.toFixed(2)}</p>
       </div>
 
-      <Link to={'/checkout'}>
-        <button onClick={generateOrder} className='checkout-btn'>Checkout</button>
-      </Link>
+      {userId ?
+        /* if user logged in go to checkout if not go to login */ 
+        <Link to={'/checkout'}>
+          <button onClick={generateOrder} className='checkout-btn'>Checkout</button>
+        </Link>
+      :
+        <Link to={'/login'}>
+          <button className='checkout-btn'>Checkout</button>
+        </Link>              
+      }
     </div>
   )
 }
