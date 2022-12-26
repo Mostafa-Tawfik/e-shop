@@ -1,11 +1,10 @@
-
-  export function setLocalStorage(key, value) {
-    try {
-      window.localStorage.setItem(key, JSON.stringify(value));
-    } catch (e) {
-      console.log(e);
-    }
+export function setLocalStorage(key, value) {
+  try {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  } catch (e) {
+    console.log(e);
   }
+}
 
 export function getLocalStorage(key, initialValue) {
   try {

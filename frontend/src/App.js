@@ -19,7 +19,7 @@ function App() {
 
         <div className="App">
           <Routes>
-            {isAdmin ? 
+            {isAdmin ?
             <Route path="/*" element={<Dashboard />}/>
             :
             <Route path="/*" element={<Home />}/>
