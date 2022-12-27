@@ -31,17 +31,6 @@ if (process.env.NODE_ENV === "production") {
     )
   );
 
-  // cyclic deployment
-  var options = {
-    dotfiles: 'ignore',
-    etag: false,
-    extensions: ['htm', 'html','css','js','ico','jpg','jpeg','png','svg'],
-    index: ['index.html'],
-    maxAge: '1m',
-    redirect: false
-  }
-  app.use(express.static('build', options))
-
 } else {
   app.get("/", (req, res) => res.send("Please set to production"));
 }
