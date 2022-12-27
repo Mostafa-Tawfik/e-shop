@@ -1,5 +1,5 @@
 # e-shop
-Sprints E-Commerce Project built with MERN Stack. You can visit the live site on https://sprints-ecommerce.herokuapp.com/
+Sprints E-Commerce Project built with MERN Stack. You can visit the live site on https://e-shop-btzd.onrender.com/
 
 ## Features
 - Admin Dashboard
